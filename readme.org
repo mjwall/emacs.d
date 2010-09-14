@@ -11,6 +11,7 @@ Todos:
 - make startup size bigger
 ----DONE ABOVE THIS MARK----
 - nav
+- make linum only show up on code (see superbobry)
 - magit
 - shell.el from defunkt
 - paredit

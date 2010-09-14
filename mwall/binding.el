@@ -35,5 +35,5 @@
 ;;(when (fboundp 'magit-status)
 ;;  (global-set-key (kbd "C-c g") 'magit-status))
 
-;;(when (fboundp 'nav)
-;;  (global-set-key (kbd "C-c n") 'nav-toggle))
+(when (fboundp 'nav)
+  (global-set-key (kbd "C-c n") 'nav-toggle))

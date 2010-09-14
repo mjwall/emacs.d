@@ -11,6 +11,7 @@
 (load "mwall/defuns")
 (load "mwall/binding")
 (load "mwall/theme")
+(load "mwall/emacs-nav")
 ;;(load "mwall/modes")
 ;;(load "mwall/theme")
 ;; html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?

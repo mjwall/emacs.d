@@ -1,7 +1,15 @@
-Here is what I need to add
+Vendor packages
+- themes/twilight-emacs - theme used by defunkt -  git submodule
+- nav - Emacs Nav package - mercurial project on google code, hg clone
+  https://emacs-nav.googlecode.com/hg/ emacs-nav, not committing .hg
+  file, so you must clone it yourself
+
+
+Todos:
 
 - theme
-*** DONE ABOVE THIS MARK
+- make startup size bigger
+----DONE ABOVE THIS MARK----
 - nav
 - magit
 - shell.el from defunkt

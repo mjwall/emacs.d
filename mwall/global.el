@@ -26,7 +26,6 @@
       font-lock-maximum-decoration t
       inhibit-startup-message t
       transient-mark-mode t
-      color-theme-is-global t
       shift-select-mode nil
       mouse-yank-at-point t
       require-final-newline t
@@ -48,8 +47,8 @@
       ;; http://sunny.in.th/2010/05/08/emacs-enabling-flyspell-mode-gave-an-error.html
       ispell-program-name "aspell")
 
-(if (null window-system)
-    (normal-erase-is-backspace-mode))
+;; make backspace mode work correctly
+(normal-erase-is-backspace-mode)
 
 ;; whitespace mode      
 (setq whitespace-style '(trailing lines space-before-tab indentation 
@@ -97,10 +96,7 @@
 
 ;; recentf stuff
 (require 'recentf)
-(setq recentf-save-file (concat dotfiles-dir "cache/recentf")
-      recentf-max-saved-items 100
-      recentf-max-menu-items 10)
-(recentf-mode t)
+(recentf-mode 1)
 
 
 

@@ -1,16 +1,17 @@
 Here is what I need to add
 
 - theme
-- magit
 - nav
-- ido hacks
-- org hacks
-- php-mode
+- magit
 - shell.el from defunkt
-- markdown
 - paredit
 - clojure mode
 - slime
+- ido hacks
+- org hacks
+- php-mode
+- obj-c xcode
+- markdown
 - rainbow parens
 - textmate?
 - twitter
@@ -22,6 +23,6 @@ Here is what I need to add
 - yaml
 - nxml
 - something for html
-- paredit
 - java
 - perl
+- python

@@ -1,0 +1,27 @@
+Here is what I need to add
+
+- theme
+- magit
+- nav
+- ido hacks
+- org hacks
+- php-mode
+- shell.el from defunkt
+- markdown
+- paredit
+- clojure mode
+- slime
+- rainbow parens
+- textmate?
+- twitter
+- ack
+- js2
+- rinari
+- ruby-mode
+- css
+- yaml
+- nxml
+- something for html
+- paredit
+- java
+- perl

@@ -31,9 +31,15 @@
 ;; no mail
 (global-unset-key (kbd "C-x m"))
 
+;; rebind to undo, stop suspending-frame
+(global-set-key (kbd "C-z") 'undo)
+
+;; add binding for switch window C-x o
+(global-set-key (kbd "C-tab") 'other-window)
 ;; Misc
 ;;(when (fboundp 'magit-status)
 ;;  (global-set-key (kbd "C-c g") 'magit-status))
 
+;; emacs-nav
 (when (fboundp 'nav)
   (global-set-key (kbd "C-c n") 'nav-toggle))

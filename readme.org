@@ -1,6 +1,7 @@
 Here is what I need to add
 
 - theme
+*** DONE ABOVE THIS MARK
 - nav
 - magit
 - shell.el from defunkt

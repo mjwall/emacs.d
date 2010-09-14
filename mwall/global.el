@@ -10,8 +10,12 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
-;;(add-hook 'before-make-frame-hook 'turn-off-tool-bar)
+;; make starting size larger, very specific for my mbp
+(set-frame-height (selected-frame) 80)
+(set-frame-width (selected-frame) 133)
+(set-frame-position (selected-frame) 0 0)
 
+;; encoding
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
@@ -99,7 +103,6 @@
 (recentf-mode 1)
 
 
-
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
@@ -177,6 +180,7 @@
 
 ;; turn on line numbers
 (global-linum-mode 1)
+(setq linum-format "%d ")
 
 ;; Get around the emacswiki spam protection
 ;;(add-hook 'oddmuse-mode-hook

@@ -10,10 +10,13 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
-;; make starting size larger, very specific for my mbp
+;; make starting size larger, very specific for my mbp and font
 (set-frame-height (selected-frame) 80)
-(set-frame-width (selected-frame) 133)
+(set-frame-width (selected-frame) 120)
 (set-frame-position (selected-frame) 0 0)
+
+;; no fringe, wasted space
+(set-fringe-mode 0)
 
 ;; encoding
 (set-terminal-coding-system 'utf-8)
@@ -22,6 +25,11 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
+
+;; fonts
+(if (eq window-system 'ns)
+    (set-default-font "Monaco-13"))
+;;    (set-default-font "Inconsolata-14"))
 
 (ansi-color-for-comint-mode-on)
 
@@ -47,12 +55,14 @@
       scroll-conservatively 100000      ;; ... the defaults ...
       scroll-up-aggressively 0          ;; ... are very ...
       scroll-down-aggressively 0        ;; ... annoying
+      user-full-name "Michael Wall"     ;; Set name
+      user-mail-address "mjwall@gmail.com" ;; Set e-mail address
       ;; set ispell to use brew installed aspell, 
       ;; http://sunny.in.th/2010/05/08/emacs-enabling-flyspell-mode-gave-an-error.html
       ispell-program-name "aspell")
 
 ;; make backspace mode work correctly
-(normal-erase-is-backspace-mode)
+(normal-erase-is-backspace-mode 1)
 
 ;; whitespace mode      
 (setq whitespace-style '(trailing lines space-before-tab indentation 

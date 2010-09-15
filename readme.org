@@ -6,6 +6,8 @@ Vendor packages
 - magit - Magical Git for Emacs - cloned from
   http://github.com/philjackson/magit, say you need to install, but
   seems to work fine as is
+- paredit - wget'd from http://mumble.net/~campbell/emacs/paredit.el,
+  current version is 21
 
 Todos:
 
@@ -14,8 +16,8 @@ Todos:
 - nav
 - make linum only show up on code (see superbobry)
 - magit
-----DONE ABOVE THIS LINE----
 - paredit
+----DONE ABOVE THIS LINE----
 - shell.el from defunkt
 - clojure mode
 - slime

@@ -27,7 +27,7 @@ Todos:
 - rainbow parens
 - textmate?
 - twitter
-- ack
+- ack - with either textmate.el project-root or project-root from http://www.shellarchive.co.uk/content/emacs.html
 - js2
 - rinari
 - ruby-mode

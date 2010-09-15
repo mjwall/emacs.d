@@ -27,6 +27,8 @@
 (global-set-key (kbd "M-<down>") 'move-line-down)
 (global-set-key (kbd "<C-S-right>") 'textmate-shift-right)
 (global-set-key (kbd "<C-S-left>") 'textmate-shift-left)
+(global-set-key "\r" 'newline-and-indent)
+(global-set-key (kbd "C-;") 'comment-region)
 
 ;; no mail
 (global-unset-key (kbd "C-x m"))
@@ -35,7 +37,7 @@
 (global-set-key (kbd "C-z") 'undo)
 
 ;; add binding for switch window C-x o
-(global-set-key (kbd "C-tab") 'other-window)
+(global-set-key [C-tab] 'other-window)
 ;; Misc
 ;;(when (fboundp 'magit-status)
 ;;  (global-set-key (kbd "C-c g") 'magit-status))

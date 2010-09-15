@@ -17,8 +17,8 @@ Todos:
 - make linum only show up on code (see superbobry)
 - magit
 - paredit
-----DONE ABOVE THIS LINE----
 - shell.el from defunkt
+----DONE ABOVE THIS LINE----
 - clojure mode
 - slime
 - ido hacks

@@ -20,7 +20,7 @@
   (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
   (global-set-key (kbd "C-x f") 'recentf-ido-find-file))
 
-;; Window switching, TODO: figure out what this is
+;; Window switching, shift and arrow key changes window
 (windmove-default-keybindings)
 
 ;; Editing
@@ -40,8 +40,7 @@
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 
-;;TODO: These need to moved out.  This file should not contain bindings for
-;; additional packages.  What to do with bindings for custom functions though
-;; fullscreen
-(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
-
+;; fullscreen toggle.  This method is available because I patched the GNU emacs build
+;; using this post http://www.sanityinc.com/full-screen-support-for-cocoa-emacs-on-osx
+(when (fboundp 'ns-toggle-fullscreen)
+  (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen))

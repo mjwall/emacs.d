@@ -75,7 +75,7 @@
 
 ;; Set this to whatever browser you use
 ;; (setq browse-url-browser-function 'browse-url-firefox)
-(setq browse-url-browser-function 'browse-default-macosx-browser)
+(setq browse-url-browser-function 'browse-url-default-macosx-browser)
 ;; (setq browse-url-browser-function 'browse-default-windows-browser)
 ;; (setq browse-url-browser-function 'browse-default-kde)
 ;; (setq browse-url-browser-function 'browse-default-epiphany)

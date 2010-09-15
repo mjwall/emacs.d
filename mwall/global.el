@@ -10,7 +10,7 @@
 
 ;; make starting size larger, very specific for my mbp and font
 (set-frame-height (selected-frame) 80)
-(set-frame-width (selected-frame) 120)
+(set-frame-width (selected-frame) 119)
 (set-frame-position (selected-frame) 0 0)
 
 ;; no fringe, wasted space
@@ -197,3 +197,7 @@
 
 ;; Start server for emacs client
 (server-start)
+
+;; add homebrew's /usr/local/bin to exec-path, pick up git et. al.
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+    (setq exec-path (append exec-path '("/usr/local/bin")))

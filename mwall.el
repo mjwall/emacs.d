@@ -11,6 +11,7 @@
 (load "mwall/theme")
 (load "mwall/emacs-nav")
 (load "mwall/lisp")
+(load "mwall/git")
 ;; elisp, html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?
 
 ;;(vendor `ack)

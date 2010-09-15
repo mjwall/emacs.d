@@ -3,7 +3,9 @@ Vendor packages
 - nav - Emacs Nav package - mercurial project on google code, hg clone
   https://emacs-nav.googlecode.com/hg/ emacs-nav, not committing .hg
   file, so you must clone it yourself
-
+- magit - Magical Git for Emacs - cloned from
+  http://github.com/philjackson/magit, say you need to install, but
+  seems to work fine as is
 
 Todos:
 
@@ -11,10 +13,10 @@ Todos:
 - make startup size bigger
 - nav
 - make linum only show up on code (see superbobry)
-----DONE ABOVE THIS MARK----
 - magit
-- shell.el from defunkt
+----DONE ABOVE THIS LINE----
 - paredit
+- shell.el from defunkt
 - clojure mode
 - slime
 - ido hacks

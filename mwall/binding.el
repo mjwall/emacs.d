@@ -3,8 +3,6 @@
 ;; Combination of defunkt and ESK
 
 
-;; fullscreen
-(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
 ;; Font size
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -17,7 +15,7 @@
   (global-set-key (kbd "M-<f12>") 'recentf-open-files)
   (global-set-key (kbd "C-x f") 'recentf-ido-find-file))
 
-;; Window switching
+;; Window switching, TODO: figure out what this is
 (windmove-default-keybindings)
 
 ;; Editing
@@ -38,9 +36,11 @@
 
 ;; add binding for switch window C-x o
 (global-set-key [C-tab] 'other-window)
-;; Misc
-;;(when (fboundp 'magit-status)
-;;  (global-set-key (kbd "C-c g") 'magit-status))
+
+;;TODO: These need to moved out.  This file should not contain bindings for
+;; additional packages.  What to do with bindings for custom functions though
+;; fullscreen
+(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
 ;; emacs-nav
 (when (fboundp 'nav)

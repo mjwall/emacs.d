@@ -18,7 +18,8 @@ Vendor packages
   http://github.com/technomancy/emacs-starter-kit  I then  used M-x
   package-list-packages to install both slime and slime-repl.  Then
   copied those packages from elpa directory to my directory.  Too hard
-  to mess with any longer
+  to mess with any longer.  When complete, M-x byte-compile-file the
+  slime.el and slime-repl.el files
 
 Todos:
 

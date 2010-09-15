@@ -1,13 +1,20 @@
 Vendor packages
-- themes/twilight-emacs - theme used by defunkt -  git submodule
+- Install color-theme from
+  http://download.savannah.gnu.org/releases/color-theme/.  Unzip and
+  put color-theme.el in vendor and color-theme-example.el and
+  color-theme-library.el in vendor/thems
+- themes/twilight-emacs - theme used by defunkt -  git submodule from
+  git://github.com/crafterm/twilight-emacs.git
 - nav - Emacs Nav package - mercurial project on google code, hg clone
   https://emacs-nav.googlecode.com/hg/ emacs-nav, not committing .hg
   file, so you must clone it yourself
-- magit - Magical Git for Emacs - cloned from
+- magit - Magical Git for Emacs - git submodule from from
   http://github.com/philjackson/magit, say you need to install, but
   seems to work fine as is
 - paredit - wget'd from http://mumble.net/~campbell/emacs/paredit.el,
   current version is 21
+- slime - wget'd from http://tromey.com/elpa/slime-20100404.el into
+  vendor directory and renamed to slime.el
 
 Todos:
 
@@ -19,8 +26,8 @@ Todos:
 - paredit
 - shell.el from defunkt
 ----DONE ABOVE THIS LINE----
-- clojure mode
 - slime
+- clojure mode
 - ido hacks
 - org hacks
 - php-mode

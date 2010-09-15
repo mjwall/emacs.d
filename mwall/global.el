@@ -2,8 +2,6 @@
 ;;
 ;; This file is a combination of global.el from defunkt and ESK's starter-kit-misc.el
 
-(message "Loading global.el")
-
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
@@ -57,15 +55,15 @@
       scroll-down-aggressively 0        ;; ... annoying
       user-full-name "Michael Wall"     ;; Set name
       user-mail-address "mjwall@gmail.com" ;; Set e-mail address
-      ;; set ispell to use brew installed aspell, 
+      ;; set ispell to use brew installed aspell,
       ;; http://sunny.in.th/2010/05/08/emacs-enabling-flyspell-mode-gave-an-error.html
       ispell-program-name "aspell")
 
 ;; make backspace mode work correctly
 (normal-erase-is-backspace-mode 1)
 
-;; whitespace mode, turned on by run-coding-hook      
-(setq whitespace-style '(trailing lines space-before-tab indentation 
+;; whitespace mode, turned on by run-coding-hook
+(setq whitespace-style '(trailing lines space-before-tab indentation
                              space-after-tab tabs newline tab-mark newline-mark)
       whitespace-line-column 100
       c-basic-indent 2

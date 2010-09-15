@@ -1,8 +1,6 @@
 ;;; init.el Where the magic begins.  Everything starts here.
 ;; This file sets up the base config files
 
-(message "Loading init.el")
-
 ;; Turn off mouse interface early in startup to avoid momentary display
 ;; You can turn them on later if needed
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))

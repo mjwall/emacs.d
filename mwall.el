@@ -2,8 +2,6 @@
 ;;
 ;; User specific loading
 
-(message "Loading mwall.el")
-
 ;; add vendor to load-path
 (add-to-list 'load-path  (concat dotfiles-dir "/vendor"))
 

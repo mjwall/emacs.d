@@ -64,14 +64,13 @@
 ;; make backspace mode work correctly
 (normal-erase-is-backspace-mode 1)
 
-;; whitespace mode      
+;; whitespace mode, turned on by run-coding-hook      
 (setq whitespace-style '(trailing lines space-before-tab indentation 
                              space-after-tab tabs newline tab-mark newline-mark)
       whitespace-line-column 100
       c-basic-indent 2
       tab-width 4
       indent-tabs-mode nil)
-(global-whitespace-mode)
 
 ;;(add-to-list 'safe-local-variable-values '(lexical-binding . t))
 ;;(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
@@ -188,8 +187,8 @@
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)
 
-;; turn on line numbers
-(global-linum-mode 1)
+;; no line numbers unless I say so, but set the format for when I do
+(global-linum-mode 0)
 (setq linum-format "%d ")
 
 ;; Get around the emacswiki spam protection

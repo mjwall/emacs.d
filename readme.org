@@ -10,8 +10,8 @@ Todos:
 - theme
 - make startup size bigger
 - nav
-----DONE ABOVE THIS MARK----
 - make linum only show up on code (see superbobry)
+----DONE ABOVE THIS MARK----
 - magit
 - shell.el from defunkt
 - paredit

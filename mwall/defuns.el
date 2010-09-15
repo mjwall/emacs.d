@@ -6,6 +6,36 @@
 (defun startup-echo-area-message ()
   "By your command...")
 
+(defun turn-on-whitespace ()
+  (whitespace-mode t)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace))
+
+(defun turn-on-hideshow () (hs-minor-mode t))
+
+(defun turn-on-linum () (linum-mode t))
+
+(defun add-watchwords ()
+  (font-lock-add-keywords
+   nil
+   '(("\\<\\(FIX\\|FIXME\\|TODO\\|BUG\\|XXX\\):"
+      1 font-lock-warning-face t))))
+
+(add-hook 'coding-hook 'turn-on-whitespace)
+(add-hook 'coding-hook 'add-watchwords)
+(add-hook 'coding-hook 'turn-on-hideshow)
+(add-hook 'coding-hook 'turn-on-linum)
+
+
+(defun run-coding-hook ()
+  (interactive)
+  (run-hooks 'coding-hook))
+
+(defun newline-maybe-indent ()
+  "Like newline-and-indent, but doesn't indent if the previous line is blank"
+  (interactive "*")
+  (if (= (line-beginning-position) (line-end-position))
+      (newline)
+    (newline-and-indent)))
 
 ;; for loading libraries in from the vendor directory
 (defun vendor (library)

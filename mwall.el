@@ -1,5 +1,5 @@
 ;;; mwall.el
-;; 
+;;
 ;; User specific loading
 
 (message "Loading mwall.el")
@@ -12,11 +12,10 @@
 (load "mwall/binding")
 (load "mwall/theme")
 (load "mwall/emacs-nav")
-;;(load "mwall/modes")
-;;(load "mwall/theme")
-;; html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?
+(load "mwall/lisp")
+;; elisp, html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?
 
 ;;(vendor `ack)
 ;;(vendor 'magit)
 ;;(vendor 'rinari)
-;; jdee, eshell, shell, 
+;; jdee, eshell, shell

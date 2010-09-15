@@ -14,4 +14,6 @@
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
 ;; Slime
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/slime-20100404"))
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/slime-repl-20100404"))
 (require 'slime)

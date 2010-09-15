@@ -13,8 +13,12 @@ Vendor packages
   seems to work fine as is
 - paredit - wget'd from http://mumble.net/~campbell/emacs/paredit.el,
   current version is 21
-- slime - wget'd from http://tromey.com/elpa/slime-20100404.el into
-  vendor directory and renamed to slime.el
+- slime - I cheated here.  I installed ESK in a separate .emac.d
+  directory.  ESK is at
+  http://github.com/technomancy/emacs-starter-kit  I then  used M-x
+  package-list-packages to install both slime and slime-repl.  Then
+  copied those packages from elpa directory to my directory.  Too hard
+  to mess with any longer
 
 Todos:
 

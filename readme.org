@@ -20,6 +20,7 @@ Vendor packages
   copied those packages from elpa directory to my directory.  Too hard
   to mess with any longer.  When complete, M-x byte-compile-file the
   slime.el and slime-repl.el files
+- clojure-mode - gitsubmodule from
 
 Todos:
 

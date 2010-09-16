@@ -4,3 +4,6 @@
 [submodule "vendor/magit"]
 	path = vendor/magit
 	url = http://github.com/philjackson/magit.git
+[submodule "vendor/clj-mode"]
+	path = vendor/clj-mode
+	url = http://github.com/technomancy/clojure-mode.git

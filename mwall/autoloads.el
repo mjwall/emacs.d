@@ -17,3 +17,10 @@
 (add-to-list 'load-path (concat dotfiles-dir "/vendor/slime-20100404"))
 (add-to-list 'load-path (concat dotfiles-dir "/vendor/slime-repl-20100404"))
 (require 'slime)
+(require 'slime-repl)
+
+;; Clojure mode
+(add-to-list 'load-path (concat dotfiles-dir "vendor/clj-mode"))
+(require 'clojure-mode)
+(add-hook 'clojure-mode-hook 'run-coding-hook)
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))

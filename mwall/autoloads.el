@@ -14,6 +14,21 @@
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
 ;; Slime
+(add-to-list 'load-path (concat dotfiles-dir "vendor/boinkor-slime"))
+(require 'slime-autoloads)
+(add-to-list 'load-path (concat dotfiles-dir "vendor/boinkor-slime/contrib"))
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+(slime-setup '(slime-repl))
+(setq slime-net-coding-system 'utf-8-unix)
+;; add paredit to slime
+(defun slimeify ()
+  (paredit-mode 1)
+  (define-key slime-repl-mode-map ;; stop slime from grabbing del
+    (read-kbd-macro paredit-backward-delete-key)
+    nil))
+
+(add-hook 'slime-repl-mode-hook 'slimeify)
 
 ;; Clojure mode
 (add-to-list 'load-path (concat dotfiles-dir "vendor/clj-mode"))

@@ -7,3 +7,6 @@
 [submodule "vendor/clj-mode"]
 	path = vendor/clj-mode
 	url = http://github.com/technomancy/clojure-mode.git
+[submodule "vendor/boinkor-slime"]
+	path = vendor/boinkor-slime
+	url = git://git.boinkor.net/slime.git

@@ -31,15 +31,14 @@ Todos:
 - magit
 - paredit
 - shell.el from defunkt
-----DONE ABOVE THIS LINE----
 - slime
 - clojure mode
+----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks
 - php-mode
 - obj-c xcode
 - markdown
-- rainbow parens
 - textmate?
 - twitter
 - ack - with either textmate.el project-root or project-root from http://www.shellarchive.co.uk/content/emacs.html

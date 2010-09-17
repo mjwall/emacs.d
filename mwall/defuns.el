@@ -30,13 +30,6 @@
   (interactive)
   (run-hooks 'coding-hook))
 
-(defun newline-maybe-indent ()
-  "Like newline-and-indent, but doesn't indent if the previous line is blank"
-  (interactive "*")
-  (if (= (line-beginning-position) (line-end-position))
-      (newline)
-    (newline-and-indent)))
-
 ;; for loading libraries in from the vendor directory
 ;; TODO: look at this again to see if it is useful
 ;; (defun vendor (library)

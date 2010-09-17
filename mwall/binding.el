@@ -30,7 +30,7 @@
 (global-set-key (kbd "M-<down>") 'move-line-down)
 (global-set-key (kbd "<C-S-right>") 'textmate-shift-right)
 (global-set-key (kbd "<C-S-left>") 'textmate-shift-left)
-(global-set-key "\r" 'newline-maybe-indent) ;;instead of built in newline-and-indent
+(global-set-key "\r" 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-region)
 
 

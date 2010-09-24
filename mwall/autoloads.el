@@ -47,6 +47,7 @@
 ;; (groovy-mode . ((grails-mode . 1)))
 ;; (java-mode . ((grails-mode . 1)))
 ;; (html-mode . ((grails-mode . 1)))
+;; or the following to apply grails mode to every file in that directory
 (add-hook 'groovy-mode-hook ;; groovy-electric
    '(lambda ()
      (require 'groovy-electric)
@@ -57,4 +58,4 @@
      (append '(("\\.groovy$" . groovy-mode)) auto-mode-alist))
      (setq interpreter-mode-alist (append '(("groovy" . groovy-mode))
                                           interpreter-mode-alist))
-(require 'grails-mode)
+(require 'grails-mode) ;;this doesn't seem right

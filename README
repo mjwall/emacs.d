@@ -28,6 +28,12 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - vivid chalk color theme - wget from
   http://github.com/evangineer/aquamacs-emacs-starter-kit/blob/master/site-lisp/vivid-chalk/vivid-chalk.el
 - zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
+- anything in prep for grails mode - wget's http://www.emacswiki.org/emacs/download/anything-config.el
+  and http://www.emacswiki.org/emacs/download/anything.el
+- grails-emacs-mode - wget all files from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have
+  aspirations of making grails command to execute test for current file, but will make a seperate project
+  on github if I do.  This works for now.
+
 
 Todos:
 - theme

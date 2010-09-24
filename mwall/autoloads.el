@@ -35,3 +35,26 @@
 (require 'clojure-mode)
 (add-hook 'clojure-mode-hook 'run-coding-hook)
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
+
+;; anything
+(add-to-list 'load-path (concat dotfiles-dir "vendor/anything"))
+(require 'anything)
+(require 'anything-config)
+
+;; groovy emacs mode
+(add-to-list 'load-path (concat dotfiles-dir "vendor/groovy-emacs-mode"))
+;; expects the grails project to have a ..dir-locals.el file with the following
+;; (groovy-mode . ((grails-mode . 1)))
+;; (java-mode . ((grails-mode . 1)))
+;; (html-mode . ((grails-mode . 1)))
+(add-hook 'groovy-mode-hook ;; groovy-electric
+   '(lambda ()
+     (require 'groovy-electric)
+     (groovy-electric-mode)))
+(autoload 'groovy-mode "groovy-mode"
+   "Mode for editing groovy source files" t)
+   (setq auto-mode-alist
+     (append '(("\\.groovy$" . groovy-mode)) auto-mode-alist))
+     (setq interpreter-mode-alist (append '(("groovy" . groovy-mode))
+                                          interpreter-mode-alist))
+(require 'grails-mode)

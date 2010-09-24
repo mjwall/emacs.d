@@ -1,8 +1,16 @@
-Vendor packages
+This is my personal emacs config.  I have taken ideas from the emacs-starter-kit, the aquamacs-starter-kit , defunkt's emacs config and others.  This config is build from the ground up because I needed to understand how this was working.
+
+Seems to work on both GNU Emacs 23 and Aquamacs 2.1 on Snow Leopard.
+
+There is still work to be done, but currently it is functional for developing clojure with slime
+
+
+
+Vendor packages:  Where these can be found in git, you will need to add the submodules.  Anything else is committed along with the project
 - Install color-theme from
   http://download.savannah.gnu.org/releases/color-theme/.  Unzip and
   put color-theme.el in vendor and color-theme-example.el and
-  color-theme-library.el in vendor/thems
+  color-theme-library.el in vendor/themes
 - themes/twilight-emacs - theme used by defunkt -  git submodule from
   git://github.com/crafterm/twilight-emacs.git
 - nav - Emacs Nav package - mercurial project on google code, hg clone
@@ -20,9 +28,13 @@ Vendor packages
 - vivid chalk color theme - wget from
   http://github.com/evangineer/aquamacs-emacs-starter-kit/blob/master/site-lisp/vivid-chalk/vivid-chalk.el
 - zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
+- anything - required for groovy emacs mode - wget from http://www.emacswiki.org/emacs/download/anything.el
+  and http://www.emacswiki.org/emacs/download/anything-config.el
+- groovy emacs mode - main development info at https://launchpad.net/groovy-emacs-mode,
+  wget'd from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have visions of adding
+  methods to execute test on current file, but I will make my own project based on this in github if so
 
 Todos:
-
 - theme
 - make startup size bigger
 - nav
@@ -32,8 +44,9 @@ Todos:
 - shell.el from defunkt
 - slime
 - clojure mode
-----DONE ABOVE THIS LINE----
+- anything
 - groovy/grails mode
+----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks
 - php-mode
@@ -52,3 +65,4 @@ Todos:
 - java
 - perl
 - python
+- make script to install submodules

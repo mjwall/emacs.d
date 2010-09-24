@@ -28,11 +28,6 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - vivid chalk color theme - wget from
   http://github.com/evangineer/aquamacs-emacs-starter-kit/blob/master/site-lisp/vivid-chalk/vivid-chalk.el
 - zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
-- anything - required for groovy emacs mode - wget from http://www.emacswiki.org/emacs/download/anything.el
-  and http://www.emacswiki.org/emacs/download/anything-config.el
-- groovy emacs mode - main development info at https://launchpad.net/groovy-emacs-mode,
-  wget'd from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have visions of adding
-  methods to execute test on current file, but I will make my own project based on this in github if so
 
 Todos:
 - theme
@@ -44,9 +39,8 @@ Todos:
 - shell.el from defunkt
 - slime
 - clojure mode
-- anything
-- groovy/grails mode
 ----DONE ABOVE THIS LINE----
+- groovy/grails mode
 - ido hacks
 - org hacks
 - php-mode

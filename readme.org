@@ -13,14 +13,13 @@ Vendor packages
   seems to work fine as is
 - paredit - wget'd from http://mumble.net/~campbell/emacs/paredit.el,
   current version is 21
-- slime - I cheated here.  I installed ESK in a separate .emac.d
-  directory.  ESK is at
-  http://github.com/technomancy/emacs-starter-kit  I then  used M-x
-  package-list-packages to install both slime and slime-repl.  Then
-  copied those packages from elpa directory to my directory.  Too hard
-  to mess with any longer.  When complete, M-x byte-compile-file the
-  slime.el and slime-repl.el files
+- slime - git submodule from git://git.boinkor.net/slime.git.  Worked
+  first time adding to autoloads
 - clojure-mode - gitsubmodule from
+  http://github.com/technomancy/clojure-mode.git
+- vivid chalk color theme - wget from
+  http://github.com/evangineer/aquamacs-emacs-starter-kit/blob/master/site-lisp/vivid-chalk/vivid-chalk.el
+- zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
 
 Todos:
 
@@ -34,6 +33,7 @@ Todos:
 - slime
 - clojure mode
 ----DONE ABOVE THIS LINE----
+- groovy/grails mode
 - ido hacks
 - org hacks
 - php-mode

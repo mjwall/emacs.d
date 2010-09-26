@@ -13,6 +13,7 @@
 (load "mwall/emacs-nav")
 (load "mwall/git")
 (load "mwall/myshell")
+(load "mwall/project")
 (load "mwall/autoloads")
 
 ;; elisp, html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?

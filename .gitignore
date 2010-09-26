@@ -8,3 +8,4 @@ places
 *.el~
 .hg
 *.elc
+my-projects.el

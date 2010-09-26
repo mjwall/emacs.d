@@ -66,5 +66,4 @@
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 ;; find-file-in-project
-(require 'find-file-in-project)
-(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
+;;(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)

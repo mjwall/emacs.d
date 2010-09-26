@@ -34,7 +34,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
   aspirations of making grails command to execute test for current file, but will make a seperate project
   on github if I do.  This works for now.
 - php-mode - wget'd from http://php-mode.svn.sourceforge.net/svnroot/php-mode/tags/php-mode-1.5.0/php-mode.el
-- find-file-in-project - wget from http://github.com/technomancy/find-file-in-project/raw/master/find-file-in-project.el
+-
 
 
 Todos:

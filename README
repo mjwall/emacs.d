@@ -31,7 +31,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - anything in prep for grails mode - wget's http://www.emacswiki.org/emacs/download/anything-config.el and http://www.emacswiki.org/emacs/download/anything.el - grails-emacs-mode - wget all files from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have aspirations of making grails command to execute test for current file, but will make a seperate project on github if I do.  This works for now.
 - php-mode - wget'd from http://php-mode.svn.sourceforge.net/svnroot/php-mode/tags/php-mode-1.5.0/php-mode.el
 - mk-project mode - git submodule from http://github.com/mattkeller/mk-project
-
+- nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
 
 Todos:
 - theme
@@ -46,6 +46,7 @@ Todos:
 - groovy/grails mode
 - php-mode
 - mk-project
+- nxhtml
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks
@@ -59,7 +60,6 @@ Todos:
 - css
 - yaml
 - nxml
-- something for html
 - java
 - perl
 - python

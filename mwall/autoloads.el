@@ -52,6 +52,7 @@
    '(lambda ()
      (require 'groovy-electric)
      (groovy-electric-mode)))
+(add-hook 'groovy-mode-hook 'run-coding-hook)
 (autoload 'groovy-mode "groovy-mode"
    "Mode for editing groovy source files" t)
    (setq auto-mode-alist
@@ -64,4 +65,8 @@
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-(add-hook 'php-mode 'run-coding-hook)
+(add-hook 'php-mode-hook 'run-coding-hook)
+
+;; nxhtml
+(load (concat dotfiles-dir "vendor/nxhtml/autostart"))
+(setq mumamo-background-colors nil)

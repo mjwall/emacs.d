@@ -4,7 +4,7 @@
 (load-file (concat dotfiles-dir "/vendor/themes/twilight-emacs/color-theme-twilight.el"))
 ;;(color-theme-twilight)
 (load-file (concat dotfiles-dir "/vendor/themes/color-theme-vivid-chalk.el"))
-;;(color-theme-vivid-chalk)
+(color-theme-vivid-chalk)
 
 (load-file (concat dotfiles-dir "vendor/themes/zenburn.el"))
-(color-theme-zenburn)
+;;(color-theme-zenburn)

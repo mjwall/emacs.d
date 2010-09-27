@@ -1,7 +1,6 @@
 ;; mk-project
 (add-to-list 'load-path (concat dotfiles-dir "vendor/mk-project"))
 (require 'mk-project)
-(load "my-projects")
 (global-set-key (kbd "C-c p c") 'project-compile)
 (global-set-key (kbd "C-c p l") 'project-load)
 (global-set-key (kbd "C-c p a") 'project-ack)
@@ -14,3 +13,4 @@
 (global-set-key (kbd "C-c p h") 'project-home)
 (global-set-key (kbd "C-c p d") 'project-dired)
 (global-set-key (kbd "C-c p t") 'project-tags)
+(load "my-projects")

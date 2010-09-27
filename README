@@ -32,6 +32,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - php-mode - wget'd from http://php-mode.svn.sourceforge.net/svnroot/php-mode/tags/php-mode-1.5.0/php-mode.el
 - mk-project mode - git submodule from http://github.com/mattkeller/mk-project
 - nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
+- twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
 
 Todos:
 - theme
@@ -47,6 +48,7 @@ Todos:
 - php-mode
 - mk-project
 - nxhtml
+- twittering-mode
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks

@@ -16,3 +16,6 @@
 [submodule "vendor/nxhtml"]
 	path = vendor/nxhtml
 	url = http://github.com/emacsmirror/nxhtml.git
+[submodule "vendor/twitter"]
+	path = vendor/twitter
+	url = git://github.com/hayamiz/twittering-mode.git

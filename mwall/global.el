@@ -63,9 +63,8 @@
 (normal-erase-is-backspace-mode 1)
 
 ;; whitespace mode, turned on by run-coding-hook
-(setq whitespace-style '(trailing lines space-before-tab indentation
+(setq whitespace-style '(trailing space-before-tab indentation
                              space-after-tab tabs newline tab-mark newline-mark)
-      whitespace-line-column 100
       c-basic-indent 2
       tab-width 4
       indent-tabs-mode nil)

@@ -10,9 +10,6 @@
 [submodule "vendor/boinkor-slime"]
 	path = vendor/boinkor-slime
 	url = git://git.boinkor.net/slime.git
-[submodule "vendor/mk-project"]
-	path = vendor/mk-project
-	url = http://github.com/mattkeller/mk-project.git
 [submodule "vendor/nxhtml"]
 	path = vendor/nxhtml
 	url = http://github.com/emacsmirror/nxhtml.git

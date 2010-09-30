@@ -30,10 +30,10 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
 - anything in prep for grails mode - wget's http://www.emacswiki.org/emacs/download/anything-config.el and http://www.emacswiki.org/emacs/download/anything.el - grails-emacs-mode - wget all files from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have aspirations of making grails command to execute test for current file, but will make a seperate project on github if I do.  This works for now.
 - php-mode - wget'd from http://php-mode.svn.sourceforge.net/svnroot/php-mode/tags/php-mode-1.5.0/php-mode.el
-- mk-project mode - git submodule from http://github.com/mattkeller/mk-project
 - nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
 - twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
 - java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
+- project-root - replaces mk-project for managing project stuff.  Clone from http://hg.piranha.org.ua/project-root/
 
 Todos:
 - theme
@@ -47,10 +47,10 @@ Todos:
 - clojure mode
 - groovy/grails mode
 - php-mode
-- mk-project
 - nxhtml
 - twittering-mode
 - malabar mode for java
+- project-root
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks

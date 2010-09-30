@@ -13,7 +13,7 @@
 (load "mwall/emacs-nav")
 (load "mwall/git")
 (load "mwall/myshell")
-;(load "mwall/project")
+(load "mwall/project")
 (load "mwall/twitter")
 (load "mwall/autoloads")
 (load "mwall/java")

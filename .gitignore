@@ -9,3 +9,4 @@ places
 .hg
 *.elc
 my-projects.el
+semanticdb

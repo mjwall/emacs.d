@@ -33,7 +33,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - mk-project mode - git submodule from http://github.com/mattkeller/mk-project
 - nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
 - twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
-- jdee - must first get elib from http://sourceforge.net/projects/jdee/files/jdee/Dependencies/elib-1.0.zip/download.  Then get jdee-2.4.0.1 and add it to vendor/jdee-2.4.0.1.  Modify java.el and go
+- java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
 
 Todos:
 - theme
@@ -50,20 +50,19 @@ Todos:
 - mk-project
 - nxhtml
 - twittering-mode
+- malabar mode for java
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks
 - obj-c xcode
 - markdown
 - textmate?
-- twitter
 - js2
 - rinari
 - ruby-mode
 - css
 - yaml
 - nxml
-- java
 - perl
 - python
 - make script to install submodules

@@ -33,7 +33,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
 - twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
 - java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
-- project-root - replaces mk-project for managing project stuff.  Clone from http://hg.piranha.org.ua/project-root/
+- eproject - git submodule from http://github.com/jrockway/eproject.git
 
 Todos:
 - theme
@@ -50,7 +50,7 @@ Todos:
 - nxhtml
 - twittering-mode
 - malabar mode for java
-- project-root
+- eproject
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks

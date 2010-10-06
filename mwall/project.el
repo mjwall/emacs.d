@@ -13,4 +13,7 @@
 (define-project-type grails (generic) (look-for "grails-app")
   :relevant-files ("\\.groovy" "\\.gsp" "\\.java" "\\.html" "\\.jsp" "\\.css" "\\.js" "\\.xml")
   :irrelevant-files ("target"))
+(define-project-type clojure (generic) (look-for "project.clj")
+  :relevant-files ("\\.clj" "\\.jsp" "\\.css" "\\.js" "\\.xml")
+  :irrelevant-files ("lib/" "classes/"))
 

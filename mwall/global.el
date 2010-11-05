@@ -98,7 +98,15 @@
         ido-enable-flex-matching t
         ido-create-new-buffer 'always
         ido-use-filename-at-point 'guess
-        ido-max-prospects 10))
+        ido-max-prospects 10
+        ido-ignore-buffers
+        '("\\` " "^\\*ESS\\*" "^\\*Messages\\*" "^\\*Help\\*" "^\\*Buffer"
+          "^\\*.*Completions\\*$" "^\\*Ediff" "^\\*tramp" "^\\*cvs-"
+          "_region_" " output\\*$" "^TAGS$" "^\*Ido")
+        ido-ignore-directories
+        '("\\`auto/" "^auto-save-list$" "^backups$" "^semanticdb$" "^target$" "^\\.git$" "^\\.svn$" "\\`CVS/" "\\`\\.\\./" "\\`\\./")
+        ido-ignore-files
+        '("\\`auto/" "\\.prv/" "_region_" "\\.class/"  "\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./")))
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
@@ -200,3 +208,5 @@
 ;; add homebrew's /usr/local/bin to exec-path, pick up git et. al.
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
     (setq exec-path (append exec-path '("/usr/local/bin")))
+
+

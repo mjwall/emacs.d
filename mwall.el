@@ -18,7 +18,3 @@
 (load "mwall/autoloads")
 (load "mwall/java")
 (load "mwall/encrypt")
-;; elisp, html, ruby, clojure, paredit, php, nxml, yaml, perl, markdown, javadoc, javascript, css  ?
-;;(vendor `ack)
-;;(vendor 'rinari)
-;; jdee, eshell, shell

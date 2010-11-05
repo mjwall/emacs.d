@@ -44,3 +44,9 @@
 ;; using this post http://www.sanityinc.com/full-screen-support-for-cocoa-emacs-on-osx
 (when (fboundp 'ns-toggle-fullscreen)
   (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen))
+
+;; bind some window resizing
+(global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-s-<down>") 'shrink-window)
+(global-set-key (kbd "C-s-<up>") 'enlarge-window)

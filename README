@@ -33,7 +33,11 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
 - twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
 - java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
-- eproject - git submodule from http://github.com/jrockway/eproject.git
+- dired-single from http://www.emacswiki.org/cgi-bin/wiki/dired-single.el
+- project-root.el - pulled in from https://github.com/emacsmirror/project-root
+- ack.el - for use with project-root from http://www.shellarchive.co.uk/content/emacs.html
+- figlet.el - also from http://www.shellarchive.co.uk/content/emacs.html, just because it looks fun.  Had to brew install figlet and modify the .el to point to the right place
+- rainbow-delimiters from http://www.emacswiki.org/emacs/RainbowDelimiters, hooked in elisp.
 
 Todos:
 - theme
@@ -50,7 +54,6 @@ Todos:
 - nxhtml
 - twittering-mode
 - malabar mode for java
-- eproject
 ----DONE ABOVE THIS LINE----
 - ido hacks
 - org hacks
@@ -66,4 +69,3 @@ Todos:
 - perl
 - python
 - make script to install submodules
-- maybe try http://github.com/jrockway/eproject

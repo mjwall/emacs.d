@@ -10,7 +10,6 @@
 (load "mwall/defuns")
 (load "mwall/binding")
 (load "mwall/theme")
-(load "mwall/emacs-nav")
 (load "mwall/git")
 (load "mwall/myshell")
 (load "mwall/project")

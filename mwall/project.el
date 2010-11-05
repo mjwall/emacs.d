@@ -1,8 +1,3 @@
-;; eproject
-(add-to-list 'load-path (concat dotfiles-dir "vendor/eproject"))
-(require 'eproject)
-(require 'eproject-extras)
-
 (define-project-type maven (generic) (look-for "pom.xml")
   :relevant-files ("\\.java" "\\.html" "\\.jsp" "\\.css" "\\.js" "\\.xml")
   :irrelevant-files ("target/"))

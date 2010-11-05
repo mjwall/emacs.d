@@ -13,3 +13,4 @@
           (lambda ()
             (add-hook 'after-save-hook 'malabar-compile-file-silently
                       nil t)))
+(add-hook 'malabar-mode-hook 'run-coding-hook)

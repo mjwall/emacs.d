@@ -1,9 +1,12 @@
+;; rainbow delimiters
+(require 'rainbow-delimiters)
+
 ;; paredit mode - added to list in mwall.el
 (autoload 'paredit-mode "paredit"
      "Minor mode for pseudo-structurally editing Lisp code."
      t)
 (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
-
+(add-hook 'emacs-lisp-mode-hook (lambda () (rainbow-delimiters-mode +1)))
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook 'run-coding-hook)

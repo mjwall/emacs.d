@@ -34,7 +34,10 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
 - java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
 - dired-single from http://www.emacswiki.org/cgi-bin/wiki/dired-single.el
-- project-root.el - cloned from http://hg.piranha.org.ua/project-root/
+- project-root.el - pulled in from https://github.com/emacsmirror/project-root
+- ack.el - for use with project-root from http://www.shellarchive.co.uk/content/emacs.html
+- figlet.el - also from http://www.shellarchive.co.uk/content/emacs.html, just because it looks fun.  Had to brew install figlet and modify the .el to point to the right place
+- rainbow-delimiters from http://www.emacswiki.org/emacs/RainbowDelimiters, hooked in elisp.
 
 Todos:
 - theme

@@ -12,6 +12,7 @@
 (load "mwall/theme")
 (load "mwall/git")
 (load "mwall/myshell")
+(load "mwall/mydired")
 (load "mwall/project")
 (load "mwall/twitter")
 (load "mwall/autoloads")

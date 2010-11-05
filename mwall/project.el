@@ -34,6 +34,7 @@
 (global-set-key (kbd "C-c p d") 'project-root-goto-root)
 (global-set-key (kbd "C-c p p") 'project-root-run-default-command)
 (global-set-key (kbd "C-c p l") 'project-root-browse-seen-projects)
+(global-set-key [f7] 'my-ido-project-files)
 
 ;; extra function to use ido to find project files from http://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
 (defun my-ido-project-files ()

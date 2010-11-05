@@ -73,3 +73,6 @@
 ;; nxhtml
 (load (concat dotfiles-dir "vendor/nxhtml/autostart"))
 (setq mumamo-background-colors nil)
+
+;; figlet, for making ascii art, mostly for commit messages
+(require 'figlet)

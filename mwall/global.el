@@ -210,3 +210,11 @@
     (setq exec-path (append exec-path '("/usr/local/bin")))
 
 
+;; from http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop
+(define-key global-map [ns-drag-file] 'my-ns-open-files)
+(setq ns-pop-up-frames nil) ; make emacs open in existing frames
+(defun my-ns-open-files ()
+  "Open files in the list `ns-input-file'."
+  (interactive)
+  (mapc 'find-file ns-input-file)
+  (setq ns-input-file nil))

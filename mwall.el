@@ -18,3 +18,6 @@
 (load "mwall/autoloads")
 (load "mwall/java")
 (load "mwall/encrypt")
+(if (system-type-is-darwin)
+    (load "mwall/darwin")
+)

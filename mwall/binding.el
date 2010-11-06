@@ -2,8 +2,6 @@
 ;;
 ;; Combination of defunkt and ESK
 
-
-
 ;; Font size
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -39,11 +37,6 @@
 
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
-
-;; fullscreen toggle.  This method is available because I patched the GNU emacs build
-;; using this post http://www.sanityinc.com/full-screen-support-for-cocoa-emacs-on-osx
-(when (fboundp 'ns-toggle-fullscreen)
-  (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen))
 
 ;; bind some window resizing
 (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)

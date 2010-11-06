@@ -24,11 +24,6 @@
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 
-;; fonts
-(if (eq window-system 'ns)
-    (set-default-font "Monaco-13"))
-;;    (set-default-font "Inconsolata-14"))
-
 (ansi-color-for-comint-mode-on)
 
 (setq visible-bell nil
@@ -204,17 +199,3 @@
 
 ;; Start server for emacs client
 (server-start)
-
-;; add homebrew's /usr/local/bin to exec-path, pick up git et. al.
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-    (setq exec-path (append exec-path '("/usr/local/bin")))
-
-
-;; from http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop
-(define-key global-map [ns-drag-file] 'my-ns-open-files)
-(setq ns-pop-up-frames nil) ; make emacs open in existing frames
-(defun my-ns-open-files ()
-  "Open files in the list `ns-input-file'."
-  (interactive)
-  (mapc 'find-file ns-input-file)
-  (setq ns-input-file nil))

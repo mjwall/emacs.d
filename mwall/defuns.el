@@ -203,3 +203,23 @@ A place is considered `tab-width' character columns."
          "ASCII Chart")
       (with-output-to-temp-buffer "ASCII Chart"
         (princ chart)))))
+
+;; Check if system is Darwin/Mac OS X
+(defun system-type-is-darwin ()
+(interactive)
+"Return true if system is darwin-based (Mac OS X)"
+(string-equal system-type "darwin")
+)
+
+;; Check if system is GNU/Linux
+(defun system-type-is-gnu ()
+(interactive)
+"Return true if system is GNU/Linux-based"
+(string-equal system-type "gnu/linux")
+)
+
+;; Insert date string
+(defun insert-date-string ()
+ "Insert a nicely formated date string."
+ (interactive)
+ (insert (format-time-string "%a %b %d %H:%M:%S %Y")))

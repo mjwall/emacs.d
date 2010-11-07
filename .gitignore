@@ -10,3 +10,4 @@ places
 *.elc
 my-projects.el
 semanticdb
+.org-id-locations

@@ -39,6 +39,8 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - figlet.el - also from http://www.shellarchive.co.uk/content/emacs.html, just because it looks fun.  Had to brew install figlet and modify the .el to point to the right place
 - rainbow-delimiters from http://www.emacswiki.org/emacs/RainbowDelimiters, hooked in elisp.
 - drap and drop on a mac, see http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop and http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop
+- org-mode as a submodule for latest.  Git submodule add git://repo.or.cz/org-mode.git vendor/org-mode.  Cd to vendor/org-mode, then git checkout -b stable origin/maint.  Run make && make doc && make install
+
 
 Todos:
 - theme

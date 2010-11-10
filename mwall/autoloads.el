@@ -77,3 +77,15 @@
 
 ;; figlet, for making ascii art, mostly for commit messages
 (require 'figlet)
+
+;; ruby-mode
+(add-to-list 'auto-mode-alist '("\\.rb" . ruby-mode))
+(add-to-list 'auto-mode-alist '("buildfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-hook 'ruby-mode-hook 'run-coding-hook)
+
+
+;; haml-mode
+(require 'haml-mode)
+(add-hook 'haml-mode-hook 'run-coding-hook)

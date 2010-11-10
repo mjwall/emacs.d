@@ -40,6 +40,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - rainbow-delimiters from http://www.emacswiki.org/emacs/RainbowDelimiters, hooked in elisp.
 - drap and drop on a mac, see http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop and http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop
 - org-mode as a submodule for latest.  Git submodule add git://repo.or.cz/org-mode.git vendor/org-mode.  Cd to vendor/org-mode, then git checkout -b stable origin/maint.  Run make && make doc && make install
+- haml-mode from https://github.com/nex3/haml/raw/da9ed66cd49d8c9fc63420378d159997934ac7ea/extra/haml-mode.el
 
 
 Todos:
@@ -58,14 +59,16 @@ Todos:
 - twittering-mode
 - malabar mode for java
 ----DONE ABOVE THIS LINE----
+- ruby-mode
+- rinari
+- haml
+- sinatra
 - ido hacks
 - org hacks
 - obj-c xcode
 - markdown
 - textmate?
 - js2
-- rinari
-- ruby-mode
 - css
 - yaml
 - nxml

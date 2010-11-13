@@ -58,10 +58,10 @@ Todos:
 - nxhtml
 - twittering-mode
 - malabar mode for java
-----DONE ABOVE THIS LINE----
 - ruby-mode
-- rinari
 - haml
+----DONE ABOVE THIS LINE----
+- rinari
 - sinatra
 - ido hacks
 - org hacks

@@ -29,7 +29,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/OrgTutorial.org" "~/org/cas.org" "~/org/cloud.org" "~/org/corporate.org" "~/org/cubs.org" "~/org/ideas.org" "~/org/iis.org" "~/org/inbox.org" "~/org/owf.org" "~/org/personal.org" "~/org/recruiting.org" "~/org/windshear.org")))
+ '(org-agenda-files (quote ("~/org/cas.org" "~/org/cloud.org" "~/org/corporate.org" "~/org/cubs.org" "~/org/ideas.org" "~/org/iis.org" "~/org/inbox.org" "~/org/owf.org" "~/org/personal.org" "~/org/recruiting.org" "~/org/windshear.org")))
  '(safe-local-variable-values (quote ((grails-mode . 1) (encoding . utf-8) (prompt-to-byte-compile)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

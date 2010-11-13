@@ -1,3 +1,4 @@
+
 (require 'ack)
 (require 'project-root)
 
@@ -24,6 +25,10 @@
          ;;:filename-regex ,(regexify-ext-list '(el org README txt))
          ;;:exclude-paths ("backups" "autosave-list" "semanticdb")
          )
+        ("buildr project"
+         :root-contains-files ("buildfile"))
+        ("ant project"
+         :root-contains-files ("build.xml"))
         )
       )
 

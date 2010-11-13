@@ -89,3 +89,7 @@
 ;; haml-mode
 (require 'haml-mode)
 (add-hook 'haml-mode-hook 'run-coding-hook)
+
+;; actionscript mode
+(require 'actionscript-mode)
+(add-hook 'actionscript-mode-hook 'run-coding-hook)

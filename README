@@ -61,6 +61,7 @@ Todos:
 - ruby-mode
 - haml
 ----DONE ABOVE THIS LINE----
+- hippie expand hacks
 - rinari
 - sinatra
 - ido hacks

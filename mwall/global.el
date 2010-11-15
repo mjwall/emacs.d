@@ -197,5 +197,8 @@
 ;;            (unless (string-match "question" oddmuse-post)
 ;;              (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post)))))
 
+;; turn menu-bar back on
+(menu-bar-mode 1)
+
 ;; Start server for emacs client
 (server-start)

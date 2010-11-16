@@ -99,7 +99,7 @@
           "^\\*.*Completions\\*$" "^\\*Ediff" "^\\*tramp" "^\\*cvs-"
           "_region_" " output\\*$" "^TAGS$" "^\*Ido")
         ido-ignore-directories
-        '("\\`auto/" "^auto-save-list$" "^backups$" "^semanticdb$" "^target$" "^\\.git$" "^\\.svn$" "\\`CVS/" "\\`\\.\\./" "\\`\\./")
+        '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/" "\\`target/" "\\`\\.git/" "\\`\\.svn/" "\\`CVS/" "\\`\\.\\./" "\\`\\./")
         ido-ignore-files
         '("\\`auto/" "\\.prv/" "_region_" "\\.class/"  "\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./")))
 

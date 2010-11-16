@@ -54,7 +54,7 @@
            (shell-command-to-string
             (concat "find "
                     my-project-root
-                    " \\( -name \"*.svn\" -o -name \"*.git\" \\) -prune -o -type f -print | grep -E -v \"\.(pyc)$\""
+                    " \\( -name \"*.svn\" -o -name \"*.git\" -o -name \"*.jar\" -o -name \"*.class\" -o -name \"WEB-INF\" -o -name \"target\" \\) -prune -o -type f -print | grep -E -v \"\.(pyc)$\""
                     )) "\n"))
     ;; populate hash table (display repr => path)
     (setq tbl (make-hash-table :test 'equal))

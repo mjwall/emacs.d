@@ -93,3 +93,7 @@
 ;; actionscript mode
 (require 'actionscript-mode)
 (add-hook 'actionscript-mode-hook 'run-coding-hook)
+
+;; rspec mode
+(add-to-list 'load-path (concat dotfiles-dir "vendor/rspec-mode"))
+(require 'rspec-mode)

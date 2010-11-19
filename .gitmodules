@@ -28,3 +28,6 @@
 [submodule "vendor/git-emacs"]
 	path = vendor/git-emacs
 	url = https://github.com/tsgates/git-emacs.git
+[submodule "vendor/rspec-mode"]
+	path = vendor/rspec-mode
+	url = https://github.com/pezra/rspec-mode.git

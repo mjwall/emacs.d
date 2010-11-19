@@ -84,7 +84,8 @@
 (add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
 (add-hook 'ruby-mode-hook 'run-coding-hook)
-
+(setq ruby-deep-indent-paren-style nil)
+(require 'ruby-electric)
 
 ;; haml-mode
 (require 'haml-mode)

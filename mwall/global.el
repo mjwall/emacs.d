@@ -129,6 +129,11 @@
 ;;(delete 'try-expand-line hippie-expand-try-functions-list)
 ;;(delete 'try-expand-list hippie-expand-try-functions-list)
 
+(setq hippie-expand-try-functions-list
+      '(try-complete-abbrev
+	try-complete-file-name
+	try-expand-dabbrev))
+
 ;; Backups, don't clutter up directories with files
 (setq make-backup-files t ;; do make backups
       backup-by-copying t ;; and copy them here

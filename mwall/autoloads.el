@@ -3,8 +3,8 @@
 
 ;; paredit mode - added to list in mwall.el
 (autoload 'paredit-mode "paredit"
-     "Minor mode for pseudo-structurally editing Lisp code."
-     t)
+  "Minor mode for pseudo-structurally editing Lisp code."
+  t)
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
@@ -53,16 +53,16 @@
 ;; (html-mode . ((grails-mode . 1)))
 ;; or the following to apply grails mode to every file in that directory
 (add-hook 'groovy-mode-hook ;; groovy-electric
-   '(lambda ()
-     (require 'groovy-electric)
-     (groovy-electric-mode)))
+          '(lambda ()
+             (require 'groovy-electric)
+             (groovy-electric-mode)))
 (add-hook 'groovy-mode-hook 'run-coding-hook)
 (autoload 'groovy-mode "groovy-mode"
-   "Mode for editing groovy source files" t)
-   (setq auto-mode-alist
-     (append '(("\\.groovy$" . groovy-mode)) auto-mode-alist))
-     (setq interpreter-mode-alist (append '(("groovy" . groovy-mode))
-                                          interpreter-mode-alist))
+  "Mode for editing groovy source files" t)
+(setq auto-mode-alist
+      (append '(("\\.groovy$" . groovy-mode)) auto-mode-alist))
+(setq interpreter-mode-alist (append '(("groovy" . groovy-mode))
+                                     interpreter-mode-alist))
 (require 'grails-mode) ;;this doesn't seem right
 
 ;; php-mode
@@ -78,18 +78,6 @@
 ;; figlet, for making ascii art, mostly for commit messages
 (require 'figlet)
 
-;; ruby-mode
-(add-to-list 'load-path (concat dotfiles-dir "vendor/ruby-mode"))
-(add-to-list 'auto-mode-alist '("\\.rb" . ruby-mode))
-(add-to-list 'auto-mode-alist '("buildfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.autotest" . ruby-mode))
-(add-hook 'ruby-mode-hook 'run-coding-hook)
-(require 'ruby-mode)
-(setq ruby-deep-indent-paren-style nil)
-(require 'ruby-electric)
-(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
 ;; haml-mode
 (require 'haml-mode)
@@ -99,6 +87,25 @@
 (require 'actionscript-mode)
 (add-hook 'actionscript-mode-hook 'run-coding-hook)
 
+;; Rinari
+(add-to-list 'load-path (concat dotfiles-dir "vendor/rinari"))
+(require 'rinari)
+
+;; ruby-mode
+;; TODO: remove that ruby-mode
+;;(add-to-list 'load-path (concat dotfiles-dir "vendor/ruby-mode"))
+;;(add-to-list 'auto-mode-alist '("\\.rb" . ruby-mode))
+(add-to-list 'auto-mode-alist '("buildfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
+;;(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+;;(add-to-list 'auto-mode-alist '("\\.autotest" . ruby-mode))
+(add-hook 'ruby-mode-hook 'run-coding-hook)
+;;(require 'ruby-mode)
+;;(setq ruby-deep-indent-paren-style nil)
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
+
 ;; rspec mode
-(add-to-list 'load-path (concat dotfiles-dir "vendor/rspec-mode"))
-(require 'rspec-mode)
+;;(add-to-list 'load-path (concat dotfiles-dir "vendor/rspec-mode"))
+;;(require 'rspec-mode)
+

@@ -64,6 +64,10 @@
       tab-width 4
       indent-tabs-mode nil)
 
+;;allow one space at the end, mostly for ruby-electric.el
+(setq whitespace-trailing-regexp
+      "\\(\\(\t\\| \\|\xA0\\|\x8A0\\|\x920\\|\xE20\\|\xF20\\)\\{2,\\}\\)$")
+
 ;;(add-to-list 'safe-local-variable-values '(lexical-binding . t))
 ;;(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 

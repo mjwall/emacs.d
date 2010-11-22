@@ -79,13 +79,17 @@
 (require 'figlet)
 
 ;; ruby-mode
+(add-to-list 'load-path (concat dotfiles-dir "vendor/ruby-mode"))
 (add-to-list 'auto-mode-alist '("\\.rb" . ruby-mode))
 (add-to-list 'auto-mode-alist '("buildfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.autotest" . ruby-mode))
 (add-hook 'ruby-mode-hook 'run-coding-hook)
+(require 'ruby-mode)
 (setq ruby-deep-indent-paren-style nil)
 (require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
 ;; haml-mode
 (require 'haml-mode)

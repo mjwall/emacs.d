@@ -19,6 +19,6 @@
 (load "mwall/project")
 (load "mwall/twitter")
 (load "mwall/autoloads")
-(load "mwall/java")
+;;(load "mwall/java")
 (load "mwall/encrypt")
 (load "mwall/myorg")

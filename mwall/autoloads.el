@@ -97,8 +97,8 @@
 ;;(add-to-list 'auto-mode-alist '("\\.rb" . ruby-mode))
 (add-to-list 'auto-mode-alist '("buildfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.ru" . ruby-mode))
-;;(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-;;(add-to-list 'auto-mode-alist '("\\.autotest" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.autotest" . ruby-mode))
 (add-hook 'ruby-mode-hook 'run-coding-hook)
 ;;(require 'ruby-mode)
 ;;(setq ruby-deep-indent-paren-style nil)
@@ -111,3 +111,15 @@
 
 ;; autotest
 (require 'autotest)
+
+;; js2-mode
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;(add-hook 'js-mode-hook (lambda () (js2-mode t)))
+;(add-hook 'js2-mode-hook 'run-coding-hook)
+(add-hook 'js-mode-hook 'run-coding-hook)
+;(add-hook 'js-mode-hook (lambda () (js2-mode t)))
+(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
+(add-hook 'js-mode-hook 'javascript-custom-setup)
+(defun javascript-custom-setup ()
+  (moz-minor-mode 1))

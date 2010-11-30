@@ -29,6 +29,8 @@
          :root-contains-files ("buildfile"))
         ("ant project"
          :root-contains-files ("build.xml"))
+        ("sinatra project"
+         :root-contains-files ("app.rb" "config.ru" "spec"))
         )
       )
 

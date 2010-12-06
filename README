@@ -45,7 +45,7 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - Update ruby-mode with svn co http://svn.ruby-lang.org/repos/ruby/trunk/misc vendor/ruby-mode
 - js2-mode from google code, but it doesn't seem to be loaded
 - Trying mozrepl with js-mode (espresso) from https://github.com/bard/mozrepl/raw/master/chrome/content/moz.el
-
+- Yaml mode from https://github.com/yoshiki/yaml-mode/raw/master/yaml-mode.el
 
 Todos:
 - theme

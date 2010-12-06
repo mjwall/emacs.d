@@ -4,8 +4,6 @@ Seems to work on both GNU Emacs 23 and Aquamacs 2.1 on Snow Leopard.
 
 There is still work to be done, but currently it is functional for developing clojure with slime
 
-
-
 Vendor packages:  Where these can be found in git, you will need to add the submodules.  Anything else is committed along with the project
 - Install color-theme from
   http://download.savannah.gnu.org/releases/color-theme/.  Unzip and

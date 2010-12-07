@@ -212,3 +212,4 @@
 
 ;; Start server for emacs client
 (server-start)
+

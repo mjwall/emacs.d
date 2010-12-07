@@ -15,7 +15,7 @@
 
 ;; no fringe, wasted space
 ;;(set-fringe-mode 0) ;; interferes with ansi-term
-(set-fringe-mode nil)
+(set-fringe-mode 1)
 
 ;; encoding
 (set-terminal-coding-system 'utf-8)
@@ -200,7 +200,7 @@
 
 ;; no line numbers unless I say so, but set the format for when I do
 (global-linum-mode 0)
-(setq linum-format " %d ")
+(setq linum-format "%4d ")
 
 ;; Get around the emacswiki spam protection
 ;;(add-hook 'oddmuse-mode-hook

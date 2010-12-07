@@ -15,3 +15,5 @@
 
 (load-file (concat dotfiles-dir "vendor/themes/color-theme-ir-black.el"))
 (color-theme-ir-black)
+
+(load-file (concat dotfiles-dir "vendor/themes/color-theme-vibrant-ink.el"))

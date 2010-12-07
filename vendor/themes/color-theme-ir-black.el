@@ -66,6 +66,7 @@
          (toolbar ((t (nil))))
          (bold ((t (:bold t))))
          (bold-italic ((t (:bold t))))
-         (underline ((nil (:underline nil)))))))))
+         (underline ((nil (:underline nil))))
+         (fringe ((((class color) (background dark)) (:background "black" :foreground "grey10" :width ultra-condensed)))))))))
 
 (provide 'color-theme-ir-black)

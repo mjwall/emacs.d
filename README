@@ -65,8 +65,8 @@ Todos:
 - haml
 - rinari
 - yaml
-----DONE ABOVE THIS LINE----
 - hippie expand hacks
+----DONE ABOVE THIS LINE----
 - sinatra
 - ido hacks
 - org hacks

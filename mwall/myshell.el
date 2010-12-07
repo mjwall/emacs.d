@@ -16,3 +16,15 @@
 (setq multi-term-program "/bin/bash")
 (global-set-key "\C-x\C-z" 'multi-term)
 (global-set-key (kbd "C-c t") 'multi-term-next)
+
+(defun my-term-yank ()
+  (interactive)
+  (if (term-in-line-mode)
+      (yank)
+    (term-paste)))
+
+
+(setq term-bind-key-alist
+      '(
+        ("C-y" . my-term-yank)
+        ("s-v" . my-term-yank)))

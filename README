@@ -41,7 +41,8 @@ Vendor packages:  Where these can be found in git, you will need to add the subm
 - haml-mode from https://github.com/nex3/haml/raw/da9ed66cd49d8c9fc63420378d159997934ac7ea/extra/haml-mode.el
 - actionscript mode from http://www.emacswiki.org/emacs/download/actionscript-mode-connors.el
 - Update ruby-mode with svn co http://svn.ruby-lang.org/repos/ruby/trunk/misc vendor/ruby-mode
-- js2-mode from google code, but it doesn't seem to be loaded
+- Removed ruby-mode and just went with rinari from https://github.com/eschulte/rinari.git
+- js2-mode from google code, but it doesn't seem to be loaded, probably can be deleted
 - Trying mozrepl with js-mode (espresso) from https://github.com/bard/mozrepl/raw/master/chrome/content/moz.el
 - Yaml mode from https://github.com/yoshiki/yaml-mode/raw/master/yaml-mode.el
 
@@ -62,18 +63,17 @@ Todos:
 - malabar mode for java
 - ruby-mode
 - haml
+- rinari
+- yaml
 ----DONE ABOVE THIS LINE----
 - hippie expand hacks
-- rinari
 - sinatra
 - ido hacks
 - org hacks
 - obj-c xcode
 - markdown
 - textmate?
-- js2
 - css
-- yaml
 - nxml
 - perl
 - python

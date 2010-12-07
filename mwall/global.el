@@ -14,7 +14,8 @@
 (set-frame-position (selected-frame) 0 0)
 
 ;; no fringe, wasted space
-(set-fringe-mode 0)
+;;(set-fringe-mode 0) ;; interferes with ansi-term
+(set-fringe-mode nil)
 
 ;; encoding
 (set-terminal-coding-system 'utf-8)

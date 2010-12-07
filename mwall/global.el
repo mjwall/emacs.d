@@ -28,6 +28,7 @@
 (ansi-color-for-comint-mode-on)
 
 (setq visible-bell nil
+      ring-bell-function 'ignore
       echo-keystrokes 0.1
       font-lock-maximum-decoration t
       inhibit-startup-message t
@@ -199,7 +200,7 @@
 
 ;; no line numbers unless I say so, but set the format for when I do
 (global-linum-mode 0)
-(setq linum-format "%d ")
+(setq linum-format " %d ")
 
 ;; Get around the emacswiki spam protection
 ;;(add-hook 'oddmuse-mode-hook

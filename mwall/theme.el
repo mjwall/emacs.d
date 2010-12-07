@@ -5,10 +5,13 @@
 ;;(color-theme-twilight)
 
 (load-file (concat dotfiles-dir "/vendor/themes/color-theme-vivid-chalk.el"))
-(color-theme-vivid-chalk)
+;;(color-theme-vivid-chalk)
 
 (load-file (concat dotfiles-dir "vendor/themes/zenburn.el"))
 ;;(color-theme-zenburn)
 
 (load-file (concat dotfiles-dir "vendor/themes/tangotango/color-theme-tangotango.el"))
 ;;(color-theme-tangotango)
+
+(load-file (concat dotfiles-dir "vendor/themes/color-theme-ir-black.el"))
+(color-theme-ir-black)

@@ -45,4 +45,4 @@
 (global-set-key (kbd "C-s-<up>") 'enlarge-window)
 
 ;; hippie expand binding
-(global-set-key (kbd "M-SPC") 'hippie-expand)
+(global-set-key (kbd "M-TAB") 'hippie-expand)

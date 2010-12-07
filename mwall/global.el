@@ -130,11 +130,15 @@
 ;; Hippie expand: at times perhaps too hip
 ;;(delete 'try-expand-line hippie-expand-try-functions-list)
 ;;(delete 'try-expand-list hippie-expand-try-functions-list)
+(defun try-complete-abbrev (old)
+   (if (expand-abbrev) t nil))
 
 (setq hippie-expand-try-functions-list
       '(try-complete-abbrev
-	try-complete-file-name
-	try-expand-dabbrev))
+        try-expand-dabbrev-visible
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        ))
 
 ;; Backups, don't clutter up directories with files
 (setq make-backup-files t ;; do make backups

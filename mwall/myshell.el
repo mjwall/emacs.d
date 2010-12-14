@@ -21,6 +21,8 @@
 
 (add-hook 'term-mode-hook '(lambda ()
                              (setenv "GIT_EDITOR" "blah")))
+(setq term-default-bg-color nil)
+(setq term-default-fg-color nil)
 
 (defun my-term-yank ()
   (interactive)

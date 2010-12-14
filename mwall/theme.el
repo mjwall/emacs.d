@@ -17,3 +17,5 @@
 (color-theme-ir-black)
 
 (load-file (concat dotfiles-dir "vendor/themes/color-theme-vibrant-ink.el"))
+(load-file (concat dotfiles-dir "vendor/themes/color-theme-railscasts.el"))
+(load-file (concat dotfiles-dir "vendor/themes/color-theme-github.el"))

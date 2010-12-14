@@ -15,7 +15,8 @@
 
 ;; no fringe, wasted space
 ;;(set-fringe-mode 0) ;; interferes with ansi-term
-(set-fringe-mode 1)
+(set-fringe-mode '(0 . 1))
+;;(set-fringe-mode (quote (0 . 2)))
 
 ;; encoding
 (set-terminal-coding-system 'utf-8)
@@ -54,10 +55,14 @@
       user-mail-address "mjwall@gmail.com" ;; Set e-mail address
       ;; set ispell to use brew installed aspell,
       ;; http://sunny.in.th/2010/05/08/emacs-enabling-flyspell-mode-gave-an-error.html
-      ispell-program-name "aspell")
+      ispell-program-name "aspell"
+      )
 
 ;; make backspace mode work correctly
 (normal-erase-is-backspace-mode 1)
+
+;; delete selected on keypress
+(delete-selection-mode 1)
 
 ;; whitespace mode, turned on by run-coding-hook
 (setq whitespace-style '(trailing space-before-tab indentation

@@ -1,6 +1,4 @@
 backups/*
-auto-save-list
-places
 .svn
 .DS_Store
 .\#*
@@ -8,6 +6,4 @@ places
 *.el~
 .hg
 *.elc
-my-projects.el
-semanticdb
-.org-id-locations
+mwall-saved

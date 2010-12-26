@@ -1,3 +1,8 @@
+;; Turn off mouse interface early in startup to avoid momentary display
+;; You can turn them on later if needed
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Make elisp more civilized
 (require 'cl)
@@ -11,25 +16,20 @@
         (normal-top-level-add-subdirs-to-load-path))))
 (setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
-;; setup the paths
-;; TODO: move to init-exec-path
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo 
- $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-(if window-system (set-exec-path-from-shell-PATH))
-
-;(require 'init-elpa)
+(require 'init-exec-path)
 (require 'init-el-get)
 
-;; my global customizations
 (require 'init-util)
 (require 'init-global)
+(require 'init-binding)
 (require 'init-window)
+
+
 (require 'init-whitespace)
+
+
 ;(require 'init-hippie-expand)
 ;(require 'init-ido-mode)
 ;(require 'init-text-mode)
 ;(require 'init-mac-specfic)
-;(require 'init-line-number)
+

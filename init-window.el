@@ -2,7 +2,9 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+  (blink-cursor-mode -1)
+  (menu-bar-mode 1))
+
 
 ;; make starting size larger, very specific for my mbp and font
 ;(set-frame-height (selected-frame) 80)

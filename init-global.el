@@ -65,6 +65,10 @@
 (require 'recentf)
 (recentf-mode 1)
 
+;; no line numbers unless I say so, but set the format for when I do
+(global-linum-mode 0)
+(setq linum-format "%4d ")
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (random t) ;; Seed the random-number generator
 
@@ -81,7 +85,7 @@
 (setq x-select-enable-clipboard t)
 
 ;; turn menu-bar back on
-(menu-bar-mode 1)
+;(menu-bar-mode 1)
 
 ;; Start server for emacs client
 (server-start)

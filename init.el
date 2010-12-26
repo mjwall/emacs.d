@@ -23,3 +23,13 @@
 ;(require 'init-elpa)
 (require 'init-el-get)
 
+;; my global customizations
+(require 'init-util)
+(require 'init-global)
+(require 'init-window)
+(require 'init-whitespace)
+;(require 'init-hippie-expand)
+;(require 'init-ido-mode)
+;(require 'init-text-mode)
+;(require 'init-mac-specfic)
+;(require 'init-line-number)

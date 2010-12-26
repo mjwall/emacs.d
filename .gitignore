@@ -7,3 +7,4 @@ backups/*
 .hg
 *.elc
 mwall-saved
+el-get

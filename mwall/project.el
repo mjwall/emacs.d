@@ -31,6 +31,8 @@
          :root-contains-files ("build.xml"))
         ("sinatra project"
          :root-contains-files ("app.rb" "config.ru" "spec"))
+        ("any git projetct"
+         :root-contains-files (".git"))
         )
       )
 

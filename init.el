@@ -24,17 +24,20 @@
 (require 'init-window)
 (require 'init-exec-path)
 
-;; Awesome package management
-(require 'init-el-get)
-
-(require 'init-editing-utils)
+;; included packages
+(require 'init-ibuffer)
 (require 'init-recentf)
+(require 'init-ido-mode)
 (require 'init-linum)
-
 (require 'init-mail)
 (require 'init-whitespace)
 
-;(require 'init-ibuffer)
+;; Awesome package management
+(require 'init-el-get)
+
+(require 'init-ido-extras)
+(require 'init-editing-utils)
+
 
 ;(require 'init-hippie-expand)
 ;(require 'init-ido-mode)

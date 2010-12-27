@@ -8,3 +8,4 @@ backups/*
 *.elc
 mwall-saved
 el-get
+auto-save-list

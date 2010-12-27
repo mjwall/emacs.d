@@ -17,14 +17,20 @@
 (setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
 (require 'init-exec-path)
+
 (require 'init-el-get)
 
+(require 'init-misc)
 (require 'init-util)
-(require 'init-global)
-(require 'init-binding)
+(require 'init-font)
+(require 'init-editing)
+(require 'init-navigation)
 (require 'init-window)
 
+(require 'init-recentf)
+(require 'init-linum)
 
+(require 'init-mail)
 (require 'init-whitespace)
 
 
@@ -32,4 +38,4 @@
 ;(require 'init-ido-mode)
 ;(require 'init-text-mode)
 ;(require 'init-mac-specfic)
-
+;(require 'init-shell)

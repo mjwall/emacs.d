@@ -15,3 +15,5 @@
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 
 (provide 'init-editing-utils)
+
+(global-set-key (kbd "s-r") 'undo-tree-redo)

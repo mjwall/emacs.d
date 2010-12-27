@@ -39,6 +39,7 @@
 (require 'init-editing-utils)
 (require 'init-themes)
 (require 'init-shell)
+(require 'init-dired)
 (require 'init-platform-specific)
 
 ;(require 'init-hippie-expand)

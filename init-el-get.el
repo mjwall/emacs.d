@@ -27,6 +27,7 @@
         (:name color-theme-railscasts :type git :url "git://github.com/olegshaldybin/color-theme-railscasts.git")
 
 	multi-term
+        dired-single
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 	)

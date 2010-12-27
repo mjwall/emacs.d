@@ -26,7 +26,7 @@
         (:name color-theme-subdued :type http :url "http://jblevins.org/git/misc.git/plain/color-theme-subdued.el")
         (:name color-theme-railscasts :type git :url "git://github.com/olegshaldybin/color-theme-railscasts.git")
 
-	;;multi-term
+	multi-term
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 	)

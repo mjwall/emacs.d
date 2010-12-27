@@ -8,6 +8,11 @@
         package
 	;;multi-term
 
+        ;;Editing packages
+        (:name diminish :type http :url "http://www.eskimo.com/~seldon/diminish.el")
+        (:name autopair :type svn :url "http://autopair.googlecode.com/svn/trunk/")
+        (:name undo-tree :type git :url "http://www.dr-qubit.org/git/undo-tree.git")
+
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 	)

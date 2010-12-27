@@ -16,23 +16,25 @@
         (normal-top-level-add-subdirs-to-load-path))))
 (setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
-(require 'init-exec-path)
-
-(require 'init-el-get)
-
+;; Basic
 (require 'init-misc)
 (require 'init-util)
 (require 'init-font)
 (require 'init-editing)
-(require 'init-navigation)
 (require 'init-window)
+(require 'init-exec-path)
 
+;; Awesome package management
+(require 'init-el-get)
+
+(require 'init-editing-utils)
 (require 'init-recentf)
 (require 'init-linum)
 
 (require 'init-mail)
 (require 'init-whitespace)
 
+;(require 'init-ibuffer)
 
 ;(require 'init-hippie-expand)
 ;(require 'init-ido-mode)

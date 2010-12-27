@@ -43,6 +43,9 @@
       kept-old-versions 5
       delete-old-versions t)
 
+;; Transparently open compressed files
+(auto-compression-mode t)
+
 ;; Start server for emacs client
 (server-start)
 

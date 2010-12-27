@@ -1,7 +1,6 @@
 ;;; init-util.el
-;;
-;; Misc functions from defunkt and ESK and others
 
+;; from ESK, but I am not using it currently
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 

@@ -37,7 +37,7 @@
 
 (require 'init-ido-extras)
 (require 'init-editing-utils)
-
+(require 'init-themes)
 
 ;(require 'init-hippie-expand)
 ;(require 'init-ido-mode)

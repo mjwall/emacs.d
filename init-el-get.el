@@ -15,6 +15,17 @@
         smex
         ido-hacks
 
+        ;; themes
+        color-theme
+        (:name color-theme-sanityinc :type git :url "git://github.com/purcell/color-theme-sanityinc.git")
+        (:name color-theme-tango-2 :type git :url "git://github.com/wfarr/color-theme-tango-2.git")
+        (:name color-theme-ir-black :type git :url "git://github.com/burke/color-theme-ir-black.git")
+        (:name color-theme-zen-and-art :type git :url "git://github.com/irfn/zen-and-art.git")
+        (:name color-theme-zenburn :type git :url "git://github.com/emacsmirror/zenburn.git")
+        (:name color-theme-twilight :type git :url "git://github.com/crafterm/twilight-emacs.git")
+        (:name color-theme-subdued :type http :url "http://jblevins.org/git/misc.git/plain/color-theme-subdued.el")
+        (:name color-theme-railscasts :type git :url "git://github.com/olegshaldybin/color-theme-railscasts.git")
+
 	;;multi-term
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")

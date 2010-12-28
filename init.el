@@ -52,6 +52,7 @@
 ;; language specific configs
 (require 'init-coding-hook)
 (require 'init-lisp)
+(require 'init-text-mode)
 
 
 ;(require 'init-text-mode)

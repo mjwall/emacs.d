@@ -26,8 +26,13 @@
         (:name color-theme-subdued :type http :url "http://jblevins.org/git/misc.git/plain/color-theme-subdued.el")
         (:name color-theme-railscasts :type git :url "git://github.com/olegshaldybin/color-theme-railscasts.git")
 
+        ;; things to keep me in emacs
 	multi-term
         dired-single
+
+        ;; addons to desktop
+        (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el")
+        session
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 	)

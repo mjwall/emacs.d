@@ -9,3 +9,6 @@ backups/*
 mwall-saved
 el-get
 auto-save-list
+.emacs.desktop
+.emacs.desktop.lock
+.session

@@ -41,6 +41,7 @@
 (require 'init-shell)
 (require 'init-dired)
 (require 'init-platform-specific)
+(require 'init-sessions)
 
 ;(require 'init-hippie-expand)
 ;(require 'init-ido-mode)

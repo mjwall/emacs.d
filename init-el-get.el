@@ -30,6 +30,7 @@
         ;; things to keep me out of the terminal and in emacs
 	multi-term
         dired-single
+        vkill
 
         ;; addons to desktop
         (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el")

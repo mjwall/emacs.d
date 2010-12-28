@@ -31,6 +31,7 @@
 (require 'init-linum)
 (require 'init-mail)
 (require 'init-whitespace)
+(require 'init-isearch)
 
 ;; Awesome package management
 (require 'init-el-get)

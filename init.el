@@ -44,7 +44,6 @@
 (require 'init-platform-specific)
 (require 'init-sessions)
 (require 'init-project)
-
-;(require 'init-hippie-expand)
+(require 'init-hippie-expand)
 ;(require 'init-text-mode)
 ;(require 'init-mac-specfic)

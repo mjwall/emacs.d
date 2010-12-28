@@ -16,7 +16,7 @@
         (normal-top-level-add-subdirs-to-load-path))))
 (setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
-;; Basic
+;; basic config
 (require 'init-misc)
 (require 'init-util)
 (require 'init-font)
@@ -32,10 +32,12 @@
 (require 'init-mail)
 (require 'init-whitespace)
 (require 'init-isearch)
+(require 'init-hippie-expand)
 
 ;; Awesome package management
 (require 'init-el-get)
 
+;; additional config
 (require 'init-ido-extras)
 (require 'init-editing-utils)
 (require 'init-themes)
@@ -44,6 +46,13 @@
 (require 'init-platform-specific)
 (require 'init-sessions)
 (require 'init-project)
-(require 'init-hippie-expand)
+;;TODO: org-mode
+;;TODO: figure out how to save term sessions
+
+;; language specific configs
+(require 'init-coding-hook)
+(require 'init-lisp)
+
+
 ;(require 'init-text-mode)
 ;(require 'init-mac-specfic)

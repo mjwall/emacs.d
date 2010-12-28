@@ -33,7 +33,8 @@
    vkill
 
    ;; addons to desktop
-   (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el")
+   (:name windows :type http :url "http://www.gentei.org/~yuuji/software/windows.el" :features windows)
+   (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el" :features revive)
    session
 
    ;; projects

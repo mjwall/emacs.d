@@ -27,13 +27,20 @@
         (:name color-theme-subdued :type http :url "http://jblevins.org/git/misc.git/plain/color-theme-subdued.el")
         (:name color-theme-railscasts :type git :url "git://github.com/olegshaldybin/color-theme-railscasts.git")
 
-        ;; things to keep me in emacs
+        ;; things to keep me out of the terminal and in emacs
 	multi-term
         dired-single
 
         ;; addons to desktop
         (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el")
         session
+
+        ;; projects
+        ack
+        ;; project-root saves as ShellArchive.git?a=blob_plain;hb=HEAD;f=project-root, putting in site-lisp
+        ;;(:name project-root :type http :url "http://repo.or.cz/w/ShellArchive.git?a=blob_plain;hb=HEAD;f=project-root.el" :features project-root)
+        
+        
 	;; Lisps
 	;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 	)

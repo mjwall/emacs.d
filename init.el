@@ -42,8 +42,8 @@
 (require 'init-dired)
 (require 'init-platform-specific)
 (require 'init-sessions)
+(require 'init-project)
 
 ;(require 'init-hippie-expand)
-;(require 'init-ido-mode)
 ;(require 'init-text-mode)
 ;(require 'init-mac-specfic)

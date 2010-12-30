@@ -4,7 +4,7 @@
 (setq desktop-save 'if-exists)
 (desktop-save-mode 1)
 
-(win:startup-with-window)
+;;(win:startup-with-window)
 
 (autoload 'save-current-configuration "revive" "Save status" t)
 (autoload 'resume "revive" "Resume Emacs" t)

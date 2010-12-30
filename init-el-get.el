@@ -37,8 +37,7 @@
    (:name org-mode :type git :url "git://repo.or.cz/org-mode.git" :load-path ("lisp" "contrib/lisp"))
 
    ;; addons to desktop
-   (:name windows :type http :url "http://www.gentei.org/~yuuji/software/windows.el" :features windows)
-   (:name revive :type http :url "http://www.gentei.org/~yuuji/software/revive.el" :features revive)
+   revive
    session
 
    ;; projects

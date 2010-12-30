@@ -46,6 +46,7 @@
 (require 'init-platform-specific)
 (require 'init-sessions)
 (require 'init-project)
+(require 'init-org-mode)
 ;;TODO: org-mode
 ;;TODO: figure out how to save term sessions
 

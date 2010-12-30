@@ -31,6 +31,10 @@
    multi-term
    dired-single
    vkill
+   ;;org-contrib dependency
+   (:name xml-rpc :type emacswiki :features xml-rpc)
+   (:name jira :type emacswiki )
+   (:name org-mode :type git :url "git://repo.or.cz/org-mode.git" :load-path ("lisp" "contrib/lisp"))
 
    ;; addons to desktop
    (:name windows :type http :url "http://www.gentei.org/~yuuji/software/windows.el" :features windows)

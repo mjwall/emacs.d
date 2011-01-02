@@ -6,6 +6,7 @@
  el-get-sources
  '(el-get
    package
+   maxframe
 
    ;; Editing util packages
    (:name diminish :type http :url "http://www.eskimo.com/~seldon/diminish.el")

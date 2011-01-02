@@ -1,7 +1,26 @@
-;; (defvar *window-system-color-theme* 'color-theme-sanityinc-dark
-;;   "Color theme to use in window-system frames")
-;; (defvar *tty-color-theme* 'color-theme-terminal
-;;   "Color theme to use in TTY frames")
+ (defvar *window-system-color-theme* 'color-theme-sanityinc-dark
+   "Color theme to use in window-system frames")
+ (defvar *tty-color-theme* 'color-theme-terminal
+   "Color theme to use in TTY frames")
+
+(defmacro preserving-maximization (&rest body)
+  (let ((maximized-frames (gensym)))
+    `(let ((,maximized-frames (loop for f in (frame-list)
+                                    when (maximized-p f)
+                                    collect f)))
+       (prog1 (progn ,@body)
+         (dolist (frame ,maximized-frames)
+           (select-frame frame)
+           (maximize-frame))))))
+
+(defmacro preserving-default-font-size (&rest body)
+  (let ((old-size (gensym)))
+    `(preserving-maximization
+      (let ((,old-size (face-attribute 'default :height)))
+        (prog1 (progn ,@body)
+          (set-face-attribute 'default nil :height ,old-size))))))
+
+
 
 
 (require 'color-theme-autoloads)
@@ -18,40 +37,40 @@
 
 (color-theme-initialize)
 
-(color-theme-sanityinc-dark)
+;;TODO: figure out how to distinquish terminals with the theme
 
-;;TODO: this is copied from purcell.  Figure out why it is not working and fix it
-;; (defun color-theme-terminal ()
-;;   (interactive)
-;;   (color-theme-sanityinc-dark))
+ (defun color-theme-terminal ()
+   (interactive)
+   (color-theme-sanityinc-dark))
 
 
-;; (defun apply-best-color-theme-for-frame-type (frame)
-;;   (let ((prev-frame (selected-frame)))
-;;     (select-frame frame)
-;;     (prog1
-;;         (if window-system
-;;             (preserving-default-font-size
-;;              (funcall *window-system-color-theme*))
-;;           (funcall *tty-color-theme*))
-;;       (select-frame prev-frame))))
+ (defun apply-best-color-theme-for-frame-type (frame)
+   (let ((prev-frame (selected-frame)))
+     (select-frame frame)
+     (prog1
+         (if window-system
+             (preserving-default-font-size
+              (funcall *window-system-color-theme*))
+           (funcall *tty-color-theme*))
+       (select-frame prev-frame))))
 
-;; (defun reapply-color-themes ()
-;;   (interactive)
-;;   (mapcar 'apply-best-color-theme-for-frame-type (frame-list)))
+(defun reapply-color-themes ()
+   (interactive)
+   (mapcar 'apply-best-color-theme-for-frame-type (frame-list)))
 
-;; (defun light ()
-;;   (interactive)
-;;   (setq *window-system-color-theme* 'color-theme-sanityinc-light)
-;;   (reapply-color-themes))
+ (defun light ()
+   (interactive)
+   (setq *window-system-color-theme* 'color-theme-sanityinc-light)
+   (reapply-color-themes))
 
-;; (defun dark ()
-;;   (interactive)
-;;   (setq *window-system-color-theme* 'color-theme-sanityinc-dark)
-;;   (reapply-color-themes))
+ (defun dark ()
+   (interactive)
+   (setq *window-system-color-theme* 'color-theme-sanityinc-dark)
+   (reapply-color-themes))
 
-;; (set-variable 'color-theme-is-global nil)
-;; (add-hook 'after-make-frame-functions 'apply-best-color-theme-for-frame-type)
-;; (apply-best-color-theme-for-frame-type (selected-frame))
+ (set-variable 'color-theme-is-global nil)
+ (add-hook 'after-make-frame-functions 'apply-best-color-theme-for-frame-type)
+ (apply-best-color-theme-for-frame-type (selected-frame))
+
 
 (provide 'init-themes)

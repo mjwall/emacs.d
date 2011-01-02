@@ -34,12 +34,13 @@
 (require 'init-isearch)
 (require 'init-hippie-expand)
 
-;; Awesome package management
+;; package management
 (require 'init-el-get)
 
 ;; additional config
 (require 'init-ido-extras)
 (require 'init-editing-utils)
+(require 'init-maxframe)
 (require 'init-themes)
 (require 'init-shell)
 (require 'init-dired)
@@ -47,14 +48,13 @@
 (require 'init-sessions)
 (require 'init-project)
 (require 'init-org-mode)
-;;TODO: org-mode
 ;;TODO: figure out how to save term sessions
 
 ;; language specific configs
 (require 'init-coding-hook)
 (require 'init-lisp)
 (require 'init-text-mode)
+(require 'init-html)
+(require 'init-java)
+(require 'init-javascript)
 
-
-;(require 'init-text-mode)
-;(require 'init-mac-specfic)

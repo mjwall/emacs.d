@@ -14,6 +14,9 @@
 (setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
 (setq *is-gnu-linux* (eq system-type 'gnu/linux))
 
+;; TODO: figure out what to do with this
+(setq *macbook-pro-support-enabled* nil)
+
 ;; Insert date string
 (defun insert-date-string ()
  "Insert a nicely formated date string."

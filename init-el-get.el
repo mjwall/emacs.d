@@ -30,7 +30,7 @@
 
    ;; things to keep me out of the terminal and in emacs
    multi-term
-   dired-single
+   dired+
    vkill
    ;;org-contrib dependency
    (:name xml-rpc :type emacswiki :features xml-rpc)

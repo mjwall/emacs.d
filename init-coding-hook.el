@@ -16,10 +16,14 @@
    '(("\\<\\(FIX\\|FIXME\\|TODO\\|BUG\\|XXX\\):"
       1 font-lock-warning-face t))))
 
+(defun bye-flyspell ()
+  (turn-off-flyspell))
+
 (add-hook 'coding-hook 'turn-on-whitespace)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-hideshow)
 (add-hook 'coding-hook 'turn-on-linum)
+(add-hook 'coding-hook 'bye-flyspell)
 ;; use autopair here too
 
 (defun run-coding-hook ()

@@ -40,7 +40,8 @@
 ;; additional config
 (require 'init-ido-extras)
 (require 'init-editing-utils)
-(require 'init-maxframe)
+(require 'init-frame-hooks)
+(require 'init-gui-frames)
 (require 'init-themes)
 (require 'init-shell)
 (require 'init-dired)

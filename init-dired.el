@@ -27,9 +27,9 @@
 ;;                           (message "Current directory is: %s" default-directory))))
 ;; (global-set-key [M-f6] 'joc-dired-toggle-buffer-name)
 
-(require 'dired+)
-(setq dired-recursive-deletes 'top)
-(define-key dired-mode-map [mouse-2] 'dired-find-file)
+;;(require 'dired+)
+;;(setq dired-recursive-deletes 'top)
+;;(define-key dired-mode-map [mouse-2] 'dired-find-file)
 
 
 (provide 'init-dired)

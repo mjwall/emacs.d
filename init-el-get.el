@@ -1,12 +1,16 @@
 (when (not (load "~/.emacs.d/el-get/el-get/el-get.el" t))
   (error "Please bootstrap el-get using the instructions here: http://github.com/dimitri/el-get/, then restart Emacs"))
 
-                                        ;(setq el-get-byte-compile nil
-(setq
+(setq el-get-byte-compile nil
+;(setq
  el-get-sources
  '(el-get
    package
    maxframe
+
+   ;; addons to desktop
+   revive
+   session
 
    ;; Editing util packages
    (:name diminish :type http :url "http://www.eskimo.com/~seldon/diminish.el")
@@ -36,10 +40,6 @@
    (:name xml-rpc :type emacswiki :features xml-rpc)
    (:name jira :type emacswiki )
    (:name org-mode :type git :url "git://repo.or.cz/org-mode.git" :load-path ("lisp" "contrib/lisp"))
-
-   ;; addons to desktop
-   revive
-   session
 
    ;; projects
    ack

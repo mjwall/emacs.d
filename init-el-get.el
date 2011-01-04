@@ -52,6 +52,10 @@
    (:name rainbow-delimiters :type emacswiki :features rainbow-delimiters)
    (:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
    clojure-mode
+   rvm
+   rinari
+   yaml-mode
+   haml-mode
    )
  )
 

@@ -58,5 +58,7 @@
 (require 'init-html)
 (require 'init-java)
 (require 'init-javascript)
-;;(require 'init-ruby)
+(require 'init-ruby)
+(require 'init-yaml)
+(require 'init-haml)
 

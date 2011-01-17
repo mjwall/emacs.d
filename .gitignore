@@ -12,3 +12,4 @@ auto-save-list
 .emacs.desktop
 .emacs.desktop.lock
 .session
+.org-id-locations

@@ -14,7 +14,7 @@
 
    ;; Editing util packages
    (:name diminish :type http :url "http://www.eskimo.com/~seldon/diminish.el")
-   (:name autopair :type svn :url "http://autopair.googlecode.com/svn/trunk/")
+   autopair
    (:name undo-tree :type git :url "http://www.dr-qubit.org/git/undo-tree.git")
 
    ;; ido extra packages

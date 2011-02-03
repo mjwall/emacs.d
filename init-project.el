@@ -2,12 +2,6 @@
 
 (setq project-roots
       `(
-        ("Maven project"
-         :root-contains-files ("pom.xml")
-         ;;:filename-regex ,(regexify-ext-list '(java html groovy jsp js css xml))
-         ;;          :on-hit (lambda (p) (message (car p)))
-         ;;:exclude-paths ("target")
-         )
         ("Clojure project"
          :root-contains-files ("project.clj")
          ;;:filename-regex ,(regexify-ext-list '(clj jsp css js xml html))
@@ -31,6 +25,12 @@
          :root-contains-files ("app.rb" "config.ru" "spec"))
         ("any git projetct"
          :root-contains-files (".git"))
+        ("Maven project"
+         :root-contains-files ("pom.xml")
+         ;;:filename-regex ,(regexify-ext-list '(java html groovy jsp js css xml))
+         ;;          :on-hit (lambda (p) (message (car p)))
+         ;;:exclude-paths ("target")
+         )
         )
       )
 

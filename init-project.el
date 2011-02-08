@@ -56,7 +56,7 @@
            (shell-command-to-string
             (concat "find "
                     my-project-root
-                    " \\( -name \"*.svn\" -o -name \"*.git\" -o -name \"*.jar\" -o -name \"*.class\" -o -name \"WEB-INF\" -o -name \"target\" \\) -prune -o -type f -print | grep -E -v \"\.(pyc)$\""
+                    " \\( -name \"*.svn\" -o -name \"*.git\" -o -name \"*.jar\" -o -name \"*.class\" -o -path \"*/WEB-INF\" -o -path \"*/target\" -o -path \"*/vendor/isolate\" \\) -prune -o -type f -print "
                     )) "\n"))
     ;; populate hash table (display repr => path)
     (setq tbl (make-hash-table :test 'equal))

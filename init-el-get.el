@@ -56,6 +56,7 @@
    rinari
    yaml-mode
    haml-mode
+   (:name autotest :type emacswiki :features autotest)
    )
  )
 

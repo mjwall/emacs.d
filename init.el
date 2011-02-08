@@ -61,6 +61,7 @@
 (require 'init-ruby)
 (require 'init-yaml)
 (require 'init-haml)
+(require 'init-autotest)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.

@@ -21,6 +21,9 @@
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)
 
+;; make emacs revert files when they change
+(setq global-auto-revert-mode 1)
+
 (defun indent-buffer ()
   (interactive)
   (indent-region (point-min) (point-max)))
@@ -35,6 +38,15 @@
   (indent-buffer)
   (untabify-buffer)
   (delete-trailing-whitespace))
+
+(defun vi-open-line-above ()
+  "Insert a newline above the current line and put point at beginning."
+  (interactive)
+  (unless (bolp)
+    (beginning-of-line))
+  (newline)
+  (forward-line -1)
+  (indent-according-to-mode))
 
 ;; grabbed from http://blog.tuxicity.se/elisp/emacs/2010/03/11/duplicate-current-line-or-region-in-emacs.html
 (defun duplicate-current-line-or-region (arg)
@@ -100,6 +112,7 @@ A place is considered `tab-width' character columns."
 (global-set-key (kbd "<C-S-left>") 'textmate-shift-left)
 (global-set-key "\r" 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-region)
+(global-set-key (kbd "C-S-o") 'vi-open-line-above)
 
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)

@@ -11,7 +11,7 @@
 
   ;; fonts
   ;; (setq mac-allow-anti-aliasing nil)
-  (set-default-font "Monaco-13")
+  (set-default-font "Monaco-14")
   ;; (set-default-font "Inconsolata-14")
 
   (when (eq system-type 'darwin)

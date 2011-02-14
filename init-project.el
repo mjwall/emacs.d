@@ -21,6 +21,8 @@
          :root-contains-files ("buildfile"))
         ("ant project"
          :root-contains-files ("build.xml"))
+        ("rails project"
+         :root-contains-files ("rails-app"))
         ("sinatra project"
          :root-contains-files ("app.rb" "config.ru" "spec"))
         ("any git projetct"
@@ -56,7 +58,7 @@
            (shell-command-to-string
             (concat "find "
                     my-project-root
-                    " \\( -name \"*.svn\" -o -name \"*.git\" -o -name \"*.jar\" -o -name \"*.class\" -o -path \"*/WEB-INF\" -o -path \"*/target\" -o -path \"*/vendor/isolate\" \\) -prune -o -type f -print "
+                    " \\( -name \"*.svn\" -o -name \"*.git\" -o -name \"*.jar\" -o -name \"*.class\" -o -path \"*/WEB-INF\" -o -path \"*/target\" -o -path \"*/vendor/isolate\" \\) -prune -o -type f -prin"
                     )) "\n"))
     ;; populate hash table (display repr => path)
     (setq tbl (make-hash-table :test 'equal))

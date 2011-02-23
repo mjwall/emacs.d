@@ -62,6 +62,7 @@
 (require 'init-yaml)
 (require 'init-haml)
 (require 'init-autotest)
+(require 'init-php)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.

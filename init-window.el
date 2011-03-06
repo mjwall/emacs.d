@@ -4,9 +4,8 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1)
   (menu-bar-mode 1)
+  (winner-mode 1)
 )
-
-;;(winner-mode 1)
 
 ;; no fringe, wasted space
 ;;(set-fringe-mode 0) ;; interferes with ansi-term

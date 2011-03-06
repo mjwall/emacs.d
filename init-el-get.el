@@ -16,6 +16,7 @@
    (:name diminish :type http :url "http://www.eskimo.com/~seldon/diminish.el")
    autopair
    (:name undo-tree :type git :url "http://www.dr-qubit.org/git/undo-tree.git")
+   auto-complete
 
    ;; ido extra packages
    smex
@@ -34,7 +35,8 @@
 
    ;; things to keep me out of the terminal and in emacs
    multi-term
-   ;;dired+
+   dired-plus
+   ;;dired-single
    vkill
    ;;org-contrib dependency
    (:name xml-rpc :type emacswiki :features xml-rpc)

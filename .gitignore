@@ -13,3 +13,4 @@ auto-save-list
 .emacs.desktop.lock
 .session
 .org-id-locations
+ac-comphist.dat

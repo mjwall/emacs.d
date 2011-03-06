@@ -47,6 +47,9 @@
 (auto-compression-mode t)
 
 ;; Start server for emacs client
-(server-start)
+(when window-system
+    (server-start)
+)
+
 
 (provide 'init-misc)

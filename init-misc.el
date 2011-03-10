@@ -46,10 +46,11 @@
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
-;; Start server for emacs client
-(when window-system
-    (server-start)
-)
-
+;; Start server for emacs client if not already started
+(if (file-exists-p
+     (concat (getenv "TMPDIR") "emacs"
+             (number-to-string
+              (user-real-uid)) "/server"))
+    nil (server-start))
 
 (provide 'init-misc)

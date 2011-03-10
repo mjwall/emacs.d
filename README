@@ -1,80 +1,17 @@
-This is my personal emacs config.  I have taken ideas from the emacs-starter-kit, the aquamacs-starter-kit , defunkt's emacs config and others.  This config is build from the ground up because I needed to understand how this was working.
+This is my personal emacs config.  I started with ideas from the emacs-starter-kit, the aquamacs-starter-kit , defunkt's emacs config and others and built it from the ground up.  Then I got frustrated with the portability and started again, taking things I liked from the current config.  It is based heavily on Steve Purcell's config at https://github.com/purcell/emacs.d and uses el-get for package management. See https://github.com/dimitri/el-get.
 
-Seems to work on both GNU Emacs 23 and Aquamacs 2.1 on Snow Leopard.
+I was a huge vim user for decades and had been using TextMate for a couple of years.  Org-mode and the swank for Clojure finally got me to buckle down and learn emacs.
 
-There is still work to be done, but currently it is functional for developing clojure with slime
+None of this is my own innovation.  I simply spent a lot of time reading other people's configs and pulling what would work for me.  I use multi-term and mostly do not have a seperate terminal app open.  I use git, but not with a package.  It is all through the terminal.  I am particular about whitespace and formatting, so that is configured strictly.
 
-Vendor packages:  Where these can be found in git, you will need to add the submodules.  Anything else is committed along with the project
-- Install color-theme from
-  http://download.savannah.gnu.org/releases/color-theme/.  Unzip and
-  put color-theme.el in vendor and color-theme-example.el and
-  color-theme-library.el in vendor/themes
-- themes/twilight-emacs - theme used by defunkt -  git submodule from
-  git://github.com/crafterm/twilight-emacs.git
-- nav - Emacs Nav package - mercurial project on google code, hg clone
-  https://emacs-nav.googlecode.com/hg/ emacs-nav, not committing .hg
-  file, so you must clone it yourself
-- magit - Magical Git for Emacs - git submodule from from
-  http://github.com/philjackson/magit, say you need to install, but
-  seems to work fine as is
-- paredit - wget'd from http://mumble.net/~campbell/emacs/paredit.el,
-  current version is 21
-- slime - git submodule from git://git.boinkor.net/slime.git.  Worked
-  first time adding to autoloads
-- clojure-mode - gitsubmodule from
-  http://github.com/technomancy/clojure-mode.git
-- vivid chalk color theme - wget from
-  http://github.com/evangineer/aquamacs-emacs-starter-kit/blob/master/site-lisp/vivid-chalk/vivid-chalk.el
-- zenburn color theme - wget from http://www.emacswiki.org/emacs/download/zenburn.el
-- anything in prep for grails mode - wget's http://www.emacswiki.org/emacs/download/anything-config.el and http://www.emacswiki.org/emacs/download/anything.el - grails-emacs-mode - wget all files from https://svn.codehaus.org/groovy/trunk/groovy/ide/emacs/.  Have aspirations of making grails command to execute test for current file, but will make a seperate project on github if I do.  This works for now.
-- php-mode - wget'd from http://php-mode.svn.sourceforge.net/svnroot/php-mode/tags/php-mode-1.5.0/php-mode.el
-- nxhtml - git submodule from http://github.com/emacsmirror/nxhtml.git
-- twittering-mode - git submodule from git://github.com/hayamiz/twittering-mode.git
-- java - using malabar mode.  Get it from http://github.com/espenhw/malabar-mode and run mvn package.  Then unzip the dist in ~/.emacs.d/vendor
-- dired-single from http://www.emacswiki.org/cgi-bin/wiki/dired-single.el
-- project-root.el - pulled in from https://github.com/emacsmirror/project-root
-- ack.el - for use with project-root from http://www.shellarchive.co.uk/content/emacs.html
-- figlet.el - also from http://www.shellarchive.co.uk/content/emacs.html, just because it looks fun.  Had to brew install figlet and modify the .el to point to the right place
-- rainbow-delimiters from http://www.emacswiki.org/emacs/RainbowDelimiters, hooked in elisp.
-- drap and drop on a mac, see http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop and http://stackoverflow.com/questions/1850292/emacs-23-1-and-mac-os-x-problem-with-files-drag-and-drop
-- org-mode as a submodule for latest.  Git submodule add git://repo.or.cz/org-mode.git vendor/org-mode.  Cd to vendor/org-mode, then git checkout -b stable origin/maint.  Run make && make doc && make install
-- haml-mode from https://github.com/nex3/haml/raw/da9ed66cd49d8c9fc63420378d159997934ac7ea/extra/haml-mode.el
-- actionscript mode from http://www.emacswiki.org/emacs/download/actionscript-mode-connors.el
-- Update ruby-mode with svn co http://svn.ruby-lang.org/repos/ruby/trunk/misc vendor/ruby-mode
-- Removed ruby-mode and just went with rinari from https://github.com/eschulte/rinari.git
-- js2-mode from google code, but it doesn't seem to be loaded, probably can be deleted
-- Trying mozrepl with js-mode (espresso) from https://github.com/bard/mozrepl/raw/master/chrome/content/moz.el
-- Yaml mode from https://github.com/yoshiki/yaml-mode/raw/master/yaml-mode.el
+This config is used everyday on my mac and occasionaly in linux.  Start with the init.el and init-el-get.el and you should be able to follow what is being loaded and configured.  I use emacs for just about everything, including development in the following
 
-Todos:
-- theme
-- make startup size bigger
-- nav
-- make linum only show up on code (see superbobry)
-- magit
-- paredit
-- shell.el from defunkt
-- slime
-- clojure mode
-- groovy/grails mode
-- php-mode
-- nxhtml
-- twittering-mode
-- malabar mode for java
-- ruby-mode
-- haml
-- rinari
-- yaml
-- hippie expand hacks
-----DONE ABOVE THIS LINE----
-- sinatra
-- ido hacks
-- org hacks
-- obj-c xcode
-- markdown
-- textmate?
-- css
-- nxml
-- perl
-- python
-- make script to install submodules
+- Ruby/Rails, with rvm
+- HTML/CSS
+- Javascript
+- Groovy
+- Java
+- Clojure
+- PHP
+- Java
+

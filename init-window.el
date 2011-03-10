@@ -4,7 +4,6 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1)
   (menu-bar-mode 1)
-  (winner-mode 1)
 )
 
 ;; no fringe, wasted space
@@ -14,6 +13,8 @@
 
 ;; Window switching, shift and arrow key changes window
 (windmove-default-keybindings)
+
+(winner-mode 1)
 
 ;; bind some window resizing
 (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)

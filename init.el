@@ -63,6 +63,7 @@
 (require 'init-haml)
 (require 'init-autotest)
 (require 'init-php)
+(require 'init-sunrise)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.

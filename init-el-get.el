@@ -36,6 +36,9 @@
    ;; things to keep me out of the terminal and in emacs
    multi-term
    dired-plus
+   sunrise-commander
+   sunrise-x-buttons
+   sunrise-x-tree
    ;;dired-single
    vkill
    ;;org-contrib dependency

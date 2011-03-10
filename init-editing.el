@@ -104,6 +104,12 @@ A place is considered `tab-width' character columns."
   (interactive)
   (move-line 1))
 
+(defun save-buffer-always ()
+  "Save the buffer even if it is not modified."
+  (interactive)
+  (set-buffer-modified-p t)
+  (save-buffer))
+
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 (global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key (kbd "M-<up>") 'move-line-up)
@@ -113,6 +119,7 @@ A place is considered `tab-width' character columns."
 (global-set-key "\r" 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-region)
 (global-set-key (kbd "C-S-o") 'vi-open-line-above)
+(global-set-key (kbd "s-s") 'save-buffer-always)
 
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)

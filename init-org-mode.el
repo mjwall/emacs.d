@@ -28,9 +28,9 @@
 ; capture
  (setq org-capture-templates
       '(("t" "Todo" entry (file "~/org/todo.org" )
-             "* TODO %?\n  %i\n  %a")
+             "* TODO %^{enter todo}\n%?")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+         "* %^{journal title}\n%?\nEntered on %U")))
 (setq org-default-notes-file (concat org-directory "~/org/inbox.org"))
 
 (provide 'init-org-mode)

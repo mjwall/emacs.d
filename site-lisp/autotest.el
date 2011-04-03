@@ -51,6 +51,9 @@
       (shell "*autotest*")
       (define-key shell-mode-map "\C-c\C-a" 'autotest-switch)
 
+      (set (make-local-variable 'comint-output-filter-functions)
+           '(comint-truncate-buffer comint-postoutput-scroll-to-bottom
+             ansi-color-process-output autotest-status-message))
       (set (make-local-variable 'comint-buffer-maximum-size) 5000)
       (set (make-local-variable 'comint-scroll-show-maximum-output) t)
       (set (make-local-variable 'comint-scroll-to-bottom-on-output) t)
@@ -61,7 +64,15 @@
       (compilation-shell-minor-mode)
 
       (comint-send-string "*autotest*" (concat autotest-command "\n")))
-)
+  )
+
+(defun autotest-status-message (txt)
+  (interactive)
+  ; (unless (= (length txt) 0)
+  (when (string-match "[0-9]+ example[s]?, [0-9]+ failure[s]?, [0-9]+ pending" txt)
+      (message (match-string 0 txt)))
+                                        ; )
+  )
 
 (defun autotest-switch ()
   "Switch back and forth between autotest and the previous buffer"

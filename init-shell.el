@@ -5,9 +5,6 @@
 (global-set-key (kbd "C-c t") 'multi-term-next)
 (setq multi-term-scroll-show-maximum-output t)
 
-;(add-hook 'term-mode-hook '(lambda ()
-;                             (setenv "GIT_EDITOR" "blah")))
-
 (setq term-default-bg-color nil)
 (setq term-default-fg-color nil)
 

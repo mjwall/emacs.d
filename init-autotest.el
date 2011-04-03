@@ -1,5 +1,3 @@
-(setq autotest-command "rake autotest")
-
-;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(autoload 'autotest "autotest" "Autotest mode" t)
 
 (provide 'init-autotest)

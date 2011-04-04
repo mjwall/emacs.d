@@ -124,5 +124,10 @@ A place is considered `tab-width' character columns."
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 
+;; revbufs from http://www.neilvandyke.org/revbufs/revbufs.el
+;; most useful when git'ing in a term
+(require 'revbufs)
+(global-set-key [f8] 'revbufs)
+
 (provide 'init-editing)
 

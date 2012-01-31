@@ -36,19 +36,19 @@
 (require 'init-hippie-expand)
 
 ;; package management
-;;(require 'init-el-get)
+(require 'init-el-get)
 
 ;; additional config
-;;(require 'init-ido-extras)
-;;(require 'init-editing-utils)
-;;(require 'init-frame-hooks)
-;;(require 'init-gui-frames)
-;;(require 'init-themes)
-;;(require 'init-shell)
-;;(require 'init-dired)
-;;(require 'init-sessions)
+(require 'init-ido-extras)
+(require 'init-editing-utils)
+(require 'init-frame-hooks)
+(require 'init-gui-frames)
+(require 'init-themes)
+(require 'init-shell)
+(require 'init-dired)
+(require 'init-org-mode)
+(require 'init-sessions)
 ;;(require 'init-project)
-;;(require 'init-org-mode)
 ;;TODO: figure out how to save term sessions
 
 ;; language specific configs

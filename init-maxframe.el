@@ -2,11 +2,6 @@
 (when *is-cocoa-emacs*
   (fset 'maximize-frame 'x-maximize-frame)
   (fset 'restore-frame 'x-restore-frame))
-;; TODO: make this work
-(when *macbook-pro-support-enabled*
-  (setq mf-max-width 1440)
-  (setq mf-max-height 900)
-  (setq mf-offset-x 0))
 
 (defmacro with-selected-frame (frame &rest forms)
   (let ((prev-frame (gensym)))

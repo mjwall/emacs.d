@@ -6,16 +6,13 @@
 
 ;; Use a more interesting startup message
 (defun startup-echo-area-message ()
-  "By your command...")
+  "Hacky time...")
 
 ;; set variables based on system type
 (setq *is-a-mac* (eq system-type 'darwin))
 (setq *is-carbon-emacs* (and *is-a-mac* (eq window-system 'mac)))
 (setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
 (setq *is-gnu-linux* (eq system-type 'gnu/linux))
-
-;; TODO: figure out what to do with this
-(setq *macbook-pro-support-enabled* nil)
 
 ;; Insert date string
 (defun insert-date-string ()

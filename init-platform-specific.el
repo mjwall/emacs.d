@@ -14,6 +14,9 @@
   (set-default-font "Monaco-15")
   ;; (set-default-font "Inconsolata-14")
 
+  ;; make command key on mac the 'meta'
+  (setq mac-command-modifier 'meta)
+  
   (when (eq system-type 'darwin)
     ;; Work around a bug on OS X where system-name is FQDN
     (setq system-name (car (split-string system-name "\\."))))

@@ -46,12 +46,13 @@
 
 
    ;; Lisps
-   ;;paredit
-   ;;(:name rainbow-delimiters :type emacswiki :features rainbow-delimiters)
+   paredit
+   rainbow-delimiters
+   clojure-mode
+   ;; slime is now in site-lisp, site is gone or something
    ;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 
    ;; other languages
-   ;;clojure-mode
    ;;rvm
    ;;rinari
    ;;yaml-mode

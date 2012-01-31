@@ -1,4 +1,4 @@
- (defvar *window-system-color-theme* 'color-theme-sanityinc-dark
+(defvar *window-system-color-theme* 'color-theme-sanityinc-dark
    "Color theme to use in window-system frames")
  (defvar *tty-color-theme* 'color-theme-terminal
    "Color theme to use in TTY frames")
@@ -22,11 +22,10 @@
 
 
 
-
 (require 'color-theme-autoloads)
-(autoload 'color-theme-zenburn "zenburn" "A low contrast color theme" t)
+;;(autoload 'color-theme-zenburn "zenburn" "A low contrast color theme" t)
 (autoload 'color-theme-twilight "color-theme-twilight" "A dark color theme" t)
-(autoload 'color-theme-vivid-chalk "vivid-chalk" "A dark color theme" t)
+;;(autoload 'color-theme-vivid-chalk "vivid-chalk" "A dark color theme" t)
 (autoload 'color-theme-tango-2 "color-theme-tango-2" "A dark color theme" t)
 (autoload 'color-theme-subdued "color-theme-subdued" "A dark color theme" t)
 (autoload 'color-theme-ir-black "color-theme-ir-black" "A dark color theme" t)
@@ -36,6 +35,9 @@
 (autoload 'color-theme-sanityinc-dark "color-theme-sanityinc" "A dark color theme" t)
 
 (color-theme-initialize)
+;; stop the default themes from loading
+;; doesn't seem to work, removed .el files from el-get/color-theme/themes
+(setq color-theme-load-all-themes nil)
 
 ;;TODO: figure out how to distinquish terminals with the theme
 

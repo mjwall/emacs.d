@@ -48,12 +48,12 @@
 (require 'init-dired)
 (require 'init-org-mode)
 (require 'init-sessions)
-;;(require 'init-project)
+(require 'init-project)
 ;;TODO: figure out how to save term sessions
 
 ;; language specific configs
-;;(require 'init-coding-hook)
-;;(require 'init-lisp)
+(require 'init-coding-hook)
+(require 'init-lisp)
 ;;(require 'init-text-mode)
 ;;(require 'init-html)
 ;;(require 'init-java)

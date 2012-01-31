@@ -1,4 +1,3 @@
-;;(require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-saved-items 100)
 
@@ -10,6 +9,5 @@
   (global-set-key (kbd "C-c r") 'revert-buffer)
   (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
   (global-set-key (kbd "C-x f") 'recentf-ido-find-file))
-
 
 (provide 'init-recentf)

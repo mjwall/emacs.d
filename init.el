@@ -26,14 +26,14 @@
 (require 'init-exec-path)
 
 ;; included packages
-;;(require 'init-ibuffer)
-;;(require 'init-recentf)
-;;(require 'init-ido-mode)
-;;(require 'init-linum)
-;;(require 'init-mail)
-;;(require 'init-whitespace)
-;;(require 'init-isearch)
-;;(require 'init-hippie-expand)
+(require 'init-ibuffer)
+(require 'init-recentf)
+(require 'init-ido-mode)
+(require 'init-linum)
+(require 'init-mail)
+(require 'init-whitespace)
+(require 'init-isearch)
+(require 'init-hippie-expand)
 
 ;; package management
 ;;(require 'init-el-get)

@@ -2,6 +2,8 @@
   "Minor mode for pseudo-structurally editing Lisp code."
   t)
 
+(require 'rainbow-delimiters)
+
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'emacs-lisp-mode-hook (lambda () (rainbow-delimiters-mode +1)))

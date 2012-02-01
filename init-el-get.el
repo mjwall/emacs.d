@@ -38,6 +38,7 @@
    multi-term
    dired-plus
    vkill
+   magit
    (:name org-mode :type git :url "git://repo.or.cz/org-mode.git" :load-path ("lisp" "contrib/lisp"))
 
    ;; projects

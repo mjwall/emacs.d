@@ -54,13 +54,14 @@
    ;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 
    ;; other languages
-   ;;rvm
-   ;;rinari
-   ;;yaml-mode
-   ;;haml-mode
-   ;;scala-mode
-   ;; ;; add groovy-mode, python-mode, markdown-mode
-   ;;(:name php-mode :type svn :url "http://php-mode.svn.sourceforge.net/svnroot/php-mode/trunk/php-mode-src")
+   rvm
+   rinari
+   yaml-mode
+   haml-mode
+   scala-mode
+   python-mode
+   markdown-mode
+   (:name php-mode :type svn :url "http://php-mode.svn.sourceforge.net/svnroot/php-mode/trunk/php-mode-src")
    )
  )
 

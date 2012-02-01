@@ -54,16 +54,17 @@
 ;; language specific configs
 (require 'init-coding-hook)
 (require 'init-lisp)
-;;(require 'init-text-mode)
-;;(require 'init-html)
-;;(require 'init-java)
-;;(require 'init-javascript)
-;;(require 'init-ruby)
-;;(require 'init-yaml)
-;;(require 'init-haml)
-;;(require 'init-autotest)
-;;(require 'init-php)
-;;(require 'init-sunrise)
+;; TODO: maybe add a magit customization
+(require 'init-text-mode)
+(require 'init-html)
+(require 'init-java)
+(require 'init-javascript)
+(require 'init-groovy)
+(require 'init-ruby)
+(require 'init-yaml)
+(require 'init-haml)
+(require 'init-autotest)
+(require 'init-php)
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

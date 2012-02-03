@@ -7,6 +7,7 @@
 (set-language-environment "UTF-8")
 
 ;; make backspace mode work correctly
+;; use F1 instead of Ctrl-h when running in the terminal
 (normal-erase-is-backspace-mode 1)
 
 ;; delete selected on keypress

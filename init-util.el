@@ -1,6 +1,6 @@
 ;;; init-util.el
 
-;; from ESK, but I am not using it currently
+;; from ESK, useful function for loading more stuff
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 

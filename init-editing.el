@@ -25,8 +25,12 @@
 (setq global-auto-revert-mode 1)
 
 (defun indent-buffer ()
+  "indent whole buffer"
   (interactive)
-  (indent-region (point-min) (point-max)))
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max))
+  )
 
 (defun untabify-buffer ()
   (interactive)

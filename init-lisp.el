@@ -10,15 +10,14 @@
 
 ;; Slime
 (require 'slime-autoloads)
-(slime-setup)
-
 (setq slime-lisp-implementations
-'((clisp ("clisp") :coding-system utf-8-unix)
-;; (scheme ("scheme") :coding-system utf-8-unix)
-))
+       '((clisp ("clisp") :coding-system utf-8-unix)
+         (clojure ,(swank-clojure-cmd) :init swank-clojure-init)
+         ;; (scheme ("scheme") :coding-system utf-8-unix)
+         ))
 
-;;(setf slime-default-lisp 'scheme)
 (setf slime-default-lisp 'clisp)
+;; ;;(setf slime-default-lisp 'clojure)
 
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
@@ -26,11 +25,11 @@
 (setq slime-net-coding-system 'utf-8-unix)
 
 ;; add paredit to slime
-(defun slimeify ()
-  (paredit-mode 1)
-  (define-key slime-repl-mode-map ;; stop slime from grabbing del
-    (read-kbd-macro paredit-backward-delete-key)
-    nil))
+ (defun slimeify ()
+   (paredit-mode 1)
+   (define-key slime-repl-mode-map ;; stop slime from grabbing del
+     (read-kbd-macro paredit-backward-delete-key)
+     nil))
 
 (add-hook 'slime-repl-mode-hook 'slimeify)
 

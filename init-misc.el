@@ -32,8 +32,15 @@
 ;;(set-default 'imenu-auto-rescan t)
 
 ;; avoid M-x if possible, https://sites.google.com/site/steveyegge2/effective-emacs
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
+;;(global-set-key "\C-x\C-m" 'execute-extended-command)
+;;(global-set-key "\C-c\C-m" 'execute-extended-command)
+(global-set-key "\C-x\C-m" 'smex)
+(global-set-key "\C-c\C-m" 'smex)
+
+;; since I use git from the terminal in emacs with GIT_EDITOR=emacsclient, I need to close
+;; the commit message when I am done.  C-x # is the command, which runs server-edit.  But
+;; I do that so often, I want an easier key combo
+(global-set-key "\C-c\C-w" 'server-edit)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (random t) ;; Seed the random-number generator

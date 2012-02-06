@@ -49,7 +49,7 @@
    ;; Lisps
    paredit
    rainbow-delimiters
-   clojure-mode
+   ;;clojure-mode
    ;; slime is now in site-lisp, site is gone or something
    ;;(:name slime :type git :url "git://sbcl.boinkor.net/slime.git" :load-path ("." "./contrib") :compile nil :load "slime-autoloads.el")
 

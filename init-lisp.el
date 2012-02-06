@@ -9,31 +9,34 @@
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
 ;; Slime
-(require 'slime-autoloads)
-(setq slime-lisp-implementations
-       '((clisp ("clisp") :coding-system utf-8-unix)
-         (clojure ,(swank-clojure-cmd) :init swank-clojure-init)
-         ;; (scheme ("scheme") :coding-system utf-8-unix)
-         ))
+;;(require 'slime)
+;;(require 'slime-autoloads)
+;; (setq slime-lisp-implementations
+;;        '((clisp ("clisp") :coding-system utf-8-unix)
+;;          (clojure ,(swank-clojure-cmd) :init swank-clojure-init)
+;;          ;; (scheme ("scheme") :coding-system utf-8-unix)
+;;          ))
 
-(setf slime-default-lisp 'clisp)
+;; (setf slime-default-lisp 'clisp)
 ;; ;;(setf slime-default-lisp 'clojure)
 
-(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-(slime-setup '(slime-repl))
-(setq slime-net-coding-system 'utf-8-unix)
+;;(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+;;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;;(slime-setup '(slime-repl))
+;;(setq slime-net-coding-system 'utf-8-unix)
 
 ;; add paredit to slime
- (defun slimeify ()
-   (paredit-mode 1)
-   (define-key slime-repl-mode-map ;; stop slime from grabbing del
-     (read-kbd-macro paredit-backward-delete-key)
-     nil))
+;;(defun slimeify ()
+  ;;(paredit-mode 1)
+  ;;(define-key slime-repl-mode-map ;; stop slime from grabbing del
+  ;;(read-kbd-macro paredit-backward-delete-key)
+  ;;nil))
 
-(add-hook 'slime-repl-mode-hook 'slimeify)
+;;(add-hook 'slime-repl-mode-hook 'slimeify)
 
 ;; Clojure mode
+(require 'clojure-mode)
+(require 'clojure-test-mode) ;; has slime built in?
 (add-hook 'clojure-mode-hook 'run-coding-hook)
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'clojure-mode-hook (lambda () (rainbow-delimiters-mode +1)))

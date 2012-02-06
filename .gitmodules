@@ -1,3 +1,0 @@
-[submodule "site-lisp/slime"]
-	path = site-lisp/slime
-	url = https://github.com/nablaone/slime.git

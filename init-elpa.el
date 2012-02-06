@@ -32,5 +32,10 @@
 (require-package 'autopair)
 (require-package 'undo-tree)
 (require-package 'diminish)
+(require-package 'color-theme)
+(require-package 'color-theme-zenburn)
+(require-package 'color-theme-twilight)
+(require-package 'color-theme-ir-black)
+(require-package 'color-theme-railscasts)
 
 (provide 'init-elpa)

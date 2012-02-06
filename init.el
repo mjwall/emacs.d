@@ -8,63 +8,68 @@
 (require 'cl)
 
 ;; load path stuff
+(setq dotfiles-dir (file-name-directory
+                    (or (buffer-file-name) load-file-name)))
+
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-    (let* ((my-lisp-dir "~/.emacs.d/site-lisp/")
+    (let* ((my-lisp-dir (concat dotfiles-dir "/site-lisp/"))
            (default-directory my-lisp-dir))
       (progn
         (setq load-path (cons my-lisp-dir load-path))
         (normal-top-level-add-subdirs-to-load-path))))
-(setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
+(setq load-path (cons (expand-file-name dotfiles-dir) load-path))
 
 ;; basic config
-(require 'init-misc)
-(require 'init-util)
-(require 'init-platform-specific)
-(require 'init-font)
-(require 'init-editing)
-(require 'init-window)
-(require 'init-exec-path)
+;;(require 'init-emacs-config)
+;;(require 'init-util)
+;;(require 'init-platform-specific)
+;;(require 'init-font)
+;;(require 'init-editing)
+;;(require 'init-window)
+;;(require 'init-exec-path)
 
 ;; included packages
-(require 'init-ibuffer)
-(require 'init-recentf)
-(require 'init-ido-mode)
-(require 'init-linum)
-(require 'init-mail)
-(require 'init-whitespace)
-(require 'init-isearch)
-(require 'init-hippie-expand)
+;;(require 'init-ibuffer)
+;;(require 'init-recentf)
+;;(require 'init-ido-mode)
+;;(require 'init-linum)
+;;(require 'init-mail)
+;;(require 'init-whitespace)
+;;(require 'init-isearch)
+;;(require 'init-hippie-expand)
 
 ;; package management
-(require 'init-el-get)
+;;(require 'init-el-get)
 
 ;; additional config
-(require 'init-ido-extras)
-(require 'init-editing-utils)
-(require 'init-frame-hooks)
-(require 'init-gui-frames)
-(require 'init-themes)
-(require 'init-shell)
-(require 'init-dired)
-(require 'init-org-mode)
-(require 'init-sessions)
-(require 'init-project)
+;;(require 'init-ido-extras)
+;;(require 'init-editing-utils)
+;;(require 'init-frame-hooks)
+;;(require 'init-gui-frames)
+;;(require 'init-themes)
+;;(require 'init-shell)
+;;(require 'init-dired)
+;;(require 'init-org-mode)
+;;(require 'init-sessions)
+;;(require 'init-project)
+;;(require 'init-smex)
 ;;TODO: figure out how to save term sessions
 
 ;; language specific configs
-(require 'init-coding-hook)
-(require 'init-lisp)
+;;(require 'init-coding-hook)
+;;(require 'init-lisp)
 ;; TODO: maybe add a magit customization
-(require 'init-text-mode)
-(require 'init-html)
-(require 'init-java)
-(require 'init-javascript)
-(require 'init-groovy)
-(require 'init-ruby)
-(require 'init-yaml)
-(require 'init-haml)
-(require 'init-autotest)
-(require 'init-php)
+;;(require 'init-text-mode)
+;;(require 'init-html)
+;;(require 'init-java)
+;;(require 'init-javascript)
+;;(require 'init-groovy)
+;;(require 'init-ruby)
+;;(require 'init-yaml)
+;;(require 'init-haml)
+;;(require 'init-autotest)
+;;(require 'init-php)
+;;(require 'init-git)
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

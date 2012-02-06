@@ -20,23 +20,23 @@
 (setq load-path (cons (expand-file-name dotfiles-dir) load-path))
 
 ;; basic config
-;;(require 'init-emacs-config)
-;;(require 'init-util)
-;;(require 'init-platform-specific)
-;;(require 'init-font)
-;;(require 'init-editing)
-;;(require 'init-window)
-;;(require 'init-exec-path)
+(require 'init-defaults)
+(require 'init-platform-specific)
+(require 'init-util)
+(require 'init-font)
+(require 'init-editing)
+(require 'init-window)
+(require 'init-exec-path)
 
 ;; included packages
-;;(require 'init-ibuffer)
-;;(require 'init-recentf)
-;;(require 'init-ido-mode)
-;;(require 'init-linum)
-;;(require 'init-mail)
-;;(require 'init-whitespace)
-;;(require 'init-isearch)
-;;(require 'init-hippie-expand)
+(require 'init-ibuffer)
+(require 'init-ido-mode)
+(require 'init-recentf)
+(require 'init-linum)
+(require 'init-mail)
+(require 'init-whitespace)
+(require 'init-isearch)
+(require 'init-hippie-expand)
 
 ;; package management
 ;;(require 'init-el-get)

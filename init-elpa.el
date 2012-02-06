@@ -29,6 +29,8 @@
 
 (package-initialize)
 (require-package 'smex)
-
+(require-package 'autopair)
+(require-package 'undo-tree)
+(require-package 'diminish)
 
 (provide 'init-elpa)

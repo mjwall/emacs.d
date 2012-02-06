@@ -41,10 +41,9 @@
 ;; package management
 (require 'init-elpa)
 
-;; additional config
+;; extra configs, require additional packages
 (require 'init-ido-extras)
-;;(require 'init-editing-utils)
-;;(require 'init-frame-hooks)
+(require 'init-editing-extras)
 ;;(require 'init-gui-frames)
 ;;(require 'init-themes)
 ;;(require 'init-shell)

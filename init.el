@@ -39,10 +39,10 @@
 (require 'init-hippie-expand)
 
 ;; package management
-;;(require 'init-el-get)
+(require 'init-elpa)
 
 ;; additional config
-;;(require 'init-ido-extras)
+(require 'init-ido-extras)
 ;;(require 'init-editing-utils)
 ;;(require 'init-frame-hooks)
 ;;(require 'init-gui-frames)

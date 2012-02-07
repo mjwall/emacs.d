@@ -32,6 +32,7 @@
 (require-package 'autopair)
 (require-package 'undo-tree)
 (require-package 'diminish)
+(require-package 'maxframe)
 (require-package 'color-theme)
 (require-package 'color-theme-zenburn)
 (require-package 'color-theme-twilight)

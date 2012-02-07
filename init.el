@@ -37,7 +37,6 @@
 (require 'init-whitespace)
 (require 'init-isearch)
 (require 'init-hippie-expand)
-(require 'init-gui-frames)
 
 ;; package management
 (require 'init-elpa)
@@ -46,6 +45,7 @@
 (require 'init-ido-extras)
 (require 'init-editing-extras)
 (require 'init-themes)
+(require 'init-gui-frames)
 ;;(require 'init-shell)
 ;;(require 'init-dired)
 ;;(require 'init-org-mode)

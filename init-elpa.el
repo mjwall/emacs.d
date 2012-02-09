@@ -38,5 +38,6 @@
 (require-package 'color-theme-twilight)
 (require-package 'color-theme-ir-black)
 (require-package 'color-theme-railscasts)
+(require-package 'multi-term)
 
 (provide 'init-elpa)

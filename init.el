@@ -47,11 +47,10 @@
 (require 'init-themes)
 (require 'init-gui-frames)
 (require 'init-shell)
-;;(require 'init-dired)
+(require 'init-dired)
 ;;(require 'init-org-mode)
 ;;(require 'init-sessions)
 ;;(require 'init-project)
-;;(require 'init-smex)
 ;;TODO: figure out how to save term sessions
 
 ;; language specific configs

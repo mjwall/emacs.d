@@ -49,7 +49,7 @@
 (require 'init-shell)
 (require 'init-dired)
 (require 'init-git)
-;;(require 'init-org-mode)
+(require 'init-org-mode)
 ;;(require 'init-sessions)
 ;;(require 'init-project)
 ;;TODO: figure out how to save term sessions

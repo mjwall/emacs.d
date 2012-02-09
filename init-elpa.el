@@ -39,5 +39,6 @@
 (require-package 'color-theme-ir-black)
 (require-package 'color-theme-railscasts)
 (require-package 'multi-term)
+(require-package 'magit)
 
 (provide 'init-elpa)

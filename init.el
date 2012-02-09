@@ -48,6 +48,7 @@
 (require 'init-gui-frames)
 (require 'init-shell)
 (require 'init-dired)
+(require 'init-git)
 ;;(require 'init-org-mode)
 ;;(require 'init-sessions)
 ;;(require 'init-project)
@@ -67,7 +68,6 @@
 ;;(require 'init-haml)
 ;;(require 'init-autotest)
 ;;(require 'init-php)
-;;(require 'init-git)
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

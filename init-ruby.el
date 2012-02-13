@@ -7,6 +7,9 @@
 (add-to-list 'auto-mode-alist '("\\Gemfile" . ruby-mode))
 (add-hook 'ruby-mode-hook 'run-coding-hook)
 
+(require 'rvm)
+(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+
 (require 'rinari)
 
 (provide 'init-ruby)

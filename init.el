@@ -64,11 +64,10 @@
 (require 'init-yaml)
 (require 'init-haml)
 (require 'init-php)
-;; scala
-;; shell
+(require 'init-scala)
+(require 'init-sh)
+(require 'init-cc)
 ;; arduino
-;; c
-;; c++
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

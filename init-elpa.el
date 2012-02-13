@@ -50,9 +50,12 @@
 (require-package 'slime-repl)
 (require-package 'groovy-mode)
 (require-package 'ruby-mode)
+(require-package 'rvm)
 (require-package 'rinari)
 (require-package 'haml-mode)
 (require-package 'yaml-mode)
+(require-package 'markdown-mode)
 (require-package 'php-mode)
+(require-package 'scala-mode)
 
 (provide 'init-elpa)

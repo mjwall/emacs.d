@@ -40,5 +40,12 @@
 (require-package 'color-theme-railscasts)
 (require-package 'multi-term)
 (require-package 'magit)
+(require-package 'paredit)
+(require-package 'rainbow-delimiters)
+(require-package 'clojure-mode)
+(require-package 'clojure-test-mode)
+(require-package 'clojurescript-mode)
+(require-package 'slime)
+(require-package 'slime-repl)
 
 (provide 'init-elpa)

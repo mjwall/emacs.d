@@ -50,15 +50,12 @@
 (require 'init-dired)
 (require 'init-git)
 (require 'init-org-mode)
-;;(require 'init-sessions)
-;;(require 'init-project)
-;;TODO: figure out how to save term sessions
+(require 'init-project)
 
 ;; language specific configs
-;;(require 'init-coding-hook)
-;;(require 'init-lisp)
-;; TODO: maybe add a magit customization
-;;(require 'init-text-mode)
+(require 'init-coding-hook)
+(require 'init-lisps)
+(require 'init-text-mode)
 ;;(require 'init-html)
 ;;(require 'init-java)
 ;;(require 'init-javascript)
@@ -66,8 +63,12 @@
 ;;(require 'init-ruby)
 ;;(require 'init-yaml)
 ;;(require 'init-haml)
-;;(require 'init-autotest)
 ;;(require 'init-php)
+;; scala
+;; shell
+;; arduino
+;; c
+;; c++
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

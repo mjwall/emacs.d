@@ -51,5 +51,8 @@
 (require-package 'groovy-mode)
 (require-package 'ruby-mode)
 (require-package 'rinari)
+(require-package 'haml-mode)
+(require-package 'yaml-mode)
+(require-package 'php-mode)
 
 (provide 'init-elpa)

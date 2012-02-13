@@ -61,9 +61,9 @@
 (require 'init-javascript)
 (require 'init-groovy)
 (require 'init-ruby)
-;;(require 'init-yaml)
-;;(require 'init-haml)
-;;(require 'init-php)
+(require 'init-yaml)
+(require 'init-haml)
+(require 'init-php)
 ;; scala
 ;; shell
 ;; arduino

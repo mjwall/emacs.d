@@ -21,6 +21,7 @@
         (package-refresh-contents)
         (require-package package min-version t)))))
 
+(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;------------------------------------------------------------------------------
@@ -47,5 +48,8 @@
 (require-package 'clojurescript-mode)
 (require-package 'slime)
 (require-package 'slime-repl)
+(require-package 'groovy-mode)
+(require-package 'ruby-mode)
+(require-package 'rinari)
 
 (provide 'init-elpa)

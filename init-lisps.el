@@ -36,7 +36,7 @@
 
 ;; Clojure mode
 (require 'clojure-mode)
-(require 'clojure-test-mode) ;; has slime built in?
+;;(require 'clojure-test-mode) ;; has slime built in?
 (add-hook 'clojure-mode-hook 'run-coding-hook)
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'clojure-mode-hook (lambda () (rainbow-delimiters-mode +1)))

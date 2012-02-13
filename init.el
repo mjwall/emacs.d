@@ -67,7 +67,7 @@
 (require 'init-scala)
 (require 'init-sh)
 (require 'init-cc)
-;; arduino
+(require 'init-arduino)
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

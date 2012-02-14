@@ -26,5 +26,9 @@
     )
   )
 
+(when *is-gnu-linux*
+  ;;fonts
+  (set-default-font "Monospace-12")
+  )
 
 (provide 'init-platform-specific)

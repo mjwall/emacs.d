@@ -68,6 +68,7 @@
 (require 'init-sh)
 (require 'init-cc)
 (require 'init-arduino)
+(require 'init-xml)
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.

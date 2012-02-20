@@ -39,7 +39,7 @@
 (require-package 'color-theme-twilight)
 (require-package 'color-theme-ir-black)
 (require-package 'color-theme-railscasts)
-(require-package 'multi-term)
+;(require-package 'multi-term)
 (require-package 'magit)
 (require-package 'paredit)
 (require-package 'rainbow-delimiters)

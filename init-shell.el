@@ -112,13 +112,22 @@ the line, to capture multiline input. (This only has effect if
   (interactive)
   (if (term-in-line-mode)
       (yank)
-    (term-paste)))
+      (term-send-down)))
 
-(setq term-bind-key-alist
-      '(
-        ("C-y" . my-term-yank)
-        ("s-v" . my-term-yank)
-        ("C-c C-c" . term-interrupt-subjob)))
+(add-hook 'ansi-term-after-hook
+  (lambda ()
+    (define-key term-raw-map "\C-y" 'term-paste)
+    (define-key term-raw-map "\M-w" 'my-term-yank) ;; term-send-raw-meta?
+    ;;(define-key term-raw-map "\C-x\C-c" 'save-buffers-kill-emacs) ;; Command-q on Mac
+    (define-key term-raw-map "\C-c\C-c" 'term-interrupt-subjob)
+))
+
+(defadvice ansi-term (after ansi-term-after-advice (arg))
+  "run hook as after advice"
+  (run-hooks 'ansi-term-after-hook))
+
+(ad-activate 'ansi-term)
+
 
 (defun my-set-buffer-name-to-directory ()
   (interactive)
@@ -126,19 +135,11 @@ the line, to capture multiline input. (This only has effect if
   (rename-buffer (concat "*" default-directory "*") 1)
   )
 
-(defadvice comint-send-input (after set-term-buffer-name-to-directory activate)
-  "Set the buffer name to default-directory"
-  (interactive)
-  (message "%s" "changing buffer name")
-  (rename-buffer (concat "*" default-directory "*") t))
-
 (defun my-ansi-term ()
   (interactive)
   (ansi-term "/bin/bash")
   )
+
 (global-set-key "\C-x\C-z" 'my-ansi-term)
-
-(add-hook 'term-command-hook 'my-set-buffer-name-to-directory)
-
 
 (provide 'init-shell)

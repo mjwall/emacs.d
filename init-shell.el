@@ -120,7 +120,11 @@ the line, to capture multiline input. (This only has effect if
     (define-key term-raw-map "\M-w" 'my-term-yank) ;; term-send-raw-meta?
     ;;(define-key term-raw-map "\C-x\C-c" 'save-buffers-kill-emacs) ;; Command-q on Mac
     (define-key term-raw-map "\C-c\C-c" 'term-interrupt-subjob)
-))
+    ))
+
+(eval-after-load "term"
+  '(progn
+     (defun term-send-backspace () (interactive) (term-send-raw-string "\C-h"))))
 
 (defadvice ansi-term (after ansi-term-after-advice (arg))
   "run hook as after advice"

@@ -34,5 +34,12 @@
   (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
   (defun ido-disable-line-trucation () (set (make-local-variable 'truncate-lines) nil))
   (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
+
+;; update keybindings so up and down move next with vertical results
+(add-hook 'ido-setup-hook
+          (lambda ()
+            (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
+            (define-key ido-completion-map (kbd "<down>") 'ido-next-match)))
+
 (provide 'init-ido-mode)
 

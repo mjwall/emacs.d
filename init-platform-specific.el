@@ -29,6 +29,8 @@
 (when *is-gnu-linux*
   ;;fonts
   (set-default-font "Monospace-12")
+  ;; give me a familiar quit emacs keybinding
+  (global-set-key (kbd "s-q") 'save-buffers-kill-emacs)
   )
 
 (provide 'init-platform-specific)

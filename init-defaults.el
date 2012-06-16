@@ -49,11 +49,21 @@
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
-;; Start server for emacs client if not already started
-(if (file-exists-p
-     (concat (getenv "TMPDIR") "emacs"
-             (number-to-string
-              (user-real-uid)) "/server"))
-    nil (server-start))
+;; add some server hooks
+(add-hook 'after-init-hook 'server-start)
+(add-hook 'server-done-hook
+   (lambda ()
+     (shell-command "screen -r -X select `cat ~/.emacsclient-caller`")))
 
+(defun start-my-server ()
+  (progn
+    (message "Starting emacs server")
+    (if (file-exists-p (concat (getenv "TMPDIR") "emacs" (number-to-string (user-real-uid)) "/server"))
+        nil (server-start)
+        (message "Server already started"))))
+
+(message "About to call start-my-server")
+(start-my-server)
+
+;; Start server for emacs client if not already started
 (provide 'init-defaults)

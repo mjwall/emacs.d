@@ -1,14 +1,20 @@
 This is my personal emacs config.  I started with ideas from the emacs-starter-kit, the aquamacs-starter-kit , defunkt's emacs config and others.  Then I got frustrated with the portability and started again, taking things I liked from the current config.  It is based heavily on Steve Purcell's config at https://github.com/purcell/emacs.d.  At one point, I used el-get for package management. But with the recent focus on elpa, specifically marmalade, I have redone the config to use that.  ELPA packages are checked into the git to help me monitor changes and speed up getting starting from a new clone.
 
 **************** NOTE: I am no longer maintaining this repo **********************
-Everything moved to https://github.com/mjwall/dotfiles/tree/master/dotemacs.d.  My current setup is screen with emacs running in terminal.  It requiresextra configs in my bashrc and script in my bin directory.  My inspiration came from http://bc.tech.coop/blog/071001.html for this setup.  We will how long I keep this.
+Everything moved to https://github.com/mjwall/dotfiles/tree/master/dotemacs.d.  My current setup 
+is screen with emacs running in terminal.  It requiresextra configs in my bashrc and script in my 
+bin directory.  My inspiration came from http://bc.tech.coop/blog/071001.html for this setup.  We 
+will see how long I keep this.
 ***********************************************************************************
 
 I was a huge vim user for decades.  Org-mode and the swank for Clojure finally got me to buckle down and learn emacs.
 
-None of this is my own innovation.  I simply spent a lot of time reading other people's configs and pulling what would work for me.  I use multi-term and mostly do not have a seperate terminal app open.  I use git, but not with a package.  It is all through the terminal.  I am particular about whitespace and formatting, so that is configured strictly.
+None of this is my own innovation.  I simply spent a lot of time reading other people's configs and pulling what would work
+for me.  I use multi-term and mostly do not have a seperate terminal app open.  I use git, but not with a package.  
+It is all through the terminal.  I am particular about whitespace and formatting, so that is configured strictly.
 
-This config is used everyday on my mac and occasionaly in linux.  Start with the init.el and then init-elpa.el and you should be able to follow what is being loaded and configured.
+This config is used everyday on my mac and occasionaly in linux.  Start with the init.el and then init-elpa.el 
+and you should be able to follow what is being loaded and configured.
 
 I use emacs for just about everything, including development in the following.
 - Ruby/Rails, with rvm

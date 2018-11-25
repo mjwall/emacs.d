@@ -1,5 +1,4 @@
-;; turn off mouse interface early in startup to avoid momentary
-;; display turned on later as needed
+;; turn off mouse interface early to avoid flicker
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -16,7 +15,7 @@
   ;; Backups, don't clutter up directories with files
   make-backup-files t ;; do make backups
   backup-by-copying t ;; and copy them here
-  backup-directory-alist `(("." . ,(expand-file-name (concat user-emacs-directory "backups"))))
+  backup-directory-alist `(("." . , (expand-file-name (concat user-emacs-directory "backups"))))
   ;; auto-saves too
   auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "auto-save/") t))
   ;; show empty lines after buffer end
@@ -55,25 +54,11 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
-;; redefine the boring startup message
-(defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
-;; (cua-mode 0)
+(cua-mode 1) ; default
 (transient-mark-mode 1)
 (electric-pair-mode 1)
-;; make backspace work as expected
-;;(normal-erase-is-backspace-mode 1)
-;; Setup hippie-expand
-;;(global-set-key [C-tab] 'hippie-expand)
-;;(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-;;                                          try-expand-dabbrev-all-buffers
-;;                                          try-expand-dabbrev-from-kill
-;;                                          try-complete-file-name-partially
-;;                                          try-complete-file-name
-;;                                          try-expand-all-abbrevs
-;;                                          try-expand-list
-;;                                          try-expand-line
-;;                                          try-complete-lisp-symbol-partially
-;;                                          try-complete-lisp-symbol))
+;; redefine the boring startup message
+(defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
 
 ;;; Change some default keybinding
 ;; no mail
@@ -85,41 +70,20 @@
 (global-set-key (kbd "M-`") 'other-frame)
 ;; keybinding to bring up ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-;;(global-set-key (kbd "C-c y") 'bury-buffer)
-;;(global-set-key (kbd "C-c r") 'revert-buffer)
 ;; some more familiar keybindings for default functions
-;;(global-set-key (kbd "C-c C-j") 'join-line)
+(global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-;; run compile from anywhere
-;;(global-set-key [f12] 'compile)
-;;(global-set-key [(meta f12)] 'recompile)
-;; mac stuff
-;;(global-set-key (kbd "H-c") 'kill-ring-save)
-;;(global-set-key (kbd "H-x") 'kill-region)
-;;(global-set-key (kbd "H-v") 'yank)
-;;(global-set-key (kbd "H-s") 'save-buffer)
-;;(global-set-key (kbd "H-w") 'kill-this-buffer)
-;;(global-set-key (kbd "H-{") 'previous-buffer) ;;C-x <left>
-;;(global-set-key (kbd "H-}") 'next-buffer) ;;C-x <right>
-;;(global-set-key (kbd "H-z") 'undo)
-;;(global-set-key (kbd "H-+") 'text-scale-increase)
-;;(global-set-key (kbd "H-=") 'text-scale-increase)
-;;(global-set-key (kbd "H-_") 'text-scale-decrease)
-;;(global-set-key (kbd "H--") 'text-scale-decrease)
-;;(if (fboundp 'toggle-frame-maximized)
-;;    (global-set-key (kbd "<f11>") 'toggle-frame-maximized)) ;; vs fullscreen
 
 ;; put customizations in a seperate file that is git committed
-;;(setq custom-file (expand-file-name "custom-shared.el" user-emacs-directory))
-;;(load custom-file)
+(setq custom-file (expand-file-name "custom-shared.el" user-emacs-directory))
+(load custom-file)
 ;; load custom file that is not committed
-;;(load (expand-file-name "custom-private.el" user-emacs-directory))
-
+;; (load (expand-file-name "custom-private.el" user-emacs-directory))
 
 ;; UI stuff, have to set at top when using daemon
 ;; because (when window-system) and (when not window-system)
@@ -132,23 +96,8 @@
 ;;(when window-system
 ;;  (message "setting up in window-system")
 ;;  )
-
 ;;(when (not window-system)
 ;;  (message "setting up in terminal")
-  ;;(add-to-list 'load-path (expand-file-name "site-lisp"
-  ;;                          user-emacs-directory))
-  ;; make copy-paste work for mac
-  ;;(defun copy-from-osx ()
-  ;;  (shell-command-to-string "pbpaste"))
-  
-  ;;(defun paste-to-osx (text &optional push)
-  ;;  (let ((process-connection-type nil))
-  ;;    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-  ;;      (process-send-string proc text)
-  ;;      (process-send-eof proc))))
-  
-  ;;(setq interprogram-cut-function 'paste-to-osx)
-  ;;(setq interprogram-paste-function 'copy-from-osx)
 ;;)
 
 (ido-mode t)
@@ -222,14 +171,8 @@
 (defalias 'ff 'find-file)
 (defalias 'd 'dired)
 (defalias 'fo 'find-file-other-window)
-;;(defalias 'emacs 'find-file)
-;;(defun my-eshell-other-window ()
-;;  "Open a `eshell' in a new window."
-;;  (interactive)
-;;  (let ((buf (split-window-below -8)))
-;;    (select-window buf)
-;;    (eshell)))
-;;(global-set-key [f5] 'my-eshell-other-window)
+
+;;; language specific stuff
 
 ;; elisp
 ;;(setq lisp-indent-offset 2)

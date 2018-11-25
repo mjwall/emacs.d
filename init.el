@@ -100,6 +100,120 @@
 ;;  (message "setting up in terminal")
 ;;)
 
+;;; Editing functions
+(defun indent-buffer ()
+  "indent whole buffer"
+  (interactive)
+  (indent-region (point-min) (point-max) nil))
+(defun untabify-buffer ()
+  "Change all tabs to spaces in current buffer"
+  (interactive)
+  (untabify (point-min) (point-max)))
+(defun cleanup-buffer ()
+  "Perform indent, untabify and remove trailing whitespace on current buffer."
+  (interactive)
+  (indent-buffer)
+  (untabify-buffer)
+  (delete-trailing-whitespace))
+(defun duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+      (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+      (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
+(global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
+(defun shift-right (&optional arg)
+  "Shift the line or region to the ARG places to the right."
+  (interactive)
+  (let ((deactivate-mark nil)
+         (beg (or (and mark-active (region-beginning))
+                (line-beginning-position)))
+         (end (or (and mark-active (region-end)) (line-end-position))))
+    (indent-rigidly beg end (* (or arg 1) tab-width))))
+(global-set-key (kbd "<M-right>") 'shift-right)
+(defun shift-left (&optional arg)
+  "Shift the line or region to the ARG places to the left."
+  (interactive)
+  (shift-right (* -1 (or arg 1))))
+(global-set-key (kbd "<M-left>") 'shift-left)
+(defun move-text-internal (arg)
+  (cond
+    ((and mark-active transient-mark-mode)
+      (if (> (point) (mark))
+        (exchange-point-and-mark))
+      (let ((column (current-column))
+             (text (delete-and-extract-region (point) (mark))))
+        (forward-line arg)
+        (move-to-column column t)
+        (set-mark (point))
+        (insert text)
+        (exchange-point-and-mark)
+        (setq deactivate-mark nil)))
+    (t
+      (let ((column (current-column)))
+        (beginning-of-line)
+        (when (or (> arg 0) (not (bobp)))
+          (forward-line)
+          (when (or (< arg 0) (not (eobp)))
+            (transpose-lines arg)
+            (when (and (eval-when-compile
+                         '(and (>= emacs-major-version 24)
+                            (>= emacs-minor-version 3)))
+                    (< arg 0))
+              (forward-line -1)))
+          (forward-line -1))
+        (move-to-column column t)))))
+(defun move-text-down (arg)
+  "Move region or current line `arg' lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+(defun move-text-up (arg)
+  "Move region or current line `arg' lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+(defun end-newline-and-indent ()
+  "Go to the end of the current line, then run
+`newline-and-indent'"
+  (interactive)
+  (progn
+    (move-end-of-line 1)
+    (newline-and-indent)))
+(global-set-key [(control return)] 'end-newline-and-indent)
+(defun smarter-move-beginning-of-line (arg)
+  "Toggle between `beginning-of-line' and `back-to-indentation'."
+  (interactive "^p")
+  (setq arg (or arg 1))
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+(global-set-key [remap move-beginning-of-line]
+  'smarter-move-beginning-of-line)
+(defun dos2unix ()
+  "Not exactly but it's easier to remember"
+  (interactive)
+  (set-buffer-file-coding-system 'unix 't))
+
+;;; IDO mode
 (ido-mode t)
 (ido-everywhere t)
 (setq ido-enable-prefix nil
@@ -119,8 +233,6 @@
     (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
     (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
     (define-key ido-completion-map (kbd "C-n") 'ido-next-match)))
-;; key binding to open in other window
-;;(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 ;; setup recentf mode
 (eval-after-load "recentf"
   '(setq recentf-max-saved-items 100))
@@ -133,11 +245,9 @@
     (when file
       (find-file file))))
 (recentf-mode 1)
-;;(global-set-key (kbd "M-<f12>") 'recentf-open-files)
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
 
-
-;; Eshell
+;;; Eshell
 (require 'vc-git)
 (load "em-hist") ;; load history vars
 (setq eshell-cmpl-cycle-completions nil
@@ -171,6 +281,12 @@
 (defalias 'ff 'find-file)
 (defalias 'd 'dired)
 (defalias 'fo 'find-file-other-window)
+
+;;; Now for packages
+;; (package-initialize)
+;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
 
 ;;; language specific stuff
 

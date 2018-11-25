@@ -31,8 +31,8 @@
   whitespace-style '(trailing space-before-tab indentation space-after-tab tabs tab-mark)
   ;; integrate kill ring with clipboard
   x-select-enable-clipboard t
-  mac-option-modifier 'meta
-  mac-command-modifier 'hyper
+  ;;mac-option-modifier 'meta
+  ;;mac-command-modifier 'hyper
   ;; make text-mode default, not fundamental
   major-mode 'text-mode
   )
@@ -42,8 +42,6 @@
 (auto-compression-mode t)
 ;; make emacs revert files when they change, for example when you switch git branches
 (global-auto-revert-mode 1)
-;; make backspace work as expected, esp in terminal
-(normal-erase-is-backspace-mode t)
 ;; highlight matching parentheses when the point is on them.
 (show-paren-mode t)
 ;; use y or n
@@ -59,11 +57,11 @@
 (set-language-environment "UTF-8")
 ;; redefine the boring startup message
 (defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
-;; have to set this because loaded when daemon starts
-(setq default-frame-alist '((font . "Menlo-15")))
 ;; (cua-mode 0)
 (transient-mark-mode 1)
 (electric-pair-mode 1)
+;; make backspace work as expected
+;;(normal-erase-is-backspace-mode 1)
 ;; Setup hippie-expand
 ;;(global-set-key [C-tab] 'hippie-expand)
 ;;(setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -123,17 +121,20 @@
 ;;(load (expand-file-name "custom-private.el" user-emacs-directory))
 
 
-;; dark please
+;; UI stuff, have to set at top when using daemon
+;; because (when window-system) and (when not window-system)
+;; only run when the daemon is started
 (load-theme 'wombat)
+(setq default-frame-alist '((font . "Menlo-15")))
 
 ;; these functions only run once when starting a daemon
 ;; so they don't do much good with the ec/et workflow
-(when window-system
-  (message "setting up in window-system")
-  )
+;;(when window-system
+;;  (message "setting up in window-system")
+;;  )
 
-(when (not window-system)
-  (message "setting up in terminal")
+;;(when (not window-system)
+;;  (message "setting up in terminal")
   ;;(add-to-list 'load-path (expand-file-name "site-lisp"
   ;;                          user-emacs-directory))
   ;; make copy-paste work for mac
@@ -148,7 +149,7 @@
   
   ;;(setq interprogram-cut-function 'paste-to-osx)
   ;;(setq interprogram-paste-function 'copy-from-osx)
-)
+;;)
 
 (ido-mode t)
 (ido-everywhere t)

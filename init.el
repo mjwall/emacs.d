@@ -176,16 +176,6 @@
     (define-key ido-completion-map (kbd "C-n") 'ido-next-match)))
 ;; key binding to open in other window
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
-;; change some ido colors
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(ido-first-match ((t (:foreground "#ccff66"))))
-  '(ido-only-match ((t (:foreground "#ffcc33"))))
-  '(ido-subdir ((t (:foreground "#66ff00")))))
-;; Face used by ido for highlighting only match.
 ;; setup recentf mode
 (eval-after-load "recentf"
   '(setq recentf-max-saved-items 100))
@@ -249,4 +239,3 @@
 
 ;; javascript
 (setq js-indent-level 2)
-

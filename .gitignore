@@ -1,3 +1,8 @@
+;; copy bin/emacs.mac and chmod 755 if needed
 bin/emacs
+
+;; emacs directories specific to an instance
 auto-save-list/
 backups/
+eshell/
+auto-save/

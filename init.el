@@ -42,7 +42,7 @@
 (auto-compression-mode t)
 ;; make emacs revert files when they change, for example when you switch git branches
 (global-auto-revert-mode 1)
-;; make backspace work as expected
+;; make backspace work as expected, esp in terminal
 (normal-erase-is-backspace-mode t)
 ;; highlight matching parentheses when the point is on them.
 (show-paren-mode t)
@@ -59,38 +59,38 @@
 (set-language-environment "UTF-8")
 ;; redefine the boring startup message
 (defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
+;; have to set this because loaded when daemon starts
 (setq default-frame-alist '((font . "Menlo-15")))
-;;(setq default-frame-alist '((font . "Monospace-13")))
 ;; (cua-mode 0)
 (transient-mark-mode 1)
 (electric-pair-mode 1)
 ;; Setup hippie-expand
-(global-set-key [C-tab] 'hippie-expand)
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                          try-expand-dabbrev-all-buffers
-                                          try-expand-dabbrev-from-kill
-                                          try-complete-file-name-partially
-                                          try-complete-file-name
-                                          try-expand-all-abbrevs
-                                          try-expand-list
-                                          try-expand-line
-                                          try-complete-lisp-symbol-partially
-                                          try-complete-lisp-symbol))
+;;(global-set-key [C-tab] 'hippie-expand)
+;;(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+;;                                          try-expand-dabbrev-all-buffers
+;;                                          try-expand-dabbrev-from-kill
+;;                                          try-complete-file-name-partially
+;;                                          try-complete-file-name
+;;                                          try-expand-all-abbrevs
+;;                                          try-expand-list
+;;                                          try-expand-line
+;;                                          try-complete-lisp-symbol-partially
+;;                                          try-complete-lisp-symbol))
 
 ;;; Change some default keybinding
 ;; no mail
 (global-unset-key (kbd "C-x m"))
 ;; from https://sites.google.com/site/steveyegge2/effective-emacs
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-(global-set-key (kbd "C-x m") 'execute-extended-command) ;; after I unset it
+;;(global-set-key (kbd "C-x m") 'execute-extended-command) ;; after I unset it
 ;; make Alt-` go to other frame as expected, like s-`
 (global-set-key (kbd "M-`") 'other-frame)
 ;; keybinding to bring up ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-c y") 'bury-buffer)
-(global-set-key (kbd "C-c r") 'revert-buffer)
+;;(global-set-key (kbd "C-c y") 'bury-buffer)
+;;(global-set-key (kbd "C-c r") 'revert-buffer)
 ;; some more familiar keybindings for default functions
-(global-set-key (kbd "C-c C-j") 'join-line)
+;;(global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 ;; rebind to undo, stop suspending-frame
@@ -98,8 +98,8 @@
 ;; not sure why this works on Mac but not Linux
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 ;; run compile from anywhere
-(global-set-key [f12] 'compile)
-(global-set-key [(meta f12)] 'recompile)
+;;(global-set-key [f12] 'compile)
+;;(global-set-key [(meta f12)] 'recompile)
 ;; mac stuff
 ;;(global-set-key (kbd "H-c") 'kill-ring-save)
 ;;(global-set-key (kbd "H-x") 'kill-region)
@@ -126,12 +126,10 @@
 ;; dark please
 (load-theme 'wombat)
 
+;; these functions only run once when starting a daemon
+;; so they don't do much good with the ec/et workflow
 (when window-system
   (message "setting up in window-system")
-  ;;(menu-bar-mode 1)
-  ;;(tool-bar-mode 1)
-  ;;(scroll-bar-mode 1)
-  ;;(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
   )
 
 (when (not window-system)
@@ -150,9 +148,6 @@
   
   ;;(setq interprogram-cut-function 'paste-to-osx)
   ;;(setq interprogram-paste-function 'copy-from-osx)
-
-  ;; In terminal make delete key work, assumes terminal sends Ctrl-h for backspace
-  (normal-erase-is-backspace-mode 1)
 )
 
 (ido-mode t)
@@ -175,7 +170,7 @@
     (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
     (define-key ido-completion-map (kbd "C-n") 'ido-next-match)))
 ;; key binding to open in other window
-(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
+;;(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 ;; setup recentf mode
 (eval-after-load "recentf"
   '(setq recentf-max-saved-items 100))
@@ -188,7 +183,7 @@
     (when file
       (find-file file))))
 (recentf-mode 1)
-(global-set-key (kbd "M-<f12>") 'recentf-open-files)
+;;(global-set-key (kbd "M-<f12>") 'recentf-open-files)
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
 
 
@@ -203,7 +198,8 @@
   eshell-prompt-regexp "^[^#$]*[#$] "
   eshell-highlight-prompt nil
   eshell-visual-commands '("less" "top" "vim")
-  eshell-visual-subcommands '(("git" "log" "diff" "di" "show")))
+  eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))
+  eshell-destroy-buffer-when-process-dies t)
 ;; eshell prompt
 (setq eshell-prompt-function
   (lambda ()
@@ -225,17 +221,17 @@
 (defalias 'ff 'find-file)
 (defalias 'd 'dired)
 (defalias 'fo 'find-file-other-window)
-(defalias 'emacs 'find-file)
-(defun my-eshell-other-window ()
-  "Open a `eshell' in a new window."
-  (interactive)
-  (let ((buf (split-window-below -8)))
-    (select-window buf)
-    (eshell)))
-(global-set-key [f5] 'my-eshell-other-window)
+;;(defalias 'emacs 'find-file)
+;;(defun my-eshell-other-window ()
+;;  "Open a `eshell' in a new window."
+;;  (interactive)
+;;  (let ((buf (split-window-below -8)))
+;;    (select-window buf)
+;;    (eshell)))
+;;(global-set-key [f5] 'my-eshell-other-window)
 
 ;; elisp
-(setq lisp-indent-offset 2)
+;;(setq lisp-indent-offset 2)
 
 ;; javascript
-(setq js-indent-level 2)
+;;(setq js-indent-level 2)

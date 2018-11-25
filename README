@@ -1,0 +1,5 @@
+# emacs on MacOSX, seems to be needed by cask
+export EMACSHOME=/Applications/Emacs.app/Contents/MacOS
+prepend_path "${EMACSHOME}/bin"
+prepend_path "${HOME}/.emacs.d/bin"
+

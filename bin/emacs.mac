@@ -1,0 +1,4 @@
+# can't use an alias, cause scripts don't see it
+# can't move /usr/bin/emacs with new Mac OSX
+# so let's do this
+/Applications/Emacs.app/Contents/MacOS/Emacs "$@"

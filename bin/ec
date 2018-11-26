@@ -33,6 +33,9 @@ change_focus() {
   emacsclient -n -e "(select-frame-set-input-focus (selected-frame))" > /dev/null
 }
 
+# Use et to start the server to make it consistent
+# -n returns control
+emacsclient -a false -e 't' 2>/dev/null || et -n 2>/dev/null
 
 # try switching to the frame incase it is just minimized
 # will start a server if not running

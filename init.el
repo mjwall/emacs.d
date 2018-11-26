@@ -101,7 +101,12 @@
 ;; because (when window-system) and (when not window-system)
 ;; only run when the daemon is started
 (load-theme 'wombat)
-(setq default-frame-alist '((font . "Menlo-15")))
+(if (eq system-type 'darwin)
+    (setq default-frame-alist '((font . "Menlo-15")))
+    )
+(if (eq system-type 'gnu/linux)
+    (setq default-frame-alist '((font . "Monospace-14")))
+    )
 
 ;; these functions only run once when starting a daemon
 ;; so they don't do much good with the ec/et workflow

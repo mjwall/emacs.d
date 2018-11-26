@@ -6,3 +6,7 @@ auto-save-list/
 backups/
 eshell/
 auto-save/
+network-security.data
+projectile-bookmarks.eld
+elpa/archives/
+elpa/gnupg/

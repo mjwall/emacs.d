@@ -78,12 +78,23 @@
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+;; hippie expand
+(global-set-key [C-tab] 'hippie-expand)
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                          try-expand-dabbrev-all-buffers
+                                          try-expand-dabbrev-from-kill
+                                          try-complete-file-name-partially
+                                          try-complete-file-name
+                                          try-expand-all-abbrevs
+                                          try-expand-list
+                                          try-expand-line
+                                          try-complete-lisp-symbol-partially
+                                          try-complete-lisp-symbol))
+
 
 ;; put customizations in a seperate file that is git committed
-(setq custom-file (expand-file-name "custom-shared.el" user-emacs-directory))
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
-;; load custom file that is not committed
-;; (load (expand-file-name "custom-private.el" user-emacs-directory))
 
 ;; UI stuff, have to set at top when using daemon
 ;; because (when window-system) and (when not window-system)
@@ -213,7 +224,7 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (set-buffer-file-coding-system 'unix 't))
 
-;;; IDO mode
+;;; ido mode
 (ido-mode t)
 (ido-everywhere t)
 (setq ido-enable-prefix nil
@@ -283,10 +294,38 @@ there's a region, all lines that region covers will be duplicated."
 (defalias 'fo 'find-file-other-window)
 
 ;;; Now for packages
-;; (package-initialize)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 ;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 ;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
+
+;;; Projectile
+(projectile-global-mode)
+(setq projectile-use-git-grep t)
+(global-set-key (kbd "<f7>") 'projectile-find-file)
+
+;;; dired-sidebar
+(require 'dired-sidebar)
+(add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+;;(push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+;;(push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+(setq dired-sidebar-subtree-line-prefix "__")
+(setq dired-sidebar-theme 'vscode)
+(setq dired-sidebar-use-term-integration t)
+(setq dired-sidebar-use-custom-font t)
+(global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
+
+;;; Magit
+(global-set-key (kbd "<f9>") 'magit-status)
+;; use git commit mode when committing from the terminal
+(global-git-commit-mode)
+
+;;; idomenu
+(require 'idomenu)
+(global-set-key (kbd "C-x TAB") 'idomenu) ;; C-x C-i
 
 ;;; language specific stuff
 

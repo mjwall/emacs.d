@@ -55,6 +55,7 @@
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (cua-mode 1) ; default
+(cua-selection-mode t) ; but use standard Emacs keybindings
 (transient-mark-mode 1)
 (electric-pair-mode 1)
 ;; redefine the boring startup message
@@ -270,7 +271,7 @@ there's a region, all lines that region covers will be duplicated."
   eshell-highlight-prompt nil
   eshell-visual-commands '("less" "top" "vim")
   eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))
-  eshell-destroy-buffer-when-process-dies t)
+  eshell-destroy-buffer-when-process-dies nil)
 ;; eshell prompt
 (setq eshell-prompt-function
   (lambda ()

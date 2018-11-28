@@ -302,38 +302,64 @@ there's a region, all lines that region covers will be duplicated."
 ;;; Now for packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
+;;(add-to-list 'package-archives
+;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("org" . "http://orgmode.org/elpa/") t)
 
-;;; Projectile
-(projectile-global-mode)
-(setq projectile-use-git-grep t)
-(global-set-key (kbd "<f7>") 'projectile-find-file)
+(eval-when-compile
+  (require 'use-package))
 
-;;; dired-sidebar
-(require 'dired-sidebar)
-(add-hook 'dired-sidebar-mode-hook
-            (lambda ()
+(use-package projectile
+  :bind (([f7] . projectile-find-file))
+  :init
+  (projectile-global-mode)
+  (setq projectile-use-git-grep t))
+
+(use-package dired-sidebar
+  :bind (([f8] . dired-sidebar-toggle-sidebar))
+  :init
+  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  :hook (dired-sidebar-mode-hook . (lambda ()
               (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-;;(push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-;;(push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-(setq dired-sidebar-subtree-line-prefix "__")
-(setq dired-sidebar-theme 'vscode)
-(setq dired-sidebar-use-term-integration t)
-(setq dired-sidebar-use-custom-font t)
-(global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
+                (auto-revert-mode)))))
 
-;;; Magit
-(global-set-key (kbd "<f9>") 'magit-status)
-;; use git commit mode when committing from the terminal
-(global-git-commit-mode)
+(use-package magit  
+  :bind (([f9] . magit-status))
+  :init
+  (global-git-commit-mode))
 
-;;; idomenu
-(require 'idomenu)
-(global-set-key (kbd "C-x TAB") 'idomenu) ;; C-x C-i
+(use-package idomenu
+  :bind (("C-x C-i" . idomenu))) ;; C-x C-i
 
 ;;; language specific stuff
+
+;; python - from http://www.andrewty.com/blog/emacs-config-for-python
+(use-package anaconda-mode
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+    :config
+    (setq python-indent-offset 4
+          python-indent 4
+          python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--simple-prompt")
+    (use-package company-anaconda
+       :ensure t
+       :init
+       (eval-after-load "company"
+         '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
+
+(use-package conda
+    :ensure t
+    :config
+    (setq conda-anaconda-home "~/anaconda3")
+    (conda-env-initialize-interactive-shells)
+    (conda-env-initialize-eshell))
 
 ;; elisp
 ;;(setq lisp-indent-offset 2)

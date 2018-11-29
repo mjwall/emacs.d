@@ -307,67 +307,75 @@ there's a region, all lines that region covers will be duplicated."
 ;;(add-to-list 'package-archives
 ;;             '("org" . "http://orgmode.org/elpa/") t)
 
+;; use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 (eval-when-compile
   (require 'use-package))
 
 (use-package projectile
+  :ensure t
   :bind (([f7] . projectile-find-file))
   :init
   (projectile-global-mode)
   :config
   (setq projectile-use-git-grep t))
 
-(use-package dired-sidebar
-  :bind (([f8] . dired-sidebar-toggle-sidebar))
-  :config
-  (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'vscode)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-  :hook (dired-sidebar-mode-hook . (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode)))))
-
-(use-package magit  
+(use-package magit
+  :ensure t
   :bind (([f9] . magit-status))
   :init
   (global-git-commit-mode))
 
 (use-package idomenu
+  :ensure t
   :bind (("C-x C-i" . idomenu))) ;; C-x C-i
 
-;;; Language Specific
+(use-package treemacs
+  :ensure t)
 
-;; python - from http://www.andrewty.com/blog/emacs-config-for-python
-(use-package anaconda-mode
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-    :config
-    (setq python-indent-offset 4
-          python-indent 4
-          python-shell-interpreter "ipython"
-          python-shell-interpreter-args "--simple-prompt")
-    (use-package company-anaconda
-       :ensure t
-       :init
-       (eval-after-load "company"
-         '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
-(use-package conda
-    :config
-    (setq conda-anaconda-home "~/anaconda3")
-    (conda-env-initialize-interactive-shells)
-    (conda-env-initialize-eshell))
-(use-package ein
-    :config
-    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-    (setq ein:jupyter-server-args (list "--no-browser")))
-;; conda install autopep8 (plus any env)
-(use-package py-autopep8
-    :config
-    (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+;; ;;; Language Specific
+
+;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
+;; (use-package anaconda-mode
+;;     :ensure t
+;;     :init
+;;     (add-hook 'python-mode-hook 'anaconda-mode)
+;;     (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;;     :config
+;;     (setq python-indent-offset 4
+;;           python-indent 4
+;;           python-shell-interpreter "ipython"
+;;           python-shell-interpreter-args "--simple-prompt")
+;;     (use-package company-anaconda
+;;        :ensure t
+;;        :init
+;;        (eval-after-load "company"
+;;          '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
+;; (use-package conda
+;;     :config
+;;     (setq conda-anaconda-home "~/anaconda3")
+;;     (conda-env-initialize-interactive-shells)
+;;     (conda-env-initialize-eshell))
+;; (use-package ein
+;;     :config
+;;     (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+;;     (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+;;     (setq ein:jupyter-server-args (list "--no-browser")))
+;; ;; conda install autopep8 (plus any env)
+;; (use-package py-autopep8
+;;     :config
+;;     (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
 
 ;; typescript/javascript
 

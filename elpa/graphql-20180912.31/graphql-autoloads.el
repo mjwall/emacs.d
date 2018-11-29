@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("graphql.el") (23547 16314 0 0))
+;;;### (autoloads nil nil ("graphql.el") (23552 14455 402182 0))
 
 ;;;***
 

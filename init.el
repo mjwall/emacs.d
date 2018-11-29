@@ -396,6 +396,35 @@ there's a region, all lines that region covers will be duplicated."
 (use-package lsp-java-treemacs
   :after (treemacs))
 
+;; javascript/typescript - https://github.com/emacs-lsp/lsp-javascript
+;; npm i -g javascript-typescript-langserver
+
+(setq-default js-indent-level 2)
+
+;;(use-package ng2-mode)
+(use-package typescript-mode
+  :ensure t
+  :init
+  (setf typescript-indent-level js-indent-level)
+  :config
+  (with-eval-after-load "lsp-javascript-typescript"
+    (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)))
+
+(use-package lsp-javascript-typescript
+  :ensure t
+  :init
+  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable))
+
+;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript
+(defun my-company-transformer (candidates)
+  (let ((completion-ignore-case t))
+    (all-completions (company-grab-symbol) candidates)))
+(defun my-js-hook nil
+  (make-local-variable 'company-transformers)
+  (push 'my-company-transformer company-transformers))
+(add-hook 'js-mode-hook 'my-js-hook)
+
 ;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 ;; (use-package anaconda-mode
 ;;     :ensure t

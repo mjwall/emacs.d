@@ -13,3 +13,6 @@ elpa/gnupg/
 mastering-emacs-v2.pdf
 .cache/
 workspace/
+eclipse.jdt.ls/server/config_linux/org.eclipse.osgi/.manager
+eclipse.jdt.ls/server/config_linux/org.eclipse.core.runtime/.manager
+eclipse.jdt.ls/server/config_linux/org.eclipse.equinox.app/.manager

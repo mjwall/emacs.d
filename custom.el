@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dap-mode lsp-java lsp-ui company-lsp lsp-mode treemacs-projectile yasnippet treemacs idomenu magit projectile use-package))))
+    (lsp-javascript-typescript typescript-mode dap-mode lsp-java lsp-ui company-lsp lsp-mode treemacs-projectile yasnippet treemacs idomenu magit projectile use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

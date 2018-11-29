@@ -374,6 +374,8 @@ there's a region, all lines that region covers will be duplicated."
 ;; c/c++
 
 ;; java
+;; https://github.com/emacs-lsp/lsp-java
+;; 
 
 ;; kotlin
 

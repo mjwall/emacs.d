@@ -314,11 +314,12 @@ there's a region, all lines that region covers will be duplicated."
   :bind (([f7] . projectile-find-file))
   :init
   (projectile-global-mode)
+  :config
   (setq projectile-use-git-grep t))
 
 (use-package dired-sidebar
   :bind (([f8] . dired-sidebar-toggle-sidebar))
-  :init
+  :config
   (setq dired-sidebar-subtree-line-prefix "__")
   (setq dired-sidebar-theme 'vscode)
   (setq dired-sidebar-use-term-integration t)
@@ -335,7 +336,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package idomenu
   :bind (("C-x C-i" . idomenu))) ;; C-x C-i
 
-;;; language specific stuff
+;;; Language Specific
 
 ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 (use-package anaconda-mode
@@ -353,16 +354,37 @@ there's a region, all lines that region covers will be duplicated."
        :init
        (eval-after-load "company"
          '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
-
 (use-package conda
-    :ensure t
     :config
     (setq conda-anaconda-home "~/anaconda3")
     (conda-env-initialize-interactive-shells)
     (conda-env-initialize-eshell))
+(use-package ein
+    :config
+    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+    (setq ein:jupyter-server-args (list "--no-browser")))
+;; conda install autopep8 (plus any env)
+(use-package py-autopep8
+    :config
+    (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
+
+;; typescript/javascript
+
+;; c/c++
+
+;; java
+
+;; kotlin
+
+;; go
 
 ;; elisp
 ;;(setq lisp-indent-offset 2)
 
 ;; javascript
 ;;(setq js-indent-level 2)
+
+;; bash
+
+;; docker

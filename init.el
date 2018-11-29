@@ -322,6 +322,10 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (setq projectile-use-git-grep t))
 
+(use-package treemacs
+  :ensure t
+  :bind (([f8] . treemacs)))
+
 (use-package magit
   :ensure t
   :bind (([f9] . magit-status))
@@ -331,9 +335,6 @@ there's a region, all lines that region covers will be duplicated."
 (use-package idomenu
   :ensure t
   :bind (("C-x C-i" . idomenu))) ;; C-x C-i
-
-(use-package treemacs
-  :ensure t)
 
 (use-package yasnippet
   :ensure t

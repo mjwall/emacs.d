@@ -410,18 +410,21 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package lsp-javascript-typescript
   :ensure t
+  ;:ensure-system-package
+  ;(javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
+  :preface
+  ;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript
+  (defun my-company-transformer (candidates)
+    (let ((completion-ignore-case t))
+      (all-completions (company-grab-symbol) candidates)))
+  (defun my-js-hook nil
+    (make-local-variable 'company-transformers)
+    (push 'my-company-transformer company-transformers))
   :init
   (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable))
-
-;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript
-(defun my-company-transformer (candidates)
-  (let ((completion-ignore-case t))
-    (all-completions (company-grab-symbol) candidates)))
-(defun my-js-hook nil
-  (make-local-variable 'company-transformers)
-  (push 'my-company-transformer company-transformers))
-(add-hook 'js-mode-hook 'my-js-hook)
+  (add-hook 'js-mode-hook #'my-js-hook)
+  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'typescript-mode-hook #'my-js-hook))
 
 ;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 ;; (use-package anaconda-mode

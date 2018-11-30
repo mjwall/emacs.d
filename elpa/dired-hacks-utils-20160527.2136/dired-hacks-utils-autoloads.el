@@ -1,9 +1,10 @@
-;;; s-autoloads.el --- automatically extracted autoloads
+;;; dired-hacks-utils-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("s.el") (23553 23901 117020 0))
+;;;### (autoloads nil nil ("dired-hacks-utils.el") (23553 23827 585203
+;;;;;;  0))
 
 ;;;***
 
@@ -12,4 +13,4 @@
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; s-autoloads.el ends here
+;;; dired-hacks-utils-autoloads.el ends here

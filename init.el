@@ -322,9 +322,17 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (setq projectile-use-git-grep t))
 
-(use-package treemacs
+(use-package dired-sidebar
   :ensure t
-  :bind (([f8] . treemacs)))
+  :bind (([f8] . dired-sidebar-toggle-sidebar))
+  :init
+  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'nerd)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  :hook (dired-sidebar-mode-hook . (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode)))))
 
 (use-package magit
   :ensure t
@@ -341,10 +349,6 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (yas-global-mode))
 
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
-
 ;;; Language Specific
 
 (require 'cc-mode)
@@ -355,9 +359,6 @@ there's a region, all lines that region covers will be duplicated."
   :ensure t
   :init (setq lsp-eldoc-render-all nil
               lsp-highlight-symbol-at-point nil))
-
-(use-package hydra
-  :ensure t)
 
 (use-package company-lsp
   :after  company
@@ -392,9 +393,6 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package dap-java
   :after (lsp-java))
-
-(use-package lsp-java-treemacs
-  :after (treemacs))
 
 ;; javascript/typescript - https://github.com/emacs-lsp/lsp-javascript
 ;; npm i -g javascript-typescript-langserver

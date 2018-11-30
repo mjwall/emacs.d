@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("bui-button.el" "bui-core.el" "bui-entry.el"
 ;;;;;;  "bui-history.el" "bui-info.el" "bui-list.el" "bui-pkg.el"
-;;;;;;  "bui-utils.el" "bui.el") (23552 16601 733115 0))
+;;;;;;  "bui-utils.el" "bui.el") (23553 23931 153346 0))
 
 ;;;***
 

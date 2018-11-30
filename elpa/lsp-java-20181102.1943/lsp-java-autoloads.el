@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("lsp-java-pkg.el" "lsp-java-treemacs.el"
-;;;;;;  "lsp-java.el") (23552 16600 289097 0))
+;;;;;;  "lsp-java.el") (23553 23927 857309 0))
 
 ;;;***
 

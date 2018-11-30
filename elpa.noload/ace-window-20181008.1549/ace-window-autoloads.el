@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "ace-window" "ace-window.el" (23552 14469 72329
+;;;### (autoloads nil "ace-window" "ace-window.el" (23553 21494 949622
 ;;;;;;  0))
 ;;; Generated autoloads from ace-window.el
 

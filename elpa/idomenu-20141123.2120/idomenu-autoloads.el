@@ -3,8 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "idomenu" "idomenu.el" (23553 23891 415914
-;;;;;;  0))
+;;;### (autoloads nil "idomenu" "idomenu.el" (23554 62802 0 0))
 ;;; Generated autoloads from idomenu.el
 
 (autoload 'idomenu "idomenu" "\

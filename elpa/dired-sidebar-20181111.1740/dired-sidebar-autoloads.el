@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "dired-sidebar" "dired-sidebar.el" (23553 23829
-;;;;;;  11219 0))
+;;;### (autoloads nil "dired-sidebar" "dired-sidebar.el" (23554 62793
+;;;;;;  0 0))
 ;;; Generated autoloads from dired-sidebar.el
 
 (autoload 'dired-sidebar-toggle-sidebar "dired-sidebar" "\

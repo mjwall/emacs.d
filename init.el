@@ -395,11 +395,9 @@ there's a region, all lines that region covers will be duplicated."
   :after (lsp-java))
 
 ;; javascript/typescript - https://github.com/emacs-lsp/lsp-javascript
-;; npm i -g javascript-typescript-langserver
 
 (setq-default js-indent-level 2)
 
-;;(use-package ng2-mode)
 (use-package typescript-mode
   :ensure t
   :init
@@ -409,6 +407,7 @@ there's a region, all lines that region covers will be duplicated."
     (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)))
 
 ;; (use-package lsp-javascript-typescript
+;;   ;; npm i -g javascript-typescript-langserver
 ;;   :ensure t
 ;;   ;:ensure-system-package
 ;;   ;(javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
@@ -427,10 +426,14 @@ there's a region, all lines that region covers will be duplicated."
 ;;   (add-hook 'typescript-mode-hook 'lsp-js-hook)
 ;;   (add-hook 'typescript-mode-hook 'lsp-javascript-typescript-enable))
 
-(use-package lsp-javascript-typescript
-     :commands lsp-javascript-typescript-enable
-     :hook ((typescript-mode js2-mode) . lsp-javascript-typescript-enable))
+(use-package lsp-typescript
+  ;; npm i -g typescript-language-server
+  :ensure t
+  :init
+  (add-hook 'js-mode-hook #'lsp-typescript-enable)
+  (add-hook 'typescript-mode-hook #'lsp-typescript-enable))
 
+;;(use-package ng2-mode)
 
 ;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 ;; (use-package anaconda-mode
@@ -463,13 +466,7 @@ there's a region, all lines that region covers will be duplicated."
 ;;     :config
 ;;     (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
 
-;; typescript/javascript
-
 ;; c/c++
-
-;; java
-;; https://github.com/emacs-lsp/lsp-java
-;; 
 
 ;; kotlin
 
@@ -478,9 +475,16 @@ there's a region, all lines that region covers will be duplicated."
 ;; elisp
 ;;(setq lisp-indent-offset 2)
 
-;; javascript
-;;(setq js-indent-level 2)
-
 ;; bash
 
 ;; docker
+
+;; thrift
+
+;; protobuf
+
+;; make/cmake
+
+;; gradle
+
+;; maven

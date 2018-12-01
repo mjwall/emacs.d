@@ -408,22 +408,29 @@ there's a region, all lines that region covers will be duplicated."
   (with-eval-after-load "lsp-javascript-typescript"
     (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)))
 
+;; (use-package lsp-javascript-typescript
+;;   :ensure t
+;;   ;:ensure-system-package
+;;   ;(javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
+;;   :config
+;;   ;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript
+;;   (defun lsp-company-transformer (candidates)
+;;     (let ((completion-ignore-case t))
+;;       (all-completions (company-grab-symbol) candidates)))
+  
+;;   (defun lsp-js-hook nil
+;;     (make-local-variable 'company-transformers)
+;;     (push 'lsp-company-transformer company-transformers))
+
+;;   (add-hook 'js-mode-hook 'lsp-js-hook)
+;;   (add-hook 'js-mode-hook 'lsp-javascript-typescript-enable)
+;;   (add-hook 'typescript-mode-hook 'lsp-js-hook)
+;;   (add-hook 'typescript-mode-hook 'lsp-javascript-typescript-enable))
+
 (use-package lsp-javascript-typescript
-  :ensure t
-  ;:ensure-system-package
-  ;(javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
-  :init
-  ;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript  (
-  (defun my-company-transformer (candidates)
-    (let ((completion-ignore-case t))
-      (all-completions (company-grab-symbol) candidates)))
-  (defun my-js-hook nil
-    (make-local-variable 'company-transformers)
-    (push 'my-company-transformer company-transformers))  
-  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'js-mode-hook #'my-js-hook)
-  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'typescript-mode-hook #'my-js-hook))
+     :commands lsp-javascript-typescript-enable
+     :hook ((typescript-mode js2-mode) . lsp-javascript-typescript-enable))
+
 
 ;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 ;; (use-package anaconda-mode

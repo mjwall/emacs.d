@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "dap-hydra" "dap-hydra.el" (23554 62819 0 0))
+;;;### (autoloads nil "dap-hydra" "dap-hydra.el" (23555 874 0 0))
 ;;; Generated autoloads from dap-hydra.el
 
 (autoload 'dap-hydra "dap-hydra" "\
@@ -13,7 +13,7 @@ Run `dap-hydra/body'.
 
 ;;;***
 
-;;;### (autoloads nil "dap-mode" "dap-mode.el" (23554 62819 0 0))
+;;;### (autoloads nil "dap-mode" "dap-mode.el" (23555 874 0 0))
 ;;; Generated autoloads from dap-mode.el
 
 (defvar dap-mode nil "\
@@ -33,7 +33,7 @@ Global minor mode for DAP mode.
 
 ;;;***
 
-;;;### (autoloads nil "dap-ui" "dap-ui.el" (23554 62819 0 0))
+;;;### (autoloads nil "dap-ui" "dap-ui.el" (23555 874 0 0))
 ;;; Generated autoloads from dap-ui.el
 
 (defvar dap-ui-mode nil "\
@@ -53,8 +53,8 @@ Displaying DAP visuals.
 
 ;;;***
 
-;;;### (autoloads nil "dap-ui-repl" "dap-ui-repl.el" (23554 62819
-;;;;;;  0 0))
+;;;### (autoloads nil "dap-ui-repl" "dap-ui-repl.el" (23555 874 0
+;;;;;;  0))
 ;;; Generated autoloads from dap-ui-repl.el
 
 (autoload 'dap-ui-repl "dap-ui-repl" "\
@@ -65,7 +65,7 @@ Start a JavaScript REPL to be evaluated in the visiting browser.
 ;;;***
 
 ;;;### (autoloads nil nil ("dap-java.el" "dap-mode-pkg.el" "dap-overlays.el"
-;;;;;;  "dap-python.el") (23554 62819 0 0))
+;;;;;;  "dap-python.el") (23555 874 0 0))
 
 ;;;***
 

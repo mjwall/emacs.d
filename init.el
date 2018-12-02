@@ -406,32 +406,15 @@ there's a region, all lines that region covers will be duplicated."
   (with-eval-after-load "lsp-javascript-typescript"
     (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)))
 
-;; (use-package lsp-javascript-typescript
-;;   ;; npm i -g javascript-typescript-langserver
-;;   :ensure t
-;;   ;:ensure-system-package
-;;   ;(javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
-;;   :config
-;;   ;; bug - see https://github.com/emacs-lsp/lsp-javascript#enabling-lsp-javascript-typescript
-;;   (defun lsp-company-transformer (candidates)
-;;     (let ((completion-ignore-case t))
-;;       (all-completions (company-grab-symbol) candidates)))
-  
-;;   (defun lsp-js-hook nil
-;;     (make-local-variable 'company-transformers)
-;;     (push 'lsp-company-transformer company-transformers))
-
-;;   (add-hook 'js-mode-hook 'lsp-js-hook)
-;;   (add-hook 'js-mode-hook 'lsp-javascript-typescript-enable)
-;;   (add-hook 'typescript-mode-hook 'lsp-js-hook)
-;;   (add-hook 'typescript-mode-hook 'lsp-javascript-typescript-enable))
-
-(use-package lsp-typescript
-  ;; npm i -g typescript-language-server
+(use-package eglot
   :ensure t
-  :init
-  (add-hook 'js-mode-hook #'lsp-typescript-enable)
-  (add-hook 'typescript-mode-hook #'lsp-typescript-enable))
+  :requires company
+  :hook ((typescript-mode js-mode) . eglot-ensure)
+  :config
+  (setq eglot-server-programs
+        '(
+          ((js-mode typescript-mode) . ("javascript-typescript-stdio"))
+          )))
 
 ;;(use-package ng2-mode)
 
@@ -477,6 +460,10 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; bash
 
+;; octave
+
+;; R
+
 ;; docker
 
 ;; thrift
@@ -488,3 +475,4 @@ there's a region, all lines that region covers will be duplicated."
 ;; gradle
 
 ;; maven
+

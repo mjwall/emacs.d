@@ -409,12 +409,10 @@ there's a region, all lines that region covers will be duplicated."
 (use-package eglot
   :ensure t
   :requires company
-  :hook ((typescript-mode js-mode) . eglot-ensure)
+  :hook (typescript-mode . eglot-ensure)
   :config
-  (setq eglot-server-programs
-        '(
-          ((js-mode typescript-mode) . ("javascript-typescript-stdio"))
-          )))
+  (add-to-list 'eglot-server-programs '(typescript-mode . ("javascript-typescript-stdio")))
+  )
 
 ;;(use-package ng2-mode)
 

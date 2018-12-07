@@ -314,13 +314,9 @@ there's a region, all lines that region covers will be duplicated."
 (eval-when-compile
   (require 'use-package))
 
-(use-package projectile
-  :ensure t
-  :bind (([f7] . projectile-find-file))
-  :init
-  (projectile-global-mode)
-  :config
-  (setq projectile-use-git-grep t))
+;; project.el
+(global-set-key [f7] 'project-find-file)
+(global-set-key [f6] 'vc-git-grep)
 
 (use-package dired-sidebar
   :ensure t
@@ -408,10 +404,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package eglot
   :ensure t
-  :requires company
   :hook (typescript-mode . eglot-ensure)
-  :config
-  (add-to-list 'eglot-server-programs '(typescript-mode . ("javascript-typescript-stdio")))
   )
 
 ;;(use-package ng2-mode)

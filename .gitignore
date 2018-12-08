@@ -1,6 +1,12 @@
 ;; copy bin/emacs.mac and chmod 755 if needed
 bin/emacs
 
+;; recovery files
+.\#*
+
+;; compiled elips
+*.elc
+
 ;; emacs directories specific to an instance
 auto-save-list/
 backups/
@@ -19,3 +25,6 @@ eclipse.jdt.ls/server/config_linux/org.eclipse.equinox.app/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.osgi/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.core.runtime/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.equinox.app/.manager
+
+;; lsp servers
+lsp-servers/

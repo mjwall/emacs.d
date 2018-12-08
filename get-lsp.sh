@@ -10,23 +10,33 @@ test -d $DIR || mkdir $DIR
 test -d $DIR/eclipse.jdt.ls || git clone https://github.com/eclipse/eclipse.jdt.ls $DIR/eclipse.jdt.ls
 
 # Javascript/Typescript
+test -d $DIR/javascript-typescript-langserver || git clone https://github.com/sourcegraph/javascript-typescript-langserver $DIR/javascript-typescript-langserver
 
 # Python
+test -d $DIR/pyls || git clone https://github.com/palantir/python-language-server $DIR/pyls
 
 # Go
+test -d $DIR/go-langserver || git clone https://github.com/sourcegraph/go-langserver $DIR/go-langserver
 
 # Kotlin
+test -d $DIR/KotlinLanguageServer || git clone https://github.com/fwcd/KotlinLanguageServer $DIR/KotlinLanguageServer
 
-# C/C++
+# C/C++ 17
+test -d $DIR/ccls || git clone https://github.com/MaskRay/ccls $DIR/ccls
+
+# C/C++ 14
+test -d $DIR/cquery || git clone https://github.com/cquery-project/cquery $DIR/cquery
 
 # Ruby
+test -d $DIR/solargraph || git clone git@github.com:castwide/solargraph.git $DIR/solargraph
 
 # Rust
+test -d $DIR/rls || git clone https://github.com/rust-lang/rls $DIR/rls
 
 
-# https://github.com/sourcegraph/javascript-typescript-langserver
-# https://github.com/sourcegraph/go-langserver
-# https://github.com/palantir/python-language-server
-# https://github.com/fwcd/KotlinLanguageServer
 
-# https://github.com/MaskRay/ccls or https://github.com/cquery-project/cquery
+
+
+
+
+

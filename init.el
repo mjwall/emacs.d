@@ -273,26 +273,26 @@ there's a region, all lines that region covers will be duplicated."
   (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
          (backend (car fileset-arg))
          (files (nth 1 fileset-arg)))
-    (if (eq backend ‘Git)
+    (if (eq backend 'Git)
         (progn (funcall fn files)
                (message (concat verb " " (number-to-string (length files))
                                 " file(s).")))
       (message "Not in a vc git buffer."))))
 (defun my-vc-git-add (&optional revision vc-fileset comment)
   (interactive "P")
-  (my-vc-git-command "Staged" ‘vc-git-register))
+  (my-vc-git-command "Staged" 'vc-git-register))
 (defun my-vc-git-reset (&optional revision vc-fileset comment)
   (interactive "P")
   (my-vc-git-command "Unstaged"
                      (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
 (eval-after-load "vc-dir"
-  ‘(progn
-     (define-key vc-prefix-map [(r)] ‘vc-revert-buffer)
-     (define-key vc-dir-mode-map [(r)] ‘vc-revert-buffer)
-     (define-key vc-prefix-map [(a)] ‘my-vc-git-add)
-     (define-key vc-dir-mode-map [(a)] ‘my-vc-git-add)
-     (define-key vc-prefix-map [(u)] ‘my-vc-git-reset)
-     (define-key vc-dir-mode-map [(u)] ‘my-vc-git-reset)
+  '(progn
+     (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
+     (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
+     (define-key vc-prefix-map [(a)] 'my-vc-git-add)
+     (define-key vc-dir-mode-map [(a)] 'my-vc-git-add)
+     (define-key vc-prefix-map [(u)] 'my-vc-git-reset)
+     (define-key vc-dir-mode-map [(u)] 'my-vc-git-reset)
 
      ;; hide up to date files after refreshing in vc-dir
      (define-key vc-dir-mode-map [(g)]

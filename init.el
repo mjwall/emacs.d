@@ -58,6 +58,8 @@
 (cua-selection-mode t) ; but use standard Emacs keybindings
 (transient-mark-mode 1)
 (electric-pair-mode 1)
+;; add ~/.emacs.d/site-lisp
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 ;; redefine the boring startup message
 (defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
 
@@ -389,6 +391,9 @@ there's a region, all lines that region covers will be duplicated."
   :init (setq lsp-eldoc-render-all nil
               lsp-highlight-symbol-at-point nil))
 
+(use-package company
+  :ensure t)
+
 (use-package company-lsp
   :after  company
   :ensure t
@@ -440,68 +445,155 @@ there's a region, all lines that region covers will be duplicated."
   (with-eval-after-load "js-mode"
     (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable)))
 
+(use-package ng2-mode
+  :ensure t)
+
+;; python - from http://www.andrewty.com/blog/emacs-config-for-python
+(use-package anaconda-mode
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+    :config
+    (setq python-indent-offset 4
+          python-indent 4
+          python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--simple-prompt")
+    ;; (use-package company-anaconda
+    ;;    :ensure t
+    ;;    :init
+    ;;    (eval-after-load "company"
+    ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+    )
+
+
+(use-package conda
+    :ensure t
+    :config
+    (setq conda-anaconda-home "~/anaconda3")
+    (conda-env-initialize-interactive-shells)
+    (conda-env-initialize-eshell))
+(use-package ein
+    :ensure t
+    :config
+    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+    (setq ein:jupyter-server-args (list "--no-browser")))
+;; conda install autopep8 (plus any env)
+(use-package py-autopep8
+    :ensure t
+    ;;:config
+    ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  )
+
+(use-package lsp-python
+  :ensure t
+  :config
+      ;; (use-package company-anaconda
+    ;;    :ensure t
+    ;;    :init
+    ;;    (eval-after-load "company"
+    ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+    )
+
+(use-package conda
+    :ensure t
+    :config
+    (setq conda-anaconda-home "~/anaconda3")
+    (conda-env-initialize-interactive-shells)
+    (conda-env-initialize-eshell))
+(use-package ein
+    :config
+    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+    (setq ein:jupyter-server-args (list "--no-browser")))
+;; conda install autopep8 (plus any env)
+(use-package py-autopep8
+    ;;:config
+    ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  )
+
+(use-package lsp-python
+  :ensure t
+  ;; :config
+  ;; (add-hook 'python-mode-hook #'lsp-python-enable)
+  )
+
+;; go
+
+(use-package go-mode
+  :ensure t)
+
+(use-package lsp-go
+  :ensure t
+  :config
+  (add-hook 'go-mode-hook #'lsp-go-enable)
+  )
+
+(use-package lsp-ruby
+  :ensure t)
+
 (use-package eglot
   :ensure t
 ;  :hook (typescript-mode . eglot-ensure)
   )
 
-;;(use-package ng2-mode)
-
-;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
-;; (use-package anaconda-mode
-;;     :ensure t
-;;     :init
-;;     (add-hook 'python-mode-hook 'anaconda-mode)
-;;     (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;;     :config
-;;     (setq python-indent-offset 4
-;;           python-indent 4
-;;           python-shell-interpreter "ipython"
-;;           python-shell-interpreter-args "--simple-prompt")
-;;     (use-package company-anaconda
-;;        :ensure t
-;;        :init
-;;        (eval-after-load "company"
-;;          '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
-;; (use-package conda
-;;     :config
-;;     (setq conda-anaconda-home "~/anaconda3")
-;;     (conda-env-initialize-interactive-shells)
-;;     (conda-env-initialize-eshell))
-;; (use-package ein
-;;     :config
-;;     (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-;;     (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-;;     (setq ein:jupyter-server-args (list "--no-browser")))
-;; ;; conda install autopep8 (plus any env)
-;; (use-package py-autopep8
-;;     :config
-;;     (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
-
 ;; c/c++
 
 ;; kotlin
-
-;; go
+(use-package kotlin-mode
+  :ensure t)
 
 ;; elisp
-;;(setq lisp-indent-offset 2)
+(setq lisp-indent-offset 2)
 
 ;; bash
 
 ;; octave
+(use-package octave
+  :ensure t)
 
 ;; R
+(use-package ess
+  :ensure t
+  ;;:init (require 'ess-site)
+  )
 
 ;; docker
+(use-package dockerfile-mode
+  :ensure t)
 
 ;; thrift
+(use-package thrift
+  :ensure t)
 
 ;; protobuf
+(use-package protobuf-mode
+  :ensure t)
+
+;; jflex - http://jflex.de/jflex-mode.el
+(require 'jflex-mode)
 
 ;; make/cmake
+(use-package cmake-mode
+  :ensure t)
 
 ;; gradle
+(use-package gradle-mode
+  :ensure t)
 
-;; maven
+;; julia
+(use-package julia-mode
+  :ensure t)
 
+;; scala
+(use-package scala-mode
+  :ensure t)
+
+;; clojure
+(use-package clojure-mode
+  :ensure t)
+
+;; markdown
+(use-package markdown-mode
+  :ensure t)

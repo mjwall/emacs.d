@@ -33,7 +33,11 @@ test -d $DIR/solargraph || git clone git@github.com:castwide/solargraph.git $DIR
 # Rust
 test -d $DIR/rls || git clone https://github.com/rust-lang/rls $DIR/rls
 
+# Clojure
+test -d $DIR/clojure-lsp || git clone https://github.com/snoe/clojure-lsp $DIR/clojure-lsp
 
+# Scala
+test -d $DIR/metals || git clone https://github.com/scalameta/metals $DIR/metals
 
 
 

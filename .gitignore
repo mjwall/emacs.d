@@ -28,3 +28,6 @@ eclipse.jdt.ls/server/config_mac/org.eclipse.equinox.app/.manager
 
 ;; lsp servers
 lsp-servers/
+elpa/archives/
+elpa/gnupg/
+abbrev_defs

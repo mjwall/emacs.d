@@ -339,6 +339,11 @@ there's a region, all lines that region covers will be duplicated."
 (defalias 'd 'dired)
 (defalias 'fo 'find-file-other-window)
 
+;; project.el
+(global-set-key [f7] 'project-find-file)
+(global-set-key [f6] 'vc-git-grep)
+(global-set-key [f9] 'vc-dir)
+
 ;;; Now for packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -354,10 +359,10 @@ there's a region, all lines that region covers will be duplicated."
 (eval-when-compile
   (require 'use-package))
 
-;; project.el
-(global-set-key [f7] 'project-find-file)
-(global-set-key [f6] 'vc-git-grep)
-(global-set-key [f9] 'vc-dir)
+(use-package ample-zen-theme
+  :ensure t
+  :init
+  (load-theme 'ample-zen))
 
 (use-package dired-sidebar
   :ensure t

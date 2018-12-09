@@ -12,4 +12,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (eglot typescript-mode dap-mode lsp-java lsp-ui company-lsp lsp-mode yasnippet idomenu dired-sidebar use-package))))
+    (lsp-javascript-typescript eglot typescript-mode dap-mode lsp-java lsp-ui company-lsp lsp-mode yasnippet idomenu dired-sidebar use-package))))

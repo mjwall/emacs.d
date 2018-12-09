@@ -102,8 +102,12 @@
 ;; only run when the daemon is started
 (load-theme 'wombat)
 (if (eq system-type 'darwin)
-    (setq default-frame-alist '((font . "Menlo-15")))
-    )
+    (progn
+      (setq default-frame-alist '((font . "Menlo-15")))
+      ;;ls does not support --dired
+      (require 'ls-lisp)
+      (setq ls-lisp-use-insert-directory-program nil)
+      ))
 (if (eq system-type 'gnu/linux)
     (setq default-frame-alist '((font . "Monospace-14")))
     )
@@ -426,14 +430,19 @@ there's a region, all lines that region covers will be duplicated."
 (use-package typescript-mode
   :ensure t
   :init
-  (setf typescript-indent-level js-indent-level)
-  :config
-  (with-eval-after-load "lsp-javascript-typescript"
-    (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)))
+  (setf typescript-indent-level js-indent-level))
+
+(use-package lsp-javascript-typescript
+  :ensure t
+  :init
+  (with-eval-after-load "typescript-mode"
+    (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
+  (with-eval-after-load "js-mode"
+    (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable)))
 
 (use-package eglot
   :ensure t
-  :hook (typescript-mode . eglot-ensure)
+;  :hook (typescript-mode . eglot-ensure)
   )
 
 ;;(use-package ng2-mode)

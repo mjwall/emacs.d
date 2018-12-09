@@ -16,7 +16,6 @@ network-security.data
 projectile-bookmarks.eld
 elpa/archives/
 elpa/gnupg/
-mastering-emacs-v2.pdf
 .cache/
 workspace/
 eclipse.jdt.ls/server/config_linux/org.eclipse.osgi/.manager
@@ -25,9 +24,8 @@ eclipse.jdt.ls/server/config_linux/org.eclipse.equinox.app/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.osgi/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.core.runtime/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.equinox.app/.manager
-
-;; lsp servers
-lsp-servers/
 elpa/archives/
 elpa/gnupg/
 abbrev_defs
+src/
+books/

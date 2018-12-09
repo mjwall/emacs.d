@@ -1,8 +1,14 @@
 #!/bin/bash
 
+# git clone emacs source
+
+SRC_DIR=${HOME}/.emacs.d/src
+
+test -d ${SRC_DIR}/emacs || git clone git@github.com:emacs-mirror/emacs.git ${SRC_DIR}/emacs
+
 # git clone lsp servers
 
-DIR=${HOME}/.emacs.d/lsp-servers
+DIR=${SRC_DIR}/lsp-servers
 
 test -d $DIR || mkdir $DIR
 

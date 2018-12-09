@@ -76,7 +76,7 @@
 ;; some more familiar keybindings for default functions
 (global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region) ;; doesn't work in terminal
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
@@ -380,6 +380,10 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (yas-global-mode))
 
+
+(use-package company
+  :ensure t)
+
 ;;; Language Specific
 
 (require 'cc-mode)
@@ -390,9 +394,6 @@ there's a region, all lines that region covers will be duplicated."
   :ensure t
   :init (setq lsp-eldoc-render-all nil
               lsp-highlight-symbol-at-point nil))
-
-(use-package company
-  :ensure t)
 
 (use-package company-lsp
   :after  company
@@ -408,15 +409,17 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package lsp-java
   :ensure t
+  :after company
   :config
   (add-hook 'java-mode-hook
 	    (lambda ()
 	      (setq-local company-backends (list 'company-lsp))))
 
-  (add-hook 'java-mode-hook 'lsp-java-enable)
+  ;;(add-hook 'java-mode-hook 'lsp-java-enable)
   (add-hook 'java-mode-hook 'flycheck-mode)
   (add-hook 'java-mode-hook 'company-mode)
-  (add-hook 'java-mode-hook 'lsp-ui-mode))
+  ;;(add-hook 'java-mode-hook 'lsp-ui-mode)
+  )
 
 (use-package dap-mode
   :ensure t
@@ -428,9 +431,12 @@ there's a region, all lines that region covers will be duplicated."
 (use-package dap-java
   :after (lsp-java))
 
-;; javascript/typescript - https://github.com/emacs-lsp/lsp-javascript
+;; javascript/typescript
 
 (setq-default js-indent-level 2)
+
+(use-package ng2-mode
+  :ensure t)
 
 (use-package typescript-mode
   :ensure t
@@ -439,14 +445,12 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package lsp-javascript-typescript
   :ensure t
-  :init
-  (with-eval-after-load "typescript-mode"
-    (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
-  (with-eval-after-load "js-mode"
-    (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable)))
-
-(use-package ng2-mode
-  :ensure t)
+  ;; :init
+  ;; (with-eval-after-load "typescript-mode"
+  ;;   (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
+  ;; (with-eval-after-load "js-mode"
+  ;;   (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable))
+  )
 
 ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 (use-package anaconda-mode
@@ -465,7 +469,6 @@ there's a region, all lines that region covers will be duplicated."
     ;;    (eval-after-load "company"
     ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
     )
-
 
 (use-package conda
     :ensure t
@@ -495,29 +498,6 @@ there's a region, all lines that region covers will be duplicated."
     ;;    (eval-after-load "company"
     ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
     )
-
-(use-package conda
-    :ensure t
-    :config
-    (setq conda-anaconda-home "~/anaconda3")
-    (conda-env-initialize-interactive-shells)
-    (conda-env-initialize-eshell))
-(use-package ein
-    :config
-    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-    (setq ein:jupyter-server-args (list "--no-browser")))
-;; conda install autopep8 (plus any env)
-(use-package py-autopep8
-    ;;:config
-    ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  )
-
-(use-package lsp-python
-  :ensure t
-  ;; :config
-  ;; (add-hook 'python-mode-hook #'lsp-python-enable)
-  )
 
 ;; go
 

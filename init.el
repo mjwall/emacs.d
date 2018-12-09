@@ -104,15 +104,15 @@
 ;; only run when the daemon is started
 (load-theme 'wombat)
 (if (eq system-type 'darwin)
-    (progn
-      (setq default-frame-alist '((font . "Menlo-15")))
-      ;;ls does not support --dired
-      (require 'ls-lisp)
-      (setq ls-lisp-use-insert-directory-program nil)
-      ))
+  (progn
+    (setq default-frame-alist '((font . "Menlo-15")))
+    ;;ls does not support --dired
+    (require 'ls-lisp)
+    (setq ls-lisp-use-insert-directory-program nil)
+    ))
 (if (eq system-type 'gnu/linux)
-    (setq default-frame-alist '((font . "Monospace-14")))
-    )
+  (setq default-frame-alist '((font . "Monospace-14")))
+  )
 
 ;; these functions only run once when starting a daemon
 ;; so they don't do much good with the ec/et workflow
@@ -277,12 +277,12 @@ there's a region, all lines that region covers will be duplicated."
 ;; and r run git reset and checkout from head.
 (defun my-vc-git-command (verb fn)
   (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
-         (backend (car fileset-arg))
-         (files (nth 1 fileset-arg)))
+          (backend (car fileset-arg))
+          (files (nth 1 fileset-arg)))
     (if (eq backend 'Git)
-        (progn (funcall fn files)
-               (message (concat verb " " (number-to-string (length files))
-                                " file(s).")))
+      (progn (funcall fn files)
+        (message (concat verb " " (number-to-string (length files))
+                   " file(s).")))
       (message "Not in a vc git buffer."))))
 (defun my-vc-git-add (&optional revision vc-fileset comment)
   (interactive "P")
@@ -290,7 +290,7 @@ there's a region, all lines that region covers will be duplicated."
 (defun my-vc-git-reset (&optional revision vc-fileset comment)
   (interactive "P")
   (my-vc-git-command "Unstaged"
-                     (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
+    (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
 (eval-after-load "vc-dir"
   '(progn
      (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
@@ -368,8 +368,8 @@ there's a region, all lines that region covers will be duplicated."
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t)
   :hook (dired-sidebar-mode-hook . (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode)))))
+                                     (unless (file-remote-p default-directory)
+                                       (auto-revert-mode)))))
 
 (use-package idomenu
   :ensure t
@@ -393,14 +393,14 @@ there's a region, all lines that region covers will be duplicated."
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-eldoc-render-all nil
-              lsp-highlight-symbol-at-point nil))
+          lsp-highlight-symbol-at-point nil))
 
 (use-package company-lsp
   :after  company
   :ensure t
   :config
   (setq company-lsp-cache-candidates t
-        company-lsp-async t))
+    company-lsp-async t))
 
 (use-package lsp-ui
   :ensure t
@@ -412,8 +412,8 @@ there's a region, all lines that region covers will be duplicated."
   :after company
   :config
   (add-hook 'java-mode-hook
-	    (lambda ()
-	      (setq-local company-backends (list 'company-lsp))))
+    (lambda ()
+      (setq-local company-backends (list 'company-lsp))))
 
   ;;(add-hook 'java-mode-hook 'lsp-java-enable)
   (add-hook 'java-mode-hook 'flycheck-mode)
@@ -454,50 +454,50 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 (use-package anaconda-mode
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-    :config
-    (setq python-indent-offset 4
-          python-indent 4
-          python-shell-interpreter "ipython"
-          python-shell-interpreter-args "--simple-prompt")
-    ;; (use-package company-anaconda
-    ;;    :ensure t
-    ;;    :init
-    ;;    (eval-after-load "company"
-    ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
-    )
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  :config
+  (setq python-indent-offset 4
+    python-indent 4
+    python-shell-interpreter "ipython"
+    python-shell-interpreter-args "--simple-prompt")
+  ;; (use-package company-anaconda
+  ;;    :ensure t
+  ;;    :init
+  ;;    (eval-after-load "company"
+  ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+  )
 
 (use-package conda
-    :ensure t
-    :config
-    (setq conda-anaconda-home "~/anaconda3")
-    (conda-env-initialize-interactive-shells)
-    (conda-env-initialize-eshell))
+  :ensure t
+  :config
+  (setq conda-anaconda-home "~/anaconda3")
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell))
 (use-package ein
-    :ensure t
-    :config
-    (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-    (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-    (setq ein:jupyter-server-args (list "--no-browser")))
+  :ensure t
+  :config
+  (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+  (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+  (setq ein:jupyter-server-args (list "--no-browser")))
 ;; conda install autopep8 (plus any env)
 (use-package py-autopep8
-    :ensure t
-    ;;:config
-    ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  :ensure t
+  ;;:config
+  ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
   )
 
 (use-package lsp-python
   :ensure t
   :config
-      ;; (use-package company-anaconda
-    ;;    :ensure t
-    ;;    :init
-    ;;    (eval-after-load "company"
-    ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
-    )
+  ;; (use-package company-anaconda
+  ;;    :ensure t
+  ;;    :init
+  ;;    (eval-after-load "company"
+  ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+  )
 
 ;; go
 
@@ -515,7 +515,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package eglot
   :ensure t
-;  :hook (typescript-mode . eglot-ensure)
+  ;; :hook (typescript-mode . eglot-ensure)
   )
 
 ;; c/c++

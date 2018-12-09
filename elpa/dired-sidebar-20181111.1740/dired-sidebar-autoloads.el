@@ -1,10 +1,12 @@
 ;;; dired-sidebar-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "dired-sidebar" "dired-sidebar.el" (23555 852
-;;;;;;  0 0))
+;;;### (autoloads nil "dired-sidebar" "dired-sidebar.el" (0 0 0 0))
 ;;; Generated autoloads from dired-sidebar.el
 
 (autoload 'dired-sidebar-toggle-sidebar "dired-sidebar" "\
@@ -37,11 +39,14 @@ If it's not showing, act as `dired-sidebar-toggle-sidebar'.
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-sidebar" '("dired-sidebar-")))
+
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; dired-sidebar-autoloads.el ends here

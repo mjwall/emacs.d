@@ -1,10 +1,13 @@
 ;;; typescript-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "typescript-mode" "typescript-mode.el" (23555
-;;;;;;  876 0 0))
+;;;### (autoloads nil "typescript-mode" "typescript-mode.el" (0 0
+;;;;;;  0 0))
 ;;; Generated autoloads from typescript-mode.el
 (put 'typescript-indent-level 'safe-local-variable #'integerp)
 
@@ -21,10 +24,19 @@ Key bindings:
 
 (add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "typescript-mode" '("typescript-")))
+
 ;;;***
 
-;;;### (autoloads nil nil ("typescript-mode-pkg.el" "typescript-mode-test-utilities.el")
-;;;;;;  (23555 876 0 0))
+;;;### (autoloads nil "typescript-mode-test-utilities" "typescript-mode-test-utilities.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from typescript-mode-test-utilities.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "typescript-mode-test-utilities" '("font-lock-test" "get-face-at" "test-with-")))
+
+;;;***
+
+;;;### (autoloads nil nil ("typescript-mode-pkg.el") (0 0 0 0))
 
 ;;;***
 
@@ -32,5 +44,6 @@ Key bindings:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; typescript-mode-autoloads.el ends here

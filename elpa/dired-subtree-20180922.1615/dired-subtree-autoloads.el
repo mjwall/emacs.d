@@ -1,10 +1,12 @@
 ;;; dired-subtree-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "dired-subtree" "dired-subtree.el" (23555 852
-;;;;;;  0 0))
+;;;### (autoloads nil "dired-subtree" "dired-subtree.el" (0 0 0 0))
 ;;; Generated autoloads from dired-subtree.el
 
 (autoload 'dired-subtree-narrow "dired-subtree" "\
@@ -117,11 +119,14 @@ the subtree.  The filter action is read from `dired-filter-map'.
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-subtree" '("dired-")))
+
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; dired-subtree-autoloads.el ends here

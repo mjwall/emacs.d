@@ -380,6 +380,7 @@ there's a region, all lines that region covers will be duplicated."
   :ensure t)
 
 (use-package spacemacs-theme
+  :ensure t
   :defer t
   :init (load-theme 'spacemacs-dark t))
 
@@ -467,15 +468,6 @@ there's a region, all lines that region covers will be duplicated."
   :init
   (setf typescript-indent-level js-indent-level))
 
-(use-package lsp-javascript-typescript
-  :ensure t
-  ;; :init
-  ;; (with-eval-after-load "typescript-mode"
-  ;;   (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
-  ;; (with-eval-after-load "js-mode"
-  ;;   (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable))
-  )
-
 ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 (use-package anaconda-mode
   :ensure t
@@ -533,9 +525,6 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (add-hook 'go-mode-hook #'lsp-go-enable)
   )
-
-(use-package lsp-ruby
-  :ensure t)
 
 (use-package eglot
   :ensure t

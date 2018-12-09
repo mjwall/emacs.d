@@ -30,9 +30,8 @@ such.
 
 ;;;***
 
-;;;### (autoloads nil nil ("lsp-common.el" "lsp-imenu.el" "lsp-io.el"
-;;;;;;  "lsp-methods.el" "lsp-mode-pkg.el" "lsp-mode.el" "lsp-notifications.el")
-;;;;;;  (0 0 0 0))
+;;;### (autoloads nil nil ("lsp-mode-pkg.el" "lsp-mode.el") (0 0
+;;;;;;  0 0))
 
 ;;;***
 

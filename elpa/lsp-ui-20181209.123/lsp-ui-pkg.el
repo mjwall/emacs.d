@@ -2,7 +2,6 @@
   '((emacs "25.1")
     (dash "2.14")
     (dash-functional "1.2.0")
-    (flycheck "31")
     (lsp-mode "5.0")
     (markdown-mode "2.3"))
   :keywords

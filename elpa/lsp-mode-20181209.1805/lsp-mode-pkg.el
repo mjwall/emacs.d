@@ -1,4 +1,4 @@
-(define-package "lsp-mode" "20181208.1953" "Minor mode for interacting with Language Servers"
+(define-package "lsp-mode" "20181209.1805" "Minor mode for interacting with Language Servers"
   '((emacs "25.1")
     (dash "2.14.1")
     (dash-functional "2.14.1")

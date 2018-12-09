@@ -409,14 +409,17 @@ there's a region, all lines that region covers will be duplicated."
 (use-package company
   :ensure t)
 
+(use-package flycheck
+  :ensure t)
+
 ;;; Language Specific
 
 (require 'cc-mode)
 
 ;; Java - https://github.com/emacs-lsp/lsp-java
 
-(use-package lsp-mode
-  :ensure t
+(use-package lsp
+  :ensure lsp-mode
   :init (setq lsp-eldoc-render-all nil
           lsp-highlight-symbol-at-point nil))
 
@@ -504,34 +507,28 @@ there's a region, all lines that region covers will be duplicated."
   ;;:config
   ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
   )
-
-(use-package lsp-python
-  :ensure t
-  :config
-  ;; (use-package company-anaconda
-  ;;    :ensure t
-  ;;    :init
-  ;;    (eval-after-load "company"
-  ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
-  )
+;; (lsp-register-client
+;; (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
+;;                  :major-modes '(python-mode)
+;;                  :server-id 'pyls))
 
 ;; go
 
 (use-package go-mode
   :ensure t)
 
-(use-package lsp-go
-  :ensure t
-  :config
-  (add-hook 'go-mode-hook #'lsp-go-enable)
-  )
-
 (use-package eglot
   :ensure t
   ;; :hook (typescript-mode . eglot-ensure)
   )
 
-;; c/c++
+;; C/C++
+;; C++ 14
+(use-package cquery
+  :ensure t)
+;; C++ 17
+(use-package ccls
+  :ensure t)
 
 ;; kotlin
 (use-package kotlin-mode

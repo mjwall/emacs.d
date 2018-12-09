@@ -320,7 +320,7 @@ returns a negative number, 0, or a positive number indicating
 whether the first parameter is less than, equal to, or greater
 than the second parameter.")
 
-(defcustom lsp-prefer-flymake nil
+(defcustom lsp-prefer-flymake t
   "Auto-configure  to prefer `flymake' over `lsp-ui' if both are present."
   :type 'boolean
   :group 'lsp-mode)
@@ -2911,15 +2911,16 @@ HOST and PORT will be used for opening the connection."
 (defun lsp--auto-configure ()
   "Autoconfigure `lsp-ui', `company-lsp' if they are installed."
 
-  ;; prefer lsp-ui of flymake if both are present.
-  (when (and (functionp 'lsp-ui-mode) (not lsp-prefer-flymake))
-    (flycheck-mode)
+  (when (functionp 'lsp-ui-mode)
     (lsp-ui-mode))
 
-  ;; prefer lsp-ui of flymake if both are present.
-  (when (and (version< "26" emacs-version)
-             (or lsp-prefer-flymake (not (functionp 'lsp-ui-mode))))
+  (cond
+   ((and (not (version< emacs-version "26.1")) lsp-prefer-flymake)
     (lsp--flymake-setup))
+   ((and (functionp 'lsp-ui-mode) (featurep 'flycheck))
+    (require 'lsp-ui-flycheck)
+    (lsp-ui-flycheck-enable t)
+    (flycheck-mode 1)))
 
   (lsp-enable-imenu)
 
@@ -3263,13 +3264,13 @@ Returns nil if the project should not be added to the current SESSION."
                                   (or project-root-suggestion default-directory)
                                   nil
                                   t))
-          (2 (push (lsp-session-folders-blacklist session) project-root-suggestion)
+          (2 (push project-root-suggestion (lsp-session-folders-blacklist session))
              nil)
-          (3 (push (lsp-session-folders-blacklist session)
-                   (read-directory-name "Select folder to blacklist: "
+          (3 (push (read-directory-name "Select folder to blacklist: "
                                         (or project-root-suggestion default-directory)
                                         nil
-                                        t))
+                                        t)
+                   (lsp-session-folders-blacklist session))
              nil)
           (t nil)))
     ('quit)))
@@ -3333,18 +3334,20 @@ language server even if there is language server which can handle
 current language. When IGNORE-MULTI-FOLDER is nil current file
 will be openned in multi folder language server if there is
 such."
-  (-if-let* ((session (lsp-session))
-             (project-root (lsp--calculate-root session (buffer-file-name)))
-             (clients (or (lsp--find-clients major-mode)
-                          (user-error "Unable to find client(s) handling %s" major-mode))))
-      (progn
-        ;; update project roots if needed and persit the lsp session
-        (unless (-contains? (lsp-session-folders session) project-root)
-          (push project-root (lsp-session-folders session))
-          (lsp--persist-session session))
-
-        (lsp--ensure-lsp-servers session clients project-root ignore-multi-folder))
-    (user-error "Unable to find project root for %s" (buffer-name))))
+  (-let ((session (lsp-session)))
+    (-if-let (clients (lsp--find-clients major-mode))
+        (-if-let (project-root (lsp--calculate-root session (buffer-file-name)))
+            (progn
+              ;; update project roots if needed and persit the lsp session
+              (unless (-contains? (lsp-session-folders session) project-root)
+                (push project-root (lsp-session-folders session))
+                (lsp--persist-session session))
+              (lsp--ensure-lsp-servers session clients project-root ignore-multi-folder))
+          (message "%s not in project." (buffer-name))
+          nil)
+      (message (format "Unable to find client(s) handling %s. Make sure you have required lsp-clients.el or proper extension."
+                       major-mode))
+      nil)))
 
 (defun lsp-shutdown-workspace ()
   "Shutdown language server."
@@ -3383,17 +3386,11 @@ current language. When IGNORE-MULTI-FOLDER is nil current file
 will be openned in multi folder language server if there is
 such."
   (interactive)
-  (setq-local lsp--buffer-workspaces (or (lsp--try-open-in-library-workspace)
-                                         (lsp--try-project-root-workspaces ignore-multi-folder)))
-  (lsp-mode 1)
-  (when lsp-auto-configure (lsp--auto-configure)))
+  (when (setq-local lsp--buffer-workspaces (or (lsp--try-open-in-library-workspace)
+                                               (lsp--try-project-root-workspaces ignore-multi-folder)))
+    (lsp-mode 1)
+    (when lsp-auto-configure (lsp--auto-configure))))
 
 (provide 'lsp-mode)
-(provide 'lsp-notifications)
-(provide 'lsp-imenu)
-(provide 'lsp-io)
-(provide 'lsp-methods)
-(provide 'lsp-common)
-
 (provide 'lsp)
 ;;; lsp.el ends here

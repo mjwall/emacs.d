@@ -1,4 +1,4 @@
-;; copy bin/emacs.mac and chmod 755 if needed
+;; copy bin/emacs.mac and chmod 755 if on a mac
 bin/emacs
 
 ;; recovery files
@@ -7,6 +7,13 @@ bin/emacs
 ;; compiled elips
 *.elc
 
+;; elpa stuff
+elpa/archives/
+elpa/gnupg/
+elpa/archives/
+elpa/gnupg/
+elpa/*-readme.txt
+
 ;; emacs directories specific to an instance
 auto-save-list/
 backups/
@@ -14,18 +21,18 @@ eshell/
 auto-save/
 network-security.data
 projectile-bookmarks.eld
-elpa/archives/
-elpa/gnupg/
 .cache/
 workspace/
+abbrev_defs
+
+;; my extra stuff
+src/
+books/
+
+;; eclipse lsp stuff
 eclipse.jdt.ls/server/config_linux/org.eclipse.osgi/.manager
 eclipse.jdt.ls/server/config_linux/org.eclipse.core.runtime/.manager
 eclipse.jdt.ls/server/config_linux/org.eclipse.equinox.app/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.osgi/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.core.runtime/.manager
 eclipse.jdt.ls/server/config_mac/org.eclipse.equinox.app/.manager
-elpa/archives/
-elpa/gnupg/
-abbrev_defs
-src/
-books/

@@ -364,9 +364,24 @@ there's a region, all lines that region covers will be duplicated."
   (require 'use-package))
 
 (use-package ample-zen-theme
+  :ensure t)
+
+(use-package zenburn-theme
   :ensure t
-  :init
-  (load-theme 'ample-zen))
+  ;;:init
+  ;;(load-theme 'zenburn)
+)
+
+;; this screws with other themes
+;; (use-package leuven-theme
+;;  :ensure t)
+  
+(use-package solarized-theme
+  :ensure t)
+
+(use-package spacemacs-theme
+  :defer t
+  :init (load-theme 'spacemacs-dark t))
 
 (use-package dired-sidebar
   :ensure t

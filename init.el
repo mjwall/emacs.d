@@ -103,10 +103,16 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;;; Theme
+;; put them in ~/.emacs.d/themes and just load them
+(add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
+(load-theme 'dracula)
+;;(load-theme 'wombat) ;; built in
+
+
 ;; UI stuff, have to set at top when using daemon
 ;; because (when window-system) and (when not window-system)
 ;; only run when the daemon is started
-(load-theme 'wombat)
 (if (eq system-type 'darwin)
   (progn
     (setq default-frame-alist '((font . "Menlo-15")))
@@ -368,24 +374,6 @@ there's a region, all lines that region covers will be duplicated."
   :bind (([f7] . find-file-in-project))
   :config
   (setq ffip-prefer-ido-mode t))
-
-;;(use-package zenburn-theme
-;;  :ensure t
-;;  ;;:init
-;;  ;;(load-theme 'zenburn)
-;;)
-
-;;(use-package solarized-theme
-;;  :ensure t)
-
-;; (eval-when-compile
-;;   ;; this one is from https://github.com/dracula/emacs and in site-lisp
-;;   ;; commit a1c9888b7876ace60a536d27fb290e788bffc9cb
-;;   ;; the one in melpa is from https://gitlab.com/fommil/emacs-darcula-theme
-;;   ;; looks like it might in melpa stable though
-(add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
-;;(load-theme 'dracula)
-;; )
 
 (use-package dired-sidebar
   :ensure t

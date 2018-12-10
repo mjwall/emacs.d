@@ -344,7 +344,7 @@ there's a region, all lines that region covers will be duplicated."
 (defalias 'fo 'find-file-other-window)
 
 ;; project.el
-(global-set-key [f7] 'project-find-file)
+;; (global-set-key [f7] 'project-find-file)
 (global-set-key [f6] 'vc-git-grep)
 (global-set-key [f9] 'vc-dir)
 
@@ -363,6 +363,12 @@ there's a region, all lines that region covers will be duplicated."
 (eval-when-compile
   (require 'use-package))
 
+(use-package find-file-in-project
+  :ensure t
+  :bind (([f7] . find-file-in-project))
+  :config
+  (setq ffip-prefer-ido-mode t))
+
 (use-package ample-zen-theme
   :ensure t)
 
@@ -372,17 +378,18 @@ there's a region, all lines that region covers will be duplicated."
   ;;(load-theme 'zenburn)
 )
 
-;; this screws with other themes
-;; (use-package leuven-theme
-;;  :ensure t)
-  
 (use-package solarized-theme
   :ensure t)
 
 (use-package spacemacs-theme
   :ensure t
-  :defer t
-  :init (load-theme 'spacemacs-dark t))
+  ;;:defer t
+  ;;:init (load-theme 'spacemacs-dark t)
+  )
+
+(use-package atom-one-dark-theme
+  :ensure t
+  :init (load-theme 'atom-one-dark t))
 
 (use-package dired-sidebar
   :ensure t

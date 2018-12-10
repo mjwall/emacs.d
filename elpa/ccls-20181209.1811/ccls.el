@@ -57,7 +57,7 @@
   :type 'file
   :group 'ccls)
 
-(defcustom ccls-extra-args
+(defcustom ccls-args
   nil
   "Additional command line options passed to the ccls executable."
   :type '(repeat string)
@@ -131,7 +131,7 @@ DIRECTION can be \"D\", \"L\", \"R\" or \"U\"."
 
 (lsp-register-client
  (make-lsp-client
-  :new-connection (lsp-stdio-connection (lambda () (cons ccls-executable ccls-extra-args)))
+  :new-connection (lsp-stdio-connection (lambda () (cons ccls-executable ccls-args)))
   :major-modes '(c-mode c++-mode cuda-mode objc-mode)
   :server-id 'ccls
   :multi-root nil

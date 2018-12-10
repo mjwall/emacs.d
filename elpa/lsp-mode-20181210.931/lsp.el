@@ -431,8 +431,7 @@ depending on it."
                                  results)))))))
 (defun lsp--spinner-start ()
   "Start spinner indication."
-  (with-demoted-errors "Unable to start spinner. Error: %s"
-    (spinner-start 'progress-bar-filled)))
+  (condition-case _err (spinner-start 'progress-bar-filled) (error)))
 
 (defun lsp--propertize (str type)
   "Propertize STR as per TYPE."
@@ -598,6 +597,10 @@ INHERIT-INPUT-METHOD will be proxied to `completing-read' without changes."
               (forward-char character)
               (point))
           (error (point)))))))
+
+(defun lsp--range-to-region (range)
+  (cons (lsp--position-to-point (gethash "start" range))
+        (lsp--position-to-point (gethash "end" range))))
 
 (defmacro lsp-define-stdio-client (&rest _rest)
   "No op - only for backward compatibility.")
@@ -807,34 +810,42 @@ WORKSPACE is the workspace that contains the diagnostics."
       (with-current-buffer buffer
         (run-hooks 'lsp-after-diagnostics-hook)))))
 
-(eval-after-load 'flymake
-  '(progn
-     (defun lsp--flymake-setup()
-       "Setup flymake."
-       (flymake-mode-on)
-       (add-hook 'flymake-diagnostic-functions 'lsp--flymake-backend nil t)
-       (add-hook 'lsp-after-diagnostics-hook 'lsp--flymake-after-diagnostics nil t))
+(with-eval-after-load 'flymake
+  (put 'lsp-note 'flymake-category 'flymake-note)
+  (put 'lsp-warning 'flymake-category 'flymake-warning)
+  (put 'lsp-error 'flymake-category 'flymake-error)
 
-     (defun lsp--flymake-after-diagnostics ()
-       "Handler for `lsp-after-diagnostics-hook'"
-       (when lsp--flymake-report-fn
-         (lsp--flymake-backend lsp--flymake-report-fn)
-         (remove-hook 'lsp-after-diagnostics-hook 'lsp--flymake-after-diagnostics t)))
+  (defun lsp--flymake-setup()
+    "Setup flymake."
+    (flymake-mode-on)
+    (add-hook 'flymake-diagnostic-functions 'lsp--flymake-backend nil t)
+    (add-hook 'lsp-after-diagnostics-hook 'lsp--flymake-after-diagnostics nil t))
 
-     (defun lsp--flymake-backend (report-fn &rest _args)
-       "Flymake backend."
-       (funcall report-fn
-                (-some->> (lsp-diagnostics)
-                          (gethash buffer-file-name)
-                          (--map (-let (((&hash "message" "severity" "range" (&hash "start" "end")) (lsp-diagnostic-original it)))
-                                   (flymake-make-diagnostic (current-buffer)
-                                                            (lsp--position-to-point start)
-                                                            (lsp--position-to-point end)
-                                                            (case severity
-                                                              (1 :error)
-                                                              (2 :warning)
-                                                              (_ :success))
-                                                            message))))))))
+  (defun lsp--flymake-after-diagnostics ()
+    "Handler for `lsp-after-diagnostics-hook'"
+    (when lsp--flymake-report-fn
+      (lsp--flymake-backend lsp--flymake-report-fn)
+      (remove-hook 'lsp-after-diagnostics-hook 'lsp--flymake-after-diagnostics t)))
+
+  (defun lsp--flymake-backend (report-fn &rest _args)
+    "Flymake backend."
+    (funcall report-fn
+             (-some->> (lsp-diagnostics)
+                       (gethash buffer-file-name)
+                       (--map (-let* (((&hash "message" "severity" "range") (lsp-diagnostic-original it))
+                                      ((start . end) (lsp--range-to-region range)))
+                                (when (= start end)
+                                  (-let* (((&hash "line" "character") (gethash "start" range))
+                                          (region (flymake-diag-region (current-buffer) (1+ line) character)))
+                                    (setq start (car region) end (cdr region))))
+                                (flymake-make-diagnostic (current-buffer)
+                                                         start
+                                                         end
+                                                         (case severity
+                                                           (1 'lsp-error)
+                                                           (2 'lsp-warning)
+                                                           (_ 'lsp-note))
+                                                         message)))))))
 
 (define-minor-mode lsp-mode ""
   nil nil nil
@@ -1487,13 +1498,12 @@ interface TextDocumentEdit {
 
 (defun lsp--apply-text-edit (text-edit)
   "Apply the edits described in the TextEdit object in TEXT-EDIT."
-  (let* ((range (gethash "range" text-edit))
-         (start-point (lsp--position-to-point (gethash "start" range)))
-         (end-point (lsp--position-to-point (gethash "end" range))))
+  (-let* (((&hash "newText" "range") text-edit)
+          ((start . end) (lsp--range-to-region range)))
     (save-excursion
-      (goto-char start-point)
-      (delete-region start-point end-point)
-      (insert (gethash "newText" text-edit)))))
+      (goto-char start)
+      (delete-region start end)
+      (insert newText))))
 
 (defun lsp--capability (cap &optional capabilities)
   "Get the value of capability CAP.  If CAPABILITIES is non-nil, use them instead."
@@ -3249,7 +3259,7 @@ Returns nil if the project should not be added to the current SESSION."
                        (format "Do not ask more for the current project(add \"%s\" to lsp-session-folder-blacklist)"
                                project-root-suggestion)
                        "Do not ask more for the current project(select ignore path interactively)."
-                       "Do nothing and as be again when opening a other files from the folder."))
+                       "Do nothing and ask me again when opening other files from the folder."))
              (action-index (cl-position
                             (completing-read (format "%s is not part of any project. Select action: "
                                                      (buffer-name))
@@ -3386,8 +3396,9 @@ current language. When IGNORE-MULTI-FOLDER is nil current file
 will be openned in multi folder language server if there is
 such."
   (interactive)
-  (when (setq-local lsp--buffer-workspaces (or (lsp--try-open-in-library-workspace)
-                                               (lsp--try-project-root-workspaces ignore-multi-folder)))
+  (when (and (buffer-file-name)
+             (setq-local lsp--buffer-workspaces (or (lsp--try-open-in-library-workspace)
+                                                    (lsp--try-project-root-workspaces ignore-multi-folder))))
     (lsp-mode 1)
     (when lsp-auto-configure (lsp--auto-configure))))
 

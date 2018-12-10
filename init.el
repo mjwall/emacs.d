@@ -383,13 +383,22 @@ there's a region, all lines that region covers will be duplicated."
 
 (use-package spacemacs-theme
   :ensure t
-  ;;:defer t
+  :defer t
   ;;:init (load-theme 'spacemacs-dark t)
   )
 
 (use-package atom-one-dark-theme
   :ensure t
-  :init (load-theme 'atom-one-dark t))
+  ;;:init (load-theme 'atom-one-dark t)
+  )
+
+;; this one is from https://github.com/dracula/emacs and in site-lisp
+;; commit a1c9888b7876ace60a536d27fb290e788bffc9cb
+;; the one in melpa is from https://gitlab.com/fommil/emacs-darcula-theme
+;; looks like it might in melpa stable though
+(setq custom-theme-directory (expand-file-name "themes" user-emacs-directory))
+(add-to-list 'custom-theme-load-path custom-theme-directory)
+(load-theme 'dracula t)
 
 (use-package dired-sidebar
   :ensure t

@@ -427,6 +427,10 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Java - https://github.com/emacs-lsp/lsp-java
 
+(use-package jdee
+  :ensure t
+  :init
+  (custom-set-variables '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))))
 ;;(require 'flymake)
 ;;(add-hook 'java-mode-hook 'flymake-mode-on)
 

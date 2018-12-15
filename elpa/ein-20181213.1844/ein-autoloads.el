@@ -282,28 +282,6 @@ To use EIN and Jedi together, add the following in your Emacs setup before loadi
 
 ;;;***
 
-;;;### (autoloads nil "ein-junk" "ein-junk.el" (0 0 0 0))
-;;; Generated autoloads from ein-junk.el
-
-(autoload 'ein:junk-new "ein-junk" "\
-Open a notebook to try random thing.
-Notebook name is determined based on
-`ein:junk-notebook-name-template'.
-
-When prefix argument is given, it asks URL or port to use.
-
-\(fn NAME KERNELSPEC URL-OR-PORT)" t nil)
-
-(autoload 'ein:junk-rename "ein-junk" "\
-Rename the current notebook based on `ein:junk-notebook-name-template'
-and save it immediately.
-
-\(fn NAME)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-junk" '("ein:junk-notebook-name")))
-
-;;;***
-
 ;;;### (autoloads nil "ein-jupyter" "ein-jupyter.el" (0 0 0 0))
 ;;; Generated autoloads from ein-jupyter.el
 
@@ -394,7 +372,9 @@ Log on to a jupyterhub server using PAM authentication. Requires jupyterhub vers
 ;;; Generated autoloads from ein-multilang.el
 
 (autoload 'ein:notebook-multilang-mode "ein-multilang" "\
-Notebook mode with multiple language fontification.
+A mode for fontifying multiple languages.
+
+\\{ein:notebook-multilang-mode-map}
 
 \(fn)" t nil)
 
@@ -424,6 +404,7 @@ Notebook mode with multiple language fontification.
 
 (autoload 'ein:notebook-open "ein-notebook" "\
 Returns notebook at URL-OR-PORT/PATH.
+
 Note that notebook sends for its contents and won't have them right away.
 
 After the notebook is opened, CALLBACK is called as::
@@ -431,9 +412,6 @@ After the notebook is opened, CALLBACK is called as::
   (funcall CALLBACK notebook created)
 
 where `created' indicates a new notebook or an existing one.
-
-TODO - This function should not be used to switch to an existing
-notebook buffer.  Let's warn for now to see who is doing this.
 
 \(fn URL-OR-PORT PATH &optional KERNELSPEC CALLBACK)" t nil)
 
@@ -473,8 +451,6 @@ Reload current Notebook list.
 
 (autoload 'ein:notebooklist-new-notebook "ein-notebooklist" "\
 Ask server to create a new notebook and open it in a new buffer.
-
-TODO - New and open should be separate, and we should flag an exception if we try to new an existing.
 
 \(fn &optional URL-OR-PORT KERNELSPEC PATH CALLBACK)" t nil)
 
@@ -736,7 +712,7 @@ Show full traceback in traceback viewer.
 ;;;### (autoloads nil "ein-worksheet" "ein-worksheet.el" (0 0 0 0))
 ;;; Generated autoloads from ein-worksheet.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-worksheet" '("ein:" "hof-add" "delete-if")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-worksheet" '("ein:" "hof-add")))
 
 ;;;***
 

@@ -119,6 +119,9 @@
     ;;ls does not support --dired
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil)
+    ;; missing stuff in path
+    (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+    (setq exec-path (append exec-path '("/usr/local/bin")))
     ))
 (if (eq system-type 'gnu/linux)
   (setq default-frame-alist '((font . "Monospace-14")))
@@ -391,10 +394,10 @@ there's a region, all lines that region covers will be duplicated."
   :ensure t
   :bind (("C-x C-i" . idomenu))) ;; C-x C-i
 
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode))
+;; (use-package yasnippet
+;;   :ensure t
+;;   :config
+;;   (yas-global-mode))
 
 
 (use-package company
@@ -409,46 +412,46 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Java - https://github.com/emacs-lsp/lsp-java
 
-(use-package lsp
-  :ensure lsp-mode
-  :init (setq lsp-eldoc-render-all nil
-          lsp-highlight-symbol-at-point nil))
+;; (use-package lsp
+;;   :ensure lsp-mode
+;;   :init (setq lsp-eldoc-render-all nil
+;;           lsp-highlight-symbol-at-point nil))
 
-(use-package company-lsp
-  :after  company
-  :ensure t
-  :config
-  (setq company-lsp-cache-candidates t
-    company-lsp-async t))
+;; (use-package company-lsp
+;;   :after  company
+;;   :ensure t
+;;   :config
+;;   (setq company-lsp-cache-candidates t
+;;     company-lsp-async t))
 
-(use-package lsp-ui
-  :ensure t
-  :config
-  (setq lsp-ui-sideline-update-mode 'point))
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :config
+;;   (setq lsp-ui-sideline-update-mode 'point))
 
-(use-package lsp-java
-  :ensure t
-  :after company
-  :config
-  (add-hook 'java-mode-hook
-    (lambda ()
-      (setq-local company-backends (list 'company-lsp))))
+;; (use-package lsp-java
+;;   :ensure t
+;;   :after company
+;;   :config
+;;   (add-hook 'java-mode-hook
+;;     (lambda ()
+;;       (setq-local company-backends (list 'company-lsp))))
 
-  ;;(add-hook 'java-mode-hook 'lsp-java-enable)
-  (add-hook 'java-mode-hook 'flycheck-mode)
-  (add-hook 'java-mode-hook 'company-mode)
-  ;;(add-hook 'java-mode-hook 'lsp-ui-mode)
-  )
+;;   ;;(add-hook 'java-mode-hook 'lsp-java-enable)
+;;   (add-hook 'java-mode-hook 'flycheck-mode)
+;;   (add-hook 'java-mode-hook 'company-mode)
+;;   ;;(add-hook 'java-mode-hook 'lsp-ui-mode)
+;;   )
 
-(use-package dap-mode
-  :ensure t
-  :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
+;;(use-package dap-mode
+;;  :ensure t
+;;  :after lsp-mode
+;;  :config
+;;  (dap-mode t)
+;;  (dap-ui-mode t))
 
-(use-package dap-java
-  :after (lsp-java))
+;;(use-package dap-java
+;;  :after (lsp-java))
 
 ;; javascript/typescript
 
@@ -508,18 +511,18 @@ there's a region, all lines that region covers will be duplicated."
 (use-package go-mode
   :ensure t)
 
-(use-package eglot
-  :ensure t
-  ;; :hook (typescript-mode . eglot-ensure)
-  )
+;; (use-package eglot
+;;   :ensure t
+;;   ;; :hook (typescript-mode . eglot-ensure)
+;;   )
 
 ;; C/C++
 ;; C++ 14
-(use-package cquery
-  :ensure t)
+;; (use-package cquery
+;; :ensure t)
 ;; C++ 17
-(use-package ccls
-  :ensure t)
+;; (use-package ccls
+;;  :ensure t)
 
 ;; kotlin
 (use-package kotlin-mode

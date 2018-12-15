@@ -372,27 +372,38 @@ there's a region, all lines that region covers will be duplicated."
 (eval-when-compile
   (require 'use-package))
 
-(use-package find-file-in-project
-  :ensure t
-  :bind (([f7] . find-file-in-project))
-  :config
-  (setq ffip-prefer-ido-mode t))
+;; (use-package find-file-in-project
+;;   :ensure t
+;;   :bind (([f7] . find-file-in-project))
+;;   :config
+;;   (setq ffip-prefer-ido-mode t))
 
-(use-package dired-sidebar
-  :ensure t
-  :bind (([f8] . dired-sidebar-toggle-sidebar))
-  :init
-  (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'nerd)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-  :hook (dired-sidebar-mode-hook . (lambda ()
-                                     (unless (file-remote-p default-directory)
-                                       (auto-revert-mode)))))
+;; (use-package dired-sidebar
+;;   :ensure t
+;;   :bind (([f8] . dired-sidebar-toggle-sidebar))
+;;   :init
+;;   (setq dired-sidebar-subtree-line-prefix "__")
+;;   (setq dired-sidebar-theme 'nerd)
+;;   (setq dired-sidebar-use-term-integration t)
+;;   (setq dired-sidebar-use-custom-font t)
+;;   :hook (dired-sidebar-mode-hook . (lambda ()
+;;                                      (unless (file-remote-p default-directory)
+;;                                        (auto-revert-mode)))))
 
 (use-package idomenu
   :ensure t
   :bind (("C-x C-i" . idomenu))) ;; C-x C-i
+
+;; use ido to complete tags - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
+(defun my-ido-find-tag ()
+    "Find a tag using ido"
+    (interactive)
+    (tags-completion-table)
+    (let (tag-names)
+      (mapcar (lambda (x)
+                  (push (prin1-to-string x t) tag-names))
+                tags-completion-table)
+      (find-tag (ido-completing-read "Tag: " tag-names))))
 
 ;; (use-package yasnippet
 ;;   :ensure t
@@ -400,17 +411,20 @@ there's a region, all lines that region covers will be duplicated."
 ;;   (yas-global-mode))
 
 
-(use-package company
-  :ensure t)
+;; (use-package company
+;;   :ensure t)
 
-(use-package flycheck
-  :ensure t)
+;;(use-package flycheck
+;;  :ensure t)
 
 ;;; Language Specific
 
 (require 'cc-mode)
 
 ;; Java - https://github.com/emacs-lsp/lsp-java
+
+;;(require 'flymake)
+;;(add-hook 'java-mode-hook 'flymake-mode-on)
 
 ;; (use-package lsp
 ;;   :ensure lsp-mode
@@ -457,50 +471,51 @@ there's a region, all lines that region covers will be duplicated."
 
 (setq-default js-indent-level 2)
 
-(use-package ng2-mode
-  :ensure t)
+;;(use-package ng2-mode
+;;  :ensure t)
 
 (use-package typescript-mode
   :ensure t
   :init
   (setf typescript-indent-level js-indent-level))
 
-;; python - from http://www.andrewty.com/blog/emacs-config-for-python
-(use-package anaconda-mode
-  :ensure t
-  :init
-  (add-hook 'python-mode-hook 'anaconda-mode)
-  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-  :config
-  (setq python-indent-offset 4
-    python-indent 4
-    python-shell-interpreter "ipython"
-    python-shell-interpreter-args "--simple-prompt")
-  ;; (use-package company-anaconda
-  ;;    :ensure t
-  ;;    :init
-  ;;    (eval-after-load "company"
-  ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
-  )
+;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
+;; (use-package anaconda-mode
+;;   :ensure t
+;;   :init
+;;   (add-hook 'python-mode-hook 'anaconda-mode)
+;;   (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;;   :config
+;;   (setq python-indent-offset 4
+;;     python-indent 4
+;;     python-shell-interpreter "ipython"
+;;     python-shell-interpreter-args "--simple-prompt")
+;;   ;; (use-package company-anaconda
+;;   ;;    :ensure t
+;;   ;;    :init
+;;   ;;    (eval-after-load "company"
+;;   ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+;;   )
 
-(use-package conda
-  :ensure t
-  :config
-  (setq conda-anaconda-home "~/anaconda3")
-  (conda-env-initialize-interactive-shells)
-  (conda-env-initialize-eshell))
-(use-package ein
-  :ensure t
-  :config
-  (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-  (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-  (setq ein:jupyter-server-args (list "--no-browser")))
-;; conda install autopep8 (plus any env)
-(use-package py-autopep8
-  :ensure t
-  ;;:config
-  ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  )
+;; (use-package conda
+;;   :ensure t
+;;   :config
+;;   (setq conda-anaconda-home "~/anaconda3")
+;;   (conda-env-initialize-interactive-shells)
+;;   (conda-env-initialize-eshell))
+;; (use-package ein
+;;   :ensure t
+;;   :config
+;;   (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
+;;   (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+;;   (setq ein:jupyter-server-args (list "--no-browser")))
+;; ;; conda install autopep8 (plus any env)
+;; (use-package py-autopep8
+;;   :ensure t
+;;   ;;:config
+;;   ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;;   )
+
 ;; (lsp-register-client
 ;; (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
 ;;                  :major-modes '(python-mode)

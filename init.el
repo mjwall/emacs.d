@@ -365,6 +365,26 @@ there's a region, all lines that region covers will be duplicated."
 ;;(add-to-list 'package-archives
 ;;             '("org" . "http://orgmode.org/elpa/") t)
 
+
+;; https://www.emacswiki.org/emacs/download/sr-speedbar.el
+(require 'sr-speedbar)
+(global-set-key [f8] 'sr-speedbar-toggle)
+
+;; https://www.emacswiki.org/emacs/download/idomenu.el
+(require 'idomenu)
+(global-set-key (kbd "C-x C-i") 'idomenu)
+
+;; use ido to complete tags - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
+(defun my-ido-find-tag ()
+    "Find a tag using ido"
+    (interactive)
+    (tags-completion-table)
+    (let (tag-names)
+      (mapcar (lambda (x)
+                  (push (prin1-to-string x t) tag-names))
+                tags-completion-table)
+      (find-tag (ido-completing-read "Tag: " tag-names))))
+
 ;; use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -390,26 +410,10 @@ there's a region, all lines that region covers will be duplicated."
 ;;                                      (unless (file-remote-p default-directory)
 ;;                                        (auto-revert-mode)))))
 
-(use-package idomenu
-  :ensure t
-  :bind (("C-x C-i" . idomenu))) ;; C-x C-i
-
-;; use ido to complete tags - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
-(defun my-ido-find-tag ()
-    "Find a tag using ido"
-    (interactive)
-    (tags-completion-table)
-    (let (tag-names)
-      (mapcar (lambda (x)
-                  (push (prin1-to-string x t) tag-names))
-                tags-completion-table)
-      (find-tag (ido-completing-read "Tag: " tag-names))))
-
 ;; (use-package yasnippet
 ;;   :ensure t
 ;;   :config
 ;;   (yas-global-mode))
-
 
 ;; (use-package company
 ;;   :ensure t)

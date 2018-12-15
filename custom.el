@@ -18,4 +18,4 @@
  '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))
   '(package-selected-packages
      (quote
-       (jdee typescript-mode markdown-mode find-file-in-project flycheck clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode py-autopep8 ein conda anaconda-mode ng2-mode company idomenu dired-sidebar use-package))))
+       (tide json-mode js2-mode jdee typescript-mode markdown-mode find-file-in-project flycheck clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode py-autopep8 ein conda anaconda-mode ng2-mode company idomenu dired-sidebar use-package))))

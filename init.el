@@ -352,29 +352,21 @@ there's a region, all lines that region covers will be duplicated."
 (defalias 'd 'dired)
 (defalias 'fo 'find-file-other-window)
 
-;; project.el
-;; (global-set-key [f7] 'project-find-file)
-(global-set-key [f6] 'vc-git-grep)
+;; project stuff
+(require 'project) ; from project.el
+(global-set-key [f7] 'project-find-file)
+(global-set-key [f6] 'vc-git-grep) 
 (global-set-key [f9] 'vc-dir)
-
-;;; Now for packages
-(package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("org" . "http://orgmode.org/elpa/") t)
-
-
+;; copied to site-lisp from
 ;; https://www.emacswiki.org/emacs/download/sr-speedbar.el
 (require 'sr-speedbar)
 (global-set-key [f8] 'sr-speedbar-toggle)
-
+;; copied to site-lisp from
 ;; https://www.emacswiki.org/emacs/download/idomenu.el
 (require 'idomenu)
 (global-set-key (kbd "C-x C-i") 'idomenu)
-
-;; use ido to complete tags - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
+;; use ido to complete tags
+;; - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
 (defun my-ido-find-tag ()
     "Find a tag using ido"
     (interactive)
@@ -385,6 +377,14 @@ there's a region, all lines that region covers will be duplicated."
                 tags-completion-table)
       (find-tag (ido-completing-read "Tag: " tag-names))))
 
+;;; Now for packages
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("org" . "http://orgmode.org/elpa/") t)
+
 ;; use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -392,100 +392,50 @@ there's a region, all lines that region covers will be duplicated."
 (eval-when-compile
   (require 'use-package))
 
-;; (use-package find-file-in-project
-;;   :ensure t
-;;   :bind (([f7] . find-file-in-project))
-;;   :config
-;;   (setq ffip-prefer-ido-mode t))
-
-;; (use-package dired-sidebar
-;;   :ensure t
-;;   :bind (([f8] . dired-sidebar-toggle-sidebar))
-;;   :init
-;;   (setq dired-sidebar-subtree-line-prefix "__")
-;;   (setq dired-sidebar-theme 'nerd)
-;;   (setq dired-sidebar-use-term-integration t)
-;;   (setq dired-sidebar-use-custom-font t)
-;;   :hook (dired-sidebar-mode-hook . (lambda ()
-;;                                      (unless (file-remote-p default-directory)
-;;                                        (auto-revert-mode)))))
-
-;; (use-package yasnippet
-;;   :ensure t
-;;   :config
-;;   (yas-global-mode))
-
-;; (use-package company
-;;   :ensure t)
-
-;;(use-package flycheck
-;;  :ensure t)
-
 ;;; Language Specific
 
-(require 'cc-mode)
+;;(require 'cc-mode)
 
-;; Java - https://github.com/emacs-lsp/lsp-java
-
+;; Java
+;; - https://github.com/jdee-emacs/jdee
 (use-package jdee
   :ensure t
   :init
-  (custom-set-variables '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))))
-;;(require 'flymake)
-;;(add-hook 'java-mode-hook 'flymake-mode-on)
+  (custom-set-variables
+    '(jdee-server-dir
+       (expand-file-name "jdee-server" user-emacs-directory))))
 
-;; (use-package lsp
-;;   :ensure lsp-mode
-;;   :init (setq lsp-eldoc-render-all nil
-;;           lsp-highlight-symbol-at-point nil))
+;; Javascript
+;; - https://github.com/mooz/js2-mode
+;; - https://github.com/joshwnj/json-mode
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :interpreter "node"
+  :init
+  (setq js-indent-level 2) ;; defalias js2-basic-off in > 25.0
+  :config
+  (use-package json-mode
+    :ensure t))
 
-;; (use-package company-lsp
-;;   :after  company
-;;   :ensure t
-;;   :config
-;;   (setq company-lsp-cache-candidates t
-;;     company-lsp-async t))
-
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :config
-;;   (setq lsp-ui-sideline-update-mode 'point))
-
-;; (use-package lsp-java
-;;   :ensure t
-;;   :after company
-;;   :config
-;;   (add-hook 'java-mode-hook
-;;     (lambda ()
-;;       (setq-local company-backends (list 'company-lsp))))
-
-;;   ;;(add-hook 'java-mode-hook 'lsp-java-enable)
-;;   (add-hook 'java-mode-hook 'flycheck-mode)
-;;   (add-hook 'java-mode-hook 'company-mode)
-;;   ;;(add-hook 'java-mode-hook 'lsp-ui-mode)
-;;   )
-
-;;(use-package dap-mode
-;;  :ensure t
-;;  :after lsp-mode
-;;  :config
-;;  (dap-mode t)
-;;  (dap-ui-mode t))
-
-;;(use-package dap-java
-;;  :after (lsp-java))
-
-;; javascript/typescript
-
-(setq-default js-indent-level 2)
-
-;;(use-package ng2-mode
-;;  :ensure t)
-
+;; Typescript 
+;; - https://github.com/ananthakumaran/typescript.el
+;; - https://github.com/ananthakumaran/tide
+;; - https://github.com/AdamNiederer/ng2-mode
 (use-package typescript-mode
   :ensure t
   :init
-  (setf typescript-indent-level js-indent-level))
+  (setf typescript-indent-level js-indent-level)
+  :config
+  (use-package ng2-mode
+    :ensure t)
+  (use-package tide
+    :ensure t
+    :after (typescript-mode flycheck)
+    :hook
+    ((typescript-mode . tide-setup)
+      (typescript-mode . tide-h1-identifier-mode)
+      (before-save . tide-format-before-save))))
 
 ;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
 ;; (use-package anaconda-mode
@@ -556,9 +506,8 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; bash
 
-;; octave
-(use-package octave
-  :ensure t)
+;; octave - built in
+(use-package octave)
 
 ;; R
 (use-package ess

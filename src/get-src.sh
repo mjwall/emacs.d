@@ -45,8 +45,37 @@ test -d $DIR/clojure-lsp || git clone https://github.com/snoe/clojure-lsp $DIR/c
 # Scala
 test -d $DIR/metals || git clone https://github.com/scalameta/metals $DIR/metals
 
+# JDEE client and server
+
+JDIR=${SRC_DIR}/jdee-emacs
+
+test -d $JDIR || mkdir -p $JDIR
+
+test -d $JDIR/jdee || git clone git@github.com:jdee-emacs/jdee.git $JDIR/jdee
+
+test -d $JDIR/jdee-server || git clone git@github.com:jdee-emacs/jdee-server.git $JDIR/jdee-server
+
+test -d $JDIR/beanshell || git clone git@github.com:beanshell/beanshell.git $JDIR/beanshell
 
 
+# tags
 
+TDIR=${SRC_DIR}/tags
 
+# http://ctags.sourceforge.net/
+CTAG_VER=5.8
+CTAG_FILE=${TDIR}/ctags-${CTAG_VER}.tar.gz
+CTAG_URL=http://prdownloads.sourceforge.net/ctags/ctags-${CTAG_VER}.tar.gz
 
+# http://savannah.gnu.org/projects/global/
+GTAG_VER=6.6.2
+GTAG_FILE=${TDIR}/global-${GTAG_VER}.tar.gz
+GTAG_URL=http://tamacom.com/global/global-${GTAG_VER}.tar.gz
+
+test -d ${TDIR} || mkdir -p ${TDIR}
+
+test -f ${CTAG_FILE} || curl -L ${CTAG_URL} -o ${CTAG_FILE}
+test -d ${TDIR}/ctags-${CTAG_VER} || pushd ${TDIR} && tar xzf ${CTAG_FILE} && popd
+
+test -f ${GTAG_FILE} || curl -L ${GTAG_URL} -o ${GTAG_FILE}
+test -d ${TDIR}/global-${GTAG_VER} || pushd ${TDIR} && tar xzf ${GTAG_FILE} && popd

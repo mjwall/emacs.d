@@ -5,7 +5,8 @@
 
 (let ((minver "26.0"))
   (when (version< emacs-version minver)
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
+    (error
+      "Your Emacs is too old -- this config requires v%s or higher" minver)))
 
 (setq-default
   ;; me
@@ -19,9 +20,11 @@
   ;; Backups, don't clutter up directories with files
   make-backup-files t ;; do make backups
   backup-by-copying t ;; and copy them here
-  backup-directory-alist `(("." . , (expand-file-name (concat user-emacs-directory "backups"))))
+  backup-directory-alist
+  `(("." . ,(expand-file-name (concat user-emacs-directory "backups"))))
   ;; auto-saves too
-  auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "auto-save/") t))
+  auto-save-file-name-transforms
+  `((".*" ,(concat user-emacs-directory "auto-save/") t))
   ;; show empty lines after buffer end
   indicate-empty-lines t
   ;; use spaces not tabs
@@ -31,19 +34,18 @@
   ;; indent with tab function
   indent-line-function 'insert-tab
   ;; set whitespace style, turned on in coding hook
-  whitespace-style '(trailing space-before-tab indentation space-after-tab tabs tab-mark)
+  whitespace-style
+  '(trailing space-before-tab indentation space-after-tab tabs tab-mark)
   ;; integrate kill ring with clipboard
   x-select-enable-clipboard t
-  ;;mac-option-modifier 'meta
-  ;;mac-command-modifier 'hyper
   ;; make text-mode default, not fundamental
-  major-mode 'text-mode
-  )
+  major-mode 'text-mode)
 
 ;; Other setting
 ;; transparently open compressed files
 (auto-compression-mode t)
-;; make emacs revert files when they change, for example when you switch git branches
+;; make emacs revert files when they change, for example
+;; when you switch git branches
 (global-auto-revert-mode 1)
 ;; highlight matching parentheses when the point is on them.
 (show-paren-mode t)
@@ -62,10 +64,10 @@
 (cua-selection-mode t) ; but use standard Emacs keybindings
 (transient-mark-mode 1)
 (electric-pair-mode 1)
-;; add ~/.emacs.d/site-lisp
-(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
+(column-number-mode 1) ; show (L:C) in modeline
 ;; redefine the boring startup message
-(defun startup-echo-area-message () (concat "Emacs loaded in " (emacs-init-time)))
+(defun startup-echo-area-message ()
+  (concat "Emacs loaded in " (emacs-init-time)))
 
 ;;; Change some default keybinding
 ;; no mail
@@ -91,13 +93,15 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;; add ~/.emacs.d/site-lisp
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
+
 ;; theme
-;; - in ~/.emacs.d/themes and just load them
+;; - in ~/.emacs.d/themes so just load them
 (add-to-list 'custom-theme-load-path
   (expand-file-name "themes/" user-emacs-directory))
 (load-theme 'dracula)
 ;;(load-theme 'wombat) ;; built in
-
 
 ;; UI stuff, have to set at top when using daemon
 ;; because (when window-system) and (when not window-system)
@@ -241,10 +245,10 @@ there's a region, all lines that region covers will be duplicated."
 ;; packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(setq package-archive-priorities '(("org" . 3)
+                                   ("melpa" . 2)
+                                   ("gnu" . 1)))
 
 ;; use-package
 (unless (package-installed-p 'use-package)
@@ -252,6 +256,13 @@ there's a region, all lines that region covers will be duplicated."
   (package-install 'use-package))
 (eval-when-compile
   (require 'use-package))
+
+;; org-mode
+;; calling right after package, trying to get the latest
+(use-package org
+  :ensure org-plus-contrib
+  :pin "org"
+  :demand t)
 
 ;; ido - built in
 (use-package ido
@@ -288,7 +299,8 @@ there's a region, all lines that region covers will be duplicated."
     ido-enable-prefix nil
     ido-enable-flex-matching t
     ido-max-prospects 20
-    ido-ignore-directories (append ido-ignore-directories ido-other-ignore-directories)
+    ido-ignore-directories (append ido-ignore-directories
+                             ido-other-ignore-directories)
     ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
     ;; Display ido results vertically, rather than horizontally
     ido-decorations '("\n-> " " " "\n   " "\n   ..."
@@ -328,7 +340,6 @@ there's a region, all lines that region covers will be duplicated."
        try-complete-lisp-symbol))
   :bind
   (("C-<tab>" . hippie-expand)))
-
 
 ;; git - built in
 (use-package vc-git
@@ -561,8 +572,9 @@ there's a region, all lines that region covers will be duplicated."
 (use-package protobuf-mode
   :ensure t)
 
-;; jflex - http://jflex.de/jflex-mode.el
-(require 'jflex-mode)
+;; jflex
+;; in site-lisp from http://jflex.de/jflex-mode.el
+(use-package jflex-mode)
 
 ;; make/cmake
 (use-package cmake-mode

@@ -86,19 +86,6 @@
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-;; hippie expand
-(global-set-key [C-tab] 'hippie-expand)
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                          try-expand-dabbrev-all-buffers
-                                          try-expand-dabbrev-from-kill
-                                          try-complete-file-name-partially
-                                          try-complete-file-name
-                                          try-expand-all-abbrevs
-                                          try-expand-list
-                                          try-expand-line
-                                          try-complete-lisp-symbol-partially
-                                          try-complete-lisp-symbol))
-
 
 ;; put customizations in a seperate file that is git committed
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -315,6 +302,34 @@ there's a region, all lines that region covers will be duplicated."
         (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
         (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
         (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))))
+
+;; hippie expand - built in
+(use-package hippie-expand
+  :init
+  (use-package dabbrev
+    :config
+    (setf dabbrev-case-fold-search nil)
+    ;; M-/ already rebound to undo, unbind the backward key
+    (global-unset-key (kbd "C-M-/")))
+  (use-package abbrev
+    :config
+    ;; don't prompt for ~/.emacs.d/themes
+    (setq save-abbrevs 'silently)
+    (setq-default abbrev-mode t))
+  (setq hippie-expand-try-functions-list
+    '(try-expand-dabbrev
+       try-expand-dabbrev-all-buffers
+       try-expand-dabbrev-from-kill
+       try-complete-file-name-partially
+       try-complete-file-name
+       try-expand-all-abbrevs
+       try-expand-list
+       try-expand-line
+       try-complete-lisp-symbol-partially
+       try-complete-lisp-symbol))
+  :bind
+  (("C-<tab>" . hippie-expand)))
+
 
 ;; git - built in
 (use-package vc-git

@@ -6,6 +6,16 @@ SRC_DIR=${HOME}/.emacs.d/src
 
 test -d ${SRC_DIR}/emacs || git clone git@github.com:emacs-mirror/emacs.git ${SRC_DIR}/emacs
 
+# use-package build here and put in site-lisp
+
+test -d ${SRC_DIR}/use-package || git clone git@github.com:jwiegley/use-package.git ${SRC_DIR}/use-package
+
+# https://jwiegley.github.io/use-package/installation/
+#cd ~/.emacs.d/src/use-package
+#git co -b 2.4-tag refs/tags/2.4
+#echo -e "LOAD_PATH = -L ~/.emacs.d/src/use-package\nMAKEINFO = /usr/local/opt/texinfo/bin/makeinfo" > ~/.emacs.d/src/use-package/config.mk
+#make
+
 # git clone lsp servers
 
 DIR=${SRC_DIR}/lsp-servers
@@ -75,7 +85,7 @@ GTAG_URL=http://tamacom.com/global/global-${GTAG_VER}.tar.gz
 test -d ${TDIR} || mkdir -p ${TDIR}
 
 test -f ${CTAG_FILE} || curl -L ${CTAG_URL} -o ${CTAG_FILE}
-test -d ${TDIR}/ctags-${CTAG_VER} || pushd ${TDIR} && tar xzf ${CTAG_FILE} && popd
+test -d ${TDIR}/ctags-${CTAG_VER} || (pushd ${TDIR} && tar xzf ${CTAG_FILE} && popd)
 
 test -f ${GTAG_FILE} || curl -L ${GTAG_URL} -o ${GTAG_FILE}
-test -d ${TDIR}/global-${GTAG_VER} || pushd ${TDIR} && tar xzf ${GTAG_FILE} && popd
+test -d ${TDIR}/global-${GTAG_VER} || (pushd ${TDIR} && tar xzf ${GTAG_FILE} && popd)

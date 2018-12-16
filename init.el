@@ -40,7 +40,7 @@
   major-mode 'text-mode
   )
 
-;;; Other setting
+;; Other setting
 ;; transparently open compressed files
 (auto-compression-mode t)
 ;; make emacs revert files when they change, for example when you switch git branches
@@ -80,7 +80,8 @@
 ;; some more familiar keybindings for default functions
 (global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region) ;; doesn't work in terminal
+;; TODO: figure out why the next one doesn't work in terminal
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region) 
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
@@ -103,9 +104,10 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;;; Theme
-;; put them in ~/.emacs.d/themes and just load them
-(add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
+;; theme
+;; - in ~/.emacs.d/themes and just load them
+(add-to-list 'custom-theme-load-path
+  (expand-file-name "themes/" user-emacs-directory))
 (load-theme 'dracula)
 ;;(load-theme 'wombat) ;; built in
 
@@ -136,7 +138,7 @@
 ;;  (message "setting up in terminal")
 ;;)
 
-;;; Editing functions
+;; custom editing functions
 (defun indent-buffer ()
   "indent whole buffer"
   (interactive)
@@ -249,74 +251,109 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (set-buffer-file-coding-system 'unix 't))
 
-;;; ido mode
-(ido-mode t)
-(ido-everywhere t)
-(setq ido-enable-prefix nil
-  ido-ignore-directories '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/" "\\`target/" "\\`\\.git/" "\\`\\.svn/" "\\`CVS/" "\\`\\.\\./""\\`\\./")
-  ido-ignore-files '("\\`auto/" "\\.prv/" "_region_" "\\.class/" "\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./")
-  ;; Display ido results vertically, rather than horizontally
-  ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match
-]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+;; packages
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("org" . "http://orgmode.org/elpa/") t)
 
-;; add keybindings so C-p and C-n move next with vertical results
-;; and C-up and C-down do the same even if the current string
-;; doesn't match
-(add-hook
-  'ido-setup-hook
-  (lambda ()
-    (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
-    (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)))
-;; setup recentf mode
-(eval-after-load "recentf"
-  '(setq recentf-max-saved-items 100))
-(defun recentf-ido-find-file ()
-  "Find a recent file using ido."
-  (interactive)
-  (let ((file
-          (ido-completing-read "Choose recent file: "
-            recentf-list nil t)))
-    (when file
-      (find-file file))))
-(recentf-mode 1)
-(global-set-key (kbd "C-x f") 'recentf-ido-find-file)
+;; use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
 
-;; vc-git - https://joppot.info/en/2018/02/04/4144
-(require 'vc-git)
-;; In vc-git and vc-dir for git buffers,
-;; make (C-x v) a run git add, u run git reset,
-;; and r run git reset and checkout from head.
-(defun my-vc-git-command (verb fn)
-  (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
-          (backend (car fileset-arg))
-          (files (nth 1 fileset-arg)))
-    (if (eq backend 'Git)
-      (progn (funcall fn files)
-        (message (concat verb " " (number-to-string (length files))
-                   " file(s).")))
-      (message "Not in a vc git buffer."))))
-(defun my-vc-git-add (&optional revision vc-fileset comment)
-  (interactive "P")
-  (my-vc-git-command "Staged" 'vc-git-register))
-(defun my-vc-git-reset (&optional revision vc-fileset comment)
-  (interactive "P")
-  (my-vc-git-command "Unstaged"
-    (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
-(eval-after-load "vc-dir"
-  '(progn
+;; ido - built in
+(use-package ido
+  :init
+  (defvar ido-other-ignore-directories
+    '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/"
+       "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
+  (defvar ido-other-ignore-files
+    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))
+  (use-package idomenu
+    :ensure t
+    :bind (("C-x C-i" . idomenu )))
+  (use-package recentf
+    ;; built in
+    :init
+    (recentf-mode 1)
+    (defun recentf-ido-find-file ()
+      "Find a recent file using ido."
+      (interactive)
+      (let ((file
+              (ido-completing-read "Choose recent file: "
+                recentf-list nil t)))
+        (when file
+          (find-file file))))
+    :bind (("C-x f" . recentf-ido-find-file))
+    :config
+    (setq
+      recentf-max-saved-items 1000
+      recentf-exclude '("/tmp/" "/ssh:")))
+  :config
+  (progn
+    (ido-mode t)
+    (ido-everywhere t)
+    (setq
+      ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-max-prospects 20
+      ido-ignore-directories (append ido-ignore-directories ido-other-ignore-directories)
+      ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
+      ;; Display ido results vertically, rather than horizontally
+      ido-decorations '("\n-> " " " "\n   " "\n   ..."
+                         "[" "]" " [No match]" " [Matched]"
+                         " [Not readable]" " [Too big]" " [Confirm]"))      
+    ;; C-n/p is more intuitive in vertical layout
+    (add-hook 'ido-setup-hook
+      (lambda ()
+        (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+        (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+        (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+        (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))))
+
+;; git - built in
+(use-package vc-git
+  :init
+  ;; In vc-git and vc-dir for git buffers,
+  ;; make (C-x v) a run git add, u run git reset,
+  ;; and r run git reset and checkout from head.
+  ;; based on https://joppot.info/en/2018/02/04/4144
+  (defun my-vc-git-command (verb fn)
+    (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
+            (backend (car fileset-arg))
+            (files (nth 1 fileset-arg)))
+      (if (eq backend 'Git)
+        (progn (funcall fn files)
+          (message (concat verb " " (number-to-string (length files))
+                     " file(s).")))
+        (message "Not in a vc git buffer."))))
+  (defun vc-git-add (&optional revision vc-fileset comment)
+    (interactive "P")
+    (my-vc-git-command "Staged" 'vc-git-register))
+  (defun vc-git-reset (&optional revision vc-fileset comment)
+    (interactive "P")
+    (my-vc-git-command "Unstaged"
+      (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
+  (defun vc-git-dir-refresh-and-update ()
+    "Refresh the vc-dir then hide up to date files and directories"
+    (interactive)
+    (vc-dir-refresh)
+    (vc-dir-hide-up-to-date))
+  :after vc-dir
+  :config
+  (progn
      (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
      (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
-     (define-key vc-prefix-map [(a)] 'my-vc-git-add)
-     (define-key vc-dir-mode-map [(a)] 'my-vc-git-add)
-     (define-key vc-prefix-map [(u)] 'my-vc-git-reset)
-     (define-key vc-dir-mode-map [(u)] 'my-vc-git-reset)
-
-     ;; hide up to date files after refreshing in vc-dir
-     (define-key vc-dir-mode-map [(g)]
-       (lambda () (interactive) (vc-dir-refresh) (vc-dir-hide-up-to-date)))
-     ))
+     (define-key vc-prefix-map [(a)] 'vc-git-add)
+     (define-key vc-dir-mode-map [(a)] 'vc-git-add)
+     (define-key vc-prefix-map [(u)] 'vc-git-reset)
+     (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
+     (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update)))
 
 ;;; Eshell
 (load "em-hist") ;; load history vars
@@ -361,36 +398,6 @@ there's a region, all lines that region covers will be duplicated."
 ;; https://www.emacswiki.org/emacs/download/sr-speedbar.el
 (require 'sr-speedbar)
 (global-set-key [f8] 'sr-speedbar-toggle)
-;; copied to site-lisp from
-;; https://www.emacswiki.org/emacs/download/idomenu.el
-(require 'idomenu)
-(global-set-key (kbd "C-x C-i") 'idomenu)
-;; use ido to complete tags
-;; - https://www.emacswiki.org/emacs/InteractivelyDoThings#toc12
-(defun my-ido-find-tag ()
-    "Find a tag using ido"
-    (interactive)
-    (tags-completion-table)
-    (let (tag-names)
-      (mapcar (lambda (x)
-                  (push (prin1-to-string x t) tag-names))
-                tags-completion-table)
-      (find-tag (ido-completing-read "Tag: " tag-names))))
-
-;;; Now for packages
-(package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("marmalade" . "https://marmalade-repo.org/packages/"))
-;;(add-to-list 'package-archives
-;;             '("org" . "http://orgmode.org/elpa/") t)
-
-;; use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
 
 ;;; Language Specific
 
@@ -400,6 +407,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/jdee-emacs/jdee
 (use-package jdee
   :ensure t
+  :defer t
   :init
   (custom-set-variables
     '(jdee-server-dir

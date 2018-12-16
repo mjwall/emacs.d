@@ -527,7 +527,12 @@ there's a region, all lines that region covers will be duplicated."
 ;;   ;; :hook (typescript-mode . eglot-ensure)
 ;;   )
 
+
 ;; C/C++
+(use-package cc-mode
+  :init
+  (setq tab-width 2
+    c-basic-offset 2))
 ;; C++ 14
 ;; (use-package cquery
 ;; :ensure t)
@@ -540,9 +545,22 @@ there's a region, all lines that region covers will be duplicated."
   :ensure t)
 
 ;; elisp
-(setq lisp-indent-offset 2)
+(use-package emacs-lisp-mode
+  :init
+  (setq lisp-indent-offset 2)
+  (use-package eldoc
+      :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
+  (use-package ert
+    :init
+    (add-to-list 'emacs-lisp-mode-hook 'ert--activate-font-lock-keywords))
+  :bind (("M-." . find-function-at-point)
+         ("M-&" . complete-symbol))
+  :interpreter (("emacs" . emacs-lisp-mode)))
 
 ;; bash
+(use-package sh-script
+  :init
+  (setq sh-basic-offset 2))
 
 ;; octave - built in
 (use-package octave)

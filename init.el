@@ -255,19 +255,19 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; ido - built in
 (use-package ido
-  :init
+  :preface
   (defvar ido-other-ignore-directories
     '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/"
        "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
   (defvar ido-other-ignore-files
-    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))
+    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))  
+  :init
   (use-package idomenu
     :ensure t
     :bind (("C-x C-i" . idomenu )))
   (use-package recentf
     ;; built in
-    :init
-    (recentf-mode 1)
+    :preface
     (defun recentf-ido-find-file ()
       "Find a recent file using ido."
       (interactive)
@@ -275,33 +275,32 @@ there's a region, all lines that region covers will be duplicated."
               (ido-completing-read "Choose recent file: "
                 recentf-list nil t)))
         (when file
-          (find-file file))))
-    :bind (("C-x f" . recentf-ido-find-file))
-    :config
+          (find-file file))))    
+    :init
+    (recentf-mode 1)
     (setq
       recentf-max-saved-items 1000
-      recentf-exclude '("/tmp/" "/ssh:")))
-  :config
-  (progn
-    (ido-mode t)
-    (ido-everywhere t)
-    (setq
-      ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-max-prospects 20
-      ido-ignore-directories (append ido-ignore-directories ido-other-ignore-directories)
-      ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
-      ;; Display ido results vertically, rather than horizontally
-      ido-decorations '("\n-> " " " "\n   " "\n   ..."
-                         "[" "]" " [No match]" " [Matched]"
-                         " [Not readable]" " [Too big]" " [Confirm]"))      
-    ;; C-n/p is more intuitive in vertical layout
-    (add-hook 'ido-setup-hook
-      (lambda ()
-        (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-        (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-        (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-        (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))))
+      recentf-exclude '("/tmp/" "/ssh:"))
+    :bind (("C-x f" . recentf-ido-find-file)))
+  (ido-mode t)
+  (ido-everywhere t)
+  (setq
+    ido-enable-prefix nil
+    ido-enable-flex-matching t
+    ido-max-prospects 20
+    ido-ignore-directories (append ido-ignore-directories ido-other-ignore-directories)
+    ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
+    ;; Display ido results vertically, rather than horizontally
+    ido-decorations '("\n-> " " " "\n   " "\n   ..."
+                       "[" "]" " [No match]" " [Matched]"
+                       " [Not readable]" " [Too big]" " [Confirm]"))      
+  ;; C-n/p is more intuitive in vertical layout
+  (add-hook 'ido-setup-hook
+    (lambda ()
+      (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+      (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+      (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+      (define-key ido-completion-map (kbd "<up>") 'ido-prev-match))))
 
 ;; hippie expand - built in
 (use-package hippie-expand
@@ -333,7 +332,7 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; git - built in
 (use-package vc-git
-  :init
+  :preface
   ;; In vc-git and vc-dir for git buffers,
   ;; make (C-x v) a run git add, u run git reset,
   ;; and r run git reset and checkout from head.
@@ -359,48 +358,58 @@ there's a region, all lines that region covers will be duplicated."
     (interactive)
     (vc-dir-refresh)
     (vc-dir-hide-up-to-date))
-  :after vc-dir
-  :config
-  (progn
-     (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
-     (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
-     (define-key vc-prefix-map [(a)] 'vc-git-add)
-     (define-key vc-dir-mode-map [(a)] 'vc-git-add)
-     (define-key vc-prefix-map [(u)] 'vc-git-reset)
-     (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
-     (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update)))
+  :init
+  (use-package vc-dir)
+  (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
+  (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
+  (define-key vc-prefix-map [(a)] 'vc-git-add)
+  (define-key vc-dir-mode-map [(a)] 'vc-git-add)
+  (define-key vc-prefix-map [(u)] 'vc-git-reset)
+  (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
+  (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update))
 
 ;; eshell - built in
 (use-package eshell
-  :after vc-git em-term
   :init
-  (load "em-hist") ;; load history var
-  (defun better-eshell-prompt ()
-    (concat
-      (propertize
-        (concat user-login-name "@"
-          (car (split-string system-name "\\.")))
-        'face '(foreground-color . "green4"))
-      (propertize
-        (concat " " (abbreviate-file-name (eshell/pwd)))
-        'face '(foreground-color . "darkgoldenrod4"))
-      (when (vc-git-root (eshell/pwd))
+  (use-package em-prompt
+    :after vc-git
+    :preface
+    (defun better-eshell-prompt ()
+      (concat
         (propertize
-          (concat " " (car (vc-git-branches)))
-          'face '(foreground-color . "darkcyan")))
-      "\n"
-      (if (= (user-uid) 0) "# " "$ ")))
-  (setq eshell-cmpl-cycle-completions nil
-    eshell-save-history-on-exit t
-    eshell-cmpl-dir-ignore
-    "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"
-    eshell-history-size 1024
-    eshell-prompt-regexp "^[^#$]*[#$] "
-    eshell-highlight-prompt nil
-    eshell-destroy-buffer-when-process-dies nil
-    eshell-prompt-function 'better-eshell-prompt
-    eshell-visual-commands '("less" "top" "vim")
-    eshell-visual-subcommands '(("git" "log" "diff" "di" "show")))
+          (concat user-login-name "@"
+            (car (split-string system-name "\\.")))
+          'face '(foreground-color . "green4"))
+        (propertize
+          (concat " " (abbreviate-file-name (eshell/pwd)))
+          'face '(foreground-color . "darkgoldenrod4"))
+        (when (vc-git-root (eshell/pwd))
+          (propertize
+            (concat " " (car (vc-git-branches)))
+            'face '(foreground-color . "darkcyan")))
+        "\n"
+        (if (= (user-uid) 0) "# " "$ ")))
+    :init
+    (setq
+      eshell-highlight-prompt nil
+      eshell-prompt-regexp "^[^#$]*[#$] "
+      eshell-prompt-function 'better-eshell-prompt))
+  (use-package em-hist
+    :init
+    (setq
+      eshell-save-history-on-exit t
+      eshell-history-size 1024))
+  (use-package em-cmpl
+    :init
+    (setq
+      eshell-cmpl-cycle-completions nil
+      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"))
+  (use-package em-term
+    :init
+    (setq
+      eshell-visual-commands '("less" "top" "vim")
+      eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))))
+  :config
   (defalias 'ff 'find-file)
   (defalias 'd 'dired)
   (defalias 'fo 'find-file-other-window))
@@ -411,8 +420,7 @@ there's a region, all lines that region covers will be duplicated."
   (use-package sr-speedbar
     :ensure t)
   :bind
-  (
-    ("<f6>" . vc-git-grep)
+  (("<f6>" . vc-git-grep)
     ("<f7>" . project-find-file)
     ("<f8>" . sr-speedbar)
     ("<f9>" . vc-dir)))

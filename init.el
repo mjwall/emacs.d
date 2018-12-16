@@ -370,21 +370,12 @@ there's a region, all lines that region covers will be duplicated."
      (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
      (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update)))
 
-;;; Eshell
-(load "em-hist") ;; load history vars
-(setq eshell-cmpl-cycle-completions nil
-  eshell-save-history-on-exit t
-  eshell-cmpl-dir-ignore
-  "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"
-  eshell-history-size 1024
-  eshell-prompt-regexp "^[^#$]*[#$] "
-  eshell-highlight-prompt nil
-  eshell-visual-commands '("less" "top" "vim")
-  eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))
-  eshell-destroy-buffer-when-process-dies nil)
-;; eshell prompt - requires vc-git
-(setq eshell-prompt-function
-  (lambda ()
+;; eshell - built in
+(use-package eshell
+  :after vc-git em-term
+  :init
+  (load "em-hist") ;; load history var
+  (defun better-eshell-prompt ()
     (concat
       (propertize
         (concat user-login-name "@"
@@ -398,23 +389,35 @@ there's a region, all lines that region covers will be duplicated."
           (concat " " (car (vc-git-branches)))
           'face '(foreground-color . "darkcyan")))
       "\n"
-      (if (= (user-uid) 0) "# " "$ ")
-      )))
-(defalias 'ff 'find-file)
-(defalias 'd 'dired)
-(defalias 'fo 'find-file-other-window)
+      (if (= (user-uid) 0) "# " "$ ")))
+  (setq eshell-cmpl-cycle-completions nil
+    eshell-save-history-on-exit t
+    eshell-cmpl-dir-ignore
+    "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"
+    eshell-history-size 1024
+    eshell-prompt-regexp "^[^#$]*[#$] "
+    eshell-highlight-prompt nil
+    eshell-destroy-buffer-when-process-dies nil
+    eshell-prompt-function 'better-eshell-prompt
+    eshell-visual-commands '("less" "top" "vim")
+    eshell-visual-subcommands '(("git" "log" "diff" "di" "show")))
+  (defalias 'ff 'find-file)
+  (defalias 'd 'dired)
+  (defalias 'fo 'find-file-other-window))
 
-;; project stuff
-(require 'project) ; from project.el
-(global-set-key [f7] 'project-find-file)
-(global-set-key [f6] 'vc-git-grep) 
-(global-set-key [f9] 'vc-dir)
-;; copied to site-lisp from
-;; https://www.emacswiki.org/emacs/download/sr-speedbar.el
-(require 'sr-speedbar)
-(global-set-key [f8] 'sr-speedbar-toggle)
+;; project - built in
+(use-package project
+  :init
+  (use-package sr-speedbar
+    :ensure t)
+  :bind
+  (
+    ("<f6>" . vc-git-grep)
+    ("<f7>" . project-find-file)
+    ("<f8>" . sr-speedbar)
+    ("<f9>" . vc-dir)))
 
-;;; Language Specific
+;; Language Specific
 
 ;;(require 'cc-mode)
 

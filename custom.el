@@ -16,4 +16,4 @@
  '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))
   '(package-selected-packages
      (quote
-       (markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))
+       (sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))

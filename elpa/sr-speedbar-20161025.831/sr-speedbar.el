@@ -8,6 +8,7 @@
 ;; Copyright (C) 2009, Peter Lunicks, all rights reversed.
 ;; Created: 2008
 ;; Version: 20161025
+;; Package-Version: 20161025.831
 ;; X-Original-Version: 0.1.10
 ;; Last-Updated: 2016-10-25
 ;; URL: http://www.emacswiki.org/emacs/download/sr-speedbar.el

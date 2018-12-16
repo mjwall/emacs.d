@@ -264,6 +264,10 @@ there's a region, all lines that region covers will be duplicated."
   :pin "org"
   :demand t)
 
+;; to verify stuff for use-package
+(use-package use-package-ensure-system-package
+  :ensure t)
+
 ;; ido - built in
 (use-package ido
   :preface
@@ -482,47 +486,36 @@ there's a region, all lines that region covers will be duplicated."
       (typescript-mode . tide-h1-identifier-mode)
       (before-save . tide-format-before-save))))
 
-;; ;; python - from http://www.andrewty.com/blog/emacs-config-for-python
-;; (use-package anaconda-mode
-;;   :ensure t
-;;   :init
-;;   (add-hook 'python-mode-hook 'anaconda-mode)
-;;   (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;;   :config
-;;   (setq python-indent-offset 4
-;;     python-indent 4
-;;     python-shell-interpreter "ipython"
-;;     python-shell-interpreter-args "--simple-prompt")
-;;   ;; (use-package company-anaconda
-;;   ;;    :ensure t
-;;   ;;    :init
-;;   ;;    (eval-after-load "company"
-;;   ;;      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
-;;   )
-
-;; (use-package conda
-;;   :ensure t
-;;   :config
-;;   (setq conda-anaconda-home "~/anaconda3")
-;;   (conda-env-initialize-interactive-shells)
-;;   (conda-env-initialize-eshell))
-;; (use-package ein
-;;   :ensure t
-;;   :config
-;;   (setq ein:jupyter-default-notebook-directory "~/git/jupyter")
-;;   (setq ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-;;   (setq ein:jupyter-server-args (list "--no-browser")))
-;; ;; conda install autopep8 (plus any env)
-;; (use-package py-autopep8
-;;   :ensure t
-;;   ;;:config
-;;   ;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;;   )
-
-;; (lsp-register-client
-;; (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
-;;                  :major-modes '(python-mode)
-;;                  :server-id 'pyls))
+;; python
+;; based on http://www.andrewty.com/blog/emacs-config-for-python
+(use-package anaconda-mode
+  :ensure t
+  :defer t
+  :init
+  (setq python-indent-offset 4
+    python-indent 4
+    python-shell-interpreter "ipython"
+    python-shell-interpreter-args "--simple-prompt")
+  (use-package conda
+    :ensure t
+    :init
+   (setq conda-anaconda-home "~/anaconda3")
+   (conda-env-initialize-interactive-shells)
+   (conda-env-initialize-eshell))
+  (use-package ein
+    :ensure t
+    :init
+    (setq
+      ein:jupyter-default-notebook-directory "~/git/jupyter"
+      ein:jupyter-default-server-command "~/anaconda3/bin/jupyter"
+      ein:jupyter-server-args (list "--no-browser")))
+  (use-package py-autopep8
+    :ensure-system-package (autopep8 . "conda install autopep8")
+    :ensure t
+    :hook ((python-mode . py-autopep8-enable-on-save)))
+  :hook
+  ((python-mode . anaconda-mode)
+    (python-mode . anaconda-eldoc-mode)))
 
 ;; go
 

@@ -26,8 +26,15 @@ abbrev_defs
 
 ;; my extra stuff
 src/*
+
 !src/get_src.sh
+
 !src/tags
+src/tags/ctags-5.8.tar.gz
+src/tags/ctags-5.8/
+src/tags/global-6.6.2.tar.gz
+src/tags/global-6.6.2/
+
 !src/jdee-server
 books/
 

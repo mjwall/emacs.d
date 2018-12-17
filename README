@@ -3,3 +3,22 @@ export EMACSHOME=/Applications/Emacs.app/Contents/MacOS
 prepend_path "${EMACSHOME}/bin"
 prepend_path "${HOME}/.emacs.d/bin"
 
+
+
+## Profiling
+
+Look at https://www.emacswiki.org/emacs/ProfileDotEmacs
+
+Download file http://www.randomsample.de/profile-dotemacs.el to
+~/.emacs.d/src/profile-dotemacs.el
+
+Edit file and change defvar profile-dotemacs-file from ~/.emacs to
+~/.emacs.d/init.el
+
+Then run
+
+```
+emacs -Q -l src/profile-dotemacs.el -f profile-dotemacs
+```
+
+Look for file for overlays of slow expressions

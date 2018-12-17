@@ -610,7 +610,7 @@ there's a region, all lines that region covers will be duplicated."
     (setq imenu-generic-expression
           '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
             ("func" "^func *\\(.*\\) {" 1))))
-  :init
+  :config
   (use-package go-rename
     :ensure nil
     :defer t)
@@ -807,3 +807,10 @@ there's a region, all lines that region covers will be duplicated."
 ;; by `xref-find-definitions'
 
 ;; make startup faster
+;; https://www.emacswiki.org/emacs/ProfileDotEmacs
+;; Look at getting rid of exec-path-from-shell as it is slow
+;; It is not needed on Linux and I think this Mac version also
+;; gets the path right https://bitbucket.org/mituharu/emacs-mac/overview
+;; Another tool https://github.com/dholm/benchmark-init-el
+
+;; Update README, change to README.md or README.org

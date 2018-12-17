@@ -275,12 +275,12 @@ there's a region, all lines that region covers will be duplicated."
 ;; ensure system package
 ;; - part of use-package at https://github.com/jwiegley/use-package
 (use-package use-package-ensure-system-package
-  :ensure t)
+  :ensure nil)
 
 ;; help setup paths
 ;; - https://github.com/purcell/exec-path-from-shell
 (use-package exec-path-from-shell
-  :ensure t
+  :ensure nil
   :config
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
@@ -288,7 +288,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; diminish
 ;; - https://github.com/myrjola/diminish.el
 (use-package diminish
-  :ensure t
+  :ensure nil
   :defer 1)
 
 ;; ido - built in
@@ -305,7 +305,7 @@ there's a region, all lines that region covers will be duplicated."
   :init
   (use-package idomenu
     ;; not built in 
-    :ensure t
+    :ensure nil
     :bind (("C-x C-i" . idomenu )))
   (use-package recentf
     ;; built in
@@ -345,11 +345,11 @@ there's a region, all lines that region covers will be duplicated."
       (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
       (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))
   (use-package ido-completing-read+
-    :ensure t
+    :ensure nil
     :init
     (ido-ubiquitous-mode 1))
   (use-package smex
-    :ensure t
+    :ensure nil
     :bind (("M-x" . smex)
             ("C-x C-m" . smex)
             ;; orig M-x
@@ -465,7 +465,7 @@ there's a region, all lines that region covers will be duplicated."
       eshell-visual-commands '("less" "top" "vim")
       eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))))
   (use-package eshell-bookmark
-    :ensure t
+    :ensure nil
     :config
     (add-hook 'eshell-mode-hook 'eshell-bookmark-setup))
   :config
@@ -477,7 +477,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package project
   :init
   (use-package sr-speedbar
-    :ensure t)
+    :ensure nil)
   :bind
   (("<f6>" . vc-git-grep)
     ("<f7>" . project-find-file)
@@ -487,7 +487,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; ctags
 ;; - https://github.com/jixiuf/ctags-update
 ;; (use-package ctags-update
-;;   :ensure t)
+;;   :ensure nil)
 
 ;; etags select
 ;; - in site-lisp from
@@ -511,14 +511,14 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/company-mode/company-mode
 ;; here but not loading
 ;;(use-package company
-;;  :ensure t)
+;;  :ensure nil)
 
 ;; Language Specific
 
 ;; Java
 ;; - https://github.com/jdee-emacs/jdee
 (use-package jdee
-  :ensure t
+  :ensure nil
   :defer t
   :init
   (custom-set-variables
@@ -529,7 +529,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/mooz/js2-mode
 ;; - https://github.com/joshwnj/json-mode
 (use-package js2-mode
-  :ensure t
+  :ensure nil
   :defer t
   :mode "\\.js\\'"
   :interpreter "node"
@@ -537,22 +537,22 @@ there's a region, all lines that region covers will be duplicated."
   (setq js-indent-level 2) ;; defalias js2-basic-off in > 25.0
   :config
   (use-package json-mode
-    :ensure t))
+    :ensure nil))
 
 ;; Typescript 
 ;; - https://github.com/ananthakumaran/typescript.el
 ;; - https://github.com/ananthakumaran/tide
 ;; - https://github.com/AdamNiederer/ng2-mode
 (use-package typescript-mode
-  :ensure t
+  :ensure nil
   :defer t
   :init
   (setf typescript-indent-level js-indent-level)
   :config
   (use-package ng2-mode
-    :ensure t)
+    :ensure nil)
   (use-package tide
-    :ensure t
+    :ensure nil
     :after (typescript-mode flycheck)
     :hook
     ((typescript-mode . tide-setup)
@@ -566,7 +566,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/millejoh/emacs-ipython-notebook
 ;; - https://github.com/paetzke/py-autopep8.el
 (use-package anaconda-mode
-  :ensure t
+  :ensure nil
   :defer t
   :init
   (setq python-indent-offset 4
@@ -574,13 +574,13 @@ there's a region, all lines that region covers will be duplicated."
     python-shell-interpreter "ipython"
     python-shell-interpreter-args "--simple-prompt")
   (use-package conda
-    :ensure t
+    :ensure nil
     :init
    (setq conda-anaconda-home "~/anaconda3")
    (conda-env-initialize-interactive-shells)
    (conda-env-initialize-eshell))
   (use-package ein
-    :ensure t
+    :ensure nil
     :init
     (setq
       ein:jupyter-default-notebook-directory "~/git/jupyter"
@@ -588,7 +588,7 @@ there's a region, all lines that region covers will be duplicated."
       ein:jupyter-server-args (list "--no-browser")))
   (use-package py-autopep8
     :ensure-system-package (autopep8 . "conda install autopep8")
-    :ensure t
+    :ensure nil
     :hook ((python-mode . py-autopep8-enable-on-save)))
   :hook
   ((python-mode . anaconda-mode)
@@ -601,7 +601,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; derived from
 ;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
 (use-package go-mode
-  :ensure t
+  :ensure nil
   :preface
   (defun my-go-mode-fn()
     (go-eldoc-setup)
@@ -612,19 +612,19 @@ there's a region, all lines that region covers will be duplicated."
             ("func" "^func *\\(.*\\) {" 1))))
   :init
   (use-package go-rename
-    :ensure t
+    :ensure nil
     :defer t)
   (use-package go-guru
-    :ensure t
+    :ensure nil
     :defer t)
   (use-package go-eldoc
-    :ensure t
+    :ensure nil
     :defer t)
   (use-package gotest
-    :ensure t
+    :ensure nil
     :defer t)
   (use-package go-complete
-    :ensure t
+    :ensure nil
     :defer t)
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-copy-env "GOPATH"))
@@ -668,14 +668,14 @@ there's a region, all lines that region covers will be duplicated."
   (setq ruby-indent-level 2
     ruby-indent-tabs-mode nil)
   (use-package rvm
-    :ensure t
+    :ensure nil
     :config
     (rvm-use-default))
   (use-package web-mode
-    :ensure t
+    :ensure nil
     :mode "\\.erb\\'")
   (use-package inf-ruby
-    :ensure t
+    :ensure nil
     :init
     (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
 
@@ -703,7 +703,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; R
 ;; - https://ess.r-project.org/
 (use-package ess
-  :ensure t
+  :ensure nil
   :defer t
   ;;:init (require 'ess-site)
   )
@@ -712,24 +712,24 @@ there's a region, all lines that region covers will be duplicated."
 ;; http://manuel-uberti.github.io/emacs/2017/10/19/docker/
 ;; - https://github.com/spotify/dockerfile-mode
 (use-package dockerfile-mode
-  :ensure t)
+  :ensure nil)
 ;; - https://github.com/meqif/docker-compose-mode
 (use-package docker-compose-mode
-  :ensure t)
+  :ensure nil)
 ;; - https://github.com/emacs-pe/docker-tramp.el
 (use-package docker-tramp
-  :ensure t)
+  :ensure nil)
 
 ;; thrift
 ;; - https://github.com/davidmiller/thrift-mode
 (use-package thrift
-  :ensure t)
+  :ensure nil)
 
 ;; protobuf
 ;; - https://melpa.org/#/protobuf-mode
 ;; which points inside https://github.com/protocolbuffers/protobuf
 (use-package protobuf-mode
-  :ensure t)
+  :ensure nil)
 
 ;; jflex
 ;; in site-lisp from http://jflex.de/jflex-mode.el
@@ -739,52 +739,52 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://melpa.org/#/cmake-mode
 ;; which points inside https://github.com/Kitware/CMake/
 (use-package cmake-mode
-  :ensure t)
+  :ensure nil)
 
 ;; gradle
 ;; - https://github.com/jacobono/emacs-gradle-mode
 (use-package gradle-mode
-  :ensure t)
+  :ensure nil)
 
 ;; julia
 ;; - https://github.com/JuliaEditorSupport/julia-emacs
 (use-package julia-mode
-  :ensure t)
+  :ensure nil)
 
 ;; scala
 ;; - https://github.com/ensime/emacs-scala-mode
 (use-package scala-mode
-  :ensure t)
+  :ensure nil)
 
 ;; clojure
 ;; - https://github.com/clojure-emacs/clojure-mode
 (use-package clojure-mode
-  :ensure t)
+  :ensure nil)
 
 ;; markdown
 ;; - https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
-  :ensure t)
+  :ensure nil)
 
 ;; kotlin
 ;; - https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
 (use-package kotlin-mode
-  :ensure t)
+  :ensure nil)
 
 ;; lua
 ;; - https://github.com/immerrr/lua-mode
 (use-package lua-mode
-  :ensure t)
+  :ensure nil)
 
 ;; groovy
 ;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 (use-package groovy-mode
-  :ensure t)
+  :ensure nil)
 
 ;; yaml
 ;; - https://github.com/yoshiki/yaml-mode
 (use-package yaml-mode
-  :ensure t)
+  :ensure nil)
 
 ;; TODO
 

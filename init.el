@@ -421,7 +421,8 @@ there's a region, all lines that region covers will be duplicated."
   (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
   (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update))
 
-;; eshell - built in
+;; eshell - all built in except
+;; - https://github.com/Fuco1/eshell-bookmark
 (use-package eshell
   :defer t
   :init
@@ -463,6 +464,10 @@ there's a region, all lines that region covers will be duplicated."
     (setq
       eshell-visual-commands '("less" "top" "vim")
       eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))))
+  (use-package eshell-bookmark
+    :ensure t
+    :config
+    (add-hook 'eshell-mode-hook 'eshell-bookmark-setup))
   :config
   (defalias 'ff 'find-file)
   (defalias 'd 'dired)
@@ -478,6 +483,29 @@ there's a region, all lines that region covers will be duplicated."
     ("<f7>" . project-find-file)
     ("<f8>" . sr-speedbar)
     ("<f9>" . vc-dir)))
+
+;; ctags
+;; - https://github.com/jixiuf/ctags-update
+;; (use-package ctags-update
+;;   :ensure t)
+
+;; etags select
+;; - in site-lisp from
+;; https://www.emacswiki.org/emacs/download/etags-select.el
+;; (use-package etags-select
+;;   :preface
+;;   ;; from https://www.emacswiki.org/emacs/EtagsSelect#toc3
+;;   (defun my-ido-find-tag ()
+;;     "Find a tag using ido"
+;;     (interactive)
+;;     (tags-completion-table)
+;;     (let (tag-names)
+;;       (mapatoms (lambda (x)
+;;                   (push (prin1-to-string x t) tag-names))
+;;         tags-completion-table)
+;;       (etags-select-find (ido-completing-read "Tag: " tag-names))))
+;;   ;;:bind (("M-.") 'my-ido-find-tag)
+;;   )
 
 ;; company
 ;; - https://github.com/company-mode/company-mode
@@ -651,11 +679,6 @@ there's a region, all lines that region covers will be duplicated."
     :init
     (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
 
-
-;; kotlin
-(use-package kotlin-mode
-  :ensure t)
-
 ;; elisp - built in
 (use-package emacs-lisp-mode
   :init
@@ -678,20 +701,33 @@ there's a region, all lines that region covers will be duplicated."
 (use-package octave)
 
 ;; R
+;; - https://ess.r-project.org/
 (use-package ess
   :ensure t
+  :defer t
   ;;:init (require 'ess-site)
   )
 
-;; docker
+;; docker setup derived from
+;; http://manuel-uberti.github.io/emacs/2017/10/19/docker/
+;; - https://github.com/spotify/dockerfile-mode
 (use-package dockerfile-mode
+  :ensure t)
+;; - https://github.com/meqif/docker-compose-mode
+(use-package docker-compose-mode
+  :ensure t)
+;; - https://github.com/emacs-pe/docker-tramp.el
+(use-package docker-tramp
   :ensure t)
 
 ;; thrift
+;; - https://github.com/davidmiller/thrift-mode
 (use-package thrift
   :ensure t)
 
 ;; protobuf
+;; - https://melpa.org/#/protobuf-mode
+;; which points inside https://github.com/protocolbuffers/protobuf
 (use-package protobuf-mode
   :ensure t)
 
@@ -700,29 +736,55 @@ there's a region, all lines that region covers will be duplicated."
 (use-package jflex-mode)
 
 ;; make/cmake
+;; - https://melpa.org/#/cmake-mode
+;; which points inside https://github.com/Kitware/CMake/
 (use-package cmake-mode
   :ensure t)
 
 ;; gradle
+;; - https://github.com/jacobono/emacs-gradle-mode
 (use-package gradle-mode
   :ensure t)
 
 ;; julia
+;; - https://github.com/JuliaEditorSupport/julia-emacs
 (use-package julia-mode
   :ensure t)
 
 ;; scala
+;; - https://github.com/ensime/emacs-scala-mode
 (use-package scala-mode
   :ensure t)
 
 ;; clojure
+;; - https://github.com/clojure-emacs/clojure-mode
 (use-package clojure-mode
   :ensure t)
 
 ;; markdown
+;; - https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
   :ensure t)
 
+;; kotlin
+;; - https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
+(use-package kotlin-mode
+  :ensure t)
+
+;; lua
+;; - https://github.com/immerrr/lua-mode
+(use-package lua-mode
+  :ensure t)
+
+;; groovy
+;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
+(use-package groovy-mode
+  :ensure t)
+
+;; yaml
+;; - https://github.com/yoshiki/yaml-mode
+(use-package yaml-mode
+  :ensure t)
 
 ;; TODO
 
@@ -732,12 +794,16 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Use diminish to clean up mode line
 
-;; better understand and use etags, ctags and global tags
-
-;; better understand .dir-locals.el
+;; better understand `.dir-locals.el'
 
 ;; try lsp stuff again, couldn't get it working first time around
 
 ;; change all `:ensure t' to  `:ensure nil' so packages
 ;; dont update automatically.  The nil is default but it allows
 ;; me to search and replace
+
+;; better understand and use etags, ctags and global tags
+;; and update scripts since `find-tag' has been replaced
+;; by `xref-find-definitions'
+
+;; make startup faster

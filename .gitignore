@@ -25,7 +25,10 @@ projectile-bookmarks.eld
 abbrev_defs
 
 ;; my extra stuff
-src/
+src/*
+!src/get_src.sh
+!src/tags
+!src/jdee-server
 books/
 
 semanticdb

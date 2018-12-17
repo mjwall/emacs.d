@@ -533,7 +533,7 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (custom-set-variables
     '(jdee-server-dir
-       (expand-file-name "jdee-server" user-emacs-directory))))
+       (expand-file-name "src/jdee-server" user-emacs-directory))))
 
 ;; Javascript
 ;; - https://github.com/mooz/js2-mode

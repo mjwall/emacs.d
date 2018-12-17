@@ -22,8 +22,6 @@ ESS source.
     `ess-eval-buffer' sends the current buffer to the ESS process.
     `ess-eval-function' sends the current function to the ESS process.
     `ess-eval-line' sends the current line to the ESS process.
-    `ess-beginning-of-function' and `ess-end-of-function' move the point to
-        the beginning and end of the current ESS function.
     `ess-switch-to-ESS' switches the current buffer to the ESS process buffer.
     `ess-switch-to-end-of-ESS' switches the current buffer to the ESS process
         buffer and puts point at the end of it.
@@ -242,7 +240,7 @@ always be passed to julia, put them in the variable
 
 \(fn &optional START-ARGS)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-julia" '("ess-" "company-ess-julia-objects" "ac-source-ess-julia-objects" "inferior-julia-args")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-julia" '("ess-" "inferior-" "company-ess-julia-objects" "ac-source-ess-julia-objects")))
 
 ;;;***
 
@@ -499,7 +497,7 @@ Major mode for editing Stata source.
 
 (add-to-list 'auto-mode-alist '("\\.ado\\'" . ess-stata-mode))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-stata-mode" '("stata" "ess-" "Stata-mode" "STA-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-stata-mode" '("stata" "ess-" "Stata-mode" "STA-" "inferior-ess-stata-mode")))
 
 ;;;***
 

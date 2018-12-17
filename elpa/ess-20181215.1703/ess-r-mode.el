@@ -576,6 +576,116 @@ Executed in process buffer."
     (add-hook 'ess-presend-filter-functions 'ess-R-scan-for-library-call nil 'local)
     (run-mode-hooks 'ess-r-post-run-hook)))
 
+(defun ess-r-beginning-of-defun (&optional _arg)
+  "Leave (and return) the point at the beginning of the current ESS function.
+Return the value of `point' if we moved, nil otherwise."
+  ;; FIXME: should not throw error in accordance with beginning-of-defun and
+  ;; beginning-of-defun-function specification
+  ;; FIXME: should __WORK__ in the crucial case: large function w/ internal function defs
+  (interactive)
+  (skip-chars-backward " \t\n")
+  (let ((init-point (point))
+        (in-set-S4 nil)
+        beg end done)
+
+    ;; Note that we must be sure that we are past the 'function (' text,
+    ;; such that ess-function-pattern is found in BACKwards later.
+    ;; In case we're sitting in a function or setMethod() header,
+    ;; we need to move further.
+    ;; But not too far! {wrongly getting into next function}
+    (if (search-forward "("
+                        (ess-line-end-position 2) t) ; at most end of next line
+        (forward-char 1))
+    ;; TODO: replace the above by hopefully more sucessful logic:
+    ;; 1. If we have 'function *(' in the same line, move to end of that line
+    ;; 2. if *not*, skip all comment lines (concat space comment-char .* "\n")
+    ;;    and only* then do something like the
+    ;;    (search-forward '(' .. (..line-end.. 2) )  above
+
+    (setq end (point))             ; = init-point when nothing found
+
+    (ess-write-to-dribble-buffer
+     (format "ess-BEG-of-fun after 'search-FWD (': Ini-pt %d, (p)-Ini-pt = %d\n"
+             init-point (- end init-point)))
+    (if (and (> end 1)
+             (re-search-backward ;; in case of setMethod() etc ..
+              ess-r-set-function-start
+              ;; at most 1 line earlier {2 is too much: finds previous sometimes}
+              (+ 1 (ess-line-end-position -1)) t))
+
+        (progn ;; yes we *have* an S4  setMethod(..)-like
+          (setq in-set-S4 t
+                beg (point))
+          (ess-write-to-dribble-buffer
+           (format " set*() function start at position %d" beg))
+          ;; often need to move even further to have 'function(' to our left
+          ;;        (if (search-forward "function" end t)
+          ;;            (ess-write-to-dribble-buffer
+          ;;             (format " -> 'function' already at pos %d\n" (point)))
+          ;;          ;; else need to move further
+          (goto-char end)
+          ;; search 4 lines, we are pretty sure now:
+          (search-forward
+           "function" (ess-line-end-position 4) t)
+          ;;        )
+          (search-forward "(" (ess-line-end-position) t))
+      ;; else: regular function; no set*Method(..)
+      (ess-write-to-dribble-buffer "ELSE  not in setMethod() header ...\n"))
+
+    (while (not done)
+      ;; Need this while loop to skip over local function definitions
+
+      ;; In the case of non-success, it is inefficiently
+      ;; going back in the buffer through all function definitions...
+      (unless
+          (and (re-search-backward ess-function-pattern (point-min) t)
+               (not (ess-inside-string-or-comment-p (point))))
+        (goto-char init-point)
+        (setq done t
+              beg nil))
+      (unless done
+        (setq beg (point))
+        (ess-write-to-dribble-buffer
+         (format "\tMatch,Pt:(%d,%d),%d\n"
+                 (match-beginning 0) (match-end 0) beg))
+        (setq in-set-S4 (looking-at ess-r-set-function-start))
+        (forward-list 1)              ; get over arguments
+
+        ;; The following used to bomb  "Unbalanced parentheses", n1, n2
+        ;; when the above (search-forward "(" ..) wasn't delimited :
+        (unless in-set-S4 (forward-sexp 1)) ; move over braces
+        ;;DBG (ess-write-to-dribble-buffer "|")
+        (setq end (point))
+        (goto-char beg)
+        ;; current function must begin and end around point
+        (setq done (and (>= end init-point) (<= beg init-point)))))
+    (when beg (point))))
+
+(defun ess-r-end-of-defun (&optional _arg)
+  "Leave the point at the end of the current function.
+ARG is currently ignored. Return t if we moved, nil otherwise."
+  (interactive)
+  (unless (or (looking-at-p ess-r-function-pattern)
+              (save-excursion (ess-r-beginning-of-defun)))
+    (error "Point not in a function"))
+  ;; Are we in setMethod(..) etc?
+  (beginning-of-defun)
+  (let ((beg-pos (point))
+        (in-set-S4 (looking-at ess-r-set-function-start))
+        (end-pos))
+    (forward-list 1)      ; get over arguments || whole set*(..)
+    (unless in-set-S4 (forward-sexp 1)) ; move over braces
+    ;; For one-line functions withOUT '{ .. }' body  -- added 2008-07-23 --
+    ;; particularly helpful for C-c C-c (ess-eval-function-or-paragraph-and-step):
+    (setq end-pos (ess-line-end-position))
+    (while (< (point) end-pos) ; if not at end of line, move further forward
+      (goto-char ;; careful not to move too far; e.g. *not* over empty lines:
+       (min (save-excursion (forward-sexp 1) (point))
+            (save-excursion (forward-paragraph 1) (point)))))
+    (unless(> (point) beg-pos)
+      (error "Point not in a function"))
+    (not (eql (point) beg-pos))))
+
 ;;;###autoload
 (define-derived-mode ess-r-mode ess-mode "ESS[R]"
   "Major mode for editing R source.  See `ess-mode' for more help."
@@ -604,17 +714,12 @@ Executed in process buffer."
   (add-hook 'xref-backend-functions #'ess-r-xref-backend nil 'local)
 
   (if (fboundp 'ess-add-toolbar) (ess-add-toolbar))
+  ;; imenu is needed for `which-function'
+  (setq imenu-generic-expression ess-imenu-S-generic-expression)
   (when ess-imenu-use-S
-    (setq imenu-generic-expression ess-imenu-S-generic-expression)
     (imenu-add-to-menubar "Imenu-R"))
-
-  ;; useful for swankr/slime:
-  (setq-local beginning-of-defun-function
-              (lambda (&optional arg)
-                (skip-chars-backward " \t\n")
-                (ess-beginning-of-function 'no-error)))
-  (setq-local end-of-defun-function
-              'ess-end-of-function)
+  (setq-local beginning-of-defun-function #'ess-r-beginning-of-defun)
+  (setq-local end-of-defun-function #'ess-r-end-of-defun)
   (ess-roxy-mode))
 ;;;###autoload
 (defalias 'R-mode 'ess-r-mode)
@@ -740,26 +845,13 @@ Once the value is found, cache it in the variable `ess-newest-R'
 for future use as finding the newest version of R can be
 potentially time-consuming."
   (or ess-newest-R
-      (progn (message "Finding all versions of R on your system...")
-             ;;(sleep-for 3)
-             nil)
+      (message "Finding all versions of R on your system...")
       (setq ess-newest-R
             (ess-newest-r
              (if ess-microsoft-p
                  (ess-rterm-prefer-higher-bit)
                (add-to-list 'ess-r-created-runners
                             inferior-ess-r-program))))))
-
-(defun ess-check-R-program ()
-  "Check if `inferior-ess-r-program' points to an executable version of R.
-If not, try to find the newest version of R elsewhere on the system, and
-update `inferior-ess-r-program' accordingly."
-  (unless (executable-find inferior-ess-r-program)
-    ;; need to check if we can find another name.
-    (let ((newest (ess-find-newest-R)))
-      (if newest
-          (setq inferior-ess-r-program newest)
-        (message "Sorry, no version of R could be found on your system.")))))
 
 (defun R-newest (&optional start-args)
   "Find the newest version of R available, and run it.
@@ -822,16 +914,10 @@ Examples: (ess-current-R-at-least '2.7.0)
            (car (ess-get-words-from-vector
                  (format "as.character(.ess.Rversion >= \"%s\")\n" version)))))
 
-(defvar ess-temp-newest nil)
-
 (defun ess-newest-r (rvers)
   "Check all the versions of RVERS to see which is the newest.
 Return the name of the newest version of R."
   (let ((rtimes (mapcar 'ess-r-version-date rvers)))
-    ;; SJE: 2007-07-13 -- following line is a temp var to check that
-    ;; the newest version of R is found correctly.
-    ;; (nowadays gives a compile warning)
-    (setq ess-temp-newest rtimes)
     (ess-find-newest-date rtimes)))
 
 (defun ess-find-newest-date (rvers)
@@ -2239,7 +2325,10 @@ state.")
       ;; probably won't work. If it's FALSE, R outputs ascii ', but
       ;; searching through the whole buffer takes too long.
       (while (re-search-forward "‘\\([^[:space:]]+?\\)’" nil t)
-        (let ((text (match-string 1)))
+        (let* ((text (match-string 1))
+               (text (if (string-match-p ".*()\\'" text)
+                         (substring text nil (- (length text) 2))
+                       text)))
           (when (member text help-topics)
             (delete-region (match-beginning 0) (match-end 0))
             (insert-text-button text

@@ -566,9 +566,8 @@ the language dialect (e.g. \"R\")."
 (defmacro with-ess-process-buffer (no-error &rest body)
   "Execute BODY in the process buffer of `ess-current-process-name'.
 If NO-ERROR is t don't trigger error when there is not current
-process.
-
-Symbol *proc* is bound to the current process during the evaluation of BODY."
+process. Symbol *proc* is bound to the current process during the
+evaluation of BODY."
   (declare (indent 1) (debug t))
   `(let ((*proc* (and ess-local-process-name (get-process ess-local-process-name))))
      (if *proc*
@@ -901,8 +900,7 @@ toggled."
                                     (null ess-local-process-name))
                                    (and
                                     (ess-derived-mode-p)
-                                    (equal loc-proc-name ess-local-process-name))
-                                   ))))
+                                    (equal loc-proc-name ess-local-process-name))))))
               (pop blist))
             (if blist
                 (pop-to-buffer (car blist))
@@ -1507,39 +1505,26 @@ VIS has same meaning as for `ess-eval-region'."
   (interactive "P")
   (ess-eval-region (point) (point-max) vis "Eval buffer till end"))
 
-(defun ess-eval-function (vis &optional no-error)
+(defun ess-eval-function (&optional vis)
   "Send the current function to the inferior ESS process.
-Prefix argument VIS toggles the meaning of `ess-eval-visibly'. If
-NO-ERROR is non-nil and the function was successfully evaluated,
-return '(beg end) representing the beginning and end of the
-current function, otherwise (in case of an error) return nil."
+Prefix arg VIS toggles visibility of ess-code as for
+`ess-eval-region'. Returns nil if not inside a function."
   (interactive "P")
-  (ess-force-buffer-current "Process to use: ")
   (save-excursion
     (ignore-errors
       ;; Evaluation is forward oriented
       (forward-line -1)
       (ess-next-code-line 1))
-    (let ((beg-end (ess-end-of-function nil no-error)))
-      (when beg-end
-        (let* ((beg (nth 0 beg-end))
-               (end (nth 1 beg-end))
-               (proc (get-process ess-local-process-name))
-               ;; FIXME: func names starting with . are not recognized??
-               (name (progn (goto-char beg)
-                            (forward-word)
-                            (ess-read-object-name-default)))
+    (when-let ((end (progn (end-of-defun)
+                           (point)))
+               (beg (and (beginning-of-defun)
+                         (point)))
                (msg (format "Eval function %s"
-                            (propertize (or name "???")
-                                        'face 'font-lock-function-name-face)))
-               (visibly (if vis (not ess-eval-visibly) ess-eval-visibly)))
-          (ess-blink-region beg end)
-          (cond
-           ((ess-tracebug-p)
-            (ess-tracebug-send-function proc beg end visibly msg))
-           (t
-            (ess-send-region proc beg end visibly msg)))
-          beg-end)))))
+                            (propertize (add-log-current-defun)
+                                        'face 'font-lock-function-name-face))))
+      (if (ess-tracebug-p)
+          (ess-tracebug-send-function (get-process ess-local-process-name) beg end vis msg)
+        (ess-eval-region beg end vis msg)))))
 
 (defun ess-eval-paragraph (&optional vis)
   "Send the current paragraph to the inferior ESS process.
@@ -1561,10 +1546,12 @@ Prefix arg VIS toggles visibility of ess-code as for
 `ess-eval-region'. Returns 'function if a function was evaluated
 or 'paragraph if a paragraph."
   (interactive "P")
-  (if (ess-eval-function vis 'noerror)
-      'function
-    (ess-eval-paragraph vis)
-    'paragraph))
+  (condition-case nil
+      (progn (ess-eval-function vis)
+             'function)
+    ;; TODO: Maybe be smarter than just catching all errors?
+    (error (ess-eval-paragraph vis)
+           'paragraph)))
 
 (defun ess-eval-function-or-paragraph-and-step (&optional vis)
   "Send the current function if \\[point] is inside one.
@@ -1595,7 +1582,7 @@ step to the next code line or to the end of region if region was
 active. Prefix arg VIS toggles visibility of ess-code as for
 `ess-eval-region'."
   (interactive "P")
-  (ess-eval-region-or-function-or-paragraph vis)
+  (ess-skip-thing (ess-eval-region-or-function-or-paragraph vis))
   (ess-next-code-line))
 
 (defun ess-eval-region-or-line-and-step (&optional vis)

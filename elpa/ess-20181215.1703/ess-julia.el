@@ -389,7 +389,6 @@ It makes underscores and dots word constituent chars.")
   (add-hook 'completion-at-point-functions 'ess-julia-object-completion nil 'local)
   (add-hook 'completion-at-point-functions 'ess-filename-completion nil 'local)
   (if (fboundp 'ess-add-toolbar) (ess-add-toolbar))
-  (set (make-local-variable 'end-of-defun-function) 'ess-end-of-function)
   (setq imenu-generic-expression ess-julia-imenu-generic-expression)
   (imenu-add-to-menubar "Imenu-jl"))
 
@@ -398,7 +397,7 @@ It makes underscores and dots word constituent chars.")
   (copy-syntax-table ess-julia-mode-syntax-table)
   "Syntax table for `ess-inferior-julia-mode'.")
 
-(define-derived-mode ess-inferior-julia-mode inferior-ess-mode "iESS[julia]"
+(define-derived-mode inferior-ess-julia-mode inferior-ess-mode "iESS[julia]"
   "Major mode for inferior julia processes."
   (ess-setq-vars-local ess-julia-customize-alist)
   (setq-local comint-use-prompt-regexp t)

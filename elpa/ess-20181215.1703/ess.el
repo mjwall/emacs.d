@@ -252,8 +252,6 @@ ESS source.
     `ess-eval-buffer' sends the current buffer to the ESS process.
     `ess-eval-function' sends the current function to the ESS process.
     `ess-eval-line' sends the current line to the ESS process.
-    `ess-beginning-of-function' and `ess-end-of-function' move the point to
-        the beginning and end of the current ESS function.
     `ess-switch-to-ESS' switches the current buffer to the ESS process buffer.
     `ess-switch-to-end-of-ESS' switches the current buffer to the ESS process
         buffer and puts point at the end of it.
@@ -370,21 +368,33 @@ With UPDATE, update cached package list."
 
 ;;;*;;; Motion / manipulation commands
 
-(defun ess-goto-beginning-of-function-or-para ()
+(defun ess-goto-beginning-of-function-or-para (&optional arg)
   "If inside a function go to the beginning of it.
-Otherwise go to the beginning of paragraph."
+Otherwise go to the beginning of paragraph. If ARG is negative,
+go to the end of function or paragraph."
   (interactive)
-  (or (ess-beginning-of-function 'no-error)
-      (backward-paragraph))
+  (let ((beg-point (point)))
+    (setq arg (or arg 1))
+    (or (condition-case nil (if (> arg 0)
+                                (beginning-of-defun)
+                              (end-of-defun))
+          ;; end-of-defun can error in R mode
+          (error (forward-paragraph)))
+        (if (> arg 0)
+            (backward-paragraph)
+          (forward-paragraph)))
+    (when (eql beg-point (point))
+      ;; Ensure we move
+      (if (> arg 0)
+          (backward-paragraph)
+        (forward-paragraph))))
   (point))
 
 (defun ess-goto-end-of-function-or-para ()
   "If inside a function go to end of it.
 Otherwise go to the end of paragraph."
   (interactive)
-  (or (ess-end-of-function nil 'no-error)
-      (forward-paragraph))
-  (point))
+  (ess-goto-beginning-of-function-or-para -1))
 
 (defun ess-mark-function-or-para ()
   "Put mark at end of ESS function, point at beginning."
@@ -401,7 +411,6 @@ Otherwise go to the end of paragraph."
 If text is already narrowed, this is removed before narrowing to the
 current function."
   (interactive)
-  ;; if point is not in a function, ess-end-of-function catches the error.
   (save-excursion
     (widen)
     (let* ((beg (ess-goto-beginning-of-function-or-para))

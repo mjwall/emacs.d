@@ -285,6 +285,12 @@ there's a region, all lines that region covers will be duplicated."
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+;; diminish
+;; - https://github.com/myrjola/diminish.el
+(use-package diminish
+  :ensure t
+  :defer 1)
+
 ;; ido - built in
 ;; - https://github.com/birkenfeld/idomenu
 ;; - https://github.com/DarwinAwardWinner/ido-completing-read-plus
@@ -473,6 +479,12 @@ there's a region, all lines that region covers will be duplicated."
     ("<f8>" . sr-speedbar)
     ("<f9>" . vc-dir)))
 
+;; company
+;; - https://github.com/company-mode/company-mode
+;; here but not loading
+;;(use-package company
+;;  :ensure t)
+
 ;; Language Specific
 
 ;; Java
@@ -558,6 +570,8 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/dominikh/go-mode.el (guru and rename too)
 ;; - https://github.com/syohex/emacs-go-eldoc
 ;; - https://github.com/nlamirault/gotest.el
+;; derived from
+;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
 (use-package go-mode
   :ensure t
   :preface
@@ -608,6 +622,35 @@ there's a region, all lines that region covers will be duplicated."
   :init
   (setq nxml-slash-auto-complete-flag t)
   (fset 'html-mode 'nxml-mode))
+
+;; ruby - built in
+;; - https://github.com/senny/rvm.el
+;; - https://github.com/fxbois/web-mode
+;; - https://github.com/nonsequitur/inf-ruby
+;; derived from
+;; https://github.com/howardabrams/dot-files/blob/master/emacs-ruby.org
+(use-package ruby-mode
+  :mode "\\.rb\\'"
+  :mode "Rakefile\\'"
+  :mode "Gemfile\\'"
+  :mode "Berksfile\\'"
+  :mode "Vagrantfile\\'"
+  :interpreter "ruby"
+  :init
+  (setq ruby-indent-level 2
+    ruby-indent-tabs-mode nil)
+  (use-package rvm
+    :ensure t
+    :config
+    (rvm-use-default))
+  (use-package web-mode
+    :ensure t
+    :mode "\\.erb\\'")
+  (use-package inf-ruby
+    :ensure t
+    :init
+    (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
+
 
 ;; kotlin
 (use-package kotlin-mode
@@ -679,3 +722,22 @@ there's a region, all lines that region covers will be duplicated."
 ;; markdown
 (use-package markdown-mode
   :ensure t)
+
+
+;; TODO
+
+;; Use bind-key instead of define-key or global-set-key
+;; so that I can M-x describe-personal-keybindings
+;; part of use-package so already there
+
+;; Use diminish to clean up mode line
+
+;; better understand and use etags, ctags and global tags
+
+;; better understand .dir-locals.el
+
+;; try lsp stuff again, couldn't get it working first time around
+
+;; change all `:ensure t' to  `:ensure nil' so packages
+;; dont update automatically.  The nil is default but it allows
+;; me to search and replace

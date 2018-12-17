@@ -16,4 +16,4 @@
  '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))
   '(package-selected-packages
      (quote
-       (go-complete smex ido-completing-read+ gotest go-eldoc go-guru go-rename exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))
+       (diminish inf-ruby web-mode rvm company go-complete smex ido-completing-read+ gotest go-eldoc go-guru go-rename exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))

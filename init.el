@@ -73,7 +73,8 @@
 ;; no mail
 (global-unset-key (kbd "C-x m"))
 ;; from https://sites.google.com/site/steveyegge2/effective-emacs
-(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+;; --- no longer used, see smex below
+;; (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 ;;(global-set-key (kbd "C-x m") 'execute-extended-command) ;; after I unset it
 ;; make Alt-` go to other frame as expected, like s-`
 (global-set-key (kbd "M-`") 'other-frame)
@@ -97,11 +98,15 @@
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; theme
-;; - in ~/.emacs.d/themes so just load them
+;; - wombat is a good default on
+;; - custom themes in in ~/.emacs.d/themes so just load them
+;; - https://github.com/dracula/emacs
+;; - https://github.com/jonathanchu/atom-one-dark-theme
+;; - https://github.com/mjwall/ample-zen
 (add-to-list 'custom-theme-load-path
   (expand-file-name "themes/" user-emacs-directory))
-(load-theme 'dracula)
-;;(load-theme 'wombat) ;; built in
+(load-theme 'atom-one-dark)
+
 
 ;; UI stuff, have to set at top when using daemon
 ;; because (when window-system) and (when not window-system)
@@ -129,7 +134,7 @@
 ;;  (message "setting up in terminal")
 ;;)
 
-;; custom editing functions
+;; custom editing functions, I have lost where they originated
 (defun indent-buffer ()
   "indent whole buffer"
   (interactive)
@@ -251,6 +256,7 @@ there's a region, all lines that region covers will be duplicated."
                                    ("gnu" . 1)))
 
 ;; use-package
+;; - https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -258,17 +264,31 @@ there's a region, all lines that region covers will be duplicated."
   (require 'use-package))
 
 ;; org-mode
-;; calling right after package, trying to get the latest
+;; - https://orgmode.org/
 (use-package org
+  ;; using org-plus-contrib is a hack to make package.el load the newer
   :ensure org-plus-contrib
+  :defer t
   :pin "org"
   :demand t)
 
-;; to verify stuff for use-package
+;; ensure system package
+;; - part of use-package at https://github.com/jwiegley/use-package
 (use-package use-package-ensure-system-package
   :ensure t)
 
+;; help setup paths
+;; - https://github.com/purcell/exec-path-from-shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
 ;; ido - built in
+;; - https://github.com/birkenfeld/idomenu
+;; - https://github.com/DarwinAwardWinner/ido-completing-read-plus
+;; - https://github.com/nonsequitur/smex
 (use-package ido
   :preface
   (defvar ido-other-ignore-directories
@@ -278,6 +298,7 @@ there's a region, all lines that region covers will be duplicated."
     '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))  
   :init
   (use-package idomenu
+    ;; not built in 
     :ensure t
     :bind (("C-x C-i" . idomenu )))
   (use-package recentf
@@ -316,7 +337,17 @@ there's a region, all lines that region covers will be duplicated."
       (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
       (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
       (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-      (define-key ido-completion-map (kbd "<up>") 'ido-prev-match))))
+      (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))
+  (use-package ido-completing-read+
+    :ensure t
+    :init
+    (ido-ubiquitous-mode 1))
+  (use-package smex
+    :ensure t
+    :bind (("M-x" . smex)
+            ("C-x C-m" . smex)
+            ;; orig M-x
+            ("C-c C-c M-x" . execute-extended-command))))
 
 ;; hippie expand - built in
 (use-package hippie-expand
@@ -347,6 +378,7 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; git - built in
 (use-package vc-git
+  :defer t
   :preface
   ;; In vc-git and vc-dir for git buffers,
   ;; make (C-x v) a run git add, u run git reset,
@@ -385,6 +417,7 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; eshell - built in
 (use-package eshell
+  :defer t
   :init
   (use-package em-prompt
     :after vc-git
@@ -442,8 +475,6 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Language Specific
 
-;;(require 'cc-mode)
-
 ;; Java
 ;; - https://github.com/jdee-emacs/jdee
 (use-package jdee
@@ -459,6 +490,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/joshwnj/json-mode
 (use-package js2-mode
   :ensure t
+  :defer t
   :mode "\\.js\\'"
   :interpreter "node"
   :init
@@ -473,6 +505,7 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/AdamNiederer/ng2-mode
 (use-package typescript-mode
   :ensure t
+  :defer t
   :init
   (setf typescript-indent-level js-indent-level)
   :config
@@ -488,6 +521,10 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; python
 ;; based on http://www.andrewty.com/blog/emacs-config-for-python
+;; - https://github.com/proofit404/anaconda-mode
+;; - https://github.com/necaris/conda.el
+;; - https://github.com/millejoh/emacs-ipython-notebook
+;; - https://github.com/paetzke/py-autopep8.el
 (use-package anaconda-mode
   :ensure t
   :defer t
@@ -517,34 +554,66 @@ there's a region, all lines that region covers will be duplicated."
   ((python-mode . anaconda-mode)
     (python-mode . anaconda-eldoc-mode)))
 
-;; go
-
+;; golang
+;; - https://github.com/dominikh/go-mode.el (guru and rename too)
+;; - https://github.com/syohex/emacs-go-eldoc
+;; - https://github.com/nlamirault/gotest.el
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :preface
+  (defun my-go-mode-fn()
+    (go-eldoc-setup)
+    (go-guru-hl-identifier-mode)
+    (flycheck-mode 1)
+    (setq imenu-generic-expression
+          '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
+            ("func" "^func *\\(.*\\) {" 1))))
+  :init
+  (use-package go-rename
+    :ensure t
+    :defer t)
+  (use-package go-guru
+    :ensure t
+    :defer t)
+  (use-package go-eldoc
+    :ensure t
+    :defer t)
+  (use-package gotest
+    :ensure t
+    :defer t)
+  (use-package go-complete
+    :ensure t
+    :defer t)
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-copy-env "GOPATH"))
+  (setq gofmt-command "goimports") 
+  :bind
+  (:map go-mode-map
+   ("M-." . go-guru-definition)
+   ("C-c d" . godoc-at-point)
+   ("C-c g" . godoc)
+   ("C-c h" . go-guru-hl-identifier))
+  :hook ((before-save-hook . gofmt-before-save)
+          (go-mode . my-go-mode-fn)))
 
-;; (use-package eglot
-;;   :ensure t
-;;   ;; :hook (typescript-mode . eglot-ensure)
-;;   )
-
-
-;; C/C++
+;; c/c++
+;; for c++ 14 look at cquery, for c++ 17 look at ccls
 (use-package cc-mode
   :init
   (setq tab-width 2
     c-basic-offset 2))
-;; C++ 14
-;; (use-package cquery
-;; :ensure t)
-;; C++ 17
-;; (use-package ccls
-;;  :ensure t)
+
+;; xml/html
+(use-package nxml-mode
+  :init
+  (setq nxml-slash-auto-complete-flag t)
+  (fset 'html-mode 'nxml-mode))
 
 ;; kotlin
 (use-package kotlin-mode
   :ensure t)
 
-;; elisp
+;; elisp - built in
 (use-package emacs-lisp-mode
   :init
   (setq lisp-indent-offset 2)
@@ -557,7 +626,7 @@ there's a region, all lines that region covers will be duplicated."
          ("M-&" . complete-symbol))
   :interpreter (("emacs" . emacs-lisp-mode)))
 
-;; bash
+;; bash - built in
 (use-package sh-script
   :init
   (setq sh-basic-offset 2))

@@ -3,6 +3,14 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; trying to make initialize faster, see
+;; https://github.com/nilcons/emacs-use-package-fast
+(setq gc-cons-threshold 64000000)
+(add-hook 'after-init-hook #'(lambda ()
+                               ;; restore after startup
+                               (setq gc-cons-threshold 800000)))
+
+;; holler if old emacs
 (let ((minver "26.0"))
   (when (version< emacs-version minver)
     (error
@@ -250,10 +258,11 @@ there's a region, all lines that region covers will be duplicated."
 ;; packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(setq package-archive-priorities '(("org" . 3)
-                                   ("melpa" . 2)
-                                   ("gnu" . 1)))
+;; turn back on when want to update orgmode
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;;(setq package-archive-priorities '(("org" . 3)
+;;                                   ("melpa" . 2)
+;;                                   ("gnu" . 1)))
 
 ;; use-package
 ;; - https://github.com/jwiegley/use-package
@@ -267,10 +276,12 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://orgmode.org/
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
-  :ensure org-plus-contrib
+  ;; turned off in package-archives, turn back on to load new
+  ;; :ensure org-plus-contrib	     
   :defer t
-  :pin "org"
-  :demand t)
+  ;; :pin "org"
+  ;; :demand t
+  )
 
 ;; ensure system package
 ;; - part of use-package at https://github.com/jwiegley/use-package
@@ -279,11 +290,11 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; help setup paths
 ;; - https://github.com/purcell/exec-path-from-shell
-(use-package exec-path-from-shell
-  :ensure nil
-  :config
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
+;;(use-package exec-path-from-shell
+;;  :ensure nil
+;;  :config
+;;  (when (memq window-system '(mac ns))
+;;    (exec-path-from-shell-initialize)))
 
 ;; diminish
 ;; - https://github.com/myrjola/diminish.el
@@ -302,7 +313,7 @@ there's a region, all lines that region covers will be duplicated."
        "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
   (defvar ido-other-ignore-files
     '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))  
-  :init
+  :config
   (use-package idomenu
     ;; not built in 
     :ensure nil
@@ -346,7 +357,7 @@ there's a region, all lines that region covers will be duplicated."
       (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))
   (use-package ido-completing-read+
     :ensure nil
-    :init
+    :config
     (ido-ubiquitous-mode 1))
   (use-package smex
     :ensure nil
@@ -358,16 +369,6 @@ there's a region, all lines that region covers will be duplicated."
 ;; hippie expand - built in
 (use-package hippie-expand
   :init
-  (use-package dabbrev
-    :config
-    (setf dabbrev-case-fold-search nil)
-    ;; M-/ already rebound to undo, unbind the backward key
-    (global-unset-key (kbd "C-M-/")))
-  (use-package abbrev
-    :config
-    ;; don't prompt for ~/.emacs.d/themes
-    (setq save-abbrevs 'silently)
-    (setq-default abbrev-mode t))
   (setq hippie-expand-try-functions-list
     '(try-expand-dabbrev
        try-expand-dabbrev-all-buffers
@@ -379,12 +380,22 @@ there's a region, all lines that region covers will be duplicated."
        try-expand-line
        try-complete-lisp-symbol-partially
        try-complete-lisp-symbol))
+  :config
+  (use-package dabbrev
+    :config
+    (setf dabbrev-case-fold-search nil)
+    ;; M-/ already rebound to undo, unbind the backward key
+    (global-unset-key (kbd "C-M-/")))
+  (use-package abbrev
+    :config
+    ;; don't prompt for ~/.emacs.d/themes
+    (setq save-abbrevs 'silently)
+    (setq-default abbrev-mode t))
   :bind
   (("C-<tab>" . hippie-expand)))
 
 ;; git - built in
 (use-package vc-git
-  :defer t
   :preface
   ;; In vc-git and vc-dir for git buffers,
   ;; make (C-x v) a run git add, u run git reset,
@@ -411,7 +422,7 @@ there's a region, all lines that region covers will be duplicated."
     (interactive)
     (vc-dir-refresh)
     (vc-dir-hide-up-to-date))
-  :init
+  :config
   (use-package vc-dir)
   (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
   (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
@@ -424,8 +435,8 @@ there's a region, all lines that region covers will be duplicated."
 ;; eshell - all built in except
 ;; - https://github.com/Fuco1/eshell-bookmark
 (use-package eshell
-  :defer t
-  :init
+  :commands eshell
+  :config
   (use-package em-prompt
     :after vc-git
     :preface
@@ -444,23 +455,23 @@ there's a region, all lines that region covers will be duplicated."
             'face '(foreground-color . "darkcyan")))
         "\n"
         (if (= (user-uid) 0) "# " "$ ")))
-    :init
+    :config
     (setq
       eshell-highlight-prompt nil
       eshell-prompt-regexp "^[^#$]*[#$] "
       eshell-prompt-function 'better-eshell-prompt))
   (use-package em-hist
-    :init
+    :config
     (setq
       eshell-save-history-on-exit t
       eshell-history-size 1024))
   (use-package em-cmpl
-    :init
+    :config
     (setq
       eshell-cmpl-cycle-completions nil
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"))
   (use-package em-term
-    :init
+    :config
     (setq
       eshell-visual-commands '("less" "top" "vim")
       eshell-visual-subcommands '(("git" "log" "diff" "di" "show"))))
@@ -468,14 +479,13 @@ there's a region, all lines that region covers will be duplicated."
     :ensure nil
     :config
     (add-hook 'eshell-mode-hook 'eshell-bookmark-setup))
-  :config
   (defalias 'ff 'find-file)
   (defalias 'd 'dired)
   (defalias 'fo 'find-file-other-window))
 
 ;; project - built in
 (use-package project
-  :init
+  :config
   (use-package sr-speedbar
     :ensure nil)
   :bind
@@ -520,7 +530,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package jdee
   :ensure nil
   :defer t
-  :init
+  :config
   (custom-set-variables
     '(jdee-server-dir
        (expand-file-name "jdee-server" user-emacs-directory))))
@@ -530,7 +540,6 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/joshwnj/json-mode
 (use-package js2-mode
   :ensure nil
-  :defer t
   :mode "\\.js\\'"
   :interpreter "node"
   :init
@@ -567,18 +576,19 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/paetzke/py-autopep8.el
 (use-package anaconda-mode
   :ensure nil
-  :defer t
   :init
   (setq python-indent-offset 4
     python-indent 4
     python-shell-interpreter "ipython"
     python-shell-interpreter-args "--simple-prompt")
+  :config
   (use-package conda
     :ensure nil
     :init
-   (setq conda-anaconda-home "~/anaconda3")
-   (conda-env-initialize-interactive-shells)
-   (conda-env-initialize-eshell))
+    (setq conda-anaconda-home "~/anaconda3")
+    :config
+    (conda-env-initialize-interactive-shells)
+    (conda-env-initialize-eshell))
   (use-package ein
     :ensure nil
     :init
@@ -626,8 +636,8 @@ there's a region, all lines that region covers will be duplicated."
   (use-package go-complete
     :ensure nil
     :defer t)
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-copy-env "GOPATH"))
+;;  (when (memq window-system '(mac ns))
+;;    (exec-path-from-shell-copy-env "GOPATH"))
   (setq gofmt-command "goimports") 
   :bind
   (:map go-mode-map
@@ -667,6 +677,7 @@ there's a region, all lines that region covers will be duplicated."
   :init
   (setq ruby-indent-level 2
     ruby-indent-tabs-mode nil)
+  :config
   (use-package rvm
     :ensure nil
     :config
@@ -683,6 +694,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package emacs-lisp-mode
   :init
   (setq lisp-indent-offset 2)
+  :config
   (use-package eldoc
       :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
   (use-package ert

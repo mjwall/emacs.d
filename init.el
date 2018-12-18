@@ -484,14 +484,22 @@ there's a region, all lines that region covers will be duplicated."
   (defalias 'fo 'find-file-other-window))
 
 ;; project - built in
+;; - sr-speedbar from https://github.com/emacsorphanage/sr-speedbar
 (use-package project
-  :config
+  :init
+  (require 'vc-git)
   (use-package sr-speedbar
-    :ensure nil)
+    :ensure nil
+    :init
+    (setq
+      sr-speedbar-show-unknown-files t
+      speedbar-use-images nil
+      sr-speedbar-default-width 20
+      sr-speedbar-right-side nil))
   :bind
   (("<f6>" . vc-git-grep)
     ("<f7>" . project-find-file)
-    ("<f8>" . sr-speedbar)
+    ("<f8>" . sr-speedbar-toggle)
     ("<f9>" . vc-dir)))
 
 ;; ctags

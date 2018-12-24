@@ -1,9 +1,43 @@
+# ~/.emacs.d
+
+My emacs config
+
+## Linux
+
+
+
+## Mac
+
+Compiling
+
+Either
+
+```
+./src/get-src.sh
+```
+or
+
+```
+git clone git@bitbucket.org:mituharu/emacs-mac.git
+```
+
+Then build it
+
+```
+git co emacs-26.1-mac-7.4
+./autogen.sh
+./configure --enable-mac-app=/Applications --without-pop --with-mailutils --prefix=/Applications/Emacs.app/Contents/MacOS
+PATH="/usr/local/opt/texinfo/bin:$PATH" make
+make install
+```
+
+Add to ~/.bashrc
+```
 # emacs on MacOSX, seems to be needed by cask
 export EMACSHOME=/Applications/Emacs.app/Contents/MacOS
 prepend_path "${EMACSHOME}/bin"
 prepend_path "${HOME}/.emacs.d/bin"
-
-
+```
 
 ## Profiling
 

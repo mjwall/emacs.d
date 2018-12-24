@@ -6,6 +6,8 @@ SRC_DIR=${HOME}/.emacs.d/src
 
 test -d ${SRC_DIR}/emacs || git clone git@github.com:emacs-mirror/emacs.git ${SRC_DIR}/emacs
 
+test -d ${SRC_DIR}/emacs-mac || git clone git@bitbucket.org:mituharu/emacs-mac.git ${SRC_DIR}/emacs-mac
+
 # use-package build here and put in site-lisp
 
 test -d ${SRC_DIR}/use-package || git clone git@github.com:jwiegley/use-package.git ${SRC_DIR}/use-package

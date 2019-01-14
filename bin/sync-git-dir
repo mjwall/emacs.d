@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# script to sync a git repo.  Intended to be called on emacs startup and shutdown.
+# Should be fine as long as emacs ons 2 computers are not running at the same time.
+#
+# Takes one arg, the git directory.  Expects that directory to already be an
+# existing git repo with an appropriate remote
+
+# ensure 1 arg, that is a dir, and that it is a git repo
+
+
+help() {
+  echo -e "Usage: $0 <dir>"
+  echo -e "  Requires 1 argument that must be git repo"
+}
+
+log() {
+  echo -e "$@"
+}
+
+if [ $# -ne 1 ]; then
+  log "ERROR: 1 argument required"
+  help
+  exit 1
+fi
+
+GITDIR=$1
+
+if [ ! -d $GITDIR ]; then
+  log "<dir> must be a directory"
+  help
+  exit 1
+fi
+
+if [ ! -e ${GITDIR}/.git/config ]; then
+  log "<dir> must be an existing git directory"
+  help
+  exit 1
+fi
+
+add_and_commit() {
+  if [ -n "$(git status --porcelain)" ]; then
+    log "Changes to be committed\n$(git status -s)"
+    host=$(uname -n | sed -e 's/\..*//')
+    git add -A && git commit -m "changes from ${host} on $(date)"
+  else
+    log "No changes"
+  fi
+}
+
+pull() {
+  log "Pulling from remote"
+  git pull
+}
+
+push() {
+  log "Pushing changes"
+  git push
+}
+
+OLD_DIR=$(pwd)
+cd ${GITDIR}
+log "Syncing $(pwd)"
+add_and_commit && pull && push
+cd ${OLD_DIR}

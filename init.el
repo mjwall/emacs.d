@@ -278,8 +278,43 @@ there's a region, all lines that region covers will be duplicated."
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
   ;; :ensure org-plus-contrib	     
-  :defer t
-  ;; :pin "org"
+  :ensure t
+  :preface
+  (setq sync-git-dir-file
+    (expand-file-name "bin/sync-git-dir" user-emacs-directory))
+  (defun async-org-files ()
+    "Use `start-process' to run `sync-git-dir-file' on `org-directory' in the background."
+    (interactive)
+    (progn
+      (org-save-all-org-buffers)
+      (message "Syncing org files in background")
+      (start-process "org-sync"
+        "*org-git-sync*"
+        sync-git-dir-file
+        (expand-file-name org-directory))
+      (pop-to-buffer "*org-git-sync*")
+      (delete-other-windows)))
+  (defun sync-org-files-on-shutdown ()
+    "Use `call-process' to run `sync-git-dir-file' on `org-directory'."
+    (interactive)
+    (progn
+      (org-save-all-org-buffers)
+      (message "Syncing org files on shutdown")
+      (call-process
+        sync-git-dir-file
+        nil nil nil
+        (expand-file-name org-directory))))
+  (defun ask-to-sync-org-files ()
+    "Prompt and ask whether to sync org files or not.  If 'y', then setup a shutdown hook to sync to as well"
+    ;; TODO: only fix script to have lock file and only prompt if not there
+    (interactive)
+    (if (y-or-n-p "Sync org files?")
+      (progn
+        (async-org-files)
+        (add-hook 'kill-emacs-hook #'sync-org-files-on-shutdown))))
+  :init
+  (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)
+  ;:pin "manual"
   ;; :demand t
   )
 

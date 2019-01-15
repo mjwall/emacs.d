@@ -89,7 +89,7 @@
 ;; keybinding to bring up ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; some more familiar keybindings for default functions
-(global-set-key (kbd "C-c C-j") 'join-line)
+;;(global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
 ;; TODO: figure out why the next one doesn't work in terminal
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region) 
@@ -316,6 +316,13 @@ there's a region, all lines that region covers will be duplicated."
   (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)
   ;:pin "manual"
   ;; :demand t
+  )
+
+;; org-journal
+(use-package org-journal
+  :ensure t
+  :custom
+  (org-journal-dir (expand-file-name "journal" org-directory))
   )
 
 ;; ensure system package

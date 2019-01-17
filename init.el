@@ -313,6 +313,7 @@ there's a region, all lines that region covers will be duplicated."
         (async-org-files)
         (add-hook 'kill-emacs-hook #'sync-org-files-on-shutdown))))
   :init
+  (setq org-startup-truncated nil) ; wrap lines
   (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)
   ;:pin "manual"
   ;; :demand t
@@ -322,6 +323,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package org-journal
   :ensure t
   :custom
+  (org-journal-file-format "%Y%m%d.org")
   (org-journal-dir (expand-file-name "journal" org-directory))
   )
 

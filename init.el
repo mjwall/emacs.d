@@ -47,7 +47,15 @@
   ;; integrate kill ring with clipboard
   x-select-enable-clipboard t
   ;; make text-mode default, not fundamental
-  major-mode 'text-mode)
+  major-mode 'text-mode
+  ;; https://www.timeanddate.com/sun/usa/baltimore
+  calendar-longitute -76.62
+  calendar-latitue 39.28
+  calendar-location-name "Baltimore, MD"
+  calendar-time-zone -300
+  calendar-standard-time-zone-name "EST"
+  calendar-daylight-time-zone-name "EDT"
+  )
 
 ;; Other setting
 ;; transparently open compressed files

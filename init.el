@@ -302,12 +302,12 @@ there's a region, all lines that region covers will be duplicated."
         (expand-file-name org-directory))
       (pop-to-buffer "*org-git-sync*")
       (delete-other-windows)))
-  (defun sync-org-files-on-shutdown ()
+  (defun sync-org-files ()
     "Use `call-process' to run `sync-git-dir-file' on `org-directory'."
     (interactive)
     (progn
       (org-save-all-org-buffers)
-      (message "Syncing org files on shutdown")
+      (message "Syncing org files")
       (call-process
         sync-git-dir-file
         nil nil nil
@@ -319,7 +319,8 @@ there's a region, all lines that region covers will be duplicated."
     (if (y-or-n-p "Sync org files?")
       (progn
         (async-org-files)
-        (add-hook 'kill-emacs-hook #'sync-org-files-on-shutdown))))
+        (add-hook 'kill-emacs-hook #'sync-org-files)
+        (global-set-key (kbd "<f5>") 'sync-org-files))))
   :init
   (setq org-startup-truncated nil) ; wrap lines
   (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)

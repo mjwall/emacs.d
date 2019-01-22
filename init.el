@@ -320,7 +320,7 @@ there's a region, all lines that region covers will be duplicated."
       (progn
         (async-org-files)
         (add-hook 'kill-emacs-hook #'sync-org-files)
-        (global-set-key (kbd "<f5>") 'sync-org-files))))
+        (global-set-key (kbd "<f5>") 'async-org-files))))
   :init
   (setq org-startup-truncated nil) ; wrap lines
   (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)

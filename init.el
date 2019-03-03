@@ -114,14 +114,14 @@
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; theme
-;; - wombat is a good default on
+;; - wombat is a good default dark one, adwaita is a good default light one
 ;; - custom themes in in ~/.emacs.d/themes so just load them
 ;; - https://github.com/dracula/emacs
 ;; - https://github.com/jonathanchu/atom-one-dark-theme
 ;; - https://github.com/mjwall/ample-zen
 (add-to-list 'custom-theme-load-path
   (expand-file-name "themes/" user-emacs-directory))
-(load-theme 'atom-one-dark)
+(load-theme 'adwaita)
 
 
 ;; UI stuff, have to set at top when using daemon

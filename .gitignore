@@ -45,3 +45,6 @@ ido.last
 session.*
 recentf
 smex-items
+ac-comphist.dat
+anaconda-mode/
+request/

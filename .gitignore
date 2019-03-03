@@ -40,3 +40,8 @@ books/
 
 semanticdb
 history
+
+ido.last
+session.*
+recentf
+smex-items

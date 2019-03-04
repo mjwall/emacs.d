@@ -119,9 +119,10 @@
 ;; - https://github.com/dracula/emacs
 ;; - https://github.com/jonathanchu/atom-one-dark-theme
 ;; - https://github.com/mjwall/ample-zen
-(add-to-list 'custom-theme-load-path
-  (expand-file-name "themes/" user-emacs-directory))
-(load-theme 'adwaita)
+;; - https://github.com/maio/eink-emacs
+(defvar my-theme-dir (expand-file-name "themes/" user-emacs-directory))
+(add-to-list 'custom-theme-load-path my-theme-dir)
+(load-theme 'eink t)
 
 
 ;; UI stuff, have to set at top when using daemon
@@ -138,7 +139,7 @@
     (setq exec-path (append exec-path '("/usr/local/bin")))
     ))
 (if (eq system-type 'gnu/linux)
-  (setq default-frame-alist '((font . "Monospace-14")))
+  (setq default-frame-alist '((font . "-CTDB-Fira Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")))
   )
 
 ;; these functions only run once when starting a daemon

@@ -139,7 +139,7 @@
     (setq exec-path (append exec-path '("/usr/local/bin")))
     ))
 (if (eq system-type 'gnu/linux)
-  (setq default-frame-alist '((font . "-CTDB-Fira Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")))
+  (setq default-frame-alist '((font . "Monospace-15")))
   )
 
 ;; these functions only run once when starting a daemon

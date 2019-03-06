@@ -120,9 +120,10 @@
 ;; - https://github.com/jonathanchu/atom-one-dark-theme
 ;; - https://github.com/mjwall/ample-zen
 ;; - https://github.com/maio/eink-emacs
+;; - https://github.com/anler/minimal-theme
 (defvar my-theme-dir (expand-file-name "themes/" user-emacs-directory))
 (add-to-list 'custom-theme-load-path my-theme-dir)
-(load-theme 'eink t)
+(load-theme 'minimal-light t)
 
 
 ;; UI stuff, have to set at top when using daemon

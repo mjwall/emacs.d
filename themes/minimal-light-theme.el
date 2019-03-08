@@ -124,12 +124,12 @@
      `(highlight-stages-higher-level-face ((,class (:background ,region))))
 
      ;; org-mode
-     `(org-level-1 ((,class (:foreground ,foreground :height 1.2))))
-     `(org-level-2 ((,class (:foreground ,foreground :height 1.1))))
-     `(org-level-3 ((,class (:foreground ,foreground))))
-     `(org-level-4 ((,class (:foreground ,foreground))))
-     `(org-level-5 ((,class (:foreground ,foreground))))
-     `(org-level-6 ((,class (:foreground ,foreground))))
+     `(org-level-1 ((,class (:foreground ,foreground :height 1.6))))
+     `(org-level-2 ((,class (:foreground ,foreground :height 1.5))))
+     `(org-level-3 ((,class (:foreground ,foreground :height 1.4))))
+     `(org-level-4 ((,class (:foreground ,foreground :height 1.3))))
+     `(org-level-5 ((,class (:foreground ,foreground :height 1.2))))
+     `(org-level-6 ((,class (:foreground ,foreground :height 1.1))))
      `(org-level-7 ((,class (:foreground ,foreground))))
      `(org-level-8 ((,class (:foreground ,foreground))))
 

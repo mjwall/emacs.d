@@ -121,9 +121,12 @@
 ;; - https://github.com/mjwall/ample-zen
 ;; - https://github.com/maio/eink-emacs
 ;; - https://github.com/anler/minimal-theme
+;; - https://github.com/jimeh/twilight-bright-theme.el
+;; - https://github.com/dgutov/espresso-theme
+;; - https://github.com/tmalsburg/tango-plus-theme
 (defvar my-theme-dir (expand-file-name "themes/" user-emacs-directory))
 (add-to-list 'custom-theme-load-path my-theme-dir)
-(load-theme 'minimal-light t)
+(load-theme 'espresso t)
 
 
 ;; UI stuff, have to set at top when using daemon

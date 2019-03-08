@@ -20,6 +20,12 @@
  '(fci-rule-character-color "#d9d9d9")
  '(fci-rule-color "#d9d9d9" t)
  '(jdee-server-dir (expand-file-name "jdee-server" user-emacs-directory))
+  '(org-file-apps
+     (quote
+       ((auto-mode . emacs)
+         ("\\.mm\\'" . default)
+         ("\\.x?html?\\'" . default)
+         ("\\.pdf\\'" . "evince %s"))))
  '(org-journal-dir "/home/mikewall/org/journal")
  '(org-journal-file-format "%Y%m%d.org")
   '(package-selected-packages

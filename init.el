@@ -821,8 +821,17 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; gradle
 ;; - https://github.com/jacobono/emacs-gradle-mode
-(use-package gradle-mode
-  :ensure nil)
+;;(use-package gradle-mode
+;;  :ensure nil
+;;  :init
+;;  (setq gradle-use-gradlew 1))
+
+;; my-gradle
+;; - copied from elpa dir with emacs-gradle-mode above
+(use-package my-gradle-mode
+  :ensure nil
+  :init
+  (setq gradle-use-gradlew 1))
 
 ;; julia
 ;; - https://github.com/JuliaEditorSupport/julia-emacs

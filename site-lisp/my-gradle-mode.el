@@ -183,6 +183,6 @@ directory to run tasks."
   :keymap 'gradle-mode-map
   :global t)
 
-(provide 'gradle-mode)
+(provide 'my-gradle-mode)
 
 ;;; gradle-mode.el ends here

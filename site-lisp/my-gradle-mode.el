@@ -79,7 +79,10 @@ is a convention for multi-build projects, where dirname is under some
 
 (defun gradle-is-gradlew-dir (dir)
   "Does this DIR contain a gradlew executable file."
-  (file-exists-p (expand-file-name "gradlew" dir)))
+  (progn
+    (message (concat "Here mike: " (expand-file-name "gradlew" dir)))
+    (file-exists-p (expand-file-name "gradlew" dir))
+    ))
 
 (defun gradle-run-from-dir (is-dir)
   "Find the closest dir to execute the gradle command under via IS-DIR function.

@@ -55,6 +55,7 @@
   calendar-time-zone -300
   calendar-standard-time-zone-name "EST"
   calendar-daylight-time-zone-name "EDT"
+  compilation-scroll-output 'first-error
   )
 
 ;; Other setting

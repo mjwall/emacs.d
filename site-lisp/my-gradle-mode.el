@@ -5,7 +5,6 @@
 ;; Author: Daniel Mijares <daniel.j.mijares@gmail.com>
 ;; Maintainer: Daniel Mijares <daniel.j.mijares@gmail.com>
 ;; URL: http://github.com/jacobono/emacs-gradle-mode
-;; Package-Version: 20150313.1905
 ;; Version: 0.5.3
 ;; Keywords: gradle
 ;; Package-Requires: ((s "1.8.0"))
@@ -79,10 +78,7 @@ is a convention for multi-build projects, where dirname is under some
 
 (defun gradle-is-gradlew-dir (dir)
   "Does this DIR contain a gradlew executable file."
-  (progn
-    (message (concat "Here mike: " (expand-file-name "gradlew" dir)))
-    (file-exists-p (expand-file-name "gradlew" dir))
-    ))
+  (file-exists-p (expand-file-name "gradlew" dir)))
 
 (defun gradle-run-from-dir (is-dir)
   "Find the closest dir to execute the gradle command under via IS-DIR function.

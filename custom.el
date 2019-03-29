@@ -26,8 +26,8 @@
          ("\\.mm\\'" . default)
          ("\\.x?html?\\'" . default)
          ("\\.pdf\\'" . "evince %s"))))
- '(org-journal-dir "/home/mikewall/org/journal")
+ '(org-journal-dir "/home/mjwall/org/journal")
  '(org-journal-file-format "%Y%m%d.org")
   '(package-selected-packages
      (quote
-       (org-journal groovy-mode lua-mode docker-tramp docker-compose-mode eshell-bookmark ctags-update diminish inf-ruby web-mode rvm company go-complete smex ido-completing-read+ gotest go-eldoc go-guru go-rename exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))
+       (go-autocomplete org-journal groovy-mode lua-mode docker-tramp docker-compose-mode eshell-bookmark ctags-update diminish inf-ruby web-mode rvm company smex ido-completing-read+ gotest go-eldoc go-guru go-rename exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))

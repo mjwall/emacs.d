@@ -700,7 +700,7 @@ there's a region, all lines that region covers will be duplicated."
   (use-package gotest
     :ensure nil
     :defer t)
-  (use-package go-complete
+  (use-package go-autocomplete
     :ensure nil
     :defer t)
 ;;  (when (memq window-system '(mac ns))

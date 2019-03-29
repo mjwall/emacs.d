@@ -586,9 +586,12 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; company
 ;; - https://github.com/company-mode/company-mode
-;; here but not loading
-;;(use-package company
-;;  :ensure nil)
+(use-package company
+  :ensure t
+  :bind (("C-." . company-complete))
+  :config
+  ;;(global-company-mode)
+  )
 
 ;; Language Specific
 
@@ -684,6 +687,8 @@ there's a region, all lines that region covers will be duplicated."
     (go-eldoc-setup)
     (go-guru-hl-identifier-mode)
     (flycheck-mode 1)
+    (add-to-list 'company-backends 'company-go)
+    (company-mode)
     (setq imenu-generic-expression
           '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
             ("func" "^func *\\(.*\\) {" 1))))
@@ -700,12 +705,11 @@ there's a region, all lines that region covers will be duplicated."
   (use-package gotest
     :ensure nil
     :defer t)
-  (use-package go-autocomplete
-    :ensure nil
+  (use-package company-go
+    ;; from gocode src at
+    ;; https://github.com/nsf/gocode/blob/master/emacs-company/company-go.el
     :defer t)
-;;  (when (memq window-system '(mac ns))
-;;    (exec-path-from-shell-copy-env "GOPATH"))
-  (setq gofmt-command "goimports") 
+  (setq gofmt-command "goimports")
   :bind
   (:map go-mode-map
    ("M-." . go-guru-definition)

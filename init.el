@@ -586,12 +586,12 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; company
 ;; - https://github.com/company-mode/company-mode
-(use-package company
-  :ensure t
-  :bind (("C-." . company-complete))
-  :config
-  ;;(global-company-mode)
-  )
+;;(use-package company
+;;  :ensure t
+;;  :bind (("C-." . company-complete))
+;;  :config
+;;  ;;(global-company-mode)
+;;  )
 
 ;; Language Specific
 
@@ -680,6 +680,26 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/nlamirault/gotest.el
 ;; derived from
 ;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
+(use-package go-rename
+  :ensure nil
+  :defer t)
+(use-package go-guru
+  :ensure nil
+  :defer t)
+(use-package go-eldoc
+  :ensure nil
+  :defer t)
+(use-package gotest
+  :ensure nil
+  :defer t)
+(use-package golint
+  :ensure nil
+  :defer t)
+(use-package go-autocomplete
+  :ensure nil
+  :defer t
+  :config
+  (require 'auto-complete-config))
 (use-package go-mode
   :ensure nil
   :preface
@@ -687,31 +707,20 @@ there's a region, all lines that region covers will be duplicated."
     (go-eldoc-setup)
     (go-guru-hl-identifier-mode)
     (flycheck-mode 1)
-    (add-to-list 'company-backends 'company-go)
-    (company-mode)
     (setq imenu-generic-expression
           '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
             ("func" "^func *\\(.*\\) {" 1))))
   :config
-  (use-package go-rename
-    :ensure nil
-    :defer t)
-  (use-package go-guru
-    :ensure nil
-    :defer t)
-  (use-package go-eldoc
-    :ensure nil
-    :defer t)
-  (use-package gotest
-    :ensure nil
-    :defer t)
-  (use-package company-go
-    ;; from gocode src at
-    ;; https://github.com/nsf/gocode/blob/master/emacs-company/company-go.el
-    :defer t)
+  (require 'go-rename)
+  (require 'go-guru)
+  (require 'go-eldoc)
+  (require 'gotest)
+  (require 'go-autocomplete)
+  (require 'golint)
   (setq gofmt-command "goimports")
   :bind
   (:map go-mode-map
+   ("C-." . auto-complete)
    ("M-." . go-guru-definition)
    ("C-c d" . godoc-at-point)
    ("C-c g" . godoc)

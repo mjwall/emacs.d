@@ -158,11 +158,11 @@
 
 ;; custom editing functions, I have lost where they originated
 (defun indent-buffer ()
-  "indent whole buffer"
+  "Indent whole buffer."
   (interactive)
   (indent-region (point-min) (point-max) nil))
 (defun untabify-buffer ()
-  "Change all tabs to spaces in current buffer"
+  "Change all tabs to spaces in current buffer."
   (interactive)
   (untabify (point-min) (point-max)))
 (defun cleanup-buffer ()
@@ -584,14 +584,22 @@ there's a region, all lines that region covers will be duplicated."
 ;;   ;;:bind (("M-.") 'my-ido-find-tag)
 ;;   )
 
-;; company
+;; company mode
 ;; - https://github.com/company-mode/company-mode
-;;(use-package company
-;;  :ensure t
-;;  :bind (("C-." . company-complete))
-;;  :config
-;;  ;;(global-company-mode)
-;;  )
+(use-package company               
+  :ensure nil
+  :init (global-company-mode)
+  :config
+  (progn
+    ;; Use Company for completion
+    (bind-key [remap completion-at-point] #'company-complete company-mode-map)
+    (setq company-dabbrev-downcase nil)))
+
+;; flycheck
+;; - https://www.flycheck.org/en/latest/
+(use-package flycheck
+  :ensure nil
+  :init (global-flycheck-mode))
 
 ;; Language Specific
 
@@ -679,54 +687,70 @@ there's a region, all lines that region covers will be duplicated."
 ;; - https://github.com/syohex/emacs-go-eldoc
 ;; - https://github.com/nlamirault/gotest.el
 ;; derived from
+;; https://github.com/mswift42/.emacs.d/blob/master/init.el
+;; and
 ;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
-(use-package go-rename
-  :ensure nil
-  :defer t)
-(use-package go-guru
-  :ensure nil
-  :defer t)
-(use-package go-eldoc
-  :ensure nil
-  :defer t)
-(use-package gotest
-  :ensure nil
-  :defer t)
-(use-package golint
-  :ensure nil
-  :defer t)
-(use-package go-autocomplete
-  :ensure nil
-  :defer t
-  :config
-  (require 'auto-complete-config))
+;; and
+;; http://www.tomcraven.io/post/my-go-development-environment/
+;; and
+;; https://github.com/hraberg/.emacs.d/blob/master/init.el
 (use-package go-mode
+  ;; go get -u -v golang.org/x/tools/cmd/goimports
+  ;; go get -u -v github.com/rogpeppe/godef
+  ;; go get -u -v https://github.com/zmb3/gogetdoc
   :ensure nil
-  :preface
-  (defun my-go-mode-fn()
-    (go-eldoc-setup)
-    (go-guru-hl-identifier-mode)
-    (flycheck-mode 1)
-    (setq imenu-generic-expression
-          '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
-            ("func" "^func *\\(.*\\) {" 1))))
   :config
-  (require 'go-rename)
-  (require 'go-guru)
-  (require 'go-eldoc)
-  (require 'gotest)
-  (require 'go-autocomplete)
-  (require 'golint)
-  (setq gofmt-command "goimports")
+  (setq
+    gofmt-command "goimports"
+    ;; https://github.com/dominikh/go-mode.el/issues/262
+    godoc-at-point-function 'godoc-gogetdoc
+    imenu-generic-expression
+    '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
+       ("func" "^func *\\(.*\\) {" 1)))
   :bind
   (:map go-mode-map
-   ("C-." . auto-complete)
-   ("M-." . go-guru-definition)
-   ("C-c d" . godoc-at-point)
-   ("C-c g" . godoc)
-   ("C-c h" . go-guru-hl-identifier))
-  :hook ((before-save-hook . gofmt-before-save)
-          (go-mode . my-go-mode-fn)))
+    ([remap find-tag] . godef-jump)
+    ("C-c d" . godoc-at-point)
+    ("C-c g" . godoc))
+  :hook
+  ((go-mode . electric-pair-mode)
+         (before-save . gofmt-before-save)))
+(use-package go-guru
+  ;; go get -u -v golang.org/x/tools/cmd/guru
+  :ensure nil
+  :config
+  (go-guru-hl-identifier-mode)
+  :bind
+  (:map go-mode-map
+    ("M-." . go-guru-definition)
+    ("C-c h" . go-guru-hl-identifier)))
+(use-package go-rename
+  ;; go get -u -v golang.org/x/tools/cmd/gorename
+  :ensure nil)
+(use-package go-eldoc
+  ;; go get -u -v github.com/mdempsky/gocode
+  :ensure nil
+  :hook
+  ((go-mode . go-eldoc-setup)))
+; flycheck just works
+(use-package company-go
+  ;; - https://github.com/mdempsky/gocode/tree/master/emacs-company
+  ;; go get -u -v github.com/mdempsky/gocode if not already
+  :config
+  (set (make-local-variable 'company-backends)
+    '(company-go))
+  (add-hook
+    'go-mode-hook
+    (lambda ()
+      (set (make-local-variable 'company-backends) '(company-go))
+      (company-mode))))
+(use-package gotest
+  :ensure nil
+  :bind
+  (:map go-test-mode-map
+    ("C-c ," . go-test-current-file)
+    ("C-c C-," . go-test-current-file)
+    ))
 
 ;; c/c++
 ;; for c++ 14 look at cquery, for c++ 17 look at ccls

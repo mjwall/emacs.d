@@ -10,11 +10,7 @@
 ;;; Generated autoloads from go-rename.el
 
 (autoload 'go-rename "go-rename" "\
-Rename the entity denoted by the identifier at point, using
-the `gorename' tool. With FORCE, call `gorename' with the
-`-force' flag.
-
-\(fn NEW-NAME &optional FORCE)" t nil)
+Rename the entity denoted by the identifier at point, using\nthe `gorename' tool. With FORCE, call `gorename' with the\n`-force' flag.\n\n(fn NEW-NAME &optional FORCE)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "go-rename" '("go-")))
 

@@ -554,7 +554,8 @@ there's a region, all lines that region covers will be duplicated."
       speedbar-show-unknown-files t
       speedbar-use-images nil
       sr-speedbar-default-width 20
-      sr-speedbar-right-side nil))
+      sr-speedbar-right-side nil
+      sr-speedbar-auto-refresh nil))
   :bind
   (("<f6>" . vc-git-grep)
     ("<f7>" . project-find-file)

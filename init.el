@@ -905,7 +905,9 @@ there's a region, all lines that region covers will be duplicated."
 ;; groovy
 ;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 (use-package groovy-mode
-  :ensure nil)
+  :ensure nil
+  :config
+  (setq groovy-indent-offset 2))
 
 ;; yaml
 ;; - https://github.com/yoshiki/yaml-mode

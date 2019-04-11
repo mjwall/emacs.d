@@ -871,6 +871,15 @@ there's a region, all lines that region covers will be duplicated."
   :ensure nil
   :init
   (setq gradle-use-gradlew 1))
+(use-package flycheck-gradle
+  :ensure nil
+  :commands (flycheck-gradle-setup)
+  :init
+  (mapc
+   (lambda (x)
+     (add-hook x #'flycheck-gradle-setup))
+   '(java-mode-hook kotlin-mode-hook)))
+
 
 ;; julia
 ;; - https://github.com/JuliaEditorSupport/julia-emacs

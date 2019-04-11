@@ -26,8 +26,8 @@
          ("\\.mm\\'" . default)
          ("\\.x?html?\\'" . default)
          ("\\.pdf\\'" . "evince %s"))))
- '(org-journal-dir "/home/mikewall/org/journal")
+ '(org-journal-dir "/home/mjwall/org/journal")
  '(org-journal-file-format "%Y%m%d.org")
   '(package-selected-packages
      (quote
-       (gotest go-autocomplete company-go go-complete flycheck go-guru go-rename go-eldoc auto-complete org-journal groovy-mode lua-mode docker-tramp docker-compose-mode eshell-bookmark ctags-update diminish inf-ruby web-mode rvm company smex ido-completing-read+ exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))
+       (flycheck-gradle gotest go-autocomplete company-go go-complete flycheck go-guru go-rename go-eldoc auto-complete org-journal groovy-mode lua-mode docker-tramp docker-compose-mode eshell-bookmark ctags-update diminish inf-ruby web-mode rvm company smex ido-completing-read+ exec-path-from-shell py-autopep8 use-package-ensure-system-package ein conda anaconda-mode org-plug-contrib org-plus-contrib sr-speedbar markdown-mode clojure-mode scala-mode gradle-mode cmake-mode protobuf-mode thrift dockerfile-mode ess kotlin-mode go-mode tide ng2-mode typescript-mode json-mode js2-mode jdee idomenu use-package))))

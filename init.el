@@ -613,6 +613,8 @@ there's a region, all lines that region covers will be duplicated."
   (custom-set-variables
     '(jdee-server-dir
        (expand-file-name "src/jdee-server" user-emacs-directory))))
+(use-package autodisass-java-bytecode
+  :ensure nil)
 
 ;; Javascript
 ;; - https://github.com/mooz/js2-mode

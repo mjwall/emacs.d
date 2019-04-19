@@ -1,7 +1,7 @@
 ;; turn off mouse interface early to avoid flicker
-(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; trying to make initialize faster, see
 ;; https://github.com/nilcons/emacs-use-package-fast
@@ -135,7 +135,7 @@
 ;; only run when the daemon is started
 (if (eq system-type 'darwin)
   (progn
-    (setq default-frame-alist '((font . "Menlo-15")))
+    (setq default-frame-alist '((font . "Menlo-13")))
     ;;ls does not support --dired
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil)
@@ -144,7 +144,7 @@
     (setq exec-path (append exec-path '("/usr/local/bin")))
     ))
 (if (eq system-type 'gnu/linux)
-  (setq default-frame-alist '((font . "Monospace-15")))
+  (setq default-frame-alist '((font . "Monospace-13")))
   )
 
 ;; these functions only run once when starting a daemon

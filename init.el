@@ -710,6 +710,7 @@ there's a region, all lines that region covers will be duplicated."
     imenu-generic-expression
     '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
        ("func" "^func *\\(.*\\) {" 1)))
+  (speedbar-add-supported-extension ".go")
   :bind
   (:map go-mode-map
     ([remap find-tag] . godef-jump)

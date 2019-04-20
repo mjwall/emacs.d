@@ -101,7 +101,7 @@
 ;;(global-set-key (kbd "C-c C-j") 'join-line)
 (global-set-key "\r" 'newline-and-indent)
 ;; TODO: figure out why the next one doesn't work in terminal
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region) 
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
 ;; not sure why this works on Mac but not Linux
@@ -291,7 +291,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
-  ;; :ensure org-plus-contrib	     
+  ;; :ensure org-plus-contrib
   :ensure t
   :preface
   (setq sync-git-dir-file
@@ -371,10 +371,10 @@ there's a region, all lines that region covers will be duplicated."
     '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/"
        "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
   (defvar ido-other-ignore-files
-    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))  
+    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))
   :config
   (use-package idomenu
-    ;; not built in 
+    ;; not built in
     :ensure nil
     :bind (("C-x C-i" . idomenu )))
   (use-package recentf
@@ -387,7 +387,7 @@ there's a region, all lines that region covers will be duplicated."
               (ido-completing-read "Choose recent file: "
                 recentf-list nil t)))
         (when file
-          (find-file file))))    
+          (find-file file))))
     :init
     (recentf-mode 1)
     (setq
@@ -406,7 +406,7 @@ there's a region, all lines that region covers will be duplicated."
     ;; Display ido results vertically, rather than horizontally
     ido-decorations '("\n-> " " " "\n   " "\n   ..."
                        "[" "]" " [No match]" " [Matched]"
-                       " [Not readable]" " [Too big]" " [Confirm]"))      
+                       " [Not readable]" " [Too big]" " [Confirm]"))
   ;; C-n/p is more intuitive in vertical layout
   (add-hook 'ido-setup-hook
     (lambda ()

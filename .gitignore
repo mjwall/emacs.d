@@ -23,6 +23,7 @@ network-security.data
 projectile-bookmarks.eld
 .cache/
 abbrev_defs
+bookmarks
 
 ;; my extra stuff
 src/*

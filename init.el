@@ -58,6 +58,8 @@
   compilation-scroll-output 'first-error
   ;; I hit this often enough to warrant asking
   confirm-kill-emacs 'y-or-n-p
+  ;; bookmarks
+  bookmark-save-flag t
   )
 
 ;; Other setting

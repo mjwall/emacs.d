@@ -56,6 +56,8 @@
   calendar-standard-time-zone-name "EST"
   calendar-daylight-time-zone-name "EDT"
   compilation-scroll-output 'first-error
+  ;; I hit this often enough to warrant asking
+  confirm-kill-emacs 'y-or-n-p
   )
 
 ;; Other setting
@@ -658,8 +660,8 @@ there's a region, all lines that region covers will be duplicated."
 (use-package anaconda-mode
   :ensure nil
   :init
-  (setq python-indent-offset 4
-    python-indent 4
+  (setq
+    python-indent-offset 4
     python-shell-interpreter "ipython"
     python-shell-interpreter-args "--simple-prompt")
   :config

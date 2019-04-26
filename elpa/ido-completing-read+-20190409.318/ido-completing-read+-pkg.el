@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "ido-completing-read+" "20190409.318" "A completing-read-function using ido" '((emacs "24.4") (cl-lib "0.5") (s "0.1") (memoize "1.1")) :commit "58f2f0c8866ab9071a0c0a911563f173ed9a2e62" :keywords '("ido" "completion" "convenience") :authors '(("Ryan Thompson")) :maintainer '("Ryan Thompson") :url "https://github.com/DarwinAwardWinner/ido-completing-read-plus")

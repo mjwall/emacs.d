@@ -1,14 +1,17 @@
+;;; init.el --- Initialization file for Emacs
+
+;; Author: Mike Wall
+;; URL: https://github.com/mjwall/emacs.d
+
+;;; Commentary:
+;; Emacs Startup File --- initialization for Emacs
+
+;;; Code:
+
 ;; turn off mouse interface early to avoid flicker
 ;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 ;(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-;; trying to make initialize faster, see
-;; https://github.com/nilcons/emacs-use-package-fast
-(setq gc-cons-threshold 64000000)
-(add-hook 'after-init-hook #'(lambda ()
-                               ;; restore after startup
-                               (setq gc-cons-threshold 800000)))
 
 ;; holler if old emacs
 (let ((minver "26.0"))
@@ -88,15 +91,16 @@
 (column-number-mode 1) ; show (L:C) in modeline
 ;; redefine the boring startup message
 (defun startup-echo-area-message ()
+  "My function to override the startup message."
   (concat "Emacs loaded in " (emacs-init-time)))
 
 ;;; Change some default keybinding
 ;; no mail
 (global-unset-key (kbd "C-x m"))
 ;; from https://sites.google.com/site/steveyegge2/effective-emacs
-;; --- no longer used, see smex below
+;; --- no longer used, used smex for a while, now using counsel
 ;; (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-;;(global-set-key (kbd "C-x m") 'execute-extended-command) ;; after I unset it
+;; (global-set-key (kbd "C-x m") 'execute-extended-command) ;; after I unset it
 ;; make Alt-` go to other frame as expected, like s-`
 (global-set-key (kbd "M-`") 'other-frame)
 ;; keybinding to bring up ibuffer
@@ -108,7 +112,7 @@
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 ;; rebind to undo, stop suspending-frame
 (global-set-key (kbd "C-z") 'undo)
-;; not sure why this works on Mac but not Linux
+;; Just kill this one, I don't want to be asked
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
 ;; put customizations in a seperate file that is git committed
@@ -142,7 +146,7 @@
     (setq default-frame-alist '((font . "Menlo-13")))
     ;;ls does not support --dired
     (require 'ls-lisp)
-    (setq ls-lisp-use-insert-directory-program nil)
+    (set-variable 'ls-lisp-use-insert-directory-program nil)
     ;; missing stuff in path
     (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
     (setq exec-path (append exec-path '("/usr/local/bin")))
@@ -160,102 +164,20 @@
 ;;  (message "setting up in terminal")
 ;;)
 
-;; custom editing functions, I have lost where they originated
-(defun indent-buffer ()
-  "Indent whole buffer."
-  (interactive)
-  (indent-region (point-min) (point-max) nil))
-(defun untabify-buffer ()
-  "Change all tabs to spaces in current buffer."
-  (interactive)
-  (untabify (point-min) (point-max)))
-(defun cleanup-buffer ()
-  "Perform indent, untabify and remove trailing whitespace on current buffer."
-  (interactive)
-  (indent-buffer)
-  (untabify-buffer)
-  (delete-trailing-whitespace))
-(defun duplicate-current-line-or-region (arg)
-  "Duplicates the current line or region ARG times.
-If there's no region, the current line will be duplicated.  However, if
-there's a region, all lines that region covers will be duplicated."
-  (interactive "p")
-  (let (beg end (origin (point)))
-    (if (and mark-active (> (point) (mark)))
-      (exchange-point-and-mark))
-    (setq beg (line-beginning-position))
-    (if mark-active
-      (exchange-point-and-mark))
-    (setq end (line-end-position))
-    (let ((region (buffer-substring-no-properties beg end)))
-      (dotimes (i arg)
-        (goto-char end)
-        (newline)
-        (insert region)
-        (setq end (point)))
-      (goto-char (+ origin (* (length region) arg) arg)))))
-(global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
-(defun shift-right (&optional arg)
-  "Shift the line or region to the ARG places to the right."
-  (interactive)
-  (let ((deactivate-mark nil)
-         (beg (or (and mark-active (region-beginning))
-                (line-beginning-position)))
-         (end (or (and mark-active (region-end)) (line-end-position))))
-    (indent-rigidly beg end (* (or arg 1) tab-width))))
-(global-set-key (kbd "<M-right>") 'shift-right)
-(defun shift-left (&optional arg)
-  "Shift the line or region to the ARG places to the left."
-  (interactive)
-  (shift-right (* -1 (or arg 1))))
-(global-set-key (kbd "<M-left>") 'shift-left)
-(defun move-text-internal (arg)
-  (cond
-    ((and mark-active transient-mark-mode)
-      (if (> (point) (mark))
-        (exchange-point-and-mark))
-      (let ((column (current-column))
-             (text (delete-and-extract-region (point) (mark))))
-        (forward-line arg)
-        (move-to-column column t)
-        (set-mark (point))
-        (insert text)
-        (exchange-point-and-mark)
-        (setq deactivate-mark nil)))
-    (t
-      (let ((column (current-column)))
-        (beginning-of-line)
-        (when (or (> arg 0) (not (bobp)))
-          (forward-line)
-          (when (or (< arg 0) (not (eobp)))
-            (transpose-lines arg)
-            (when (and (eval-when-compile
-                         '(and (>= emacs-major-version 24)
-                            (>= emacs-minor-version 3)))
-                    (< arg 0))
-              (forward-line -1)))
-          (forward-line -1))
-        (move-to-column column t)))))
-(defun move-text-down (arg)
-  "Move region or current line `arg' lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-(defun move-text-up (arg)
-  "Move region or current line `arg' lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-(global-set-key [M-up] 'move-text-up)
-(global-set-key [M-down] 'move-text-down)
+
+;; editing function
+; Indent and unindent by one tab length
+(global-set-key (kbd "C->") 'indent-rigidly-right-to-tab-stop)
+(global-set-key (kbd "C-<") 'indent-rigidly-left-to-tab-stop)
 (defun end-newline-and-indent ()
-  "Go to the end of the current line, then run
-`newline-and-indent'"
+  "Go to the end of the current line, then run `newline-and-indent'."
   (interactive)
   (progn
     (move-end-of-line 1)
     (newline-and-indent)))
 (global-set-key [(control return)] 'end-newline-and-indent)
 (defun smarter-move-beginning-of-line (arg)
-  "Toggle between `beginning-of-line' and `back-to-indentation'."
+  "Toggle between `beginning-of-line' and `back-to-indentation' based on ARG."
   (interactive "^p")
   (setq arg (or arg 1))
   ;; Move lines first
@@ -269,9 +191,9 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key [remap move-beginning-of-line]
   'smarter-move-beginning-of-line)
 (defun dos2unix ()
-  "Not exactly but it's easier to remember"
+  "Not exactly but it's easier to remember."
   (interactive)
-  (set-buffer-file-coding-system 'unix 't))
+(set-buffer-file-coding-system 'unix 't))
 
 ;; packages
 (package-initialize)
@@ -326,7 +248,7 @@ there's a region, all lines that region covers will be duplicated."
     "Prompt and ask whether to sync org files or not.  If 'y', then setup a shutdown hook to sync to as well"
     ;; TODO: only fix script to have lock file and only prompt if not there
     (interactive)
-    (if (y-or-n-p "Sync org files?")
+    (if (y-or-n-p "Sync org files? ")
       (progn
         (async-org-files)
         (add-hook 'kill-emacs-hook #'sync-org-files)
@@ -365,69 +287,39 @@ there's a region, all lines that region covers will be duplicated."
   :ensure nil
   :defer 1)
 
-;; ido - built in
-;; - https://github.com/birkenfeld/idomenu
-;; - https://github.com/DarwinAwardWinner/ido-completing-read-plus
-;; - https://github.com/nonsequitur/smex
-(use-package ido
-  :preface
-  (defvar ido-other-ignore-directories
-    '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/"
-       "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
-  (defvar ido-other-ignore-files
-    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))
+(use-package ivy
+  :ensure nil
+  :init
+  (require 'recentf)
   :config
-  (use-package idomenu
-    ;; not built in
-    :ensure nil
-    :bind (("C-x C-i" . idomenu )))
-  (use-package recentf
-    ;; built in
-    :preface
-    (defun recentf-ido-find-file ()
-      "Find a recent file using ido."
-      (interactive)
-      (let ((file
-              (ido-completing-read "Choose recent file: "
-                recentf-list nil t)))
-        (when file
-          (find-file file))))
-    :init
-    (recentf-mode 1)
-    (setq
-      recentf-max-saved-items 1000
-      recentf-exclude '("/tmp/" "/ssh:"))
-    :bind (("C-x f" . recentf-ido-find-file)))
-  (ido-mode t)
-  (ido-everywhere t)
-  (setq
-    ido-enable-prefix nil
-    ido-enable-flex-matching t
-    ido-max-prospects 20
-    ido-ignore-directories (append ido-ignore-directories
-                             ido-other-ignore-directories)
-    ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
-    ;; Display ido results vertically, rather than horizontally
-    ido-decorations '("\n-> " " " "\n   " "\n   ..."
-                       "[" "]" " [No match]" " [Matched]"
-                       " [Not readable]" " [Too big]" " [Confirm]"))
-  ;; C-n/p is more intuitive in vertical layout
-  (add-hook 'ido-setup-hook
-    (lambda ()
-      (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-      (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-      (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-      (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)))
-  (use-package ido-completing-read+
-    :ensure nil
-    :config
-    (ido-ubiquitous-mode 1))
-  (use-package smex
-    :ensure nil
-    :bind (("M-x" . smex)
-            ("C-x C-m" . smex)
-            ;; orig M-x
-            ("C-c C-c M-x" . execute-extended-command))))
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-display-style 'fancy)
+  )
+
+(use-package swiper
+  :ensure nil
+  :config
+  (global-set-key "\C-s" 'swiper))
+
+(use-package counsel
+  :ensure nil
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-m") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-x f") 'counsel-recentf)
+  ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  ;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  ;; (global-set-key (kbd "C-c a") 'counsel-ag)
+  ;;(global-set-key (kbd "C-x l") 'counsel-locate)
+  ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  )
 
 ;; hippie expand - built in
 (use-package hippie-expand
@@ -507,7 +399,7 @@ there's a region, all lines that region covers will be duplicated."
       (concat
         (propertize
           (concat user-login-name "@"
-            (car (split-string system-name "\\.")))
+            (car (split-string (system-name) "\\.")))
           'face '(foreground-color . "green4"))
         (propertize
           (concat " " (abbreviate-file-name (eshell/pwd)))
@@ -546,25 +438,26 @@ there's a region, all lines that region covers will be duplicated."
   (defalias 'd 'dired)
   (defalias 'fo 'find-file-other-window))
 
-;; project - built in
-;; - sr-speedbar from https://github.com/emacsorphanage/sr-speedbar
+;; speedbar - built in
+(use-package speedbar
+  :config
+  (progn
+    (set-variable 'speedbar-use-images nil)
+    (set-variable 'speedbar-show-unknown-files t)
+    (set-variable 'speedbar-update-flag nil)
+    ))
+
+
 (use-package project
-  :init
-  (require 'vc-git)
-  (use-package sr-speedbar
-    :ensure nil
-    :init
-    (setq
-      speedbar-show-unknown-files t
-      speedbar-use-images nil
-      sr-speedbar-default-width 20
-      sr-speedbar-right-side nil
-      sr-speedbar-auto-refresh nil))
   :bind
-  (("<f6>" . vc-git-grep)
-    ("<f7>" . project-find-file)
-    ("<f8>" . sr-speedbar-toggle)
-    ("<f9>" . vc-dir)))
+  (
+    ; ("<f6>" . vc-git-grep)
+    ("<f6>" . counsel-git-grep) ;; faster
+    ; ("<f7>" . project-find-file)
+    ("<f7>" . counsel-git) ;; faster
+    ("<f8>" . speedbar)
+    ("<f9>" . vc-dir)
+    ("<f10>" . eshell)))
 
 ;; ctags
 ;; - https://github.com/jixiuf/ctags-update
@@ -591,14 +484,14 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; company mode
 ;; - https://github.com/company-mode/company-mode
-(use-package company               
+(use-package company
   :ensure nil
   :init (global-company-mode)
   :config
   (progn
     ;; Use Company for completion
     (bind-key [remap completion-at-point] #'company-complete company-mode-map)
-    (setq company-dabbrev-downcase nil)))
+    (set-variable 'company-dabbrev-downcase nil)))
 
 ;; flycheck
 ;; - https://www.flycheck.org/en/latest/
@@ -633,7 +526,7 @@ there's a region, all lines that region covers will be duplicated."
   (use-package json-mode
     :ensure nil))
 
-;; Typescript 
+;; Typescript
 ;; - https://github.com/ananthakumaran/typescript.el
 ;; - https://github.com/ananthakumaran/tide
 ;; - https://github.com/AdamNiederer/ng2-mode
@@ -677,10 +570,9 @@ there's a region, all lines that region covers will be duplicated."
   (use-package ein
     :ensure nil
     :init
-    (setq
-      ein:jupyter-default-notebook-directory "~/git/jupyter"
-      ein:jupyter-default-server-command "~/anaconda3/bin/jupyter"
-      ein:jupyter-server-args (list "--no-browser")))
+    (set-variable 'ein:jupyter-default-notebook-directory "~/git/jupyter")
+    (set-variable 'ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+    (set-variable 'ein:jupyter-server-args (list "--no-browser")))
   (use-package py-autopep8
     :ensure-system-package (autopep8 . "conda install autopep8")
     :ensure nil
@@ -877,7 +769,7 @@ there's a region, all lines that region covers will be duplicated."
 (use-package my-gradle-mode
   :ensure nil
   :init
-  (setq gradle-use-gradlew 1))
+  (set-variable 'gradle-use-gradlew 1))
 (use-package flycheck-gradle
   :ensure nil
   :commands (flycheck-gradle-setup)
@@ -958,3 +850,9 @@ there's a region, all lines that region covers will be duplicated."
 ;; Another tool https://github.com/dholm/benchmark-init-el
 
 ;; Update README, change to README.md or README.org
+
+;; clean up ivy highlight
+;; redo vc-git
+
+(provide 'init)
+;;; init.el ends here

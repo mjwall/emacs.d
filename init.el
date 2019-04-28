@@ -294,7 +294,13 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-display-style 'fancy)
+  ;; change the dark blue background of the current match
+  (set-face-attribute 'ivy-current-match nil
+    :background "#ffc911"
+    :foreground "#1c1c1c"
+    ;; :background "#dddddd"
+    ;; :foreground "#000000"
+    )
   )
 
 (use-package swiper
@@ -309,16 +315,17 @@
   (global-set-key (kbd "C-x C-m") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-x f") 'counsel-recentf)
-  ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-  ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "C-c f") 'counsel-describe-function)
+  (global-set-key (kbd "C-c v") 'counsel-describe-variable)
   ;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
   ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c u") 'counsel-unicode-char)
   (global-set-key (kbd "C-c g") 'counsel-git)
   (global-set-key (kbd "C-c j") 'counsel-git-grep)
   ;; (global-set-key (kbd "C-c a") 'counsel-ag)
-  ;;(global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-c l") 'counsel-locate)
   ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (global-set-key (kbd "C-c r") 'counsel-resume)
   )
 
 ;; hippie expand - built in
@@ -351,41 +358,42 @@
 
 ;; git - built in
 (use-package vc-git
-  :preface
-  ;; In vc-git and vc-dir for git buffers,
-  ;; make (C-x v) a run git add, u run git reset,
-  ;; and r run git reset and checkout from head.
-  ;; based on https://joppot.info/en/2018/02/04/4144
-  (defun my-vc-git-command (verb fn)
-    (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
-            (backend (car fileset-arg))
-            (files (nth 1 fileset-arg)))
-      (if (eq backend 'Git)
-        (progn (funcall fn files)
-          (message (concat verb " " (number-to-string (length files))
-                     " file(s).")))
-        (message "Not in a vc git buffer."))))
-  (defun vc-git-add (&optional revision vc-fileset comment)
-    (interactive "P")
-    (my-vc-git-command "Staged" 'vc-git-register))
-  (defun vc-git-reset (&optional revision vc-fileset comment)
-    (interactive "P")
-    (my-vc-git-command "Unstaged"
-      (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
-  (defun vc-git-dir-refresh-and-update ()
-    "Refresh the vc-dir then hide up to date files and directories"
-    (interactive)
-    (vc-dir-refresh)
-    (vc-dir-hide-up-to-date))
+  ;; :preface
+  ;; ;; In vc-git and vc-dir for git buffers,
+  ;; ;; make (C-x v) a run git add, u run git reset,
+  ;; ;; and r run git reset and checkout from head.
+  ;; ;; based on https://joppot.info/en/2018/02/04/4144
+  ;; (defun my-vc-git-command (verb fn)
+  ;;   (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
+  ;;           (backend (car fileset-arg))
+  ;;           (files (nth 1 fileset-arg)))
+  ;;     (if (eq backend 'Git)
+  ;;       (progn (funcall fn files)
+  ;;         (message (concat verb " " (number-to-string (length files))
+  ;;                    " file(s).")))
+  ;;       (message "Not in a vc git buffer."))))
+  ;; (defun vc-git-add (&optional revision vc-fileset comment)
+  ;;   (interactive "P")
+  ;;   (my-vc-git-command "Staged" 'vc-git-register))
+  ;; (defun vc-git-reset (&optional revision vc-fileset comment)
+  ;;   (interactive "P")
+  ;;   (my-vc-git-command "Unstaged"
+  ;;     (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
+  ;; (defun vc-git-dir-refresh-and-update ()
+  ;;   "Refresh the vc-dir then hide up to date files and directories"
+  ;;   (interactive)
+  ;;   (vc-dir-refresh)
+  ;;   (vc-dir-hide-up-to-date))
   :config
   (use-package vc-dir)
-  (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
-  (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
-  (define-key vc-prefix-map [(a)] 'vc-git-add)
-  (define-key vc-dir-mode-map [(a)] 'vc-git-add)
-  (define-key vc-prefix-map [(u)] 'vc-git-reset)
-  (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
-  (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update))
+  ;; (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
+  ;; (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
+  ;; (define-key vc-prefix-map [(a)] 'vc-git-add)
+  ;; (define-key vc-dir-mode-map [(a)] 'vc-git-add)
+  ;; (define-key vc-prefix-map [(u)] 'vc-git-reset)
+  ;; (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
+  ;; (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update)
+  )
 
 ;; eshell - all built in except
 ;; - https://github.com/Fuco1/eshell-bookmark
@@ -828,6 +836,8 @@
 ;; so that I can M-x describe-personal-keybindings
 ;; part of use-package so already there
 
+;; setup a var for :ensure nil
+
 ;; Use diminish to clean up mode line
 
 ;; better understand `.dir-locals.el'
@@ -850,8 +860,8 @@
 ;; Another tool https://github.com/dholm/benchmark-init-el
 
 ;; Update README, change to README.md or README.org
+;; Update dotfiles repo
 
-;; clean up ivy highlight
 ;; redo vc-git
 
 (provide 'init)

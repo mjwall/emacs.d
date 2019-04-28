@@ -19,8 +19,6 @@ auto-save-list/
 backups/
 eshell/
 auto-save/
-network-security.data
-projectile-bookmarks.eld
 .cache/
 abbrev_defs
 bookmarks
@@ -45,7 +43,6 @@ history
 ido.last
 session.*
 recentf
-smex-items
 ac-comphist.dat
 anaconda-mode/
 request/

@@ -10,7 +10,9 @@
 ;;; Generated autoloads from company-go.el
 
 (autoload 'company-go "company-go" "\
-\n\n(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
+
+\(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-go" '("company-go-")))
 

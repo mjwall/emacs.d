@@ -10,7 +10,9 @@
 ;;; Generated autoloads from kotlin-mode.el
 
 (autoload 'kotlin-mode "kotlin-mode" "\
-Major mode for editing Kotlin.\n\n(fn)" t nil)
+Major mode for editing Kotlin.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.kts?\\'" . kotlin-mode) t)
 

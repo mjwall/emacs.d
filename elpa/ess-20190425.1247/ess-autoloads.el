@@ -10,10 +10,14 @@
 ;;; Generated autoloads from ess.el
 
 (autoload 'ess-version "ess" "\
-Return a string with ESS version information.\n\n(fn)" t nil)
+Return a string with ESS version information.
+
+\(fn)" t nil)
 
 (autoload 'ess-submit-bug-report "ess" "\
-Submit a bug report to the ESS maintainers.\n\n(fn)" t nil)
+Submit a bug report to the ESS maintainers.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess" '("ess")))
 
@@ -23,7 +27,9 @@ Submit a bug report to the ESS maintainers.\n\n(fn)" t nil)
 ;;; Generated autoloads from ess-bugs-d.el
 
 (autoload 'ess-bugs-mode "ess-bugs-d" "\
-Major mode for BUGS.\n\n(fn)" t nil)
+Major mode for BUGS.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.[Bb][Uu][Gg]\\'" . ess-bugs-mode))
 
@@ -63,10 +69,18 @@ Directory containing ess-site.el(c) and other ESS Lisp files.")
 ;;; Generated autoloads from ess-gretl.el
 
 (autoload 'ess-gretl-mode "ess-gretl" "\
-Major mode for editing gretl source.  See `ess-mode' for more help.\n\n(fn)" t nil)
+Major mode for editing gretl source.  See `ess-mode' for more help.
+
+\(fn)" t nil)
 
 (autoload 'gretl "ess-gretl" "\
-Call 'gretl',\nOptional prefix (C-u) allows to set command line arguments, such as\n--vsize.  This should be OS agnostic.\nIf you have certain command line arguments that should always be passed\nto gretl, put them in the variable `inferior-gretl-args'.\n\n(fn &optional START-ARGS)" t nil)
+Call 'gretl',
+Optional prefix (C-u) allows to set command line arguments, such as
+--vsize.  This should be OS agnostic.
+If you have certain command line arguments that should always be passed
+to gretl, put them in the variable `inferior-gretl-args'.
+
+\(fn &optional START-ARGS)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-gretl" '("ess-gretl-" "inferior-gretl-args" "gretl-")))
 
@@ -76,12 +90,24 @@ Call 'gretl',\nOptional prefix (C-u) allows to set command line arguments, such 
 ;;; Generated autoloads from ess-help.el
 
 (autoload 'ess-display-help-on-object "ess-help" "\
-Display documentation for OBJECT.\nIf prefix arg is given, force an update of the cached help topics\nand query the ESS process for the help file instead of reusing an\nexisting buffer if it exists. Uses the variable\n`inferior-ess-help-command' for the actual help command. Prompts\nfor the object name based on the cursor location for all cases\nexcept the S-Plus GUI. With S-Plus on Windows (both GUI and in an\ninferior Emacs buffer) the GUI help window is used. If COMMAND is\nsuplied, it is used instead of `inferior-ess-help-command'.\n\n(fn OBJECT &optional COMMAND)" t nil)
+Display documentation for OBJECT.
+If prefix arg is given, force an update of the cached help topics
+and query the ESS process for the help file instead of reusing an
+existing buffer if it exists. Uses the variable
+`inferior-ess-help-command' for the actual help command. Prompts
+for the object name based on the cursor location for all cases
+except the S-Plus GUI. With S-Plus on Windows (both GUI and in an
+inferior Emacs buffer) the GUI help window is used. If COMMAND is
+suplied, it is used instead of `inferior-ess-help-command'.
+
+\(fn OBJECT &optional COMMAND)" t nil)
 
 (defalias 'ess-help 'ess-display-help-on-object)
 
 (autoload 'ess-goto-info "ess-help" "\
-Display node NODE from `ess-mode' info.\n\n(fn NODE)" nil nil)
+Display node NODE from `ess-mode' info.
+
+\(fn NODE)" nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-help" '("ess-")))
 
@@ -91,7 +117,10 @@ Display node NODE from `ess-mode' info.\n\n(fn NODE)" nil nil)
 ;;; Generated autoloads from ess-inf.el
 
 (autoload 'ess-load-file "ess-inf" "\
-Load FILENAME into an inferior ESS process.\nThis handles Tramp when working on a remote.\n\n(fn &optional FILENAME)" t nil)
+Load FILENAME into an inferior ESS process.
+This handles Tramp when working on a remote.
+
+\(fn &optional FILENAME)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-inf" '("ess-" "inferior-ess" "update-ess-process-name-list" "with-ess-process-buffer")))
 
@@ -101,7 +130,9 @@ Load FILENAME into an inferior ESS process.\nThis handles Tramp when working on 
 ;;; Generated autoloads from ess-jags-d.el
 
 (autoload 'ess-jags-mode "ess-jags-d" "\
-Major mode for JAGS.\n\n(fn)" t nil)
+Major mode for JAGS.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.[Jj][Aa][Gg]\\'" . ess-jags-mode))
 
@@ -113,10 +144,19 @@ Major mode for JAGS.\n\n(fn)" t nil)
 ;;; Generated autoloads from ess-julia.el
 
 (autoload 'ess-julia-mode "ess-julia" "\
-Major mode for julia files.\n\n(fn)" t nil)
+Major mode for julia files.
+
+\(fn)" t nil)
 
 (autoload 'run-ess-julia "ess-julia" "\
-Start an inferior julia process.\nOptional prefix START-ARGS (\\[universal-argument]) allows to set\ncommand line arguments, such as --load=<file>. This should be OS\nagnostic. If you have certain command line arguments that should\nalways be passed to julia, put them in the variable\n`inferior-julia-args'.\n\n(fn &optional START-ARGS)" t nil)
+Start an inferior julia process.
+Optional prefix START-ARGS (\\[universal-argument]) allows to set
+command line arguments, such as --load=<file>. This should be OS
+agnostic. If you have certain command line arguments that should
+always be passed to julia, put them in the variable
+`inferior-julia-args'.
+
+\(fn &optional START-ARGS)" t nil)
 
 (defalias 'julia #'run-ess-julia)
 
@@ -128,10 +168,83 @@ Start an inferior julia process.\nOptional prefix START-ARGS (\\[universal-argum
 ;;; Generated autoloads from ess-mode.el
 
 (autoload 'ess-mode "ess-mode" "\
-Major mode for editing ESS source.\nOptional arg ALIST describes how to customize the editing mode.\nOptional arg PROC-NAME is name of associated inferior process.\n\n\\{ess-mode-map}\n\nYou can send text to the inferior ESS process from other buffers containing\nESS source.\n    `ess-eval-region' sends the current region to the ESS process.\n    `ess-eval-buffer' sends the current buffer to the ESS process.\n    `ess-eval-function' sends the current function to the ESS process.\n    `ess-eval-line' sends the current line to the ESS process.\n    `ess-switch-to-ESS' switches the current buffer to the ESS process buffer.\n    `ess-switch-to-end-of-ESS' switches the current buffer to the ESS process\n        buffer and puts point at the end of it.\n\n    `ess-eval-region-and-go', `ess-eval-buffer-and-go',\n        `ess-eval-function-and-go', and `ess-eval-line-and-go' switch to the S\n        process buffer after sending their text.\n\n    `ess-load-file' sources a file of commands to the ESS process.\n\n\\[ess-indent-command] indents for ESS code.\n\\[backward-delete-char-untabify] converts tabs to spaces as it moves back.\nComments are indented in a similar way to Emacs-lisp mode:\n       `###'     beginning of line\n       `##'      the same level of indentation as the code\n       `#'       the same column on the right, or to the right of such a\n                 column if that is not possible.(default value 40).\n                 \\[indent-for-comment] command automatically inserts such a\n                 `#' in the right place, or aligns such a comment if it is\n                 already inserted.\n\\[ess-indent-exp] command indents each line of the syntactic unit following point.\n\nVariables controlling indentation style:\n `ess-indent-offset'\n    Indentation of ESS statements within surrounding block.\n    The surrounding block's indentation is the indentation of the line on\n    which the open-brace appears.\n `ess-offset-block'\n    Indentation of blocks opened with curly braces or anonymous parentheses.\n `ess-offset-arguments'\n    Indentation of function arguments or bracket indices.\n `ess-offset-arguments-newline'\n    Indentation of function arguments or bracket indices when the opening\n    delimiter is immediately followed by a newline.\n `ess-offset-continued'\n    Indentation style for continued statements.\n `ess-align-nested-calls'\n    Functions whose nested calls should be aligned.\n `ess-align-arguments-in-calls'\n    Calls in which arguments should be aligned.\n `ess-align-continuations-in-calls'\n    Whether ignore indentation after an operator in calls\n `ess-align-blocks'\n    Blocks that should always be aligned vertically.\n `ess-indent-from-lhs'\n    Whether function calls given as argument should be indented from the\n    parameter name.\n `ess-indent-from-chain-start'\n    Whether to indent arguments from the first of several consecutive calls.\n `ess-indent-with-fancy-comments'\n    Non-nil means distinguish between #, ##, and ### for indentation.\n\nFurthermore, \\[ess-set-style] command enables you to set up predefined ess-mode\nindentation style. See `ess-style-alist' for predefined styles.\n\n(fn)" t nil)
+Major mode for editing ESS source.
+Optional arg ALIST describes how to customize the editing mode.
+Optional arg PROC-NAME is name of associated inferior process.
+
+\\{ess-mode-map}
+
+You can send text to the inferior ESS process from other buffers containing
+ESS source.
+    `ess-eval-region' sends the current region to the ESS process.
+    `ess-eval-buffer' sends the current buffer to the ESS process.
+    `ess-eval-function' sends the current function to the ESS process.
+    `ess-eval-line' sends the current line to the ESS process.
+    `ess-switch-to-ESS' switches the current buffer to the ESS process buffer.
+    `ess-switch-to-end-of-ESS' switches the current buffer to the ESS process
+        buffer and puts point at the end of it.
+
+    `ess-eval-region-and-go', `ess-eval-buffer-and-go',
+        `ess-eval-function-and-go', and `ess-eval-line-and-go' switch to the S
+        process buffer after sending their text.
+
+    `ess-load-file' sources a file of commands to the ESS process.
+
+\\[ess-indent-command] indents for ESS code.
+\\[backward-delete-char-untabify] converts tabs to spaces as it moves back.
+Comments are indented in a similar way to Emacs-lisp mode:
+       `###'     beginning of line
+       `##'      the same level of indentation as the code
+       `#'       the same column on the right, or to the right of such a
+                 column if that is not possible.(default value 40).
+                 \\[indent-for-comment] command automatically inserts such a
+                 `#' in the right place, or aligns such a comment if it is
+                 already inserted.
+\\[ess-indent-exp] command indents each line of the syntactic unit following point.
+
+Variables controlling indentation style:
+ `ess-indent-offset'
+    Indentation of ESS statements within surrounding block.
+    The surrounding block's indentation is the indentation of the line on
+    which the open-brace appears.
+ `ess-offset-block'
+    Indentation of blocks opened with curly braces or anonymous parentheses.
+ `ess-offset-arguments'
+    Indentation of function arguments or bracket indices.
+ `ess-offset-arguments-newline'
+    Indentation of function arguments or bracket indices when the opening
+    delimiter is immediately followed by a newline.
+ `ess-offset-continued'
+    Indentation style for continued statements.
+ `ess-align-nested-calls'
+    Functions whose nested calls should be aligned.
+ `ess-align-arguments-in-calls'
+    Calls in which arguments should be aligned.
+ `ess-align-continuations-in-calls'
+    Whether ignore indentation after an operator in calls
+ `ess-align-blocks'
+    Blocks that should always be aligned vertically.
+ `ess-indent-from-lhs'
+    Whether function calls given as argument should be indented from the
+    parameter name.
+ `ess-indent-from-chain-start'
+    Whether to indent arguments from the first of several consecutive calls.
+ `ess-indent-with-fancy-comments'
+    Non-nil means distinguish between #, ##, and ### for indentation.
+
+Furthermore, \\[ess-set-style] command enables you to set up predefined ess-mode
+indentation style. See `ess-style-alist' for predefined styles.
+
+\(fn)" t nil)
 
 (autoload 'ess-dump-object-into-edit-buffer "ess-mode" "\
-Edit an ESS OBJECT in its own buffer.\nWithout a prefix argument, this simply finds the file pointed to by\n`ess-source-directory'.  If this file does not exist, or if a\nprefix argument is given, a dump() command is sent to the ESS process to\ngenerate the source buffer.\n\n(fn OBJECT)" t nil)
+Edit an ESS OBJECT in its own buffer.
+Without a prefix argument, this simply finds the file pointed to by
+`ess-source-directory'.  If this file does not exist, or if a
+prefix argument is given, a dump() command is sent to the ESS process to
+generate the source buffer.
+
+\(fn OBJECT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-mode" '("ess-")))
 
@@ -166,12 +279,24 @@ Edit an ESS OBJECT in its own buffer.\nWithout a prefix argument, this simply fi
 Keymap for commands related to development and debugging.")
 
 (autoload 'run-ess-r "ess-r-mode" "\
-Call 'R', the 'GNU S' system from the R Foundation.\nOptional prefix (\\[universal-argument]) allows to set command line arguments, such as\n--vsize.  This should be OS agnostic.\nIf you have certain command line arguments that should always be passed\nto R, put them in the variable `inferior-R-args'.\n\nSTART-ARGS can be a string representing an argument, a list of\nsuch strings, or any other non-nil value.  In the latter case, you\nwill be prompted to enter arguments interactively.\n\n(fn &optional START-ARGS)" t nil)
+Call 'R', the 'GNU S' system from the R Foundation.
+Optional prefix (\\[universal-argument]) allows to set command line arguments, such as
+--vsize.  This should be OS agnostic.
+If you have certain command line arguments that should always be passed
+to R, put them in the variable `inferior-R-args'.
+
+START-ARGS can be a string representing an argument, a list of
+such strings, or any other non-nil value.  In the latter case, you
+will be prompted to enter arguments interactively.
+
+\(fn &optional START-ARGS)" t nil)
 
 (defalias 'R #'run-ess-r)
 
 (autoload 'ess-r-mode "ess-r-mode" "\
-Major mode for editing R source.  See `ess-mode' for more help.\n\n(fn)" t nil)
+Major mode for editing R source.  See `ess-mode' for more help.
+
+\(fn)" t nil)
 
 (defalias 'R-mode 'ess-r-mode)
 
@@ -188,7 +313,9 @@ Major mode for editing R source.  See `ess-mode' for more help.\n\n(fn)" t nil)
 (add-to-list 'auto-mode-alist '("CITATION\\'" . ess-r-mode))
 
 (autoload 'ess-r-transcript-mode "ess-r-mode" "\
-A Major mode for R transcript files.\n\n(fn)" t nil)
+A Major mode for R transcript files.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.[Rr]out" . ess-r-transcript-mode))
 
@@ -229,7 +356,15 @@ A Major mode for R transcript files.\n\n(fn)" t nil)
 ;;; Generated autoloads from ess-rd.el
 
 (autoload 'Rd-mode "ess-rd" "\
-Major mode for editing R documentation source files.\n\nType \\[list-abbrevs] to display the built-in abbrevs for Rd\nkeywords.To automatically turn on the abbrev(iate) features, add\nthe following to your Emacs configuration file:\n\n  (add-hook 'Rd-mode-hook #'abbrev-mode)\n\n(fn)" t nil)
+Major mode for editing R documentation source files.
+
+Type \\[list-abbrevs] to display the built-in abbrevs for Rd
+keywords.To automatically turn on the abbrev(iate) features, add
+the following to your Emacs configuration file:
+
+  (add-hook 'Rd-mode-hook #'abbrev-mode)
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.Rd\\'" . Rd-mode))
 
@@ -241,7 +376,11 @@ Major mode for editing R documentation source files.\n\nType \\[list-abbrevs] to
 ;;; Generated autoloads from ess-rdired.el
 
 (autoload 'ess-rdired "ess-rdired" "\
-Show R objects from the global environment in a separate buffer.\nYou may interact with these objects, see `ess-rdired-mode' for\ndetails.\n\n(fn)" t nil)
+Show R objects from the global environment in a separate buffer.
+You may interact with these objects, see `ess-rdired-mode' for
+details.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-rdired" '("ess-rdired-")))
 
@@ -251,7 +390,9 @@ Show R objects from the global environment in a separate buffer.\nYou may intera
 ;;; Generated autoloads from ess-roxy.el
 
 (autoload 'ess-roxy-mode "ess-roxy" "\
-Minor mode for editing ROxygen documentation.\n\n(fn &optional ARG)" t nil)
+Minor mode for editing ROxygen documentation.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-roxy" '("ess-")))
 
@@ -286,12 +427,16 @@ Minor mode for editing ROxygen documentation.\n\n(fn &optional ARG)" t nil)
 ;;; Generated autoloads from ess-sas-d.el
 
 (autoload 'SAS-mode "ess-sas-d" "\
-Major mode for editing SAS source.  See `ess-mode' for more help.\n\n(fn)" t nil)
+Major mode for editing SAS source.  See `ess-mode' for more help.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.[Ss][Aa][Ss]\\'" . SAS-mode))
 
 (autoload 'SAS-menu "ess-sas-d" "\
-Start SAS from the menu.\n\n(fn)" t nil)
+Start SAS from the menu.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-sas-d" '("ess-" "SAS" "inferior-SAS-args")))
 
@@ -308,7 +453,9 @@ Start SAS from the menu.\n\n(fn)" t nil)
 ;;; Generated autoloads from ess-sp6-d.el
 
 (autoload 'S+-mode "ess-sp6-d" "\
-Major mode for editing S+ source.  See `ess-mode' for more help.\n\n(fn &optional PROC-NAME)" t nil)
+Major mode for editing S+ source.  See `ess-mode' for more help.
+
+\(fn &optional PROC-NAME)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-sp6-d" '("ess-" "S+")))
 
@@ -327,7 +474,9 @@ Major mode for editing S+ source.  See `ess-mode' for more help.\n\n(fn &optiona
 ;;; Generated autoloads from ess-stata-mode.el
 
 (autoload 'ess-stata-mode "ess-stata-mode" "\
-Major mode for editing Stata source.\n\n(fn)" t nil)
+Major mode for editing Stata source.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.do\\'" . ess-stata-mode))
 
@@ -355,10 +504,25 @@ Major mode for editing Stata source.\n\n(fn)" t nil)
 ;;; Generated autoloads from ess-trns.el
 
 (autoload 'ess-transcript-mode "ess-trns" "\
-Major mode for transcript files.\n\nType \\[ess-transcript-send-command] to send a command in the\ntranscript to the current inferior process. \\[ess-transcript-copy-command]\ncopies the command but does not execute it, allowing you to edit it in\nthe process buffer first.\n\nType \\[ess-transcript-clean-region] to delete all outputs and prompts\nin the region, leaving only the commands.\n\n(fn)" t nil)
+Major mode for transcript files.
+
+Type \\[ess-transcript-send-command] to send a command in the
+transcript to the current inferior process. \\[ess-transcript-copy-command]
+copies the command but does not execute it, allowing you to edit it in
+the process buffer first.
+
+Type \\[ess-transcript-clean-region] to delete all outputs and prompts
+in the region, leaving only the commands.
+
+\(fn)" t nil)
 
 (autoload 'ess-transcript-clean-region "ess-trns" "\
-Strip the transcript in the region, leaving only (R/S/Lsp/..) commands.\nDeletes any lines not beginning with a prompt, and then removes the\nprompt from those lines that remain.  Prefix argument means to\nclean even if the buffer is \\[read-only].\n\n(fn BEG END EVEN-IF-READ-ONLY)" t nil)
+Strip the transcript in the region, leaving only (R/S/Lsp/..) commands.
+Deletes any lines not beginning with a prompt, and then removes the
+prompt from those lines that remain.  Prefix argument means to
+clean even if the buffer is \\[read-only].
+
+\(fn BEG END EVEN-IF-READ-ONLY)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ess-trns" '("ess-transcript-")))
 
@@ -375,7 +539,24 @@ Strip the transcript in the region, leaving only (R/S/Lsp/..) commands.\nDeletes
 ;;; Generated autoloads from essd-els.el
 
 (autoload 'ess-remote "essd-els" "\
-Execute this command from within a buffer running a process.\nIt runs `ess-add-ess-process' to add the PROC-NAME to\n`ess-process-name-alist' and to make it the\n`ess-current-process-name'. It then prompts the user for an ESS\nlanguage and sets the editing characteristics appropriately.\n\nTo use this command, first start a process on a remote computer by\nmanual use of telnet, rlogin, ssh, or some other protocol.  Start the\nrelevant program (\"S\" or \"R\" or \"sas -stdio\") in that buffer.  Once\nyou are talking to S or R or SAS, then do \\[ess-remote] to make\nthe current buffer an inferior-ess buffer with the right behavior for\nthe language you are currently working with.  With S and R, use C-c\nC-n to send lines over.  With SAS, use C-c i\n`ess-eval-line-and-step-invisibly' to send lines over invisibly.\n\nDIALECT is the desired ess-dialect. If nil, ask for dialect\n\n(fn &optional PROC-NAME DIALECT)" t nil)
+Execute this command from within a buffer running a process.
+It runs `ess-add-ess-process' to add the PROC-NAME to
+`ess-process-name-alist' and to make it the
+`ess-current-process-name'. It then prompts the user for an ESS
+language and sets the editing characteristics appropriately.
+
+To use this command, first start a process on a remote computer by
+manual use of telnet, rlogin, ssh, or some other protocol.  Start the
+relevant program (\"S\" or \"R\" or \"sas -stdio\") in that buffer.  Once
+you are talking to S or R or SAS, then do \\[ess-remote] to make
+the current buffer an inferior-ess buffer with the right behavior for
+the language you are currently working with.  With S and R, use C-c
+C-n to send lines over.  With SAS, use C-c i
+`ess-eval-line-and-step-invisibly' to send lines over invisibly.
+
+DIALECT is the desired ess-dialect. If nil, ask for dialect
+
+\(fn &optional PROC-NAME DIALECT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "essd-els" '("ess-" "S+elsewhere" "inferior-ess-remote-pager")))
 
@@ -392,7 +573,9 @@ Execute this command from within a buffer running a process.\nIt runs `ess-add-e
 ;;; Generated autoloads from mouseme.el
 
 (autoload 'mouse-me "mouseme" "\
-Popup a menu of functions to run on selected string or region.\n\n(fn EVENT)" t nil)
+Popup a menu of functions to run on selected string or region.
+
+\(fn EVENT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mouseme" '("mouse-me-")))
 

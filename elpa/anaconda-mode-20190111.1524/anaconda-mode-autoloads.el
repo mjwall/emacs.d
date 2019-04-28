@@ -10,10 +10,16 @@
 ;;; Generated autoloads from anaconda-mode.el
 
 (autoload 'anaconda-mode "anaconda-mode" "\
-Code navigation, documentation lookup and completion for Python.\n\n\\{anaconda-mode-map}\n\n(fn &optional ARG)" t nil)
+Code navigation, documentation lookup and completion for Python.
+
+\\{anaconda-mode-map}
+
+\(fn &optional ARG)" t nil)
 
 (autoload 'anaconda-eldoc-mode "anaconda-mode" "\
-Toggle echo area display of Python objects at point.\n\n(fn &optional ARG)" t nil)
+Toggle echo area display of Python objects at point.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "anaconda-mode" '("turn-o" "anaconda-mode-")))
 

@@ -12,7 +12,13 @@
 (put 'typescript-indent-level 'safe-local-variable #'integerp)
 
 (autoload 'typescript-mode "typescript-mode" "\
-Major mode for editing typescript.\n\nKey bindings:\n\n\\{typescript-mode-map}\n\n(fn)" t nil)
+Major mode for editing typescript.
+
+Key bindings:
+
+\\{typescript-mode-map}
+
+\(fn)" t nil)
 
 (eval-after-load 'folding '(when (fboundp 'folding-add-to-marks-list) (folding-add-to-marks-list 'typescript-mode "// {{{" "// }}}")))
 

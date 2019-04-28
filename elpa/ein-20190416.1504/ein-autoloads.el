@@ -46,7 +46,9 @@
 ;;; Generated autoloads from ein-company.el
 
 (autoload 'ein:company-backend "ein-company" "\
-\n\n(fn COMMAND &optional ARG &rest _)" t nil)
+
+
+\(fn COMMAND &optional ARG &rest _)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-company" '("ein:comp")))
 
@@ -63,19 +65,35 @@
 ;;; Generated autoloads from ein-connect.el
 
 (autoload 'ein:connect-to-notebook-command "ein-connect" "\
-Connect to notebook.  When the prefix argument is given,\nyou can choose any notebook on your server including the ones\nnot yet opened.  Otherwise, already chose from already opened\nnotebooks.\n\n(fn &optional NOT-YET-OPENED)" t nil)
+Connect to notebook.  When the prefix argument is given,
+you can choose any notebook on your server including the ones
+not yet opened.  Otherwise, already chose from already opened
+notebooks.
+
+\(fn &optional NOT-YET-OPENED)" t nil)
 
 (autoload 'ein:connect-to-notebook "ein-connect" "\
-Connect any buffer to notebook and its kernel.\n\n(fn NBPATH &optional BUFFER NO-RECONNECTION)" t nil)
+Connect any buffer to notebook and its kernel.
+
+\(fn NBPATH &optional BUFFER NO-RECONNECTION)" t nil)
 
 (autoload 'ein:connect-to-notebook-buffer "ein-connect" "\
-Connect any buffer to opened notebook and its kernel.\n\n(fn BUFFER-OR-NAME)" t nil)
+Connect any buffer to opened notebook and its kernel.
+
+\(fn BUFFER-OR-NAME)" t nil)
 
 (autoload 'ein:connect-buffer-to-notebook "ein-connect" "\
-Connect BUFFER to NOTEBOOK.\n\n(fn NOTEBOOK &optional BUFFER NO-RECONNECTION)" nil nil)
+Connect BUFFER to NOTEBOOK.
+
+\(fn NOTEBOOK &optional BUFFER NO-RECONNECTION)" nil nil)
 
 (autoload 'ein:connect-to-default-notebook "ein-connect" "\
-Connect to the default notebook specified by\n`ein:connect-default-notebook'.  Set this to `python-mode-hook'\nto automatically connect any python-mode buffer to the\nnotebook.\n\n(fn)" nil nil)
+Connect to the default notebook specified by
+`ein:connect-default-notebook'.  Set this to `python-mode-hook'
+to automatically connect any python-mode buffer to the
+notebook.
+
+\(fn)" nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-connect" '("ein:")))
 
@@ -85,7 +103,18 @@ Connect to the default notebook specified by\n`ein:connect-default-notebook'.  S
 ;;; Generated autoloads from ein-console.el
 
 (autoload 'ein:console-open "ein-console" "\
-Open IPython console.\nTo use this function, `ein:console-security-dir' and\n`ein:console-args' must be set properly.\nThis function works best with the new python.el_ which is shipped\nwith Emacs 24.2 or later.  If you don't have it, this function\nopens a \"plain\" command line interpreter (comint) buffer where\nyou cannot use fancy stuff such as TAB completion.\nIt should be possible to support python-mode.el.  Patches are welcome!\n\n.. _python.el: https://github.com/fgallina/python.el\n\n(fn)" t nil)
+Open IPython console.
+To use this function, `ein:console-security-dir' and
+`ein:console-args' must be set properly.
+This function works best with the new python.el_ which is shipped
+with Emacs 24.2 or later.  If you don't have it, this function
+opens a \"plain\" command line interpreter (comint) buffer where
+you cannot use fancy stuff such as TAB completion.
+It should be possible to support python-mode.el.  Patches are welcome!
+
+.. _python.el: https://github.com/fgallina/python.el
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-console" '("ein:")))
 
@@ -110,16 +139,26 @@ Open IPython console.\nTo use this function, `ein:console-security-dir' and\n`ei
 ;;; Generated autoloads from ein-dev.el
 
 (autoload 'ein:dev-insert-mode-map "ein-dev" "\
-Insert mode-map into rst document.  For README.rst.\n\n(fn MAP-STRING)" nil nil)
+Insert mode-map into rst document.  For README.rst.
+
+\(fn MAP-STRING)" nil nil)
 
 (autoload 'ein:dev-start-debug "ein-dev" "\
-Enable EIN debugging support.\nWhen the prefix argument is given, debugging support for websocket\ncallback (`websocket-callback-debug-on-error') is enabled.\n\n(fn &optional WS-CALLBACK)" t nil)
+Enable EIN debugging support.
+When the prefix argument is given, debugging support for websocket
+callback (`websocket-callback-debug-on-error') is enabled.
+
+\(fn &optional WS-CALLBACK)" t nil)
 
 (autoload 'ein:dev-stop-debug "ein-dev" "\
-Inverse of `ein:dev-start-debug'.  Hard to maintain because it needs to match start\n\n(fn)" t nil)
+Inverse of `ein:dev-start-debug'.  Hard to maintain because it needs to match start
+
+\(fn)" t nil)
 
 (autoload 'ein:dev-bug-report-template "ein-dev" "\
-Open a buffer with bug report template.\n\n(fn)" t nil)
+Open a buffer with bug report template.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-dev" '("ein:")))
 
@@ -143,16 +182,24 @@ Open a buffer with bug report template.\n\n(fn)" t nil)
 ;;; Generated autoloads from ein-helm.el
 
 (autoload 'anything-ein-kernel-history "ein-helm" "\
-Search kernel execution history then insert the selected one.\n\n(fn)" t nil)
+Search kernel execution history then insert the selected one.
+
+\(fn)" t nil)
 
 (autoload 'helm-ein-kernel-history "ein-helm" "\
-Search kernel execution history then insert the selected one.\n\n(fn)" t nil)
+Search kernel execution history then insert the selected one.
+
+\(fn)" t nil)
 
 (autoload 'anything-ein-notebook-buffers "ein-helm" "\
-Choose opened notebook using anything.el interface.\n\n(fn)" t nil)
+Choose opened notebook using anything.el interface.
+
+\(fn)" t nil)
 
 (autoload 'helm-ein-notebook-buffers "ein-helm" "\
-Choose opened notebook using helm interface.\n\n(fn)" t nil)
+Choose opened notebook using helm interface.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-helm" '("ein:helm-")))
 
@@ -162,7 +209,11 @@ Choose opened notebook using helm interface.\n\n(fn)" t nil)
 ;;; Generated autoloads from ein-iexec.el
 
 (autoload 'ein:iexec-mode "ein-iexec" "\
-Instant cell execution minor mode.\nCode cell at point will be automatically executed after any\nchange in its input area.\n\n(fn &optional ARG)" t nil)
+Instant cell execution minor mode.
+Code cell at point will be automatically executed after any
+change in its input area.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-iexec" '("ein:iexec-")))
 
@@ -172,7 +223,9 @@ Instant cell execution minor mode.\nCode cell at point will be automatically exe
 ;;; Generated autoloads from ein-inspector.el
 
 (autoload 'ein:inspect-object "ein-inspector" "\
-\n\n(fn KERNEL OBJECT)" t nil)
+
+
+\(fn KERNEL OBJECT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-inspector" '("ein:")))
 
@@ -190,7 +243,9 @@ Instant cell execution minor mode.\nCode cell at point will be automatically exe
 ;;; Generated autoloads from ein-ipynb-mode.el
 
 (autoload 'ein:ipynb-mode "ein-ipynb-mode" "\
-A simple mode for ipynb file.\n\n(fn)" t nil)
+A simple mode for ipynb file.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '(".*\\.ipynb\\'" . ein:ipynb-mode))
 
@@ -202,14 +257,34 @@ A simple mode for ipynb file.\n\n(fn)" t nil)
 ;;; Generated autoloads from ein-jupyter.el
 
 (autoload 'ein:jupyter-server-start "ein-jupyter" "\
-Start SERVER-CMD_PATH with `--notebook-dir' NOTEBOOK-DIRECTORY.  Login after connection established unless NO-LOGIN-P is set.  LOGIN-CALLBACK takes two arguments, the buffer created by ein:notebooklist-open--finish, and the url-or-port argument of ein:notebooklist-open*.\n\nThis command opens an asynchronous process running the jupyter\nnotebook server and then tries to detect the url and password to\ngenerate automatic calls to `ein:notebooklist-login' and\n`ein:notebooklist-open'.\n\nWith \\[universal-argument] prefix arg, it will prompt the user for the path to\nthe jupyter executable first. Else, it will try to use the\nvalue of `*ein:last-jupyter-command*' or the value of the\ncustomizable variable `ein:jupyter-default-server-command'.\n\nThen it prompts the user for the path of the root directory\ncontaining the notebooks the user wants to access.\n\nThe buffer named by `ein:jupyter-server-buffer-name' will contain\nthe log of the running jupyter server.\n\n(fn SERVER-CMD-PATH NOTEBOOK-DIRECTORY &optional NO-LOGIN-P LOGIN-CALLBACK PORT)" t nil)
+Start SERVER-CMD_PATH with `--notebook-dir' NOTEBOOK-DIRECTORY.  Login after connection established unless NO-LOGIN-P is set.  LOGIN-CALLBACK takes two arguments, the buffer created by ein:notebooklist-open--finish, and the url-or-port argument of ein:notebooklist-open*.
+
+This command opens an asynchronous process running the jupyter
+notebook server and then tries to detect the url and password to
+generate automatic calls to `ein:notebooklist-login' and
+`ein:notebooklist-open'.
+
+With \\[universal-argument] prefix arg, it will prompt the user for the path to
+the jupyter executable first. Else, it will try to use the
+value of `*ein:last-jupyter-command*' or the value of the
+customizable variable `ein:jupyter-default-server-command'.
+
+Then it prompts the user for the path of the root directory
+containing the notebooks the user wants to access.
+
+The buffer named by `ein:jupyter-server-buffer-name' will contain
+the log of the running jupyter server.
+
+\(fn SERVER-CMD-PATH NOTEBOOK-DIRECTORY &optional NO-LOGIN-P LOGIN-CALLBACK PORT)" t nil)
 
 (defalias 'ein:run 'ein:jupyter-server-start)
 
 (defalias 'ein:stop 'ein:jupyter-server-stop)
 
 (autoload 'ein:jupyter-server-stop "ein-jupyter" "\
-\n\n(fn &optional FORCE LOG)" t nil)
+
+
+\(fn &optional FORCE LOG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-jupyter" '("ein:" "*ein:")))
 
@@ -220,7 +295,9 @@ Start SERVER-CMD_PATH with `--notebook-dir' NOTEBOOK-DIRECTORY.  Login after con
 ;;; Generated autoloads from ein-jupyterhub.el
 
 (autoload 'ein:jupyterhub-connect "ein-jupyterhub" "\
-Log on to a jupyterhub server using PAM authentication. Requires jupyterhub version 0.8 or greater.  CALLBACK takes two arguments, the resulting buffer and the singleuser url-or-port\n\n(fn URL-OR-PORT USERNAME PASSWORD CALLBACK)" t nil)
+Log on to a jupyterhub server using PAM authentication. Requires jupyterhub version 0.8 or greater.  CALLBACK takes two arguments, the resulting buffer and the singleuser url-or-port
+
+\(fn URL-OR-PORT USERNAME PASSWORD CALLBACK)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-jupyterhub" '("ein:" "*ein:jupyterhub-connections*")))
 
@@ -263,7 +340,11 @@ Log on to a jupyterhub server using PAM authentication. Requires jupyterhub vers
 ;;; Generated autoloads from ein-multilang.el
 
 (autoload 'ein:notebook-multilang-mode "ein-multilang" "\
-A mode for fontifying multiple languages.\n\n\\{ein:notebook-multilang-mode-map}\n\n(fn)" t nil)
+A mode for fontifying multiple languages.
+
+\\{ein:notebook-multilang-mode-map}
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-multilang" '("ein:" "python-imenu-format-parent-item-jump-label")))
 
@@ -290,7 +371,17 @@ A mode for fontifying multiple languages.\n\n\\{ein:notebook-multilang-mode-map}
 (defalias 'ein:notebook-name 'ein:$notebook-notebook-name)
 
 (autoload 'ein:notebook-open "ein-notebook" "\
-Returns notebook at URL-OR-PORT/PATH.\n\nNote that notebook sends for its contents and won't have them right away.\n\nAfter the notebook is opened, CALLBACK is called as::\n\n  (funcall CALLBACK notebook created)\n\nwhere `created' indicates a new notebook or an existing one.\n\n(fn URL-OR-PORT PATH &optional KERNELSPEC CALLBACK ERRBACK NO-POP)" t nil)
+Returns notebook at URL-OR-PORT/PATH.
+
+Note that notebook sends for its contents and won't have them right away.
+
+After the notebook is opened, CALLBACK is called as::
+
+  (funcall CALLBACK notebook created)
+
+where `created' indicates a new notebook or an existing one.
+
+\(fn URL-OR-PORT PATH &optional KERNELSPEC CALLBACK ERRBACK NO-POP)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-notebook" '("ein:" "*ein:notebook--pending-query*")))
 
@@ -301,39 +392,90 @@ Returns notebook at URL-OR-PORT/PATH.\n\nNote that notebook sends for its conten
 ;;; Generated autoloads from ein-notebooklist.el
 
 (autoload 'ein:notebooklist-enable-keepalive "ein-notebooklist" "\
-Enable periodic calls to the notebook server to keep long running sessions from expiring.\nBy long running we mean sessions to last days, or weeks. The\nfrequency of the refresh (which is very similar to a call to\n`ein:notebooklist-open`) is controlled by\n`ein:notebooklist-keepalive-refresh-time`, and is measured in\nterms of hours. If `ein:enable-keepalive' is non-nil this will\nautomatically be called during calls to `ein:notebooklist-open`.\n\n(fn &optional URL-OR-PORT)" t nil)
+Enable periodic calls to the notebook server to keep long running sessions from expiring.
+By long running we mean sessions to last days, or weeks. The
+frequency of the refresh (which is very similar to a call to
+`ein:notebooklist-open`) is controlled by
+`ein:notebooklist-keepalive-refresh-time`, and is measured in
+terms of hours. If `ein:enable-keepalive' is non-nil this will
+automatically be called during calls to `ein:notebooklist-open`.
+
+\(fn &optional URL-OR-PORT)" t nil)
 
 (autoload 'ein:notebooklist-disable-keepalive "ein-notebooklist" "\
-Disable the notebooklist keepalive calls to the jupyter notebook server.\n\n(fn)" t nil)
+Disable the notebooklist keepalive calls to the jupyter notebook server.
+
+\(fn)" t nil)
 
 (autoload 'ein:notebooklist-reload "ein-notebooklist" "\
-Reload current Notebook list.\n\n(fn &optional NBLIST RESYNC CALLBACK)" t nil)
+Reload current Notebook list.
+
+\(fn &optional NBLIST RESYNC CALLBACK)" t nil)
 
 (autoload 'ein:notebooklist-upload-file "ein-notebooklist" "\
-\n\n(fn UPLOAD-PATH)" t nil)
+
+
+\(fn UPLOAD-PATH)" t nil)
 
 (autoload 'ein:notebooklist-new-notebook "ein-notebooklist" "\
-\n\n(fn URL-OR-PORT KERNELSPEC &optional CALLBACK NO-POP RETRY)" t nil)
+
+
+\(fn URL-OR-PORT KERNELSPEC &optional CALLBACK NO-POP RETRY)" t nil)
 
 (autoload 'ein:notebooklist-new-notebook-with-name "ein-notebooklist" "\
-Open new notebook and rename the notebook.\n\n(fn URL-OR-PORT KERNELSPEC NAME &optional CALLBACK NO-POP)" t nil)
+Open new notebook and rename the notebook.
+
+\(fn URL-OR-PORT KERNELSPEC NAME &optional CALLBACK NO-POP)" t nil)
 
 (autoload 'ein:notebooklist-list-paths "ein-notebooklist" "\
-Return all files of CONTENT-TYPE for all sessions\n\n(fn &optional CONTENT-TYPE)" nil nil)
+Return all files of CONTENT-TYPE for all sessions
+
+\(fn &optional CONTENT-TYPE)" nil nil)
 
 (autoload 'ein:notebooklist-load "ein-notebooklist" "\
-Load notebook list but do not pop-up the notebook list buffer.\n\nFor example, if you want to load notebook list when Emacs starts,\nadd this in the Emacs initialization file::\n\n  (add-to-hook 'after-init-hook 'ein:notebooklist-load)\n\nor even this (if you want fast Emacs start-up)::\n\n  ;; load notebook list if Emacs is idle for 3 sec after start-up\n  (run-with-idle-timer 3 nil #'ein:notebooklist-load)\n\nYou should setup `ein:url-or-port' or `ein:default-url-or-port'\nin order to make this code work.\n\nSee also:\n`ein:connect-to-default-notebook', `ein:connect-default-notebook'.\n\n(fn &optional URL-OR-PORT)" nil nil)
+Load notebook list but do not pop-up the notebook list buffer.
+
+For example, if you want to load notebook list when Emacs starts,
+add this in the Emacs initialization file::
+
+  (add-to-hook 'after-init-hook 'ein:notebooklist-load)
+
+or even this (if you want fast Emacs start-up)::
+
+  ;; load notebook list if Emacs is idle for 3 sec after start-up
+  (run-with-idle-timer 3 nil #'ein:notebooklist-load)
+
+You should setup `ein:url-or-port' or `ein:default-url-or-port'
+in order to make this code work.
+
+See also:
+`ein:connect-to-default-notebook', `ein:connect-default-notebook'.
+
+\(fn &optional URL-OR-PORT)" nil nil)
 
 (autoload 'ein:notebooklist-open "ein-notebooklist" "\
-This is now an alias for ein:notebooklist-login\n\n(fn URL-OR-PORT CALLBACK)" t nil)
+This is now an alias for ein:notebooklist-login
+
+\(fn URL-OR-PORT CALLBACK)" t nil)
 
 (defalias 'ein:login 'ein:notebooklist-login)
 
 (autoload 'ein:notebooklist-login "ein-notebooklist" "\
-Deal with security before main entry of ein:notebooklist-open*.\n\nCALLBACK takes two arguments, the buffer created by ein:notebooklist-open--success\nand the url-or-port argument of ein:notebooklist-open*.\n\n(fn URL-OR-PORT CALLBACK &optional COOKIE-PLIST)" t nil)
+Deal with security before main entry of ein:notebooklist-open*.
+
+CALLBACK takes two arguments, the buffer created by ein:notebooklist-open--success
+and the url-or-port argument of ein:notebooklist-open*.
+
+\(fn URL-OR-PORT CALLBACK &optional COOKIE-PLIST)" t nil)
 
 (autoload 'ein:notebooklist-change-url-port "ein-notebooklist" "\
-Update the ipython/jupyter notebook server URL for all the\nnotebooks currently opened from the current notebooklist buffer.\n\nThis function works by calling `ein:notebook-update-url-or-port'\non all the notebooks opened from the current notebooklist.\n\n(fn NEW-URL-OR-PORT)" t nil)
+Update the ipython/jupyter notebook server URL for all the
+notebooks currently opened from the current notebooklist buffer.
+
+This function works by calling `ein:notebook-update-url-or-port'
+on all the notebooks opened from the current notebooklist.
+
+\(fn NEW-URL-OR-PORT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-notebooklist" '("ein:" "render-" "generate-breadcrumbs")))
 
@@ -351,10 +493,32 @@ Update the ipython/jupyter notebook server URL for all the\nnotebooks currently 
 ;;; Generated autoloads from ein-org.el
 
 (autoload 'ein:org-open "ein-org" "\
-Open IPython notebook specified by LINK-PATH.\nThis function is to be used for FOLLOW function of\n`org-add-link-type'.\n\n(fn LINK-PATH)" nil nil)
+Open IPython notebook specified by LINK-PATH.
+This function is to be used for FOLLOW function of
+`org-add-link-type'.
+
+\(fn LINK-PATH)" nil nil)
 
 (autoload 'ein:org-store-link "ein-org" "\
-Call `org-store-link-props' when in notebook buffer.\nThis function is to be used for `org-store-link-functions'.\n\nExamples::\n\n  ipynb:(:url-or-port 8888 :name \"My_Notebook\")\n  ipynb:(:url-or-port \"http://notebook-server\" :name \"My_Notebook\")\n\nNote that spaces will be escaped in org files.\n\nAs how IPython development team supports multiple directory in\nIPython notebook server is unclear, it is not easy to decide the\nformat for notebook links.  Current approach is to use\nS-expression based (rather verbose) serialization, so that\nextending link spec without loosing backward compatibility is\neasier.  For the examples of link format in general, see Info\nnode `(org) External links' and Info node `(org) Search options'\n\n(fn)" nil nil)
+Call `org-store-link-props' when in notebook buffer.
+This function is to be used for `org-store-link-functions'.
+
+Examples::
+
+  ipynb:(:url-or-port 8888 :name \"My_Notebook\")
+  ipynb:(:url-or-port \"http://notebook-server\" :name \"My_Notebook\")
+
+Note that spaces will be escaped in org files.
+
+As how IPython development team supports multiple directory in
+IPython notebook server is unclear, it is not easy to decide the
+format for notebook links.  Current approach is to use
+S-expression based (rather verbose) serialization, so that
+extending link spec without loosing backward compatibility is
+easier.  For the examples of link format in general, see Info
+node `(org) External links' and Info node `(org) Search options'
+
+\(fn)" nil nil)
 
 (eval-after-load "org" '(if (fboundp 'org-link-set-parameters) (org-link-set-parameters "ipynb" :follow 'ein:org-open :help-echo "Open ipython notebook." :store 'ein:org-store-link) (org-add-link-type "ipynb" :follow 'ein:org-open) (add-hook 'org-store-link-functions 'ein:org-store-link)))
 
@@ -389,7 +553,9 @@ Call `org-store-link-props' when in notebook buffer.\nThis function is to be use
 ;;; Generated autoloads from ein-pseudo-console.el
 
 (autoload 'ein:pseudo-console-mode "ein-pseudo-console" "\
-Pseudo console mode.  Hit RET to execute code.\n\n(fn &optional ARG)" t nil)
+Pseudo console mode.  Hit RET to execute code.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-pseudo-console" '("ein:pseudo-console-mode-map")))
 
@@ -429,13 +595,28 @@ Pseudo console mode.  Hit RET to execute code.\n\n(fn &optional ARG)" t nil)
 ;;; Generated autoloads from ein-shared-output.el
 
 (autoload 'ein:shared-output-pop-to-buffer "ein-shared-output" "\
-Open shared output buffer.\n\n(fn)" t nil)
+Open shared output buffer.
+
+\(fn)" t nil)
 
 (autoload 'ein:shared-output-show-code-cell-at-point "ein-shared-output" "\
-Show code cell at point in shared-output buffer.\nIt is useful when the output of the cell at point is truncated.\nSee also `ein:cell-max-num-outputs'.\n\n(fn)" t nil)
+Show code cell at point in shared-output buffer.
+It is useful when the output of the cell at point is truncated.
+See also `ein:cell-max-num-outputs'.
+
+\(fn)" t nil)
 
 (autoload 'ein:shared-output-eval-string "ein-shared-output" "\
-Evaluate a piece of code.  Prompt will appear asking the code to run.\nThis is handy when you want to execute something quickly without\nmaking a cell.  If the code outputs something, it will go to the\nshared output buffer.  You can open the buffer by the command\n`ein:shared-output-pop-to-buffer'.\n\n.. ARGS is passed to `ein:kernel-execute'.  Unlike `ein:kernel-execute',\n   `:silent' is `nil' by default.\n\n(fn KERNEL CODE POPUP &rest ARGS)" t nil)
+Evaluate a piece of code.  Prompt will appear asking the code to run.
+This is handy when you want to execute something quickly without
+making a cell.  If the code outputs something, it will go to the
+shared output buffer.  You can open the buffer by the command
+`ein:shared-output-pop-to-buffer'.
+
+.. ARGS is passed to `ein:kernel-execute'.  Unlike `ein:kernel-execute',
+   `:silent' is `nil' by default.
+
+\(fn KERNEL CODE POPUP &rest ARGS)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-shared-output" '("ein:" "*ein:shared-output*")))
 
@@ -474,7 +655,9 @@ Evaluate a piece of code.  Prompt will appear asking the code to run.\nThis is h
 ;;; Generated autoloads from ein-traceback.el
 
 (autoload 'ein:tb-show "ein-traceback" "\
-Show full traceback in traceback viewer.\n\n(fn)" t nil)
+Show full traceback in traceback viewer.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ein-traceback" '("ein:t")))
 
@@ -505,13 +688,19 @@ Show full traceback in traceback viewer.\n\n(fn)" t nil)
 ;;; Generated autoloads from ob-ein.el
 
 (autoload 'org-babel-execute:ein "ob-ein" "\
-This function is called by `org-babel-execute-src-block'.\n\n(fn BODY PARAMS)" nil nil)
+This function is called by `org-babel-execute-src-block'.
+
+\(fn BODY PARAMS)" nil nil)
 
 (autoload 'org-babel-execute:ein-hy "ob-ein" "\
-\n\n(fn BODY PARAMS)" nil nil)
+
+
+\(fn BODY PARAMS)" nil nil)
 
 (autoload 'org-babel-edit-prep:ein "ob-ein" "\
-C-c ' enters the lightly tested connect-to-notebook mode.\n\n(fn BABEL-INFO)" nil nil)
+C-c ' enters the lightly tested connect-to-notebook mode.
+
+\(fn BABEL-INFO)" nil nil)
 
 (with-eval-after-load "python" (setq python-indent-guess-indent-offset-verbose nil))
 

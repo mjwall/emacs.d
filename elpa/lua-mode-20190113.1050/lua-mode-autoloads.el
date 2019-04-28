@@ -17,7 +17,9 @@
 ;;; Generated autoloads from lua-mode.el
 
 (autoload 'lua-mode "lua-mode" "\
-Major mode for editing Lua code.\n\n(fn)" t nil)
+Major mode for editing Lua code.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
@@ -26,7 +28,11 @@ Major mode for editing Lua code.\n\n(fn)" t nil)
 (defalias 'run-lua #'lua-start-process)
 
 (autoload 'lua-start-process "lua-mode" "\
-Start a Lua process named NAME, running PROGRAM.\nPROGRAM defaults to NAME, which defaults to `lua-default-application'.\nWhen called interactively, switch to the process buffer.\n\n(fn &optional NAME PROGRAM STARTFILE &rest SWITCHES)" t nil)
+Start a Lua process named NAME, running PROGRAM.
+PROGRAM defaults to NAME, which defaults to `lua-default-application'.
+When called interactively, switch to the process buffer.
+
+\(fn &optional NAME PROGRAM STARTFILE &rest SWITCHES)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lua-mode" '("lua-")))
 

@@ -10,16 +10,25 @@
 ;;; Generated autoloads from swiper.el
 
 (autoload 'swiper-avy "swiper" "\
-Jump to one of the current swiper candidates.\n\n(fn)" t nil)
+Jump to one of the current swiper candidates.
+
+\(fn)" t nil)
 
 (autoload 'swiper "swiper" "\
-`isearch' with an overview.\nWhen non-nil, INITIAL-INPUT is the initial search pattern.\n\n(fn &optional INITIAL-INPUT)" t nil)
+`isearch' with an overview.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
 
 (autoload 'swiper-all "swiper" "\
-Run `swiper' for all open buffers.\n\n(fn &optional INITIAL-INPUT)" t nil)
+Run `swiper' for all open buffers.
+
+\(fn &optional INITIAL-INPUT)" t nil)
 
 (autoload 'swiper-isearch "swiper" "\
-A `swiper' that's not line-based.\n\n(fn &optional INITIAL-INPUT)" t nil)
+A `swiper' that's not line-based.
+
+\(fn &optional INITIAL-INPUT)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swiper" '("swiper-")))
 

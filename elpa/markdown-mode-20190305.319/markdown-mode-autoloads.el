@@ -10,23 +10,33 @@
 ;;; Generated autoloads from markdown-mode.el
 
 (autoload 'markdown-mode "markdown-mode" "\
-Major mode for editing Markdown files.\n\n(fn)" t nil)
+Major mode for editing Markdown files.
+
+\(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (autoload 'gfm-mode "markdown-mode" "\
-Major mode for editing GitHub Flavored Markdown files.\n\n(fn)" t nil)
+Major mode for editing GitHub Flavored Markdown files.
+
+\(fn)" t nil)
 
 (autoload 'markdown-view-mode "markdown-mode" "\
-Major mode for viewing Markdown content.\n\n(fn)" t nil)
+Major mode for viewing Markdown content.
+
+\(fn)" t nil)
 
 (autoload 'gfm-view-mode "markdown-mode" "\
-Major mode for viewing GitHub Flavored Markdown content.\n\n(fn)" t nil)
+Major mode for viewing GitHub Flavored Markdown content.
+
+\(fn)" t nil)
 
 (autoload 'markdown-live-preview-mode "markdown-mode" "\
-Toggle native previewing on save for a specific markdown file.\n\n(fn &optional ARG)" t nil)
+Toggle native previewing on save for a specific markdown file.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "markdown-mode" '("gfm-" "markdown" "defun-markdown-")))
 

@@ -10,7 +10,9 @@
 ;;; Generated autoloads from ad-javap-mode.el
 
 (autoload 'ad-javap-mode "ad-javap-mode" "\
-A major mode for viewing javap files.\n\n(fn)" t nil)
+A major mode for viewing javap files.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ad-javap-mode" '("ad-javap-")))
 

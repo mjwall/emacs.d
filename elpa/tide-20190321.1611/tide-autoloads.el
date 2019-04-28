@@ -10,31 +10,53 @@
 ;;; Generated autoloads from tide.el
 
 (autoload 'company-tide "tide" "\
-\n\n(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
+
+\(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
 (autoload 'tide-format-before-save "tide" "\
-Before save hook to format the buffer before each save.\n\n(fn)" t nil)
+Before save hook to format the buffer before each save.
+
+\(fn)" t nil)
 
 (autoload 'tide-format "tide" "\
-Format the current region or buffer.\n\n(fn)" t nil)
+Format the current region or buffer.
+
+\(fn)" t nil)
 
 (autoload 'tide-setup "tide" "\
-Setup `tide-mode' in current buffer.\n\n(fn)" t nil)
+Setup `tide-mode' in current buffer.
+
+\(fn)" t nil)
 
 (autoload 'tide-mode "tide" "\
-Minor mode for Typescript Interactive Development Environment.\n\n\\{tide-mode-map}\n\n(fn &optional ARG)" t nil)
+Minor mode for Typescript Interactive Development Environment.
+
+\\{tide-mode-map}
+
+\(fn &optional ARG)" t nil)
 
 (autoload 'tide-project-errors "tide" "\
-\n\n(fn)" t nil)
+
+
+\(fn)" t nil)
 
 (autoload 'tide-unhighlight-identifiers "tide" "\
-Remove highlights from previously highlighted identifier.\n\n(fn)" nil nil)
+Remove highlights from previously highlighted identifier.
+
+\(fn)" nil nil)
 
 (autoload 'tide-hl-identifier "tide" "\
-Highlight all instances of the identifier under point. Removes\nhighlights from previously highlighted identifier.\n\n(fn)" t nil)
+Highlight all instances of the identifier under point. Removes
+highlights from previously highlighted identifier.
+
+\(fn)" t nil)
 
 (autoload 'tide-hl-identifier-mode "tide" "\
-Highlight instances of the identifier at point after a short\ntimeout.\n\n(fn &optional ARG)" t nil)
+Highlight instances of the identifier at point after a short
+timeout.
+
+\(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tide" '("tide-")))
 

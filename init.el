@@ -198,11 +198,6 @@
 ;; packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;; turn back on when want to update orgmode
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-;;(setq package-archive-priorities '(("org" . 3)
-;;                                   ("melpa" . 2)
-;;                                   ("gnu" . 1)))
 
 ;; use-package
 ;; - https://github.com/jwiegley/use-package
@@ -214,11 +209,16 @@
 
 ;; org-mode
 ;; - https://orgmode.org/
+;; turn back on when want to update orgmode, and 
+;; uncomment the `:ensure org-plus-contrib' below
+;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;; (setq package-archive-priorities '(("org" . 3)
+;;                                   ("melpa" . 2)
+;;                                   ("gnu" . 1)))
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
   ;; :ensure org-plus-contrib
-  :ensure t
   :preface
   (setq sync-git-dir-file
     (expand-file-name "bin/sync-git-dir" user-emacs-directory))
@@ -262,7 +262,7 @@
 
 ;; org-journal
 (use-package org-journal
-  :ensure t
+  :ensure nil
   :custom
   (org-journal-file-format "%Y%m%d.org")
   (org-journal-dir (expand-file-name "journal" org-directory))
@@ -271,7 +271,8 @@
 ;; ensure system package
 ;; - part of use-package at https://github.com/jwiegley/use-package
 (use-package use-package-ensure-system-package
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; help setup paths
 ;; - https://github.com/purcell/exec-path-from-shell
@@ -301,6 +302,7 @@
     ;; :background "#dddddd"
     ;; :foreground "#000000"
     )
+  (global-set-key (kbd "C-c r") 'ivy-resume)
   )
 
 (use-package swiper
@@ -325,7 +327,6 @@
   ;; (global-set-key (kbd "C-c a") 'counsel-ag)
   (global-set-key (kbd "C-c l") 'counsel-locate)
   ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-  (global-set-key (kbd "C-c r") 'counsel-resume)
   )
 
 ;; hippie expand - built in
@@ -358,41 +359,8 @@
 
 ;; git - built in
 (use-package vc-git
-  ;; :preface
-  ;; ;; In vc-git and vc-dir for git buffers,
-  ;; ;; make (C-x v) a run git add, u run git reset,
-  ;; ;; and r run git reset and checkout from head.
-  ;; ;; based on https://joppot.info/en/2018/02/04/4144
-  ;; (defun my-vc-git-command (verb fn)
-  ;;   (let* ((fileset-arg (or vc-fileset (vc-deduce-fileset nil t)))
-  ;;           (backend (car fileset-arg))
-  ;;           (files (nth 1 fileset-arg)))
-  ;;     (if (eq backend 'Git)
-  ;;       (progn (funcall fn files)
-  ;;         (message (concat verb " " (number-to-string (length files))
-  ;;                    " file(s).")))
-  ;;       (message "Not in a vc git buffer."))))
-  ;; (defun vc-git-add (&optional revision vc-fileset comment)
-  ;;   (interactive "P")
-  ;;   (my-vc-git-command "Staged" 'vc-git-register))
-  ;; (defun vc-git-reset (&optional revision vc-fileset comment)
-  ;;   (interactive "P")
-  ;;   (my-vc-git-command "Unstaged"
-  ;;     (lambda (files) (vc-git-command nil 0 files "reset" "-q" "–"))))
-  ;; (defun vc-git-dir-refresh-and-update ()
-  ;;   "Refresh the vc-dir then hide up to date files and directories"
-  ;;   (interactive)
-  ;;   (vc-dir-refresh)
-  ;;   (vc-dir-hide-up-to-date))
   :config
   (use-package vc-dir)
-  ;; (define-key vc-prefix-map [(r)] 'vc-revert-buffer)
-  ;; (define-key vc-dir-mode-map [(r)] 'vc-revert-buffer)
-  ;; (define-key vc-prefix-map [(a)] 'vc-git-add)
-  ;; (define-key vc-dir-mode-map [(a)] 'vc-git-add)
-  ;; (define-key vc-prefix-map [(u)] 'vc-git-reset)
-  ;; (define-key vc-dir-mode-map [(u)] 'vc-git-reset)
-  ;; (define-key vc-dir-mode-map [(g)] 'vc-git-dir-refresh-and-update)
   )
 
 ;; eshell - all built in except
@@ -465,12 +433,14 @@
     ("<f7>" . counsel-git) ;; faster
     ("<f8>" . speedbar)
     ("<f9>" . vc-dir)
-    ("<f10>" . eshell)))
+    ("<f10>" . eshell))
+  )
 
 ;; ctags
 ;; - https://github.com/jixiuf/ctags-update
 ;; (use-package ctags-update
-;;   :ensure nil)
+;;   :ensure nil
+;;)
 
 ;; etags select
 ;; - in site-lisp from
@@ -519,7 +489,8 @@
     '(jdee-server-dir
        (expand-file-name "src/jdee-server" user-emacs-directory))))
 (use-package autodisass-java-bytecode
-  :ensure nil)
+  :ensure nil
+)
 
 ;; Javascript
 ;; - https://github.com/mooz/js2-mode
@@ -532,7 +503,8 @@
   (setq js-indent-level 2) ;; defalias js2-basic-off in > 25.0
   :config
   (use-package json-mode
-    :ensure nil))
+    :ensure nil
+    ))
 
 ;; Typescript
 ;; - https://github.com/ananthakumaran/typescript.el
@@ -545,7 +517,8 @@
   (setf typescript-indent-level js-indent-level)
   :config
   (use-package ng2-mode
-    :ensure nil)
+    :ensure nil
+    )
   (use-package tide
     :ensure nil
     :after (typescript-mode flycheck)
@@ -634,7 +607,8 @@
     ("C-c h" . go-guru-hl-identifier)))
 (use-package go-rename
   ;; go get -u -v golang.org/x/tools/cmd/gorename
-  :ensure nil)
+  :ensure nil
+  )
 (use-package go-eldoc
   ;; go get -u -v github.com/mdempsky/gocode
   :ensure nil
@@ -643,6 +617,7 @@
 ; flycheck just works
 (use-package company-go
   ;; - https://github.com/mdempsky/gocode/tree/master/emacs-company
+  :ensure nil
   ;; go get -u -v github.com/mdempsky/gocode if not already
   :config
   (set (make-local-variable 'company-backends)
@@ -736,24 +711,29 @@
 ;; http://manuel-uberti.github.io/emacs/2017/10/19/docker/
 ;; - https://github.com/spotify/dockerfile-mode
 (use-package dockerfile-mode
-  :ensure nil)
+  :ensure nil
+  )
 ;; - https://github.com/meqif/docker-compose-mode
 (use-package docker-compose-mode
-  :ensure nil)
+  :ensure nil
+  )
 ;; - https://github.com/emacs-pe/docker-tramp.el
 (use-package docker-tramp
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; thrift
 ;; - https://github.com/davidmiller/thrift-mode
 (use-package thrift
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; protobuf
 ;; - https://melpa.org/#/protobuf-mode
 ;; which points inside https://github.com/protocolbuffers/protobuf
 (use-package protobuf-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; jflex
 ;; in site-lisp from http://jflex.de/jflex-mode.el
@@ -763,7 +743,8 @@
 ;; - https://melpa.org/#/cmake-mode
 ;; which points inside https://github.com/Kitware/CMake/
 (use-package cmake-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; gradle
 ;; - https://github.com/jacobono/emacs-gradle-mode
@@ -775,7 +756,6 @@
 ;; my-gradle
 ;; - copied from elpa dir with emacs-gradle-mode above
 (use-package my-gradle-mode
-  :ensure nil
   :init
   (set-variable 'gradle-use-gradlew 1))
 (use-package flycheck-gradle
@@ -791,32 +771,38 @@
 ;; julia
 ;; - https://github.com/JuliaEditorSupport/julia-emacs
 (use-package julia-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; scala
 ;; - https://github.com/ensime/emacs-scala-mode
 (use-package scala-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; clojure
 ;; - https://github.com/clojure-emacs/clojure-mode
 (use-package clojure-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; markdown
 ;; - https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; kotlin
 ;; - https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
 (use-package kotlin-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; lua
 ;; - https://github.com/immerrr/lua-mode
 (use-package lua-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; groovy
 ;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
@@ -828,7 +814,8 @@
 ;; yaml
 ;; - https://github.com/yoshiki/yaml-mode
 (use-package yaml-mode
-  :ensure nil)
+  :ensure nil
+  )
 
 ;; TODO
 
@@ -844,7 +831,7 @@
 
 ;; try lsp stuff again, couldn't get it working first time around
 
-;; change all `:ensure t' to  `:ensure nil' so packages
+;; change all :`ensure nil' to  :`ensure t' so packages
 ;; dont update automatically.  The nil is default but it allows
 ;; me to search and replace
 
@@ -862,7 +849,6 @@
 ;; Update README, change to README.md or README.org
 ;; Update dotfiles repo
 
-;; redo vc-git
 
 (provide 'init)
 ;;; init.el ends here

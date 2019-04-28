@@ -10,10 +10,14 @@
 ;;; Generated autoloads from pythonic.el
 
 (autoload 'pythonic-activate "pythonic" "\
-Activate python VIRTUALENV.\n\n(fn VIRTUALENV)" t nil)
+Activate python VIRTUALENV.
+
+\(fn VIRTUALENV)" t nil)
 
 (autoload 'pythonic-deactivate "pythonic" "\
-Deactivate python virtual environment.\n\n(fn)" t nil)
+Deactivate python virtual environment.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pythonic" '("pythonic-")))
 

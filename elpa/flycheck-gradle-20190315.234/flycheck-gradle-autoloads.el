@@ -11,7 +11,9 @@
 ;;; Generated autoloads from flycheck-gradle.el
 
 (autoload 'flycheck-gradle-setup "flycheck-gradle" "\
-Setup Flycheck for Gradle.\n\n(fn)" t nil)
+Setup Flycheck for Gradle.
+
+\(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "flycheck-gradle" '("flycheck-gradle-")))
 

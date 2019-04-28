@@ -1,2 +1,2 @@
 ;;; -*- no-byte-compile: t -*-
-(define-package "cmake-mode" "20180709.1426" "major-mode for editing CMake sources" 'nil :commit "b689679594c99e63003ed8ea8cb85c4f909c4240")
+(define-package "cmake-mode" "20180709.1426" "major-mode for editing CMake sources" 'nil :commit "d8426b57a66d7a420f28b0b0309d1502e7bcfea8")

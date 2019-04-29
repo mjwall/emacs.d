@@ -209,7 +209,7 @@
 
 ;; org-mode
 ;; - https://orgmode.org/
-;; turn back on when want to update orgmode, and 
+;; turn back on when want to update orgmode, and
 ;; uncomment the `:ensure org-plus-contrib' below
 ;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 ;; (setq package-archive-priorities '(("org" . 3)
@@ -308,7 +308,7 @@
 (use-package swiper
   :ensure nil
   :config
-  (global-set-key "\C-s" 'swiper))
+  (global-set-key "\C-s" 'swiper-isearch))
 
 (use-package counsel
   :ensure nil
@@ -848,6 +848,21 @@
 
 ;; Update README, change to README.md or README.org
 ;; Update dotfiles repo
+
+;; document M-s h bindings like
+;; key             binding
+;; ---             -------
+
+;; M-s h .         highlight-symbol-at-point
+;; M-s h f         hi-lock-find-patterns
+;; M-s h l         highlight-lines-matching-regexp
+;; M-s h p         highlight-phrase
+;; M-s h r         highlight-regexp
+;; M-s h u         unhighlight-regexp
+;; M-s h w         hi-lock-write-interactive-patterns
+;; and
+;; M-x highlight-regexp RET <REGEXP>
+;; M-x highlight-phrase RET <REGEXP>
 
 
 (provide 'init)

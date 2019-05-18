@@ -536,6 +536,25 @@
 ;; - https://github.com/necaris/conda.el
 ;; - https://github.com/millejoh/emacs-ipython-notebook
 ;; - https://github.com/paetzke/py-autopep8.el
+(use-package conda
+  :ensure nil
+  :preface
+  ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
+  (defun hack-conda--get-path-prefix (orig-fun &rest args)
+    "Hack getting a platform-specific path string to utilize the conda env in
+ENV-DIR.  It's platform specific in that it uses the platform's native path
+separator."
+    (s-trim (concat (file-name-as-directory (car args)) "bin")))
+  :init
+  (setq conda-anaconda-home "~/anaconda3")
+  :config
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell)
+  (conda-env-autoactivate-mode t)
+  ;; monkey patch until this PR is merged
+  ;; https://github.com/necaris/conda.el/pull/23
+  (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
+  :after (flycheck))
 (use-package anaconda-mode
   :ensure nil
   :init
@@ -546,7 +565,8 @@
     )
   :hook
   ((python-mode . anaconda-mode)
-    (python-mode . anaconda-eldoc-mode)))
+    (python-mode . anaconda-eldoc-mode))
+  :after (conda))
 (use-package company-anaconda
   :ensure nil
   :init
@@ -560,25 +580,8 @@
 (use-package py-autopep8
   :ensure-system-package (autopep8 . "conda install autopep8")
   :ensure nil
-  :hook ((python-mode . py-autopep8-enable-on-save)))
-(use-package conda
-  :ensure nil
-  :preface
-  ;; see https://github.com/necaris/conda.el/pull/23 and
-  ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
-  (defun hack-conda--get-path-prefix (orig-fun &rest args)
-    "Get a platform-specific path string to utilize the conda env in ENV-DIR.
-It's platform specific in that it uses the platform's native path separator."
-    (s-trim (concat (file-name-as-directory (car args)) "bin")))
-  :init
-  (setq conda-anaconda-home "~/anaconda3")
-  :config
-  (conda-env-initialize-interactive-shells)
-  (conda-env-initialize-eshell)
-  (conda-env-autoactivate-mode t)
-  ;; monkey patch until PR referenced above is merged
-  (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
-  :after (conda flycheck))
+  :hook ((python-mode . py-autopep8-enable-on-save))
+  :after (conda))
 (use-package virtualenvwrapper
   :ensure nil
   )

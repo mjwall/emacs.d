@@ -329,6 +329,9 @@
   ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 
+(use-package smex
+  :ensure nil)
+
 ;; hippie expand - built in
 (use-package hippie-expand
   :init
@@ -537,30 +540,51 @@
   :ensure nil
   :init
   (setq
-    python-indent-offset 4
-    python-shell-interpreter "ipython"
-    python-shell-interpreter-args "--simple-prompt")
-  :config
-  (use-package conda
-    :ensure nil
-    :init
-    (setq conda-anaconda-home "~/anaconda3")
-    :config
-    (conda-env-initialize-interactive-shells)
-    (conda-env-initialize-eshell))
-  (use-package ein
-    :ensure nil
-    :init
-    (set-variable 'ein:jupyter-default-notebook-directory "~/git/jupyter")
-    (set-variable 'ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-    (set-variable 'ein:jupyter-server-args (list "--no-browser")))
-  (use-package py-autopep8
-    :ensure-system-package (autopep8 . "conda install autopep8")
-    :ensure nil
-    :hook ((python-mode . py-autopep8-enable-on-save)))
+    python-indent-offset 2
+    ;;python-shell-interpreter "ipython"
+    ;;python-shell-interpreter-args "--simple-prompt"
+    )
   :hook
   ((python-mode . anaconda-mode)
     (python-mode . anaconda-eldoc-mode)))
+(use-package company-anaconda
+  :ensure nil
+  :init
+  (add-to-list 'company-backends 'company-anaconda))
+(use-package ein
+  :ensure nil
+  :init
+  (set-variable 'ein:jupyter-default-notebook-directory "~/git/jupyter")
+  (set-variable 'ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
+  (set-variable 'ein:jupyter-server-args (list "--no-browser")))
+(use-package py-autopep8
+  :ensure-system-package (autopep8 . "conda install autopep8")
+  :ensure nil
+  :hook ((python-mode . py-autopep8-enable-on-save)))
+(use-package conda
+  :ensure nil
+  :preface
+  ;; see https://github.com/necaris/conda.el/pull/23 and
+  ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
+  (defun hack-conda--get-path-prefix (orig-fun &rest args)
+    "Get a platform-specific path string to utilize the conda env in ENV-DIR.
+It's platform specific in that it uses the platform's native path separator."
+    (s-trim (concat (file-name-as-directory (car args)) "bin")))
+  :init
+  (setq conda-anaconda-home "~/anaconda3")
+  :config
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell)
+  (conda-env-autoactivate-mode t)
+  ;; monkey patch until PR referenced above is merged
+  (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
+  :after (conda flycheck))
+(use-package virtualenvwrapper
+  :ensure nil
+  )
+(use-package cython-mode
+  :ensure nil
+  :mode (("\\.py[xdi]" . cython-mode)))
 
 ;; golang
 ;; - https://github.com/dominikh/go-mode.el (guru and rename too)

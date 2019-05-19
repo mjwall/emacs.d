@@ -206,6 +206,14 @@
   (package-install 'use-package))
 (eval-when-compile
   (require 'use-package))
+;; not sure if the following is needed, but if you want to debug the
+;; macro expansion for use-package (actually for any macro), a way to do
+;; is to go the end of the macro, then run `eval-last-sexp' (C-x C-e) which
+;; will expand that macro, then run `pp-macroexpand-last-sexp' which
+;; writes the output to a new buffer
+;;(setq
+;;  use-package-verbose 'debug
+;;  use-package-expand-minimally nil)
 
 ;; org-mode
 ;; - https://orgmode.org/

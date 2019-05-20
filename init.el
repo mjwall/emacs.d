@@ -267,6 +267,9 @@
   ;:pin "manual"
   ;; :demand t
   )
+;; org-tempo to get back TAB for easy template expansion
+;; https://www.reddit.com/r/orgmode/comments/7jedp0/easy_templates_expansion_not_working/
+(use-package org-tempo)
 
 ;; org-journal
 (use-package org-journal
@@ -281,6 +284,12 @@
 (use-package use-package-ensure-system-package
   :ensure nil
   )
+
+;; unfill - useful when editing filled paragraphs
+(use-package unfill
+  :ensure nil
+  ;; `fill-paragraph' usually bound to M-q
+  :bind ([remap fill-paragraph] . unfill-toggle))
 
 ;; help setup paths
 ;; - https://github.com/purcell/exec-path-from-shell

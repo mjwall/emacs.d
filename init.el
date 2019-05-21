@@ -394,6 +394,8 @@
     (defun better-eshell-prompt ()
       (concat
         (propertize
+          (concat "[" venv-current-name ":" (pyenv-mode-version) "] "))
+        (propertize
           (concat user-login-name "@"
             (car (split-string (system-name) "\\.")))
           'face '(foreground-color . "green4"))
@@ -410,7 +412,8 @@
     (setq
       eshell-highlight-prompt nil
       eshell-prompt-regexp "^[^#$]*[#$] "
-      eshell-prompt-function 'better-eshell-prompt))
+      eshell-prompt-function 'better-eshell-prompt)
+    :after (virtualenvwrapper pyenv-mode))
   (use-package em-hist
     :config
     (setq
@@ -550,28 +553,35 @@
 ;; python
 ;; based on http://www.andrewty.com/blog/emacs-config-for-python
 ;; - https://github.com/proofit404/anaconda-mode
-;; - https://github.com/necaris/conda.el
+;; - https://github.com/proofit404/pyenv-mode
+;; - https://github.com/porterjamesj/virtualenvwrapper.el
 ;; - https://github.com/millejoh/emacs-ipython-notebook
 ;; - https://github.com/paetzke/py-autopep8.el
-(use-package conda
+;; - https://github.com/cython/cython/blob/caba0c0637e5b33e24597e4a547fd38d54dfdebc/Tools/cython-mode.el
+;; (use-package conda
+;;   :ensure nil
+;;   :preface
+;;   ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
+;;   (defun hack-conda--get-path-prefix (orig-fun &rest args)
+;;     "Hack getting a platform-specific path string to utilize the conda env in
+;; ENV-DIR.  It's platform specific in that it uses the platform's native path
+;; separator."
+;;     (s-trim (concat (file-name-as-directory (car args)) "bin")))
+;;   :init
+;;   (setq conda-anaconda-home "~/anaconda3")
+;;   :config
+;;   (conda-env-initialize-interactive-shells)
+;;   (conda-env-initialize-eshell)
+;;   (conda-env-autoactivate-mode t)
+;;   ;; monkey patch until this PR is merged
+;;   ;; https://github.com/necaris/conda.el/pull/23
+;;   (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
+;;   :after (flycheck))
+(use-package pyenv-mode
   :ensure nil
-  :preface
-  ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
-  (defun hack-conda--get-path-prefix (orig-fun &rest args)
-    "Hack getting a platform-specific path string to utilize the conda env in
-ENV-DIR.  It's platform specific in that it uses the platform's native path
-separator."
-    (s-trim (concat (file-name-as-directory (car args)) "bin")))
-  :init
-  (setq conda-anaconda-home "~/anaconda3")
   :config
-  (conda-env-initialize-interactive-shells)
-  (conda-env-initialize-eshell)
-  (conda-env-autoactivate-mode t)
-  ;; monkey patch until this PR is merged
-  ;; https://github.com/necaris/conda.el/pull/23
-  (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
-  :after (flycheck))
+  (pyenv-mode)
+  )
 (use-package anaconda-mode
   :ensure nil
   :init
@@ -583,7 +593,8 @@ separator."
   :hook
   ((python-mode . anaconda-mode)
     (python-mode . anaconda-eldoc-mode))
-  :after (conda))
+  :after (pyenv-mode)
+  )
 (use-package company-anaconda
   :ensure nil
   :init
@@ -595,12 +606,21 @@ separator."
   (set-variable 'ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
   (set-variable 'ein:jupyter-server-args (list "--no-browser")))
 (use-package py-autopep8
-  :ensure-system-package (autopep8 . "conda install autopep8")
+  :ensure-system-package (autopep8 . "pip install autopep8")
   :ensure nil
   :hook ((python-mode . py-autopep8-enable-on-save))
-  :after (conda))
+  ;;:after (pyenv-mode)
+  )
 (use-package virtualenvwrapper
   :ensure nil
+  :config
+  (venv-initialize-interactive-shells)
+  (venv-initialize-eshell)
+  ;; note that setting `venv-location` is not necessary if you
+  ;; use the default location (`~/.virtualenvs`), or if the
+  ;; the environment variable `WORKON_HOME` points to the right place
+  ;; (setq venv-location "/path/to/your/virtualenvs/")
+  ;:after (pyenv-mode)
   )
 (use-package cython-mode
   :ensure nil

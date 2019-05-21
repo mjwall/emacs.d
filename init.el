@@ -354,6 +354,7 @@
 ;; ace window
 ;; - https://github.com/abo-abo/ace-window
 (use-package ace-window
+  :ensure nil
   :bind* ("M-o" . ace-window)
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
@@ -548,17 +549,18 @@
   :defer t
   :init
   (setf typescript-indent-level js-indent-level)
-  :config
-  (use-package ng2-mode
-    :ensure nil
+  )
+(use-package tide
+  :ensure nil
+  :after (typescript-mode flycheck)
+  :hook
+  ((typescript-mode . tide-setup)
+    (typescript-mode . tide-h1-identifier-mode)
+    (before-save . tide-format-before-save)))
+(use-package ng2-mode
+  :ensure nil
+  :after (typescript-mode)
     )
-  (use-package tide
-    :ensure nil
-    :after (typescript-mode flycheck)
-    :hook
-    ((typescript-mode . tide-setup)
-      (typescript-mode . tide-h1-identifier-mode)
-      (before-save . tide-format-before-save))))
 
 ;; python
 ;; based on http://www.andrewty.com/blog/emacs-config-for-python

@@ -305,6 +305,8 @@
   :ensure nil
   :defer 1)
 
+;; ivy, swiper and counsel
+;; - https://github.com/abo-abo/swiper
 (use-package ivy
   :ensure nil
   :init
@@ -321,12 +323,10 @@
     )
   (global-set-key (kbd "C-c r") 'ivy-resume)
   )
-
 (use-package swiper
   :ensure nil
   :config
   (global-set-key "\C-s" 'swiper-isearch))
-
 (use-package counsel
   :ensure nil
   :config
@@ -346,8 +346,16 @@
   ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 
+;; smex
+;; - https://github.com/nonsequitur/smex
 (use-package smex
   :ensure nil)
+
+;; ace window
+;; - https://github.com/abo-abo/ace-window
+(use-package ace-window
+  :bind* ("M-o" . ace-window)
+  :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; hippie expand - built in
 (use-package hippie-expand
@@ -412,7 +420,9 @@
     (setq
       eshell-highlight-prompt nil
       eshell-prompt-regexp "^[^#$]*[#$] "
-      eshell-prompt-function 'better-eshell-prompt)
+      eshell-prompt-function 'better-eshell-prompt
+      ;; this next one should be moved to ansi-term config if I had one
+      comint-prompt-read-only t)
     :after (virtualenvwrapper pyenv-mode))
   (use-package em-hist
     :config
@@ -446,7 +456,7 @@
     (set-variable 'speedbar-update-flag nil)
     ))
 
-
+;; project - built in
 (use-package project
   :bind
   (

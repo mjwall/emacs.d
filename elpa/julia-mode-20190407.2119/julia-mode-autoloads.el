@@ -12,14 +12,10 @@
 (add-to-list 'auto-mode-alist '("\\.jl\\'" . julia-mode))
 
 (autoload 'julia-mode "julia-mode" "\
-Major mode for editing julia code.
-
-\(fn)" t nil)
+Major mode for editing julia code.\n\n(fn)" t nil)
 
 (autoload 'inferior-julia "julia-mode" "\
-Run an inferior instance of `julia' inside Emacs.
-
-\(fn)" t nil)
+Run an inferior instance of `julia' inside Emacs.\n\n(fn)" t nil)
 
 (defalias 'run-julia #'inferior-julia "\
 Run an inferior instance of `julia' inside Emacs.")

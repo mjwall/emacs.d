@@ -17,14 +17,10 @@
 ;;; Generated autoloads from skewer-bower.el
 
 (autoload 'skewer-bower-refresh "skewer-bower" "\
-Update the package listing and packages synchronously.
-
-\(fn)" t nil)
+Update the package listing and packages synchronously.\n\n(fn)" t nil)
 
 (autoload 'skewer-bower-load "skewer-bower" "\
-Dynamically load a library from bower into the current page.
-
-\(fn PACKAGE &optional VERSION)" t nil)
+Dynamically load a library from bower into the current page.\n\n(fn PACKAGE &optional VERSION)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "skewer-bower" '("skewer")))
 
@@ -34,9 +30,7 @@ Dynamically load a library from bower into the current page.
 ;;; Generated autoloads from skewer-css.el
 
 (autoload 'skewer-css-mode "skewer-css" "\
-Minor mode for interactively loading new CSS rules.
-
-\(fn &optional ARG)" t nil)
+Minor mode for interactively loading new CSS rules.\n\n(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "skewer-css" '("skewer-css")))
 
@@ -46,9 +40,7 @@ Minor mode for interactively loading new CSS rules.
 ;;; Generated autoloads from skewer-html.el
 
 (autoload 'skewer-html-mode "skewer-html" "\
-Minor mode for interactively loading new HTML.
-
-\(fn &optional ARG)" t nil)
+Minor mode for interactively loading new HTML.\n\n(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "skewer-html" '("skewer-html-")))
 
@@ -58,29 +50,16 @@ Minor mode for interactively loading new HTML.
 ;;; Generated autoloads from skewer-mode.el
 
 (autoload 'list-skewer-clients "skewer-mode" "\
-List the attached browsers in a buffer.
-
-\(fn)" t nil)
+List the attached browsers in a buffer.\n\n(fn)" t nil)
 
 (autoload 'skewer-mode "skewer-mode" "\
-Minor mode for interacting with a browser.
-
-\(fn &optional ARG)" t nil)
+Minor mode for interacting with a browser.\n\n(fn &optional ARG)" t nil)
 
 (autoload 'run-skewer "skewer-mode" "\
-Attach a browser to Emacs for a skewer JavaScript REPL. Uses
-`browse-url' to launch a browser.
-
-With a prefix arugment (C-u), it will ask the filename of the
-root document.  With two prefix arguments (C-u C-u), it will use
-the contents of the current buffer as the root document.
-
-\(fn &optional ARG)" t nil)
+Attach a browser to Emacs for a skewer JavaScript REPL. Uses\n`browse-url' to launch a browser.\n\nWith a prefix arugment (C-u), it will ask the filename of the\nroot document.  With two prefix arguments (C-u C-u), it will use\nthe contents of the current buffer as the root document.\n\n(fn &optional ARG)" t nil)
 
 (autoload 'skewer-run-phantomjs "skewer-mode" "\
-Connect an inferior PhantomJS process to Skewer, returning the process.
-
-\(fn)" t nil)
+Connect an inferior PhantomJS process to Skewer, returning the process.\n\n(fn)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "skewer-mode" '("skewer" "phantomjs-program-name" "httpd/skewer/")))
 
@@ -90,14 +69,10 @@ Connect an inferior PhantomJS process to Skewer, returning the process.
 ;;; Generated autoloads from skewer-repl.el
 
 (autoload 'skewer-repl--response-hook "skewer-repl" "\
-Catches all browser messages logging some to the REPL.
-
-\(fn RESPONSE)" nil nil)
+Catches all browser messages logging some to the REPL.\n\n(fn RESPONSE)" nil nil)
 
 (autoload 'skewer-repl "skewer-repl" "\
-Start a JavaScript REPL to be evaluated in the visiting browser.
-
-\(fn)" t nil)
+Start a JavaScript REPL to be evaluated in the visiting browser.\n\n(fn)" t nil)
 
 (eval-after-load 'skewer-mode '(progn (add-hook 'skewer-response-hook #'skewer-repl--response-hook) (add-hook 'skewer-repl-mode-hook #'skewer-repl-mode-compilation-shell-hook) (define-key skewer-mode-map (kbd "C-c C-z") #'skewer-repl)))
 
@@ -109,9 +84,7 @@ Start a JavaScript REPL to be evaluated in the visiting browser.
 ;;; Generated autoloads from skewer-setup.el
 
 (autoload 'skewer-setup "skewer-setup" "\
-Fully integrate Skewer into js2-mode, css-mode, and html-mode buffers.
-
-\(fn)" nil nil)
+Fully integrate Skewer into js2-mode, css-mode, and html-mode buffers.\n\n(fn)" nil nil)
 
 ;;;***
 

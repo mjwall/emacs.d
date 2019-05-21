@@ -10,26 +10,16 @@
 ;;; Generated autoloads from simple-httpd.el
 
 (autoload 'httpd-start "simple-httpd" "\
-Start the web server process. If the server is already
-running, this will restart the server. There is only one server
-instance per Emacs instance.
-
-\(fn)" t nil)
+Start the web server process. If the server is already\nrunning, this will restart the server. There is only one server\ninstance per Emacs instance.\n\n(fn)" t nil)
 
 (autoload 'httpd-stop "simple-httpd" "\
-Stop the web server if it is currently running, otherwise do nothing.
-
-\(fn)" t nil)
+Stop the web server if it is currently running, otherwise do nothing.\n\n(fn)" t nil)
 
 (autoload 'httpd-running-p "simple-httpd" "\
-Return non-nil if the simple-httpd server is running.
-
-\(fn)" nil nil)
+Return non-nil if the simple-httpd server is running.\n\n(fn)" nil nil)
 
 (autoload 'httpd-serve-directory "simple-httpd" "\
-Start the web server with given `directory' as `httpd-root'.
-
-\(fn DIRECTORY)" t nil)
+Start the web server with given `directory' as `httpd-root'.\n\n(fn DIRECTORY)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "simple-httpd" '("httpd" "defservlet" "with-httpd-buffer")))
 

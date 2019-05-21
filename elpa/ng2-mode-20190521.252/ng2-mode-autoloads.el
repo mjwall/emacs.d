@@ -10,9 +10,7 @@
 ;;; Generated autoloads from ng2-html.el
 
 (autoload 'ng2-html-mode "ng2-html" "\
-Major mode for Angular 2 templates
-
-\(fn)" t nil)
+Major mode for Angular 2 templates\n\n(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.component.html\\'" . ng2-html-mode))
 
@@ -24,11 +22,14 @@ Major mode for Angular 2 templates
 ;;; Generated autoloads from ng2-mode.el
 
 (autoload 'ng2-mode "ng2-mode" "\
-Activates the appropriate Angular 2-related mode for the buffer.
+Activates the appropriate Angular 2-related mode for the buffer.\n\n(fn)" t nil)
 
-\(fn)" t nil)
+;;;***
+
+;;;### (autoloads nil "ng2-shared" "ng2-shared.el" (0 0 0 0))
+;;; Generated autoloads from ng2-shared.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ng2-mode" '("ng2-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ng2-shared" '("ng2-")))
 
 ;;;***
 
@@ -36,9 +37,7 @@ Activates the appropriate Angular 2-related mode for the buffer.
 ;;; Generated autoloads from ng2-ts.el
 
 (autoload 'ng2-ts-mode "ng2-ts" "\
-Major mode for Angular 2 TypeScript
-
-\(fn)" t nil)
+Major mode for Angular 2 TypeScript\n\n(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.component.ts\\'" . ng2-ts-mode))
 

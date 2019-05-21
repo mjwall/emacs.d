@@ -1,4 +1,4 @@
-(define-package "ng2-mode" "20181212.10" "Major modes for editing Angular 2"
+(define-package "ng2-mode" "20190521.252" "Major modes for editing Angular 2"
   '((typescript-mode "0.1"))
   :keywords
   '("typescript" "angular" "angular2" "template")

@@ -9,9 +9,9 @@
 ;;; Code:
 
 ;; turn off mouse interface early to avoid flicker
-;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-;(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; holler if old emacs
 (let ((minver "26.0"))
@@ -164,9 +164,8 @@
 ;;  (message "setting up in terminal")
 ;;)
 
-
 ;; editing function
-; Indent and unindent by one tab length
+;; Indent and unindent by one tab length
 (global-set-key (kbd "C->") 'indent-rigidly-right-to-tab-stop)
 (global-set-key (kbd "C-<") 'indent-rigidly-left-to-tab-stop)
 (defun end-newline-and-indent ()
@@ -193,7 +192,7 @@
 (defun dos2unix ()
   "Not exactly but it's easier to remember."
   (interactive)
-(set-buffer-file-coding-system 'unix 't))
+  (set-buffer-file-coding-system 'unix 't))
 
 ;; packages
 (package-initialize)
@@ -267,6 +266,7 @@
   ;:pin "manual"
   ;; :demand t
   )
+
 ;; org-tempo to get back TAB for easy template expansion
 ;; https://www.reddit.com/r/orgmode/comments/7jedp0/easy_templates_expansion_not_working/
 (use-package org-tempo)
@@ -460,9 +460,9 @@
 (use-package project
   :bind
   (
-    ; ("<f6>" . vc-git-grep)
+    ;; ("<f6>" . vc-git-grep)
     ("<f6>" . counsel-git-grep) ;; faster
-    ; ("<f7>" . project-find-file)
+    ;; ("<f7>" . project-find-file)
     ("<f7>" . counsel-git) ;; faster
     ("<f8>" . speedbar)
     ("<f9>" . vc-dir)
@@ -523,7 +523,7 @@
        (expand-file-name "src/jdee-server" user-emacs-directory))))
 (use-package autodisass-java-bytecode
   :ensure nil
-)
+  )
 
 ;; Javascript
 ;; - https://github.com/mooz/js2-mode
@@ -630,7 +630,7 @@
   ;; use the default location (`~/.virtualenvs`), or if the
   ;; the environment variable `WORKON_HOME` points to the right place
   ;; (setq venv-location "/path/to/your/virtualenvs/")
-  ;:after (pyenv-mode)
+                                        ;:after (pyenv-mode)
   )
 (use-package cython-mode
   :ensure nil
@@ -669,7 +669,7 @@
     ("C-c g" . godoc))
   :hook
   ((go-mode . electric-pair-mode)
-         (before-save . gofmt-before-save)))
+    (before-save . gofmt-before-save)))
 (use-package go-guru
   ;; go get -u -v golang.org/x/tools/cmd/guru
   :ensure nil
@@ -688,7 +688,7 @@
   :ensure nil
   :hook
   ((go-mode . go-eldoc-setup)))
-; flycheck just works
+                                        ; flycheck just works
 (use-package company-go
   ;; - https://github.com/mdempsky/gocode/tree/master/emacs-company
   :ensure nil
@@ -757,12 +757,12 @@
   (setq lisp-indent-offset 2)
   :config
   (use-package eldoc
-      :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
+    :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
   (use-package ert
     :init
     (add-to-list 'emacs-lisp-mode-hook 'ert--activate-font-lock-keywords))
   :bind (("M-." . find-function-at-point)
-         ("M-&" . complete-symbol))
+          ("M-&" . complete-symbol))
   :interpreter (("emacs" . emacs-lisp-mode)))
 
 ;; bash - built in
@@ -837,9 +837,9 @@
   :commands (flycheck-gradle-setup)
   :init
   (mapc
-   (lambda (x)
-     (add-hook x #'flycheck-gradle-setup))
-   '(java-mode-hook kotlin-mode-hook)))
+    (lambda (x)
+      (add-hook x #'flycheck-gradle-setup))
+    '(java-mode-hook kotlin-mode-hook)))
 
 
 ;; julia

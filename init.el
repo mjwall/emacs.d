@@ -174,7 +174,7 @@
   (progn
     (move-end-of-line 1)
     (newline-and-indent)))
-(global-set-key [(control return)] 'end-newline-and-indent)
+(global-set-key [(meta return)] 'end-newline-and-indent)
 (defun smarter-move-beginning-of-line (arg)
   "Toggle between `beginning-of-line' and `back-to-indentation' based on ARG."
   (interactive "^p")

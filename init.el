@@ -218,14 +218,14 @@
 ;; - https://orgmode.org/
 ;; turn back on when want to update orgmode, and
 ;; uncomment the `:ensure org-plus-contrib' below
-;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-;; (setq package-archive-priorities '(("org" . 3)
-;;                                   ("melpa" . 2)
-;;                                   ("gnu" . 1)))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+ (setq package-archive-priorities '(("org" . 3)
+                                   ("melpa" . 2)
+                                   ("gnu" . 1)))
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
-  ;; :ensure org-plus-contrib
+  :ensure org-plus-contrib
   :preface
   (setq sync-git-dir-file
     (expand-file-name "bin/sync-git-dir" user-emacs-directory))
@@ -268,6 +268,7 @@
   )
 
 ;; org-tempo to get back TAB for easy template expansion
+;; built into newer org
 ;; https://www.reddit.com/r/orgmode/comments/7jedp0/easy_templates_expansion_not_working/
 (use-package org-tempo)
 
@@ -305,58 +306,78 @@
   :ensure nil
   :defer 1)
 
-;; ivy, swiper and counsel
-;; - https://github.com/abo-abo/swiper
-(use-package ivy
-  :ensure nil
-  :init
-  (require 'recentf)
+;; ido - built in
+;; - https://github.com/birkenfeld/idomenu
+;; - https://github.com/DarwinAwardWinner/ido-completing-read-plus
+;; - https://github.com/nonsequitur/smex
+(use-package ido
+  :preface
+  (defvar ido-other-ignore-directories
+    '("\\`auto/" "\\`auto-save-list/" "\\`backups/" "\\`semanticdb/"
+       "\\`target/" "\\`\\.git/" "\\`\\.svn/" ))
+  (defvar ido-other-ignore-files
+    '("\\`auto/" "\\.prv/" "_region_" "\\.class/"))
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  ;; change the dark blue background of the current match
-  (set-face-attribute 'ivy-current-match nil
-    :background "#ffc911"
-    :foreground "#1c1c1c"
-    ;; :background "#dddddd"
-    ;; :foreground "#000000"
-    )
-  (global-set-key (kbd "C-c r") 'ivy-resume)
-  )
-(use-package swiper
+  (ido-mode t)
+  (ido-everywhere t)
+  (setq
+    ido-enable-prefix nil
+    ido-enable-flex-matching t
+    ido-max-prospects 20
+    ido-ignore-directories (append ido-ignore-directories
+                             ido-other-ignore-directories)
+    ido-ignore-files (append ido-ignore-files ido-other-ignore-files)
+    ;; Display ido results vertically, rather than horizontally
+    ido-decorations '("\n-> " " " "\n   " "\n   ..."
+                       "[" "]" " [No match]" " [Matched]"
+                       " [Not readable]" " [Too big]" " [Confirm]"))
+  ;; C-n/p is more intuitive in vertical layout
+  (add-hook 'ido-setup-hook
+    (lambda ()
+      (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+      (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+      (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+      (define-key ido-completion-map (kbd "<up>") 'ido-prev-match))))
+
+;; ido completing read plus
+;; https://github.com/DarwinAwardWinner/ido-completing-read-plus
+(use-package ido-completing-read+
   :ensure nil
   :config
-  (global-set-key "\C-s" 'swiper-isearch))
-(use-package counsel
-  :ensure nil
-  :config
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-m") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "C-x f") 'counsel-recentf)
-  (global-set-key (kbd "C-c f") 'counsel-describe-function)
-  (global-set-key (kbd "C-c v") 'counsel-describe-variable)
-  ;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
-  ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  (global-set-key (kbd "C-c u") 'counsel-unicode-char)
-  (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  ;; (global-set-key (kbd "C-c a") 'counsel-ag)
-  (global-set-key (kbd "C-c l") 'counsel-locate)
-  ;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-  )
+  (ido-ubiquitous-mode 1))
 
 ;; smex
-;; - https://github.com/nonsequitur/smex
+;; http://github.com/nonsequitur/smex/
 (use-package smex
-  :ensure nil)
-
-;; ace window
-;; - https://github.com/abo-abo/ace-window
-(use-package ace-window
   :ensure nil
-  :bind* ("M-o" . ace-window)
-  :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+  :bind (("M-x" . smex)
+          ("C-x C-m" . smex)
+          ;; orig M-x
+          ("C-c C-c M-x" . execute-extended-command)))
+
+;; not built in
+;; https://www.emacswiki.org/emacs/download/idomenu.el
+(use-package idomenu
+  :ensure nil
+  :bind (("C-x C-i" . idomenu )))
+
+;; recentf - built-in
+(use-package recentf
+  :preface
+  (defun recentf-ido-find-file ()
+    "Find a recent file using ido."
+    (interactive)
+    (let ((file
+            (ido-completing-read "Choose recent file: "
+              recentf-list nil t)))
+      (when file
+        (find-file file))))
+    :init
+    (recentf-mode 1)
+    (setq
+      recentf-max-saved-items 1000
+      recentf-exclude '("/tmp/" "/ssh:"))
+  :bind (("C-x f" . recentf-ido-find-file)))
 
 ;; hippie expand - built in
 (use-package hippie-expand

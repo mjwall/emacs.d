@@ -9,9 +9,9 @@
 ;;; Code:
 
 ;; turn off mouse interface early to avoid flicker
-;;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-;;(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; holler if old emacs
 (let ((minver "26.0"))
@@ -110,8 +110,8 @@
 (global-set-key "\r" 'newline-and-indent)
 ;; TODO: figure out why the next one doesn't work in terminal
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
-;; rebind to undo, stop suspending-frame
-(global-set-key (kbd "C-z") 'undo)
+;; rebind to undo, stop suspending-frame, useful with GUI
+;;(global-set-key (kbd "C-z") 'undo)
 ;; Just kill this one, I don't want to be asked
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
@@ -219,9 +219,9 @@
 ;; turn back on when want to update orgmode, and
 ;; uncomment the `:ensure org-plus-contrib' below
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-;; (setq package-archive-priorities '(("org" . 3)
-                                   ("melpa" . 2)
-                                   ("gnu" . 1)))
+;;(setq package-archive-priorities '(("org" . 3)
+;;                                   ("melpa" . 2)
+;;                                   ("gnu" . 1)))
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
@@ -262,7 +262,12 @@
         (global-set-key (kbd "<f5>") 'async-org-files))))
   :init
   (setq org-startup-truncated nil) ; wrap lines
-  (add-hook 'emacs-startup-hook #'ask-to-sync-org-files)
+  ;; add hook if no-org-sync is not bound
+  (if (not (boundp 'no-org-sync))
+    ;; can setup something like this to avoid this hook
+    ;; alias emacs="emacs -Q -nw --eval '(defvar no-org-sync t)' --load ~/.emacs.d/init.el"
+    (add-hook 'emacs-startup-hook #'ask-to-sync-org-files))
+  
   ;:pin "manual"
   ;; :demand t
   )

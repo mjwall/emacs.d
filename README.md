@@ -33,11 +33,17 @@ make install
 
 Add to ~/.bashrc
 ```
-# emacs on MacOSX, seems to be needed by cask
-export EMACSHOME=/Applications/Emacs.app/Contents/MacOS
+# editors
+export EMACSHOME=/WHATEVERPATH
 prepend_path "${EMACSHOME}/bin"
 prepend_path "${HOME}/.emacs.d/bin"
+# setup alias so calling emacs from command line stays in terminal and skips org-sync
+# can still run emacs windows mode by opening the app
+alias emacs="emacs -Q -nw --eval '(defvar no-org-sync t)' --load ~/.emacs.d/init.el"
+# now setup GIT_EDITOR
+export GIT_EDITOR='emacs -nw -Q -l ${HOME}/.emacs.d/init-git-editor.el'
 ```
+
 
 ## Profiling
 

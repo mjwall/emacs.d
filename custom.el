@@ -24,8 +24,8 @@
          ("\\.mm\\'" . default)
          ("\\.x?html?\\'" . default)
          ("\\.pdf\\'" . "evince %s"))))
- '(org-journal-dir "/home/mjwall/org/journal")
+ '(org-journal-dir "/home/mikewall/org/journal")
  '(org-journal-file-format "%Y%m%d.org")
   '(package-selected-packages
      (quote
-       (org-tempo idomenu ido-completing-read+ julia-mode ace-window pyenv-mode unfill cython-mode smex virtualenvwrapper company-anaconda web-mode ein inf-ruby py-autopep8 rvm company-go eshell-bookmark org-plus-contrib groovy-mode lua-mode kotlin-mode markdown-mode clojure-mode scala-mode flycheck-gradle cmake-mode protobuf-mode thrift docker-tramp docker-compose-mode dockerfile-mode ess gotest go-eldoc go-rename go-guru go-mode anaconda-mode tide ng1-mode typescript-mode json-mode js2-mode autodisass-java-bytecode jdee flycheck company counsel swiper ivy diminish use-package-ensure-system-package org-journal use-package ng2-mode))))
+       (xclip org-tempo idomenu ido-completing-read+ julia-mode ace-window pyenv-mode unfill cython-mode smex virtualenvwrapper company-anaconda web-mode ein inf-ruby py-autopep8 rvm company-go eshell-bookmark org-plus-contrib groovy-mode lua-mode kotlin-mode markdown-mode clojure-mode scala-mode flycheck-gradle cmake-mode protobuf-mode thrift docker-tramp docker-compose-mode dockerfile-mode ess gotest go-eldoc go-rename go-guru go-mode anaconda-mode tide ng1-mode typescript-mode json-mode js2-mode autodisass-java-bytecode jdee flycheck company counsel swiper ivy diminish use-package-ensure-system-package org-journal use-package ng2-mode))))

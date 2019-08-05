@@ -48,7 +48,7 @@
   whitespace-style
   '(trailing space-before-tab indentation space-after-tab tabs tab-mark)
   ;; integrate kill ring with clipboard
-  x-select-enable-clipboard t
+  ;; x-select-enable-clipboard t
   ;; make text-mode default, not fundamental
   major-mode 'text-mode
   ;; https://www.timeanddate.com/sun/usa/baltimore
@@ -197,6 +197,9 @@
 ;; packages
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;; https://debbugs.gnu.org/34341, fixed in 26.3
+;; uncomment and C-x C-e to eval
+;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; use-package
 ;; - https://github.com/jwiegley/use-package
@@ -304,6 +307,17 @@
 ;;  :config
 ;;  (when (memq window-system '(mac ns))
 ;;    (exec-path-from-shell-initialize)))
+
+;; clipboard
+(when (executable-find "xclip")
+  (use-package xclip
+    :ensure nil
+    :init
+    ;; not sure why (xclip--select) doesn't do this already
+    ;;(setq interprogram-cut-function 'xclip-select-text)
+    ;;(setq interprogram-paste-function 'xclip-selection-value)
+    :config
+    (xclip-mode 1)))
 
 ;; diminish
 ;; - https://github.com/myrjola/diminish.el

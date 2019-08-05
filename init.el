@@ -218,14 +218,14 @@
 ;; - https://orgmode.org/
 ;; turn back on when want to update orgmode, and
 ;; uncomment the `:ensure org-plus-contrib' below
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
- (setq package-archive-priorities '(("org" . 3)
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;; (setq package-archive-priorities '(("org" . 3)
                                    ("melpa" . 2)
                                    ("gnu" . 1)))
 (use-package org
   ;; using org-plus-contrib is a hack to make package.el load the newer
   ;; turned off in package-archives, turn back on to load new
-  :ensure org-plus-contrib
+  ;;:ensure org-plus-contrib
   :preface
   (setq sync-git-dir-file
     (expand-file-name "bin/sync-git-dir" user-emacs-directory))

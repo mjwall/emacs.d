@@ -63,6 +63,8 @@
   confirm-kill-emacs 'y-or-n-p
   ;; bookmarks
   bookmark-save-flag t
+  ;; don't ask, just go
+  vc-follow-symlinks t
   )
 
 ;; Other setting
@@ -135,7 +137,8 @@
 ;; - https://github.com/tmalsburg/tango-plus-theme
 (defvar my-theme-dir (expand-file-name "themes/" user-emacs-directory))
 (add-to-list 'custom-theme-load-path my-theme-dir)
-(load-theme 'espresso t)
+;;(load-theme 'espresso t)
+(load-theme 'tango-plus t)
 
 
 ;; UI stuff, have to set at top when using daemon
@@ -490,12 +493,20 @@
 
 ;; speedbar - built in
 (use-package speedbar
-  :config
-  (progn
-    (set-variable 'speedbar-use-images nil)
-    (set-variable 'speedbar-show-unknown-files t)
-    (set-variable 'speedbar-update-flag nil)
+  :init
+  (setq
+    speedbar-use-images nil
+    speedbar-show-unknown-files t
+    speedbar-update-flag nil
     ))
+
+(use-package sr-speedbar
+    :ensure nil
+    :init
+    (setq
+      ;;sr-speedbar-default-width 20
+      sr-speedbar-right-side nil
+      sr-speedbar-auto-refresh nil))
 
 ;; project - built in
 (use-package project
@@ -505,7 +516,7 @@
     ("<f6>" . counsel-git-grep) ;; faster
     ;; ("<f7>" . project-find-file)
     ("<f7>" . counsel-git) ;; faster
-    ("<f8>" . speedbar)
+    ("<f8>" . sr-speedbar-toggle)
     ("<f9>" . vc-dir)
     ("<f10>" . eshell))
   )

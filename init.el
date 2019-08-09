@@ -9,6 +9,13 @@
 ;;; Code:
 
 ;; turn off mouse interface early to avoid flicker
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -47,7 +54,7 @@
 (set-language-environment    "UTF-8")
 
 ;; backups
-(defconst private-dir  (expand-file-name "private" user-emacs-directory))
+(defconst private-dir (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories")
 (setq
@@ -180,6 +187,11 @@
 (global-set-key (kbd "<f7>") 'find-file-in-git-repo)
 (global-set-key (kbd "<f8>") 'sr-speedbar-toggle)
 (global-set-key (kbd "<f9>") 'eshell)
+
+
+;;; Language specific stuff
+
+(require 'cc-mode)
 
 (provide 'init)
 ;;; init.el ends here

@@ -1,9 +1,9 @@
 private
 #  recovery files
-# .\#*
+.\#*
 
 #  compiled elips
-# *.elc
+*.elc
 
 #  emacs directories specific to an instance
 # auto-save-list/

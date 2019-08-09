@@ -17,9 +17,6 @@
 (setq-default
   user-full-name "Michael Wall"
   user-mail-address "mjwall@gmail.com"
-  ;; put backups and autosaves under .emacs.d 
-  backup-directory-alist `(("." . ,(expand-file-name (concat user-emacs-directory "backups"))))
-  auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "autosaves/") t))
   ;; use spaces not tabs
   indent-tabs-mode nil
   tab-width 2
@@ -30,12 +27,6 @@
 (show-paren-mode t)
 ;; use y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
-;; encoding UTF-8
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-language-environment 'utf-8)
-(set-selection-coding-system 'utf-8)
-(set-language-environment "UTF-8")
 ;; use cua
 (cua-mode 1)
 ;; but enable selection without the C-z/C-x/C-c/C-v bindings.
@@ -47,6 +38,30 @@
 ;; stop showing completion buffer from minibuffer, use ? if you really want it
 ;; didn't really work for ido
 ;;(setq completion-auto-help nil)
+
+;; encoding UTF-8
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-language-environment 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+
+;; backups
+(defconst private-dir  (expand-file-name "private" user-emacs-directory))
+(defconst temp-dir (format "%s/cache" private-dir)
+  "Hostname-based elisp temp directories")
+(setq
+ history-length                     1000
+ backup-inhibited                   nil
+ make-backup-files                  t
+ auto-save-default                  t
+ auto-save-list-file-name           (concat temp-dir "/autosave")
+ make-backup-files                  t
+ create-lockfiles                   nil
+ backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
+ auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
+(unless (file-exists-p (concat temp-dir "/auto-save-list"))
+		       (make-directory (concat temp-dir "/auto-save-list") :parents))
 
 ;; Change some default keybinding
 ;; from https://sites.google.com/site/steveyegge2/effective-emacs

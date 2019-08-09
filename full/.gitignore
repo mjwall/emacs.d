@@ -1,0 +1,50 @@
+;; copy bin/emacs.mac and chmod 755 if on a mac
+bin/emacs
+
+;; recovery files
+.\#*
+
+;; compiled elips
+*.elc
+
+;; elpa stuff
+elpa/archives/
+elpa/gnupg/
+elpa/archives/
+elpa/gnupg/
+elpa/*-readme.txt
+
+;; emacs directories specific to an instance
+auto-save-list/
+backups/
+eshell/
+auto-save/
+.cache/
+abbrev_defs
+bookmarks
+
+;; my extra stuff
+src/*
+
+!src/get_src.sh
+
+!src/tags
+src/tags/ctags-5.8.tar.gz
+src/tags/ctags-5.8/
+src/tags/global-6.6.2.tar.gz
+src/tags/global-6.6.2/
+
+!src/jdee-server
+books/
+
+semanticdb
+history
+
+ido.last
+session.*
+recentf
+ac-comphist.dat
+anaconda-mode/
+request/
+url/
+smex-items

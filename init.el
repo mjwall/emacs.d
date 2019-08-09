@@ -51,6 +51,7 @@
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories")
 (setq
+ delete-old-versions                t
  history-length                     1000
  backup-inhibited                   nil
  make-backup-files                  t

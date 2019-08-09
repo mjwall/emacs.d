@@ -1,20 +1,21 @@
-;; recovery files
-;;.\#*
+private
+#  recovery files
+# .\#*
 
-;; compiled elips
-;;*.elc
+#  compiled elips
+# *.elc
 
-;; emacs directories specific to an instance
-;;auto-save-list/
-;;backups/
-;;eshell/
-;;auto-save/
-;;.cache/
-;;abbrev_defs
-;;bookmarks
-;;semanticdb
-;;history
-;;ido.last
-;;session.*
-;;recentf
-;;ac-comphist.dat
+#  emacs directories specific to an instance
+# auto-save-list/
+# backups/
+# eshell/
+# auto-save/
+# .cache/
+# abbrev_defs
+# bookmarks
+# semanticdb
+# history
+# ido.last
+# session.*
+# recentf
+# ac-comphist.dat

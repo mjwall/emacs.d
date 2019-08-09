@@ -15,16 +15,14 @@
 
 ;; some defaults
 (setq-default
-  user-full-name "Michael Wall"
-  user-mail-address "mjwall@gmail.com"
-  ;; use spaces not tabs
-  indent-tabs-mode nil
-  tab-width 2
+  user-full-name          "Michael Wall"
+  user-mail-address       "mjwall@gmail.com"
+  indent-tabs-mode        nil
+  tab-width               2
+  inhibit-startup-message t  
   )
 ;; revert files when they change, like when switching git branches
 (global-auto-revert-mode 1)
-;; highlight matching parentheses when the point is on them.
-(show-paren-mode t)
 ;; use y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; use cua
@@ -33,6 +31,8 @@
 (cua-selection-mode t)
 ;; insert matching delimiters
 (electric-pair-mode 1)
+;; highlight matching parentheses when the point is on them.
+(show-paren-mode t)
 ;; show (L:C) in modeline
 (column-number-mode 1)
 ;; stop showing completion buffer from minibuffer, use ? if you really want it
@@ -40,11 +40,11 @@
 ;;(setq completion-auto-help nil)
 
 ;; encoding UTF-8
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-language-environment 'utf-8)
+(prefer-coding-system        'utf-8)
+(set-default-coding-systems  'utf-8)
+(set-language-environment    'utf-8)
 (set-selection-coding-system 'utf-8)
-(set-language-environment "UTF-8")
+(set-language-environment    "UTF-8")
 
 ;; backups
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
@@ -62,6 +62,10 @@
  auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
 (unless (file-exists-p (concat temp-dir "/auto-save-list"))
 		       (make-directory (concat temp-dir "/auto-save-list") :parents))
+
+;; put customizations in a seperate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 ;; Change some default keybinding
 ;; from https://sites.google.com/site/steveyegge2/effective-emacs
@@ -116,28 +120,31 @@
 
 ;; recentf
 (recentf-mode 1)
-(setq recentf-max-saved-items 25)
+(setq
+ recentf-max-saved-items 50
+ recentf-save-file (expand-file-name "recentf" temp-dir)
+ )
 (global-set-key (kbd "C-x f") 'recentf-open-files)
 
 ;; expansion
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
-	try-complete-file-name-partially
-	try-complete-file-name
-	try-expand-all-abbrevs
-	try-expand-list
-	try-expand-line
-	try-complete-lisp-symbol-partially
-	try-complete-lisp-symbol))
+        try-expand-dabbrev-all-buffers
+        try-expand-dabbrev-from-kill
+        try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-all-abbrevs
+        try-expand-list
+        try-expand-line
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
 ;; reassign from dabbrev-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; vc
-(setq version-control t
+(setq version-control      t
       vc-make-backup-files t
-      vc-follow-symlinks t
+      vc-follow-symlinks   t
       )
 (require 'log-edit)
 (require 'vc-git)
@@ -148,17 +155,18 @@
 
 ;; speedbar 
 (setq
-  speedbar-use-images nil
+  speedbar-use-images         nil
   speedbar-show-unknown-files t
-  speedbar-update-flag nil
-)
+  speedbar-update-flag        nil
+  )
 
 ;; sr-speedbar - because speedbar doesn't work in terminal
 ;; NOT built-in, see site-lisp
 (require 'sr-speedbar)
 (setq
-  sr-speedbar-right-side nil
-  sr-speedbar-auto-refresh nil)
+  sr-speedbar-right-side   nil
+  sr-speedbar-auto-refresh nil
+  )
 
 ;; find file - because project-find-file is ugly
 ;; NOT built-in, see site-lisp

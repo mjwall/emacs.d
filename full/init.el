@@ -121,8 +121,8 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;; add ~/.emacs.d/site-lisp-full
-(add-to-list 'load-path (expand-file-name "site-lisp-full" user-emacs-directory))
+;; add ~/.emacs.d/site-lisp
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; theme
 ;; - wombat is a good default dark one, adwaita is a good default light one

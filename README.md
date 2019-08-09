@@ -1,64 +1,19 @@
-# ~/.emacs.d
+# My emacs config
 
-My emacs config
+Here is my latest incantation of an emacs config.  This time, I am going for a more minimal config, but trying to keep the more full featured config just in case I need it.  To do this, I am using some alias in my bashrc
 
-## Linux
+## Alias
 
-
-
-## Mac
-
-Compiling
-
-Either
+So my normal emacs will the terminal version.  I will use `gemacs` to launch the gui version of my minimal config and `femacs` to launch the previous config, which is stored in ~/.emacs.d/full.  These assume EMACS_HOME is set.
 
 ```
-./src/get-src.sh
-```
-or
-
-```
-git clone git@bitbucket.org:mituharu/emacs-mac.git
+alias emacs="${EMACS_HOME}/bin/emacs -nw"
+alias gemacs="${EMACS_HOME}/bin/emacs"
+alias femacs="${EMACS_HOME}/bin/emacs -Q --eval '(setq user-emacs-directory "~/.emacs.d/full")' --load ~/.emacs.d/full/init.el"
 ```
 
-Then build it
+## Git editor
 
 ```
-git co emacs-26.1-mac-7.4
-./autogen.sh
-./configure --enable-mac-app=/Applications --without-pop --with-mailutils --prefix=/Applications/Emacs.app/Contents/MacOS
-PATH="/usr/local/opt/texinfo/bin:$PATH" make
-make install
+export GIT_EDITOR='${EMACS_HOME}/bin/emacs -nw'
 ```
-
-Add to ~/.bashrc
-```
-# editors
-export EMACSHOME=/WHATEVERPATH
-prepend_path "${EMACSHOME}/bin"
-prepend_path "${HOME}/.emacs.d/bin"
-# setup alias so calling emacs from command line stays in terminal and skips org-sync
-# can still run emacs windows mode by opening the app
-alias emacs="emacs -Q -nw --eval '(defvar no-org-sync t)' --load ~/.emacs.d/init.el"
-# now setup GIT_EDITOR
-export GIT_EDITOR='emacs -nw -Q -l ${HOME}/.emacs.d/init-git-editor.el'
-```
-
-
-## Profiling
-
-Look at https://www.emacswiki.org/emacs/ProfileDotEmacs
-
-Download file http://www.randomsample.de/profile-dotemacs.el to
-~/.emacs.d/src/profile-dotemacs.el
-
-Edit file and change defvar profile-dotemacs-file from ~/.emacs to
-~/.emacs.d/init.el
-
-Then run
-
-```
-emacs -Q -l src/profile-dotemacs.el -f profile-dotemacs
-```
-
-Look for file for overlays of slow expressions

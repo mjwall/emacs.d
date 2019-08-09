@@ -120,7 +120,13 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; vc
-;;(require 'vc-dir)
+(setq version-control t
+      vc-make-backup-files t
+      vc-follow-symlinks t
+      )
+(require 'log-edit)
+(require 'vc-git)
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG\\'" . vc-git-log-edit-mode))
 
 ;; org mode
 (setq org-startup-truncated nil) ;; wrap lines

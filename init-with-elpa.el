@@ -32,29 +32,86 @@
 ;;  use-package-verbose 'debug
 ;;  use-package-expand-minimally nil)
 
+(require 'cl)
+(require 'cc-mode)
 
-;; LSP for java
+(use-package company
+  :ensure t
+  )
+(use-package flycheck
+  :ensure t
+  )
 (use-package lsp-mode
   :ensure t
+  :init
+  (setq
+   lsp-enable-snippet nil
+   lsp-session-file (expand-file-name temp-file ".lsp-session-v1"))
   )
 (use-package company-lsp
   :ensure t
   )
-(use-package lsp-ui
-  :ensure t
-  )
+(use-package dap-mode
+  :ensure t)
+
+;; java
+;; can run the following if you need a .project
+;; mvn org.apache.maven.plugins:maven-eclipse-plugin:2.10:eclipse
+;; To start lsp, M-x lsp-workspace-folder-add (first time) then
+;; C-u M-x lsp
+;; choose jdtls
 (use-package lsp-java
   :ensure t
   :after lsp
-  :config (add-hook 'java-mode-hook 'lsp))
-(use-package dap-mode
+  :init  
+  (setq
+   lsp-java-server-install-dir (expand-file-name "site-lisp/lsp" user-emacs-directory)
+   dap-java-test-runner (expand-file-name "site-lisp/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" user-emacs-directory)
+   )
+  ;;:hook
+  ;;(java-mode .  lsp)
+  )
+
+;; python
+(use-package lsp-python-ms
   :ensure t
-  :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
-(use-package dap-java
-  :ensure t
-  :after (lsp-java))
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp)))) 
+;; golang
+
+;; js2 and json
+
+;; typescript
+
+;; bash
+
+;; c/c++
+
+;; makefile
+
+;; cmake
+
+;; docker
+
+;; ruby
+
+;; nxml
+
+;; scala
+
+;; clojure
+
+;; elisp
+
+;; thrift
+
+;; protobuf
+
+;; groovy
+
+;; gradle
+
+;; jflex
 
 (message "Loading LSP stuff")

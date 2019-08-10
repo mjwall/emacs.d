@@ -110,6 +110,7 @@
  ido-enable-prefix nil
  ido-everywhere t
  ido-max-prospects 20
+ ido-save-directory-list-file (concat temp-dir "/ido.last")
  )
 (defun my/ido-keys ()
   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
@@ -191,7 +192,6 @@
 
 ;;; Language specific stuff
 
-(require 'cc-mode)
 
 (provide 'init)
 ;;; init.el ends here

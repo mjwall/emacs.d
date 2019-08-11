@@ -46,7 +46,7 @@
   :init
   (setq
    lsp-enable-snippet nil
-   lsp-session-file (expand-file-name temp-file ".lsp-session-v1"))
+   lsp-session-file (expand-file-name temp-dir ".lsp-session-v1"))
   )
 (use-package company-lsp
   :ensure t

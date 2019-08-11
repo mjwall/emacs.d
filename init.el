@@ -128,12 +128,12 @@
 (add-to-list 'ido-ignore-files 'ido-other-ignore-files)
 
 ;; recentf
-(recentf-mode 1)
 (setq
  recentf-max-saved-items 50
  recentf-save-file (expand-file-name "recentf" temp-dir)
  )
 (global-set-key (kbd "C-x f") 'recentf-open-files)
+(recentf-mode 1)
 
 ;; expansion
 (setq hippie-expand-try-functions-list

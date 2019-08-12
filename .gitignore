@@ -1,21 +1,14 @@
+# emacs working files
 private
-#  recovery files
-# .\#*
+.\#*
+*.elc
 
-#  compiled elips
-# *.elc
+# elpa stuff
+elpa/archives
+elpa/gnupg
+elpa/*.signed
+elpa/*-readme.txt
 
-#  emacs directories specific to an instance
-# auto-save-list/
-# backups/
-# eshell/
-# auto-save/
-# .cache/
-# abbrev_defs
-# bookmarks
-# semanticdb
-# history
-# ido.last
-# session.*
-# recentf
-# ac-comphist.dat
+# lsp
+workspace
+lsp/**/.manager

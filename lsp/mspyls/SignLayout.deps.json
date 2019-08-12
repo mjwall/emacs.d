@@ -1,0 +1,43 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.2",
+    "signature": "8195ee380f5591739211b2726ee486023d749063"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.2": {
+      "SignLayout/1.0.0": {
+        "dependencies": {
+          "MicroBuild.Core": "0.3.0",
+          "NuGet.CommandLine": "4.5.1"
+        },
+        "runtime": {
+          "SignLayout.dll": {}
+        }
+      },
+      "MicroBuild.Core/0.3.0": {},
+      "NuGet.CommandLine/4.5.1": {}
+    }
+  },
+  "libraries": {
+    "SignLayout/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicroBuild.Core/0.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-71NxN8xP8+n08w7XuEOpbzuerL45QRodeLfrjs51qCT8LbjARyfPEcSE30YqLjFtFl3km5eH5Oaqnq2p1hQbAw==",
+      "path": "microbuild.core/0.3.0",
+      "hashPath": "microbuild.core.0.3.0.nupkg.sha512"
+    },
+    "NuGet.CommandLine/4.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VsdQcJMDf+hG8YU0kvdWhfuGXaw2yaZ+0bbXlJ0e7cXxhtkgj3tMucPmw2i4ovqh0x6N5mw1ssW8a6AIXOmYQg==",
+      "path": "nuget.commandline/4.5.1",
+      "hashPath": "nuget.commandline.4.5.1.nupkg.sha512"
+    }
+  }
+}

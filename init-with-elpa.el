@@ -33,7 +33,6 @@
 ;;  use-package-expand-minimally nil)
 
 (require 'cl)
-(require 'cc-mode)
 
 (use-package company
   :ensure t
@@ -65,8 +64,8 @@
   :after lsp
   :init  
   (setq
-   lsp-java-server-install-dir (expand-file-name "site-lisp/lsp" user-emacs-directory)
-   dap-java-test-runner (expand-file-name "site-lisp/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" user-emacs-directory)
+   lsp-java-server-install-dir (expand-file-name "lsp/jdtls" user-emacs-directory)
+   dap-java-test-runner (expand-file-name "lsp/jdtls/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" user-emacs-directory)
    )
   )
 ;; C-u M-x lsp, choose jdtls
@@ -106,7 +105,7 @@
   :ensure t
   :init
   (setq
-   lsp-python-ms-dir (expand-file-name "site-lisp/lsp/mspyls/" user-emacs-directory)
+   lsp-python-ms-dir (expand-file-name "lsp/mspyls/" user-emacs-directory)
    )
   )
 ;; C-u M-x lsp and choose lsp-python-ms
@@ -151,12 +150,57 @@
 ;; C-u M-x lsp and select gopls
 
 ;; js2 and json
+;; - https://github.com/mooz/js2-mode
+;; - https://github.com/joshwnj/json-mode
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :interpreter "node"
+  :init
+  (setq js-indent-level 2) ;; defalias js2-basic-off in > 25.0
+  :config
+  )
+(use-package json-mode
+  :ensure t
+  )
+;; lsp use typescript-language-server
 
 ;; typescript
+;; - https://github.com/ananthakumaran/typescript.el
+;; - https://github.com/AdamNiederer/ng2-mode
+(use-package typescript-mode
+  :ensure t
+  :defer t
+  :init
+  (setf typescript-indent-level js-indent-level)
+  )
+(use-package ng2-mode
+  :ensure t
+  :after (typescript-mode)
+  )
+;; npm i -g typescript-language-server; npm i -g typescript
 
 ;; bash
 
 ;; c/c++
+;; for c++ 14 look at cquery, for c++ 17 look at ccls
+(use-package cc-mode
+  :init
+  (setq tab-width 2
+        c-basic-offset 2))
+;; sudo apt install clang-tools-7
+;; which clangd-7
+(setq lsp-clients-clangd-executable "clangd-7")
+
+;; too much setup, but looked like a nicer option
+;; (use-package ccls
+;;   :init
+;;   (setq ccls-executable (expand-file-name "lsp/ccls/bin/ccls" user-emacs-directory))
+;;   :config
+;;   ;;:hook ((c-mode c++-mode objc-mode) .
+;;   ;;       (lambda () (require 'ccls) (lsp)))
+;;   )
+
 
 ;; makefile
 
@@ -184,108 +228,7 @@
 
 ;; jflex
 
-(message "Loading LSP stuff")
-
-
-;; ;; Javascript
-;; ;; - https://github.com/mooz/js2-mode
-;; ;; - https://github.com/joshwnj/json-mode
-;; (use-package js2-mode
-;;   :ensure nil
-;;   :mode "\\.js\\'"
-;;   :interpreter "node"
-;;   :init
-;;   (setq js-indent-level 2) ;; defalias js2-basic-off in > 25.0
-;;   :config
-;;   (use-package json-mode
-;;     :ensure nil
-;;     ))
-
-;; ;; Typescript
-;; ;; - https://github.com/ananthakumaran/typescript.el
-;; ;; - https://github.com/ananthakumaran/tide
-;; ;; - https://github.com/AdamNiederer/ng2-mode
-;; (use-package typescript-mode
-;;   :ensure nil
-;;   :defer t
-;;   :init
-;;   (setf typescript-indent-level js-indent-level)
-;;   )
-;; (use-package tide
-;;   :ensure nil
-;;   :after (typescript-mode flycheck)
-;;   :hook
-;;   ((typescript-mode . tide-setup)
-;;     (typescript-mode . tide-h1-identifier-mode)
-;;     (before-save . tide-format-before-save)))
-;; (use-package ng2-mode
-;;   :ensure nil
-;;   :after (typescript-mode)
-;;     )
-
-;; ;; python
-;; ;; based on http://www.andrewty.com/blog/emacs-config-for-python
-;; ;; - https://github.com/proofit404/anaconda-mode
-;; ;; - https://github.com/proofit404/pyenv-mode
-;; ;; - https://github.com/porterjamesj/virtualenvwrapper.el
-;; ;; - https://github.com/millejoh/emacs-ipython-notebook
-;; ;; - https://github.com/paetzke/py-autopep8.el
-;; ;; - https://github.com/cython/cython/blob/caba0c0637e5b33e24597e4a547fd38d54dfdebc/Tools/cython-mode.el
-;; ;; (use-package conda
-;; ;;   :ensure nil
-;; ;;   :preface
-;; ;;   ;; https://github.com/necaris/conda.el/issues/22#issuecomment-458462342
-;; ;;   (defun hack-conda--get-path-prefix (orig-fun &rest args)
-;; ;;     "Hack getting a platform-specific path string to utilize the conda env in
-;; ;; ENV-DIR.  It's platform specific in that it uses the platform's native path
-;; ;; separator."
-;; ;;     (s-trim (concat (file-name-as-directory (car args)) "bin")))
-;; ;;   :init
-;; ;;   (setq conda-anaconda-home "~/anaconda3")
-;; ;;   :config
-;; ;;   (conda-env-initialize-interactive-shells)
-;; ;;   (conda-env-initialize-eshell)
-;; ;;   (conda-env-autoactivate-mode t)
-;; ;;   ;; monkey patch until this PR is merged
-;; ;;   ;; https://github.com/necaris/conda.el/pull/23
-;; ;;   (advice-add 'conda--get-path-prefix :around #'hack-conda--get-path-prefix)
-;; ;;   :after (flycheck))
-;; (use-package anaconda-mode
-;;   :ensure nil
-;;   :init
-;;   (setq
-;;     python-indent-offset 2
-;;     ;;python-shell-interpreter "ipython"
-;;     ;;python-shell-interpreter-args "--simple-prompt"
-;;     )
-;;   :hook
-;;   ((python-mode . anaconda-mode)
-;;     (python-mode . anaconda-eldoc-mode))
-;;   :after (pyenv-mode)
-;;   )
-;; (use-package company-anaconda
-;;   :ensure nil
-;;   :init
-;;   (add-to-list 'company-backends 'company-anaconda))
-;; (use-package ein
-;;   :ensure nil
-;;   :init
-;;   (set-variable 'ein:jupyter-default-notebook-directory "~/git/jupyter")
-;;   (set-variable 'ein:jupyter-default-server-command "~/anaconda3/bin/jupyter")
-;;   (set-variable 'ein:jupyter-server-args (list "--no-browser")))
-;; (use-package py-autopep8
-;;   :ensure-system-package (autopep8 . "pip install autopep8")
-;;   :ensure nil
-;;   :hook ((python-mode . py-autopep8-enable-on-save))
-;;   ;;:after (pyenv-mode)
-;;   )
-
-;; ;; c/c++
-;; ;; for c++ 14 look at cquery, for c++ 17 look at ccls
-;; (use-package cc-mode
-;;   :init
-;;   (setq tab-width 2
-;;     c-basic-offset 2))
+(message "Loaded packages from elpa")
 
 ;; ;; xml/html
 ;; (use-package nxml-mode

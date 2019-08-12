@@ -11,4 +11,4 @@ elpa/*-readme.txt
 
 # lsp
 workspace
-site-lisp/lsp/**/.manager
+lsp/**/.manager

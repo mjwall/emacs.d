@@ -1,0 +1,3 @@
+[submodule "lsp/kotlin-language-server"]
+	path = lsp/kotlin-language-server
+	url = git@github.com:fwcd/kotlin-language-server.git

@@ -180,7 +180,20 @@
   )
 ;; npm i -g typescript-language-server; npm i -g typescript
 
+;; kotlin
+;; - https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
+(use-package kotlin-mode
+  :ensure t
+  )
+;; git submodule update to checkout https://github.com/fwcd/kotlin-language-server
+;; then 
+;; ./gradlew :server:installDist
+;; then add ~/.emacs.d/lsp/kotlin-language-server/server/build/install/server/bin to PATH
+
 ;; bash
+(use-package sh-script
+  :init
+  (setq sh-basic-offset 2))
 
 ;; c/c++
 ;; for c++ 14 look at cquery, for c++ 17 look at ccls
@@ -191,7 +204,6 @@
 ;; sudo apt install clang-tools-7
 ;; which clangd-7
 (setq lsp-clients-clangd-executable "clangd-7")
-
 ;; too much setup, but looked like a nicer option
 ;; (use-package ccls
 ;;   :init
@@ -201,16 +213,43 @@
 ;;   ;;       (lambda () (require 'ccls) (lsp)))
 ;;   )
 
-
-;; makefile
-
-;; cmake
+;; make/cmake
 
 ;; docker
 
 ;; ruby
+;; derived https://github.com/howardabrams/dot-files/blob/master/emacs-ruby.org
+(use-package ruby-mode
+  :mode "\\.rb\\'"
+  :mode "Rakefile\\'"
+  :mode "Gemfile\\'"
+  :mode "Berksfile\\'"
+  :mode "Vagrantfile\\'"
+  :interpreter "ruby"
+  :init
+  (setq ruby-indent-level 2
+    ruby-indent-tabs-mode nil))
+;; - https://github.com/senny/rvm.el
+(use-package rvm
+  :ensure t
+  :config
+  (rvm-use-default))
+;; - https://github.com/fxbois/web-mode
+(use-package web-mode
+  :ensure t
+  :mode "\\.erb\\'")
+;; - https://github.com/nonsequitur/inf-ruby
+(use-package inf-ruby
+  :ensure t
+  :init
+  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
+;; ruby lsp uses https://github.com/castwide/solargraph
 
-;; nxml
+;; xml/html
+(use-package nxml-mode
+  :init
+  (setq nxml-slash-auto-complete-flag t)
+  (fset 'html-mode 'nxml-mode))
 
 ;; scala
 
@@ -223,47 +262,50 @@
 ;; protobuf
 
 ;; groovy
+;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
+(use-package groovy-mode
+  :ensure t
+  :config
+  (setq groovy-indent-offset 2))
 
 ;; gradle
+;; - https://github.com/jacobono/emacs-gradle-mode
+;;(use-package gradle-mode
+;;  :ensure nil
+;;  :init
+;;  (setq gradle-use-gradlew 1))
+;; my-gradle
+;; in site-lisp but copied from emacs-gradle-mode in elpa
+(use-package my-gradle-mode
+  :init
+  (set-variable 'gradle-use-gradlew 1))
+(use-package flycheck-gradle
+  :ensure nil
+  :commands (flycheck-gradle-setup)
+  :init
+  (mapc
+    (lambda (x)
+      (add-hook x #'flycheck-gradle-setup))
+    '(java-mode-hook kotlin-mode-hook)))
+
+;; yaml
+;; - https://github.com/yoshiki/yaml-mode
+(use-package yaml-mode
+  :ensure t
+  )
 
 ;; jflex
+;; in site-lisp from http://jflex.de/jflex-mode.el
+(use-package jflex-mode)
+
+;; markdown
+;; - https://github.com/jrblevin/markdown-mode
+(use-package markdown-mode
+  :ensure t
+  )
 
 (message "Loaded packages from elpa")
 
-;; ;; xml/html
-;; (use-package nxml-mode
-;;   :init
-;;   (setq nxml-slash-auto-complete-flag t)
-;;   (fset 'html-mode 'nxml-mode))
-
-;; ;; ruby - built in
-;; ;; - https://github.com/senny/rvm.el
-;; ;; - https://github.com/fxbois/web-mode
-;; ;; - https://github.com/nonsequitur/inf-ruby
-;; ;; derived from
-;; ;; https://github.com/howardabrams/dot-files/blob/master/emacs-ruby.org
-;; (use-package ruby-mode
-;;   :mode "\\.rb\\'"
-;;   :mode "Rakefile\\'"
-;;   :mode "Gemfile\\'"
-;;   :mode "Berksfile\\'"
-;;   :mode "Vagrantfile\\'"
-;;   :interpreter "ruby"
-;;   :init
-;;   (setq ruby-indent-level 2
-;;     ruby-indent-tabs-mode nil)
-;;   :config
-;;   (use-package rvm
-;;     :ensure nil
-;;     :config
-;;     (rvm-use-default))
-;;   (use-package web-mode
-;;     :ensure nil
-;;     :mode "\\.erb\\'")
-;;   (use-package inf-ruby
-;;     :ensure nil
-;;     :init
-;;     (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
 
 ;; ;; elisp - built in
 ;; (use-package emacs-lisp-mode
@@ -278,11 +320,6 @@
 ;;   :bind (("M-." . find-function-at-point)
 ;;           ("M-&" . complete-symbol))
 ;;   :interpreter (("emacs" . emacs-lisp-mode)))
-
-;; ;; bash - built in
-;; (use-package sh-script
-;;   :init
-;;   (setq sh-basic-offset 2))
 
 ;; ;; octave - built in
 ;; (use-package octave)
@@ -323,38 +360,12 @@
 ;;   :ensure nil
 ;;   )
 
-;; ;; jflex
-;; ;; in site-lisp-full from http://jflex.de/jflex-mode.el
-;; (use-package jflex-mode)
-
 ;; ;; make/cmake
 ;; ;; - https://melpa.org/#/cmake-mode
 ;; ;; which points inside https://github.com/Kitware/CMake/
 ;; (use-package cmake-mode
 ;;   :ensure nil
 ;;   )
-
-;; ;; gradle
-;; ;; - https://github.com/jacobono/emacs-gradle-mode
-;; ;;(use-package gradle-mode
-;; ;;  :ensure nil
-;; ;;  :init
-;; ;;  (setq gradle-use-gradlew 1))
-
-;; ;; my-gradle
-;; ;; in site-lisp-full but copied from emacs-gradle-mode in elpa
-;; (use-package my-gradle-mode
-;;   :init
-;;   (set-variable 'gradle-use-gradlew 1))
-;; (use-package flycheck-gradle
-;;   :ensure nil
-;;   :commands (flycheck-gradle-setup)
-;;   :init
-;;   (mapc
-;;     (lambda (x)
-;;       (add-hook x #'flycheck-gradle-setup))
-;;     '(java-mode-hook kotlin-mode-hook)))
-
 
 ;; ;; julia
 ;; ;; - https://github.com/JuliaEditorSupport/julia-emacs
@@ -374,33 +385,8 @@
 ;;   :ensure nil
 ;;   )
 
-;; ;; markdown
-;; ;; - https://github.com/jrblevin/markdown-mode
-;; (use-package markdown-mode
-;;   :ensure nil
-;;   )
-
-;; ;; kotlin
-;; ;; - https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
-;; (use-package kotlin-mode
-;;   :ensure nil
-;;   )
-
 ;; ;; lua
 ;; ;; - https://github.com/immerrr/lua-mode
 ;; (use-package lua-mode
-;;   :ensure nil
-;;   )
-
-;; ;; groovy
-;; ;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
-;; (use-package groovy-mode
-;;   :ensure nil
-;;   :config
-;;   (setq groovy-indent-offset 2))
-
-;; ;; yaml
-;; ;; - https://github.com/yoshiki/yaml-mode
-;; (use-package yaml-mode
 ;;   :ensure nil
 ;;   )

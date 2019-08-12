@@ -214,8 +214,26 @@
 ;;   )
 
 ;; make/cmake
+;; - https://melpa.org/#/cmake-mode
+;; which points inside https://github.com/Kitware/CMake/
+(use-package cmake-mode
+  :ensure t
+  )
 
 ;; docker
+;; derived from http://manuel-uberti.github.io/emacs/2017/10/19/docker/
+;; - https://github.com/spotify/dockerfile-mode
+(use-package dockerfile-mode
+  :ensure t
+  )
+;; - https://github.com/meqif/docker-compose-mode
+(use-package docker-compose-mode
+  :ensure t
+  )
+;; - https://github.com/emacs-pe/docker-tramp.el
+(use-package docker-tramp
+  :ensure t
+  )
 
 ;; ruby
 ;; derived https://github.com/howardabrams/dot-files/blob/master/emacs-ruby.org
@@ -251,15 +269,66 @@
   (setq nxml-slash-auto-complete-flag t)
   (fset 'html-mode 'nxml-mode))
 
+;; julia
+;; - https://github.com/JuliaEditorSupport/julia-emacs
+(use-package julia-mode
+  :ensure t
+  )
+
 ;; scala
+;; - https://github.com/ensime/emacs-scala-mode
+(use-package scala-mode
+  :ensure t
+  )
 
 ;; clojure
+;; - https://github.com/clojure-emacs/clojure-mode
+(use-package clojure-mode
+  :ensure t
+  )
 
-;; elisp
+;; lua
+;; - https://github.com/immerrr/lua-mode
+(use-package lua-mode
+  :ensure t
+  )
+
+;; elisp - built in
+(use-package emacs-lisp-mode
+  :init
+  (setq lisp-indent-offset 2)
+  :bind (("M-." . find-function-at-point)
+          ("M-&" . complete-symbol))
+  :interpreter (("emacs" . emacs-lisp-mode)))
+(use-package eldoc
+  :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
+(use-package ert
+  :init
+  (add-to-list 'emacs-lisp-mode-hook 'ert--activate-font-lock-keywords))
+
+;; octave - built in
+(use-package octave)
+
+;; R
+;; - https://ess.r-project.org/
+(use-package ess
+  :ensure t
+  :defer t
+  ;;:init (require 'ess-site)
+  )
 
 ;; thrift
+;; - https://github.com/davidmiller/thrift-mode
+(use-package thrift
+  :ensure t
+  )
 
 ;; protobuf
+;; - https://melpa.org/#/protobuf-mode
+;; which points inside https://github.com/protocolbuffers/protobuf
+(use-package protobuf-mode
+  :ensure t
+  )
 
 ;; groovy
 ;; - https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
@@ -305,88 +374,3 @@
   )
 
 (message "Loaded packages from elpa")
-
-
-;; ;; elisp - built in
-;; (use-package emacs-lisp-mode
-;;   :init
-;;   (setq lisp-indent-offset 2)
-;;   :config
-;;   (use-package eldoc
-;;     :hook ((emacs-lisp-mode . turn-on-eldoc-mode)))
-;;   (use-package ert
-;;     :init
-;;     (add-to-list 'emacs-lisp-mode-hook 'ert--activate-font-lock-keywords))
-;;   :bind (("M-." . find-function-at-point)
-;;           ("M-&" . complete-symbol))
-;;   :interpreter (("emacs" . emacs-lisp-mode)))
-
-;; ;; octave - built in
-;; (use-package octave)
-
-;; ;; R
-;; ;; - https://ess.r-project.org/
-;; (use-package ess
-;;   :ensure nil
-;;   :defer t
-;;   ;;:init (require 'ess-site)
-;;   )
-
-;; ;; docker setup derived from
-;; ;; http://manuel-uberti.github.io/emacs/2017/10/19/docker/
-;; ;; - https://github.com/spotify/dockerfile-mode
-;; (use-package dockerfile-mode
-;;   :ensure nil
-;;   )
-;; ;; - https://github.com/meqif/docker-compose-mode
-;; (use-package docker-compose-mode
-;;   :ensure nil
-;;   )
-;; ;; - https://github.com/emacs-pe/docker-tramp.el
-;; (use-package docker-tramp
-;;   :ensure nil
-;;   )
-
-;; ;; thrift
-;; ;; - https://github.com/davidmiller/thrift-mode
-;; (use-package thrift
-;;   :ensure nil
-;;   )
-
-;; ;; protobuf
-;; ;; - https://melpa.org/#/protobuf-mode
-;; ;; which points inside https://github.com/protocolbuffers/protobuf
-;; (use-package protobuf-mode
-;;   :ensure nil
-;;   )
-
-;; ;; make/cmake
-;; ;; - https://melpa.org/#/cmake-mode
-;; ;; which points inside https://github.com/Kitware/CMake/
-;; (use-package cmake-mode
-;;   :ensure nil
-;;   )
-
-;; ;; julia
-;; ;; - https://github.com/JuliaEditorSupport/julia-emacs
-;; (use-package julia-mode
-;;   :ensure nil
-;;   )
-
-;; ;; scala
-;; ;; - https://github.com/ensime/emacs-scala-mode
-;; (use-package scala-mode
-;;   :ensure nil
-;;   )
-
-;; ;; clojure
-;; ;; - https://github.com/clojure-emacs/clojure-mode
-;; (use-package clojure-mode
-;;   :ensure nil
-;;   )
-
-;; ;; lua
-;; ;; - https://github.com/immerrr/lua-mode
-;; (use-package lua-mode
-;;   :ensure nil
-;;   )

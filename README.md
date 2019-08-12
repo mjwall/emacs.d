@@ -9,7 +9,6 @@ So my normal emacs will the terminal version.  I will use `gemacs` to launch the
 ```
 alias emacs="${EMACS_HOME}/bin/emacs -nw"
 alias gemacs="${EMACS_HOME}/bin/emacs"
-alias femacs="${EMACS_HOME}/bin/emacs -Q --eval '(setq user-emacs-directory "~/.emacs.d/full")' --load ~/.emacs.d/full/init.el"
 ```
 
 ## Git editor
@@ -17,3 +16,25 @@ alias femacs="${EMACS_HOME}/bin/emacs -Q --eval '(setq user-emacs-directory "~/.
 ```
 export GIT_EDITOR='${EMACS_HOME}/bin/emacs -nw'
 ```
+
+## Script
+
+Talk about bin directory, which I don't really use anymore
+
+## Profiling
+
+Look at https://www.emacswiki.org/emacs/ProfileDotEmacs
+
+Downloaded file http://www.randomsample.de/profile-dotemacs.el to
+~/.emacs.d/src/profile-dotemacs.el
+
+Edit file and change defvar profile-dotemacs-file from ~/.emacs to
+~/.emacs.d/init.el
+
+Then run
+
+```
+emacs -Q -l src/profile-dotemacs.el -f profile-dotemacs
+```
+
+Look for file for overlays of slow expressions

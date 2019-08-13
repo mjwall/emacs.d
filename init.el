@@ -93,6 +93,24 @@
 ;; keeping is separate from site-lisp for now
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
+;; integrate text terminal with X clipboard
+;; in site-lisp from https://github.com/emacsmirror/xclip/blob/master/xclip.el i
+(require 'xclip)
+(xclip-mode 1)
+
+;; vc
+(setq version-control      t
+      vc-make-backup-files t
+      vc-follow-symlinks   t
+      )
+(require 'log-edit)
+(require 'vc-git)
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG\\'" . vc-git-log-edit-mode))
+
+;; eshell
+(setq
+  eshell-directory-name (expand-file-name "eshell" temp-dir))
+
 ;; ido
 (setq
  ;; Display ido results vertically, rather than horizontally
@@ -142,15 +160,6 @@
         try-complete-lisp-symbol))
 ;; reassign from dabbrev-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
-
-;; vc
-(setq version-control      t
-      vc-make-backup-files t
-      vc-follow-symlinks   t
-      )
-(require 'log-edit)
-(require 'vc-git)
-(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG\\'" . vc-git-log-edit-mode))
 
 ;; org mode
 (setq org-startup-truncated nil) ;; wrap lines

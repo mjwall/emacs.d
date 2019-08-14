@@ -256,7 +256,16 @@
   )
 
 ;; python
- (use-package pyenv-mode
+;;(use-package python
+;;  :ensure t
+;;  )
+(setq python-indent-offset 2)
+(when (executable-find "ipython")
+  (setq
+    python-shell-interpreter "ipython"
+    python-shell-interpreter-args "--simple-prompt -i"
+    ))
+(use-package pyenv-mode
    :ensure t
    :config
    (pyenv-mode)
@@ -271,11 +280,6 @@
   ;; the environment variable `WORKON_HOME` points to the right place
   ;; (setq venv-location "/path/to/your/virtualenvs/")
                                         ;:after (pyenv-mode)
-  )
-(use-package python
-  :ensure t
-  :init
-  (setq python-indent-offset 2)
   )
 (use-package cython-mode
   :ensure t

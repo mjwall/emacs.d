@@ -161,6 +161,16 @@
 ;; reassign from dabbrev-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 
+;; color in compilation mode
+(ignore-errors
+  (require 'ansi-color)
+  (defun colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer))
+;; and follow along during compile
+(setq compilation-scroll-output 'first-error)
+
 ;; org mode
 (setq org-startup-truncated nil) ;; wrap lines
 
@@ -184,6 +194,7 @@
 (require 'find-file-in-git-repo)
 
 (require 'project)
+(global-set-key (kbd "<f4>") 'compile)
 (global-set-key (kbd "<f5>") 'vc-dir)
 (global-set-key (kbd "<f6>") 'vc-git-grep)
 ;; (global-set-key (kbd "<f7>") 'project-find-file)

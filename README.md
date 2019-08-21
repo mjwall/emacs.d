@@ -4,17 +4,18 @@ Here is my latest incantation of an emacs config.  This time, I am going for a m
 
 ## Alias
 
-So my normal emacs will the terminal version.  I will use `gemacs` to launch the gui version of my minimal config and `femacs` to launch the previous config, which is stored in ~/.emacs.d/full.  These assume EMACS_HOME is set.
+So normal emacs will be in the terminal and will not load packages (although there a few things I put in site-lisp that will get loaded).  The `pemacs` command will load the basic config and then load packages for a more full featured experience, but still in terminal.  The `gemacs` command will launch the same emacs as `pemacs` but will launch the gui version.  These assume EMACS_HOME is set.
 
 ```
 alias emacs="${EMACS_HOME}/bin/emacs -nw"
-alias gemacs="${EMACS_HOME}/bin/emacs"
+alias pemacs="${EMACS_HOME}/bin/emacs -Q -nw -l ${HOME}/emacs.d/init-elpa.el"
+alias gemacs="${EMACS_HOME}/bin/emacs -Q -l ${HOME}/emacs.d/init-elpa.el"
 ```
 
 ## Git editor
 
 ```
-export GIT_EDITOR='${EMACS_HOME}/bin/emacs -nw'
+export GIT_EDITOR='${EMACS_HOME}/bin/emacs -Q -nw -l ${HOME}/emacs.d/init-git-editor.el'
 ```
 
 ## Script

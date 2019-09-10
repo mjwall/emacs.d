@@ -199,7 +199,13 @@
 (require 'find-file-in-git-repo)
 
 (require 'project)
-(global-set-key (kbd "<f4>") 'compile)
+(defun my-compile (dir)
+  "Run compile in project-current directory."
+  (interactive
+    (let ((default-directory (cdr (project-current))))
+        (call-interactively 'compile))))
+
+(global-set-key (kbd "<f4>") 'my-compile)
 (global-set-key (kbd "<f5>") 'vc-dir)
 (global-set-key (kbd "<f6>") 'vc-git-grep)
 ;; (global-set-key (kbd "<f7>") 'project-find-file)

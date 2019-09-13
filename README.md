@@ -39,3 +39,19 @@ emacs -Q -l src/profile-dotemacs.el -f profile-dotemacs
 ```
 
 Look for file for overlays of slow expressions
+
+## Rebuilding packages
+
+To rebuild all packages, run
+
+```
+M-: (byte-recompile-directory package-user-dir nil 'force)
+```
+
+To recompile 
+
+```
+C-u 0 M-x byte-recompile-directory
+```
+
+Then choose ~/.emacs.d/site-lisp
